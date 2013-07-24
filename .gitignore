@@ -1,0 +1,5 @@
+.DS_Store
+node_modules
+local.json
+public/stylesheets/*-min.css
+public/javascripts/build

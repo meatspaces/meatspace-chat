@@ -1,0 +1,8 @@
+{
+    "domain": "http://localhost",
+    "port": 3000,
+    "authPort": 3000,
+    "authUrl": "https://login.persona.org",
+    "session_secret": "secret",
+    "session_cookie": "session"
+}
