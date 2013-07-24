@@ -2,3 +2,11 @@ extend layout
 
 block content
   p This is the dashboard
+
+  .friends.list
+    form(method='post', data-action='add-friend', action='/add/friend')
+      input(type='text', name='friend', id='add-friend', class='input', autocomplete='off', placeholder='Add a friend by email')
+
+  .chats.list
+    form(method='post', data-action='add-chat', action='/add/chat')
+      input(type='text', name='chat', id='add-chat', class='input', autocomplete='off', placeholder='Message your friend')

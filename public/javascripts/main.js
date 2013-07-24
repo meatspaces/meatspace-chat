@@ -45,4 +45,17 @@ define(['jquery'],
       }
     });
   });
+
+  body.on('submit', function (ev) {
+    var self = $(ev.target);
+
+    switch (self.data('action')) {
+      case 'add-friend':
+        ev.preventDefault();
+        $.post(self.attr('action'), self.serialize(), function (data) {
+          console.log(data);
+        });
+        break;
+    }
+  });
 });

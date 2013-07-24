@@ -31,6 +31,13 @@ module.exports = function (app, isLoggedIn) {
   });
 
   app.post('/add/friend', isLoggedIn, function (req, res) {
-
+    parallax.getOrAddFriend(req.body.friend, function (err, f) {
+      if (err) {
+        res.status(400);
+        res.json({ error: err.toString() });
+      } else {
+        res.json({ friend: f });
+      }
+    });
   });
 };
