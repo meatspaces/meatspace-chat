@@ -1,4 +1,5 @@
 .DS_Store
+db
 node_modules
 local.json
 public/stylesheets/*-min.css

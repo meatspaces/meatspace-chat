@@ -22,6 +22,6 @@ require('express-persona')(app, {
 });
 
 // routes
-require("./routes")(app, isLoggedIn);
+require('./routes')(app, isLoggedIn);
 
 app.listen(process.env.PORT || nconf.get('port'));
