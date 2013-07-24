@@ -21,7 +21,7 @@ define(['jquery'],
         cache: false
       }).done(function(data) {
         if (data.status === 'okay') {
-          document.location.href = '/dashboard';
+          document.location.href = '/login';
         } else {
           console.log('Login failed because ' + data.reason);
         }
