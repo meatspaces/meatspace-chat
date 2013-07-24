@@ -5,10 +5,10 @@ define(['jquery'],
 
   var body = $('body');
 
-  body.on('click', '#login', function(ev) {
+  body.on('click', '#login', function (ev) {
     ev.preventDefault();
 
-    navigator.id.get(function(assertion) {
+    navigator.id.get(function (assertion) {
       if (!assertion) {
         return;
       }
@@ -19,7 +19,7 @@ define(['jquery'],
         data: { assertion: assertion },
         dataType: 'json',
         cache: false
-      }).done(function(data) {
+      }).done(function (data) {
         if (data.status === 'okay') {
           document.location.href = '/login';
         } else {
@@ -37,7 +37,7 @@ define(['jquery'],
       type: 'POST',
       dataType: 'json',
       cache: false
-    }).done(function(data) {
+    }).done(function (data) {
       if (data.status === 'okay') {
         document.location.href = '/';
       } else {

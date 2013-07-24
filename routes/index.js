@@ -1,6 +1,6 @@
 'use strict';
 
-module.exports = function(app, isLoggedIn) {
+module.exports = function (app, isLoggedIn) {
   var Parallax = require('meatspace-parallax');
   var parallax = new Parallax({
     db: '../db',
@@ -24,5 +24,13 @@ module.exports = function(app, isLoggedIn) {
 
   app.get('/dashboard', isLoggedIn, function (req, res) {
     res.render('dashboard');
+  });
+
+  app.post('/add/chat', isLoggedIn, function (req, res) {
+
+  });
+
+  app.post('/add/friend', isLoggedIn, function (req, res) {
+
   });
 };
