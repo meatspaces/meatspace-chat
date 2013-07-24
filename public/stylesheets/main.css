@@ -47,10 +47,30 @@ table {
     border-spacing: 0;
 }
 
-#wrapper {
-    margin: 0 auto;
-    max-width: 850px;
-    min-width: 300px;
-    padding: 20px;
+html, body {
+    height: 100%;
     position: relative;
+}
+
+#wrapper {
+    background-color: #eee;
+    height: 90%;
+    margin: 0 auto;
+    width: 850px;
+    padding: 2%;
+    position: relative;
+}
+
+.input {
+    padding: 1%;
+    margin-bottom: 10px;
+    width: 96%;
+}
+
+.list {
+    background-color: rgba(1, 1, 1, 0.3);
+    float: left;
+    margin: 2%;
+    position: relative;
+    width: 46%;
 }
