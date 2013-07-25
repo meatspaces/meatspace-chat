@@ -54,6 +54,7 @@ html, body {
 
 #wrapper {
     background-color: #eee;
+    font-family: Arial, sans-serif;
     height: 90%;
     margin: 0 auto;
     width: 850px;
@@ -68,9 +69,17 @@ html, body {
 }
 
 .list {
-    background-color: rgba(1, 1, 1, 0.3);
+    background-color: rgba(1, 1, 1, 0.2);
     float: left;
     margin: 2%;
     position: relative;
     width: 46%;
+}
+
+ul li.on {
+    background-color: #adf6ff;
+}
+
+.hidden {
+    display: none;
 }

@@ -14,9 +14,9 @@ html
         h1 Parallax
 
       if session.email
-        a(href='#', id='logout') Log out
+        a(href='javascript:;', data-action='logout') Log out
       else
-        a(href='#', id='login') Log in
+        a(href='javascript:;', data-action='login') Log in
 
       block content
       #footer
