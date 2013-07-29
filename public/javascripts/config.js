@@ -2,7 +2,8 @@ requirejs.config({
   deps: ['main'],
   paths: {
     'jquery': 'lib/jquery',
-    'gumhelper': 'gumhelper'
+    'gumhelper': 'gumhelper',
+    'videoshooter': 'videoShooter'
   },
   shim: {
     'jquery': {
