@@ -14,7 +14,8 @@
     "nconf": ">= 0.6.7",
     "express-persona": "git://github.com/jbuck/express-persona.git",
     "meatspace-parallax": "*",
-    "gravatar": "1.0.6"
+    "gravatar": "1.0.6",
+    "gumhelper": "0.0.3"
   },
   "devDependencies": {
     "grunt": ">= 0.4.x",
@@ -22,6 +23,7 @@
     "grunt-contrib-concat": ">= 0.1.3",
     "grunt-contrib-uglify": ">= 0.1.2",
     "grunt-contrib-requirejs": ">= 0.4.0",
-    "grunt-contrib-cssmin": ">= 0.4.1"
+    "grunt-contrib-cssmin": ">= 0.4.1",
+    "grunt-contrib-copy": "~0.4.1"
   }
 }

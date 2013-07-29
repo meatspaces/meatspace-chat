@@ -1,5 +1,5 @@
-define(['jquery'],
-  function($) {
+define(['jquery', 'gumhelper'],
+  function($, gumhelper) {
 
   'use strict';
 
