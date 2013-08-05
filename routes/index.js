@@ -4,7 +4,7 @@ module.exports = function (app, isLoggedIn) {
   var gravatar = require('gravatar');
   var Parallax = require('meatspace-parallax');
   var parallax = new Parallax('none', {
-    db: '../db',
+    db: './db',
     limit: 20
   });
 
@@ -76,7 +76,10 @@ module.exports = function (app, isLoggedIn) {
   });
 
   app.post('/add/chat', isLoggedIn, function (req, res) {
-    parallax.addChat(req.body.friend, req.body.chat, function (err, c) {
+    parallax.addChat(req.body.friend, req.body.chat, {
+      ttl: 20000,
+      media: req.body.picture || gravatar.url(req.session.email, { s: 100 })
+    }, function (err, c) {
       if (err) {
         res.status(400);
         res.json({ error: err.toString() });
