@@ -71,9 +71,20 @@ html, body {
 .list {
     background-color: rgba(1, 1, 1, 0.2);
     float: left;
-    margin: 2%;
     position: relative;
-    width: 46%;
+}
+
+.friends {
+    margin-right: 10px;
+    width: 150px;
+}
+
+.chats {
+    width: 650px;
+}
+
+.chats li {
+    margin-bottom: 5px;
 }
 
 ul li.on {
