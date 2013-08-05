@@ -21,7 +21,7 @@ define(['jquery', 'gumhelper', 'videoshooter'],
   var renderChat = function (c) {
     setTimeout(function () {
       var li = $('<li data-action="chat-message" data-user="' +
-        c.user + '"><p>' + c.chat + '</p><li>');
+        c.user + '"><p>' + c.chat.message + ' (TTL: ' + c.chat.ttl + ')</p><li>');
       chatList.append(li);
     }, 1);
   };
@@ -42,16 +42,16 @@ define(['jquery', 'gumhelper', 'videoshooter'],
     });
   }
 
-  if(navigator.getMedia) {
-      gumHelper.startVideoStreaming(function errorCb() {
-      }, function successCallback(stream, videoElement, width, height) {
-          console.log('yay', videoElement, width, height);
-          videoElement.width = width / 10;
-          videoElement.height = height / 10;
-          $('#header').append(videoElement);
-          videoElement.play();
-          videoShooter = new VideoShooter(videoElement);
-      });
+  if (navigator.getMedia) {
+    gumHelper.startVideoStreaming(function errorCb() {
+    }, function successCallback(stream, videoElement, width, height) {
+      console.log('yay', videoElement, width, height);
+      videoElement.width = width / 10;
+      videoElement.height = height / 10;
+      $('#header').append(videoElement);
+      videoElement.play();
+      videoShooter = new VideoShooter(videoElement);
+    });
   }
 
   body.on('click', function (ev) {
@@ -135,7 +135,7 @@ define(['jquery', 'gumhelper', 'videoshooter'],
 
         getScreenshot(function(pictureData) {
           var picField = self.find('#picture');
-          
+
           picField.val(pictureData);
 
           $.post(self.attr('action'), self.serialize(), function (data) {
