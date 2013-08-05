@@ -52,8 +52,11 @@ html, body {
     position: relative;
 }
 
+body > img {
+    display: none;
+}
+
 #wrapper {
-    background-color: #eee;
     font-family: Arial, sans-serif;
     height: 90%;
     margin: 0 auto;
@@ -80,6 +83,8 @@ html, body {
 }
 
 .chats {
+    float: left;
+    position: relative;
     width: 650px;
 }
 
