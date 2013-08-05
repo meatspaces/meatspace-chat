@@ -12,19 +12,24 @@ define(['jquery', './base/gumhelper', './base/videoshooter'],
 
   var renderFriend = function (f) {
     setTimeout(function () {
-      var li = $('<li data-action="chat-friend" data-user="' +
-        f.user + '"><img src="' + f.avatar + '" data-action="chat-friend" ' +
-        'data-user="' + f.user + '"><li>');
-      friendList.append(li);
+      if (body.find('li[data-user="' + f.user + '"]').length === 0) {
+        var li = $('<li data-action="chat-friend" data-user="' +
+          f.user + '"><img src="' + f.avatar + '" data-action="chat-friend" ' +
+          'data-user="' + f.user + '"><li>');
+        friendList.append(li);
+      }
    }, 1);
   };
 
   var renderChat = function (c) {
     setTimeout(function () {
-      var li = $('<li data-action="chat-message" data-user="' +
-        c.user + '"><img src="' + c.chat.media + '"><p>' + c.chat.message +
-        ' (TTL: ' + c.chat.ttl + ')</p><li>');
-      chatList.append(li);
+      if (body.find('li[data-created="' + c.chat.created + '"]').length === 0) {
+        var li = $('<li data-action="chat-message" data-user="' +
+          c.user + '" data-created="' + c.chat.created + '"><img src="' +
+          c.chat.media + '"><p>' + c.chat.message +
+          ' (TTL: ' + c.chat.ttl + ')</p><li>');
+        chatList.append(li);
+      }
     }, 1);
   };
 
@@ -126,6 +131,7 @@ define(['jquery', './base/gumhelper', './base/videoshooter'],
     switch (self.data('action')) {
       case 'add-friend':
         ev.preventDefault();
+
         $.post(self.attr('action'), self.serialize(), function (data) {
           renderFriend(data.friend);
           self.find('#add-friend').val('');
@@ -144,9 +150,7 @@ define(['jquery', './base/gumhelper', './base/videoshooter'],
             renderChat(data);
             body.find('#add-chat', '#friend').val('');
             picField.val('');
-
           });
-
         }, 10, 0.2);
         break;
     }
