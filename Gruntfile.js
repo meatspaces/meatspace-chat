@@ -7,7 +7,7 @@ module.exports = function(grunt) {
     copy: {
       main: {
         files: [
-          { expand: true, flatten: true, src: ['node_modules/gumhelper/gumhelper.js'], dest: JS_FILE_PATH }
+          { expand: true, flatten: true, src: ['node_modules/gumhelper/gumhelper.js'], dest: JS_FILE_PATH + 'base/' }
         ]
       }
     },
