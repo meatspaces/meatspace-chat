@@ -44,5 +44,5 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-requirejs');
   grunt.loadNpmTasks('grunt-contrib-cssmin');
 
-  grunt.registerTask('default', ['cssmin', 'requirejs', 'concat']);
+  grunt.registerTask('default', ['copy', 'cssmin', 'requirejs', 'concat']);
 };
