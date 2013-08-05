@@ -28,9 +28,9 @@ define(['jquery', './base/gumhelper', './base/videoshooter'],
     }, 1);
   };
 
-  var getScreenshot = function (callback) {
+  var getScreenshot = function (callback, numFrames, interval) {
     if (videoShooter) {
-      videoShooter.getShot(callback);
+      videoShooter.getShot(callback, numFrames, interval);
     } else {
       callback('');
     }
@@ -147,7 +147,7 @@ define(['jquery', './base/gumhelper', './base/videoshooter'],
 
           });
 
-        });
+        }, 10, 0.2);
         break;
     }
   });
