@@ -139,11 +139,10 @@ define(['jquery', './base/gumhelper', './base/videoshooter'],
           var picField = body.find('#picture');
 
           picField.val(pictureData);
-          console.log(pictureData)
 
           $.post(self.attr('action'), self.serialize(), function (data) {
             renderChat(data);
-            self.siblings().find('#add-chat', '#friend').val('');
+            body.find('#add-chat', '#friend').val('');
             picField.val('');
 
           });
