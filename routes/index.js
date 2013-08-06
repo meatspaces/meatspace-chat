@@ -17,6 +17,8 @@ module.exports = function (app, io, isLoggedIn) {
   };
   */
 
+  console.log('! ', req )
+
   app.get('/', function (req, res) {
     if (req.session.email) {
       res.redirect('/dashboard');
@@ -51,7 +53,7 @@ module.exports = function (app, io, isLoggedIn) {
       friends.push({
         user: user,
         avatar: gravatar.url(user, { s: 100 })
-      })
+      });
 
       if (friends.length === f.friends.length) {
         res.json({ friends: friends });
@@ -63,8 +65,6 @@ module.exports = function (app, io, isLoggedIn) {
         res.status(400);
         res.json({ error: err.toString() });
       } else {
-        var friends = [];
-
         for (var i = 0; i < f.friends.length; i ++) {
           addFriend(f, i);
         }
