@@ -1,9 +1,9 @@
+'use strict';
+
 var express = require('express');
-var configurations = module.exports;
 var app = express();
 var server = require('http').createServer(app);
 var nconf = require('nconf');
-var settings = require('./settings')(app, configurations, express);
 
 nconf.argv().env().file({ file: 'local.json' });
 
@@ -11,21 +11,27 @@ nconf.argv().env().file({ file: 'local.json' });
 
 var io = require('socket.io').listen(server);
 
-io.configure(function() {
+io.configure(function () {
   io.set('transports', ['websocket', 'xhr-polling']);
   io.set('polling duration', 10);
   io.set('log level', 1);
 });
 
-io.sockets.on('connection', function(socket) {
-  socket.on('join channel', function(channel) {
+io.sockets.on('connection', function (socket) {
+  socket.on('join channel', function (channel) {
     socket.join(channel);
   });
+/*
+  socket.on('private', function (data) {
+    io.sockets.in(data.channel).emit('private', data.privateChannel);
+  });
+*/
+
 });
 
 /* Filters for routes */
 
-var isLoggedIn = function(req, res, next) {
+var isLoggedIn = function (req, res, next) {
   if (req.session.email) {
     next();
   } else {

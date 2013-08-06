@@ -1,6 +1,5 @@
 define(['jquery', './base/gumhelper', './base/videoshooter'],
   function($, gumHelper, VideoShooter) {
-
   'use strict';
 
   var body = $('body');
@@ -42,7 +41,13 @@ define(['jquery', './base/gumhelper', './base/videoshooter'],
     socket.on('message', function (data) {
       renderChat(data);
     });
-
+/*
+    socket.on('private', function (data) {
+      if (data) {
+        renderChat(data);
+      }
+    });
+*/
     socket.emit('join channel', channel);
   });
 
