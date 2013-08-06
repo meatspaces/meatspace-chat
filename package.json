@@ -13,9 +13,10 @@
     "jade": ">= 0.29.0",
     "nconf": ">= 0.6.7",
     "express-persona": "git://github.com/jbuck/express-persona.git",
-    "meatspace-parallax": "0.0.9",
+    "meatspace-parallax": "0.1.0",
     "gravatar": "1.0.6",
-    "gumhelper": "0.0.3"
+    "gumhelper": "0.0.3",
+    "socket.io": ">= 0.9.16"
   },
   "devDependencies": {
     "grunt": ">= 0.4.x",

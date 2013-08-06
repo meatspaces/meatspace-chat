@@ -7,6 +7,22 @@ var settings = require('./settings')(app, configurations, express);
 
 nconf.argv().env().file({ file: 'local.json' });
 
+/* Websocket setup */
+
+var io = require('socket.io').listen(server);
+
+io.configure(function() {
+  io.set('transports', ['websocket', 'xhr-polling']);
+  io.set('polling duration', 10);
+  io.set('log level', 1);
+});
+
+io.sockets.on('connection', function(socket) {
+  socket.on('join channel', function(channel) {
+    socket.join(channel);
+  });
+});
+
 /* Filters for routes */
 
 var isLoggedIn = function(req, res, next) {
@@ -22,6 +38,6 @@ require('express-persona')(app, {
 });
 
 // routes
-require('./routes')(app, isLoggedIn);
+require('./routes')(app, io, isLoggedIn);
 
-app.listen(process.env.PORT || nconf.get('port'));
+server.listen(process.env.PORT || nconf.get('port'));

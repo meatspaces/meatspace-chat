@@ -61,7 +61,7 @@ function startStreaming(errorCallback, onStreaming, okCallback) {
     var onDimensionsReady = function(width, height) {
         okCallback(cameraStream, videoElement, width, height);
     };
-    
+
     videoElement = document.createElement('video');
     videoElement.autoplay = true;
 
@@ -90,7 +90,7 @@ function startStreaming(errorCallback, onStreaming, okCallback) {
  * comment for more info)
  */
 function startVideoStreaming(errorCallback, okCallback) {
-    
+
     if(navigator.getMedia) {
 
         // Some browsers apparently have support for video streaming because of the
@@ -101,7 +101,7 @@ function startVideoStreaming(errorCallback, okCallback) {
         noGUMSupportTimeout = setTimeout(onNoGUMSupport, 10000);
 
         startStreaming(errorCallback, function() {
-                
+
                 // The streaming started somehow, so we can assume /there is/
                 // gUM support
                 clearTimeout(noGUMSupportTimeout);
@@ -130,7 +130,7 @@ function startVideoStreaming(errorCallback, okCallback) {
 
 
 function stopVideoStreaming() {
-    
+
     if(cameraStream) {
 
         cameraStream.stop();

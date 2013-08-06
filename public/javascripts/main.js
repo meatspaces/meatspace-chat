@@ -9,10 +9,15 @@ define(['jquery', './base/gumhelper', './base/videoshooter'],
   var chatUser = $('#friend');
   var header = $('#header');
   var videoShooter;
+  var channel = 'public';
+  var currUser = localStorage.getItem('personaEmail');
+  var socket = io.connect(location.protocol + '//' + location.hostname +
+    (location.port ? ':' + location.port : ''));
 
   var renderFriend = function (f) {
     setTimeout(function () {
-      if (body.find('li[data-user="' + f.user + '"]').length === 0) {
+      if (body.find('li[data-user="' + f.user + '"]').length === 0 &&
+          f.user !== currUser) {
         var li = $('<li data-action="chat-friend" data-user="' +
           f.user + '"><img src="' + f.avatar + '" data-action="chat-friend" ' +
           'data-user="' + f.user + '"><li>');
@@ -32,6 +37,14 @@ define(['jquery', './base/gumhelper', './base/videoshooter'],
       }
     }, 1);
   };
+
+  socket.on('connect', function () {
+    socket.on('message', function (data) {
+      renderChat(data);
+    });
+
+    socket.emit('join channel', channel);
+  });
 
   var getScreenshot = function (callback, numFrames, interval) {
     if (videoShooter) {
@@ -53,8 +66,8 @@ define(['jquery', './base/gumhelper', './base/videoshooter'],
     gumHelper.startVideoStreaming(function errorCb() {
     }, function successCallback(stream, videoElement, width, height) {
       console.log('yay', videoElement, width, height);
-      videoElement.width = width / 10;
-      videoElement.height = height / 10;
+      videoElement.width = width / 5;
+      videoElement.height = height / 5;
       header.append(videoElement);
       videoElement.play();
       videoShooter = new VideoShooter(videoElement);
@@ -67,6 +80,7 @@ define(['jquery', './base/gumhelper', './base/videoshooter'],
     switch (self.data('action')) {
       case 'login':
         ev.preventDefault();
+
         navigator.id.get(function (assertion) {
           if (!assertion) {
             return;
@@ -80,6 +94,7 @@ define(['jquery', './base/gumhelper', './base/videoshooter'],
             cache: false
           }).done(function (data) {
             if (data.status === 'okay') {
+              localStorage.setItem('personaEmail', data.email);
               document.location.href = '/login';
             } else {
               console.log('Login failed because ' + data.reason);
@@ -90,6 +105,7 @@ define(['jquery', './base/gumhelper', './base/videoshooter'],
 
       case 'logout':
         ev.preventDefault();
+
         $.ajax({
           url: '/persona/logout',
           type: 'POST',
@@ -97,6 +113,7 @@ define(['jquery', './base/gumhelper', './base/videoshooter'],
           cache: false
         }).done(function (data) {
           if (data.status === 'okay') {
+            localStorage.removeItem('personaEmail');
             document.location.href = '/logout';
           } else {
             console.log('Logout failed because ' + data.reason);
@@ -106,6 +123,7 @@ define(['jquery', './base/gumhelper', './base/videoshooter'],
 
       case 'chat-friend':
         ev.preventDefault();
+
         friendList.find('li').removeClass('on');
         body.find('#add-chat').removeClass('hidden');
         self.closest('li').addClass('on');

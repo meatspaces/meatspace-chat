@@ -8,7 +8,7 @@ module.exports = function(app, configurations, express) {
 
   // Configuration
 
-  app.configure(function(){
+  app.configure(function () {
     app.set('views', __dirname + '/views');
     app.set('view engine', 'jade');
     app.set('view options', { layout: false });
@@ -31,29 +31,29 @@ module.exports = function(app, configurations, express) {
         maxAge: maxAge
       }
     }));
-    app.use(function(req, res, next) {
+    app.use(function (req, res, next) {
       res.locals.session = req.session;
       next();
     });
     app.locals.pretty = true;
     app.use(app.router);
-    app.use(function(req, res, next) {
+    app.use(function (req, res, next) {
       res.status(404);
       res.render('404', { url: req.url, layout: false });
       return;
     });
-    app.use(function(req, res, next) {
+    app.use(function (req, res, next) {
       res.status(403);
       res.render('403', { url: req.url, layout: false });
       return;
     });
   });
 
-  app.configure('development, test', function(){
+  app.configure('development, test', function() {
     app.use(express.errorHandler({ dumpExceptions: true, showStack: true }));
   });
 
-  app.configure('prod', function(){
+  app.configure('prod', function() {
     app.use(function(err, req, res, next) {
       res.status(err.status || 500);
       res.render('500', { error: err, layout: false });
