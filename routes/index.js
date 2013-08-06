@@ -1,12 +1,21 @@
 'use strict';
 
-module.exports = function (app, isLoggedIn) {
+module.exports = function (app, io, isLoggedIn) {
   var gravatar = require('gravatar');
   var Parallax = require('meatspace-parallax');
   var parallax = new Parallax('none', {
     db: './db',
     limit: 20
   });
+
+  // For later when doing private channel support
+  /*
+  var getChannel = function (toUser, fromUser) {
+    var users = [toUser.toString().toLowerCase().trim(),
+                 fromUser.toString().toLowerCase().trim()].sort();
+    return new Buffer(users.toString(), 'base64');
+  };
+  */
 
   app.get('/', function (req, res) {
     if (req.session.email) {
@@ -26,6 +35,7 @@ module.exports = function (app, isLoggedIn) {
   });
 
   app.get('/dashboard', isLoggedIn, function (req, res) {
+    req.session.channels = [];
     parallax.user = req.session.email;
     parallax.friendsLevel = parallax.db.sublevel(parallax.user + '!friends');
     parallax.friendList = parallax.db.sublevel(parallax.user + '!friendlist');
@@ -84,6 +94,16 @@ module.exports = function (app, isLoggedIn) {
         res.status(400);
         res.json({ error: err.toString() });
       } else {
+        try {
+          var channel = 'public';
+          io.sockets.in(channel).emit('message', {
+            user: req.body.friend,
+            chat: c
+          });
+        } catch (err) {
+          console.log('Could not emit message');
+        }
+
         res.json({
           user: req.body.friend,
           chat: c
