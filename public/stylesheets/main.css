@@ -73,9 +73,8 @@ header {
 
 .input {
     font-size: 1.1rem;
-    margin: 60px 0 20px 0;
     padding: 5px;
-    width: 96.5%;
+    width: 75%;
 }
 
 .list {
@@ -85,7 +84,7 @@ header {
 
 .chats {
     float: left;
-    margin-top: 110px;
+    margin-bottom: 80px;
     position: relative;
     width: 100%;
 }
@@ -135,15 +134,22 @@ ul li.on {
     right: 0;
 }
 
+#add-chat-form {
+    bottom: 0;
+    left: 0;
+    position: fixed;
+    right: 0;
+}
+
 #add-chat-blocker {
     background-color: rgba(255, 255, 255, 0.9);
-    bottom: -52px;
+    bottom: 0;
     color: #111;
     font-size: 2rem;
     height: 45px;
-    left: -5px;
+    left: 0;
     position: absolute;
-    right: -5px;
+    right: 0;
     text-align: center;
 }
 
@@ -151,4 +157,10 @@ ul li.on {
     float: right;
     padding: 20px;
     position: relative;
+}
+
+.footer {
+    bottom: 0;
+    position: absolute;
+    right: 0;
 }
