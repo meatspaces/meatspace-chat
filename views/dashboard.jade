@@ -1,17 +1,10 @@
 extend layout
 
 block content
-  .friends.list
-    form(method='post', data-action='add-friend', action='/add/friend')
-      input(type='text', name='friend', id='add-friend', class='input', autocomplete='off', placeholder='Add a friend by email')
-
-    ul
-
-  .chats.list
-    form(method='post', data-action='add-chat', action='/add/chat')
-      input(type='hidden', name='friend', id='friend')
-      input(type='hidden', name='picture', id='picture')
-
-      ul
-      input(type='text', name='chat', id='add-chat', class='input hidden', autocomplete='off', placeholder='Message your friend')
+  form(method='post', id='add-chat-form')
+    input(type='hidden', name='picture', id='picture')
+    .message-content
+      input(type='text', name='message', id='add-chat', class='input', autocomplete='off', placeholder='Send a public message')
+      #add-chat-blocker.hidden
+        span Sending, please wait!
 

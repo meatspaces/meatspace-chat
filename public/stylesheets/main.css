@@ -99,3 +99,23 @@ ul li.on {
 .hidden {
     display: none;
 }
+
+.message-content {
+    position: relative;
+}
+
+#add-chat-blocker {
+    background-color: rgba(1, 1, 1, 0.4);
+    bottom: 0;
+    color: #fff;
+    left: 0;
+    position: absolute;
+    right: 0;
+    text-align: center;
+    top: 0;
+}
+
+.signin {
+    float: right;
+    position: relative;
+}

@@ -2,22 +2,11 @@
 
 module.exports = function (app, io, isLoggedIn) {
   var gravatar = require('gravatar');
-  var Parallax = require('meatspace-parallax');
-  var parallax = new Parallax('none', {
+  var Publico = require('meatspace-publico');
+  var publico = new Publico('none', {
     db: './db',
     limit: 20
   });
-
-  // For later when doing private channel support
-  /*
-  var getChannel = function (toUser, fromUser) {
-    var users = [toUser.toString().toLowerCase().trim(),
-                 fromUser.toString().toLowerCase().trim()].sort();
-    return new Buffer(users.toString(), 'base64');
-  };
-  */
-
-  console.log('! ', req )
 
   app.get('/', function (req, res) {
     if (req.session.email) {
@@ -32,48 +21,16 @@ module.exports = function (app, io, isLoggedIn) {
   });
 
   app.get('/logout', isLoggedIn, function (req, res) {
-
     res.redirect('/');
   });
 
   app.get('/dashboard', isLoggedIn, function (req, res) {
-    req.session.channels = [];
-    parallax.user = req.session.email;
-    parallax.friendsLevel = parallax.db.sublevel(parallax.user + '!friends');
-    parallax.friendList = parallax.db.sublevel(parallax.user + '!friendlist');
+    publico.user = req.session.email;
     res.render('dashboard');
   });
 
-  app.get('/get/friends', isLoggedIn, function (req, res) {
-    var friends = [];
-
-    var addFriend = function (f, i) {
-      var user = f.friends[i].key;
-
-      friends.push({
-        user: user,
-        avatar: gravatar.url(user, { s: 100 })
-      });
-
-      if (friends.length === f.friends.length) {
-        res.json({ friends: friends });
-      }
-    };
-
-    parallax.getFriends(function (err, f) {
-      if (err) {
-        res.status(400);
-        res.json({ error: err.toString() });
-      } else {
-        for (var i = 0; i < f.friends.length; i ++) {
-          addFriend(f, i);
-        }
-      }
-    });
-  });
-
-  app.get('/get/chats/:user', isLoggedIn, function (req, res) {
-    parallax.getChats(req.params.user, false, false, function (err, c) {
+  app.get('/get/chats', function (req, res) {
+    publico.getChats(false, function (err, c) {
       if (err) {
         res.status(400);
         res.json({ error: err.toString() });
@@ -86,7 +43,7 @@ module.exports = function (app, io, isLoggedIn) {
   });
 
   app.post('/add/chat', isLoggedIn, function (req, res) {
-    parallax.addChat(req.body.friend, req.body.chat, {
+    publico.addChat(req.body.message, {
       ttl: 20000,
       media: req.body.picture || gravatar.url(req.session.email, { s: 100 })
     }, function (err, c) {
@@ -95,31 +52,24 @@ module.exports = function (app, io, isLoggedIn) {
         res.json({ error: err.toString() });
       } else {
         try {
-          var channel = 'public';
-          io.sockets.in(channel).emit('message', {
-            user: req.body.friend,
-            chat: c
+          io.sockets.emit('message', {
+            chat: {
+              key: c.key,
+              value: {
+                created: c.created,
+                media: c.media,
+                ttl: c.ttl,
+                message: c.message
+              }
+            }
           });
         } catch (err) {
           console.log('Could not emit message');
         }
 
         res.json({
-          user: req.body.friend,
-          chat: c
+          status: 'sent!'
         });
-      }
-    });
-  });
-
-  app.post('/add/friend', isLoggedIn, function (req, res) {
-    parallax.getOrAddFriend(req.body.friend, function (err, f) {
-      if (err) {
-        res.status(400);
-        res.json({ error: err.toString() });
-      } else {
-        f.avatar = gravatar.url(f.user, { s: 100 });
-        res.json({ friend: f });
       }
     });
   });

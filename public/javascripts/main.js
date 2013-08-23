@@ -3,9 +3,8 @@ define(['jquery', './base/gumhelper', './base/videoshooter'],
   'use strict';
 
   var body = $('body');
-  var friendList = $('.friends ul');
+  var addChat = $('#add-chat-form');
   var chatList = $('.chats ul');
-  var chatUser = $('#friend');
   var header = $('#header');
   var videoShooter;
   var channel = 'public';
@@ -13,25 +12,13 @@ define(['jquery', './base/gumhelper', './base/videoshooter'],
   var socket = io.connect(location.protocol + '//' + location.hostname +
     (location.port ? ':' + location.port : ''));
 
-  var renderFriend = function (f) {
-    setTimeout(function () {
-      if (body.find('li[data-user="' + f.user + '"]').length === 0 &&
-          f.user !== currUser) {
-        var li = $('<li data-action="chat-friend" data-user="' +
-          f.user + '"><img src="' + f.avatar + '" data-action="chat-friend" ' +
-          'data-user="' + f.user + '"><li>');
-        friendList.append(li);
-      }
-   }, 1);
-  };
-
   var renderChat = function (c) {
+    console.log('** ', c.chat.key)
     setTimeout(function () {
-      if (body.find('li[data-created="' + c.chat.created + '"]').length === 0) {
-        var li = $('<li data-action="chat-message" data-user="' +
-          c.user + '" data-created="' + c.chat.created + '"><img src="' +
-          c.chat.media + '"><p>' + c.chat.message +
-          ' (TTL: ' + c.chat.ttl + ')</p><li>');
+      if (body.find('li[data-key="' + c.chat.key + '"]').length === 0) {
+        var li = $('<li data-action="chat-message" data-key="' + c.chat.key +
+          '"><img src="' + c.chat.value.media + '"><p>' + c.chat.value.message +
+          ' (TTL: ' + c.chat.value.ttl + ')</p><li>');
         chatList.append(li);
       }
     }, 1);
@@ -39,16 +26,18 @@ define(['jquery', './base/gumhelper', './base/videoshooter'],
 
   socket.on('connect', function () {
     socket.on('message', function (data) {
+      console.log('emitted! ', data)
       renderChat(data);
     });
-/*
-    socket.on('private', function (data) {
-      if (data) {
-        renderChat(data);
-      }
-    });
-*/
-    socket.emit('join channel', channel);
+  });
+
+  $.get('/get/chats', function (data) {
+    for (var i = 0; i < data.chats.chats.length; i ++) {
+      var chat = {
+        chat: data.chats.chats[i]
+      };
+      renderChat(chat);
+    }
   });
 
   var getScreenshot = function (callback, numFrames, interval) {
@@ -59,18 +48,9 @@ define(['jquery', './base/gumhelper', './base/videoshooter'],
     }
   };
 
-  if (!!body.data('authenticated')) {
-    $.get('/get/friends', function (data) {
-      for (var i = 0; i < data.friends.length; i ++) {
-        renderFriend(data.friends[i]);
-      }
-    });
-  }
-
-  if (navigator.getMedia) {
+  if (navigator.getMedia && !!body.data('authenticated')) {
     gumHelper.startVideoStreaming(function errorCb() {
     }, function successCallback(stream, videoElement, width, height) {
-      console.log('yay', videoElement, width, height);
       videoElement.width = width / 5;
       videoElement.height = height / 5;
       header.append(videoElement);
@@ -79,7 +59,7 @@ define(['jquery', './base/gumhelper', './base/videoshooter'],
     });
   }
 
-  body.on('click', function (ev) {
+  body.on('click touchstart', function (ev) {
     var self = $(ev.target);
 
     switch (self.data('action')) {
@@ -125,57 +105,24 @@ define(['jquery', './base/gumhelper', './base/videoshooter'],
           }
         });
         break;
-
-      case 'chat-friend':
-        ev.preventDefault();
-
-        friendList.find('li').removeClass('on');
-        body.find('#add-chat').removeClass('hidden');
-        self.closest('li').addClass('on');
-        chatUser.val(self.data('user'));
-        chatList.empty();
-
-        $.get('/get/chats/' + self.data('user'), function (data) {
-          for (var i = 0; i < data.chats.chats.length; i ++) {
-            var chat = {
-              user: data.chats.chats[i].key.split('!')[1],
-              chat: data.chats.chats[i].value
-            };
-            renderChat(chat);
-          }
-        });
-        break;
     }
   });
 
-  body.on('submit', function (ev) {
+  addChat.on('submit', function (ev) {
+    ev.preventDefault();
+
     var self = $(ev.target);
 
-    switch (self.data('action')) {
-      case 'add-friend':
-        ev.preventDefault();
+    self.find('#add-chat-blocker').removeClass('hidden');
 
-        $.post(self.attr('action'), self.serialize(), function (data) {
-          renderFriend(data.friend);
-          self.find('#add-friend').val('');
-        });
-        break;
+    getScreenshot(function (pictureData) {
+      var picField = self.find('#picture').val(pictureData);
 
-      case 'add-chat':
-        ev.preventDefault();
-
-        getScreenshot(function(pictureData) {
-          var picField = body.find('#picture');
-
-          picField.val(pictureData);
-
-          $.post(self.attr('action'), self.serialize(), function (data) {
-            renderChat(data);
-            body.find('#add-chat', '#friend').val('');
-            picField.val('');
-          });
-        }, 10, 0.2);
-        break;
-    }
+      $.post('/add/chat', self.serialize(), function () {
+        picField.val('');
+        self.find('#add-chat').val('');
+        self.find('#add-chat-blocker').addClass('hidden');
+      });
+    }, 5, 0.2);
   });
 });
