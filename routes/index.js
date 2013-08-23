@@ -35,9 +35,7 @@ module.exports = function (app, io, isLoggedIn) {
         res.status(400);
         res.json({ error: err.toString() });
       } else {
-        res.json({
-          chats: c
-        });
+        res.json({ chats: c });
       }
     });
   });
@@ -67,9 +65,7 @@ module.exports = function (app, io, isLoggedIn) {
           console.log('Could not emit message');
         }
 
-        res.json({
-          status: 'sent!'
-        });
+        res.json({ status: 'sent!' });
       }
     });
   });

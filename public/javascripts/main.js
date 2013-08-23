@@ -5,7 +5,7 @@ define(['jquery', './base/gumhelper', './base/videoshooter'],
   var body = $('body');
   var addChat = $('#add-chat-form');
   var chatList = $('.chats ul');
-  var header = $('header');
+  var footer = $('.footer');
   var videoShooter;
   var socket = io.connect(location.protocol + '//' + location.hostname +
     (location.port ? ':' + location.port : ''));
@@ -17,6 +17,7 @@ define(['jquery', './base/gumhelper', './base/videoshooter'],
           '"><img src="' + c.chat.value.media + '"><p>' + c.chat.value.message +
           ' <span>(TTL: ' + c.chat.value.ttl + ')</span></p><li>');
         chatList.append(li);
+        li[0].scrollIntoView(true);
       }
     }, 1);
   };
@@ -49,7 +50,7 @@ define(['jquery', './base/gumhelper', './base/videoshooter'],
     }, function successCallback(stream, videoElement, width, height) {
       videoElement.width = width / 5;
       videoElement.height = height / 5;
-      header.append(videoElement);
+      footer.append(videoElement);
       videoElement.play();
       videoShooter = new VideoShooter(videoElement);
     });
