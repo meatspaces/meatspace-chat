@@ -7,18 +7,15 @@ define(['jquery', './base/gumhelper', './base/videoshooter'],
   var chatList = $('.chats ul');
   var header = $('#header');
   var videoShooter;
-  var channel = 'public';
-  var currUser = localStorage.getItem('personaEmail');
   var socket = io.connect(location.protocol + '//' + location.hostname +
     (location.port ? ':' + location.port : ''));
 
   var renderChat = function (c) {
-    console.log('** ', c.chat.key)
     setTimeout(function () {
       if (body.find('li[data-key="' + c.chat.key + '"]').length === 0) {
         var li = $('<li data-action="chat-message" data-key="' + c.chat.key +
           '"><img src="' + c.chat.value.media + '"><p>' + c.chat.value.message +
-          ' (TTL: ' + c.chat.value.ttl + ')</p><li>');
+          ' <span>(TTL: ' + c.chat.value.ttl + ')</span></p><li>');
         chatList.append(li);
       }
     }, 1);
@@ -26,7 +23,6 @@ define(['jquery', './base/gumhelper', './base/videoshooter'],
 
   socket.on('connect', function () {
     socket.on('message', function (data) {
-      console.log('emitted! ', data)
       renderChat(data);
     });
   });
