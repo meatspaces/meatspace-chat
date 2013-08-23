@@ -13,7 +13,7 @@
     "jade": ">= 0.29.0",
     "nconf": ">= 0.6.7",
     "express-persona": "git://github.com/jbuck/express-persona.git",
-    "meatspace-publico": "0.0.2",
+    "meatspace-publico": "0.0.3",
     "gravatar": "1.0.6",
     "gumhelper": "0.0.3",
     "socket.io": ">= 0.9.16"
