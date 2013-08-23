@@ -60,36 +60,55 @@ body > img {
     font-family: Arial, sans-serif;
     height: 90%;
     margin: 0 auto;
-    width: 850px;
     padding: 2%;
     position: relative;
 }
 
 .input {
+    font-size: 1.4rem;
     padding: 1%;
     margin-bottom: 10px;
     width: 96%;
 }
 
 .list {
-    background-color: rgba(1, 1, 1, 0.2);
     float: left;
     position: relative;
-}
-
-.friends {
-    margin-right: 10px;
-    width: 150px;
 }
 
 .chats {
     float: left;
+    margin-top: 10px;
     position: relative;
-    width: 650px;
+    width: 100%;
 }
 
 .chats li {
+    clear: both;
+    float: left;
     margin-bottom: 5px;
+    width: 100%;
+}
+
+.chats li img {
+    display: block;
+    float: left;
+    min-width: 128px;
+    width: 20%;
+}
+
+.chats li p {
+    color: #3b444a;
+    float: left;
+    font-size: 2rem;
+    margin-left: 10px;
+    min-width: 182px;
+    width: 60%;
+}
+
+.chats li p span {
+    color: #70b4e4;
+    font-size: 0.9rem;
 }
 
 ul li.on {
