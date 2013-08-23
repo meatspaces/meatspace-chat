@@ -11,14 +11,17 @@ html
   body(data-authenticated='#{!!session.email}')
     #wrapper
       #header
-        h1 Parallax
+        h1 Publico
 
-      if session.email
-        a(href='javascript:;', data-action='logout') Log out
-      else
-        a(href='javascript:;', data-action='login') Log in
+        .signin
+          if session.email
+            a(href='javascript:;', data-action='logout') Log out
+          else
+            a(href='javascript:;', data-action='login') Log in
 
-      block content
+      .chats.list
+        ul
+        block content
       #footer
 
     script(src='https://login.persona.org/include.js', type='text/javascript')
