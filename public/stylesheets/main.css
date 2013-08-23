@@ -56,19 +56,26 @@ body > img {
     display: none;
 }
 
+header {
+    left: 0;
+    position: fixed;
+    right: 0;
+    top: 0;
+    z-index: 2;
+}
+
 #wrapper {
     font-family: Arial, sans-serif;
-    height: 90%;
     margin: 0 auto;
-    padding: 2%;
+    padding: 1%;
     position: relative;
 }
 
 .input {
-    font-size: 1.4rem;
-    padding: 1%;
-    margin-bottom: 10px;
-    width: 96%;
+    font-size: 1.1rem;
+    margin: 60px 0 20px 0;
+    padding: 5px;
+    width: 96.5%;
 }
 
 .list {
@@ -78,7 +85,7 @@ body > img {
 
 .chats {
     float: left;
-    margin-top: 10px;
+    margin-top: 110px;
     position: relative;
     width: 100%;
 }
@@ -100,9 +107,10 @@ body > img {
 .chats li p {
     color: #3b444a;
     float: left;
-    font-size: 2rem;
+    font-size: 1.9rem;
     margin-left: 10px;
     min-width: 182px;
+    overflow: hidden;
     width: 60%;
 }
 
@@ -120,21 +128,27 @@ ul li.on {
 }
 
 .message-content {
-    position: relative;
-}
-
-#add-chat-blocker {
-    background-color: rgba(1, 1, 1, 0.4);
     bottom: 0;
-    color: #fff;
+    height: 50px;
     left: 0;
     position: absolute;
     right: 0;
+}
+
+#add-chat-blocker {
+    background-color: rgba(255, 255, 255, 0.9);
+    bottom: -52px;
+    color: #111;
+    font-size: 2rem;
+    height: 45px;
+    left: -5px;
+    position: absolute;
+    right: -5px;
     text-align: center;
-    top: 0;
 }
 
 .signin {
     float: right;
+    padding: 20px;
     position: relative;
 }
