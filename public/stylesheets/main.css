@@ -156,7 +156,7 @@ ul li.on {
 
 .signin {
     float: right;
-    padding: 0 20px;
+    padding: 0 10px;
     position: relative;
 }
 
@@ -176,6 +176,12 @@ ul li.on {
 
 @media only screen and (max-width: 460px) {
     .input {
-        width: 255px;
+        width: 50%;
+    }
+}
+
+@media only screen and (max-width: 320px) {
+    .input {
+        width: 155px;
     }
 }
