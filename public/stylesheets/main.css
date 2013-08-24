@@ -73,6 +73,7 @@ header {
 
 .input {
     font-size: 1.1rem;
+    margin-left: 10px;
     padding: 5px;
     width: 75%;
 }
@@ -106,7 +107,7 @@ header {
 .chats li p {
     color: #3b444a;
     float: left;
-    font-size: 1.9rem;
+    font-size: 1.8rem;
     margin-left: 10px;
     min-width: 182px;
     overflow: hidden;
@@ -155,12 +156,26 @@ ul li.on {
 
 .signin {
     float: right;
-    padding: 20px;
+    padding: 0 20px;
     position: relative;
+}
+
+.signin a {
+    background-color: rgba(1, 1, 1, 0.8);
+    color: #fff;
+    display: inline-block;
+    padding: 5px 10px;
+    text-decoration: none;
 }
 
 .footer {
     bottom: 0;
     position: absolute;
     right: 0;
+}
+
+@media only screen and (max-width: 460px) {
+    .input {
+        width: 255px;
+    }
 }

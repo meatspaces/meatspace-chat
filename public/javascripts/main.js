@@ -56,7 +56,7 @@ define(['jquery', './base/gumhelper', './base/videoshooter'],
     });
   }
 
-  body.on('click touchstart', function (ev) {
+  body.on('click', function (ev) {
     var self = $(ev.target);
 
     switch (self.data('action')) {
@@ -109,16 +109,20 @@ define(['jquery', './base/gumhelper', './base/videoshooter'],
     ev.preventDefault();
 
     var self = $(ev.target);
+    var blocker = self.find('#add-chat-blocker');
+    var addChat = self.find('#add-chat');
 
-    self.find('#add-chat-blocker').removeClass('hidden');
+    blocker.removeClass('hidden');
+    //addChat.attr('disabled', 'disabled');
 
     getScreenshot(function (pictureData) {
       var picField = self.find('#picture').val(pictureData);
 
       $.post('/add/chat', self.serialize(), function () {
         picField.val('');
-        self.find('#add-chat').val('');
-        self.find('#add-chat-blocker').addClass('hidden');
+        //addChat.removeAttr('disabled')
+        addChat.val('');
+        blocker.addClass('hidden');
       });
     }, 5, 0.2);
   });
