@@ -10,11 +10,19 @@ define(['jquery', './base/gumhelper', './base/videoshooter'],
   var socket = io.connect(location.protocol + '//' + location.hostname +
     (location.port ? ':' + location.port : ''));
 
+  var escapeHtml = function (text) {
+    return text
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;');
+  };
+
   var renderChat = function (c) {
     setTimeout(function () {
       if (body.find('li[data-key="' + c.chat.key + '"]').length === 0) {
         var li = $('<li data-action="chat-message" data-key="' + c.chat.key +
-          '"><img src="' + c.chat.value.media + '"><p>' + c.chat.value.message +
+          '"><img src="' + escapeHtml(c.chat.value.media) + '"><p>' +
+          escapeHtml(c.chat.value.message) +
           ' <span>(TTL: ' + c.chat.value.ttl + ')</span></p><li>');
         chatList.append(li);
         li[0].scrollIntoView(true);
