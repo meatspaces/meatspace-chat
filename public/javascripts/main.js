@@ -22,8 +22,7 @@ define(['jquery', './base/gumhelper', './base/videoshooter'],
       if (body.find('li[data-key="' + c.chat.key + '"]').length === 0) {
         var li = $('<li data-action="chat-message" data-key="' + c.chat.key +
           '"><img src="' + escapeHtml(c.chat.value.media) + '"><p>' +
-          escapeHtml(c.chat.value.message) +
-          ' <span>(TTL: ' + c.chat.value.ttl + ')</span></p><li>');
+          escapeHtml(c.chat.value.message) + '</p><li>');
         chatList.append(li);
         li[0].scrollIntoView(true);
       }
