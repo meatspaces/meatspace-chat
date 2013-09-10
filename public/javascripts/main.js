@@ -112,6 +112,8 @@ define(['jquery', './base/gumhelper', './base/videoshooter'],
     }
   });
 
+  var posting = false;
+
   addChat.on('submit', function (ev) {
     ev.preventDefault();
 
@@ -119,18 +121,20 @@ define(['jquery', './base/gumhelper', './base/videoshooter'],
     var blocker = self.find('#add-chat-blocker');
     var addChat = self.find('#add-chat');
 
-    blocker.removeClass('hidden');
-    //addChat.attr('disabled', 'disabled');
+    if (!posting) {
+      blocker.removeClass('hidden');
+      posting = true;
 
-    getScreenshot(function (pictureData) {
-      var picField = self.find('#picture').val(pictureData);
+      getScreenshot(function (pictureData) {
+        var picField = self.find('#picture').val(pictureData);
 
-      $.post('/add/chat', self.serialize(), function () {
-        picField.val('');
-        //addChat.removeAttr('disabled')
-        addChat.val('');
-        blocker.addClass('hidden');
-      });
-    }, 5, 0.2);
+        $.post('/add/chat', self.serialize(), function () {
+          picField.val('');
+          addChat.val('');
+          blocker.addClass('hidden');
+          posting = false;
+        });
+      }, 5, 0.2);
+    }
   });
 });

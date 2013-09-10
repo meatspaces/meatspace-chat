@@ -9,15 +9,11 @@ module.exports = function (app, io, isLoggedIn) {
   });
 
   app.get('/', function (req, res) {
-    if (req.session.email) {
-      res.redirect('/dashboard');
-    } else {
-      res.render('index');
-    }
+    res.render('index');
   });
 
   app.get('/login', isLoggedIn, function (req, res) {
-    res.redirect('/dashboard');
+    res.render('index');
   });
 
   app.get('/logout', isLoggedIn, function (req, res) {
