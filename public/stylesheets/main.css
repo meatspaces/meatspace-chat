@@ -147,8 +147,9 @@ ul li.on {
     bottom: 0;
     color: #111;
     font-size: 2rem;
-    height: 45px;
+    height: 65px;
     left: 0;
+    line-height: 2rem;
     position: absolute;
     right: 0;
     text-align: center;
@@ -177,6 +178,12 @@ ul li.on {
 @media only screen and (max-width: 460px) {
     .input {
         width: 50%;
+    }
+
+    #add-chat-blocker {
+        font-size: 1.6rem;
+        left: -150px;
+        line-height: 3.6rem;
     }
 }
 
