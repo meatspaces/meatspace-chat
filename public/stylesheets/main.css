@@ -47,6 +47,13 @@ table {
     border-spacing: 0;
 }
 
+@font-face {
+    font-family: 'latin_modern_mono10_regular';
+    src: url('../fonts/lmmono10-regular-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
 html, body {
     height: 100%;
     position: relative;
@@ -56,24 +63,58 @@ body > img {
     display: none;
 }
 
-header {
-    left: 0;
+.header {
+    background-color: rgba(255, 255, 255, 0.6);
+    display: block;
+    font-size: 0.9rem;
     position: fixed;
     right: 0;
     top: 0;
     z-index: 2;
 }
 
+.header li {
+    clear: both;
+    float: left;
+    padding: 2px;
+    position: relative;
+    width: 150px;
+}
+
+.header a {
+    color: #333;
+    display: block;
+    outline: none;
+    padding: 2px 5px;
+    text-align: right;
+    text-decoration: none;
+}
+
+.header a:hover {
+    background-color: #0eabde;
+    color: #fff;
+}
+
 #wrapper {
-    font-family: Arial, sans-serif;
+    font-family: 'latin_modern_mono10_regular', sans-serif;
     margin: 0 auto;
-    padding: 1%;
+    padding: 3px;
     position: relative;
 }
 
+h1 {
+    font-size: 3rem;
+    padding: 20px;
+}
+
 .input {
+    background-color: rgba(255, 255, 255, 0.8);
+    border: 1px solid #eee;
+    color: #164352;
+    font-family: 'latin_modern_mono10_regular', sans-serif;
     font-size: 1.1rem;
     margin-left: 10px;
+    outline: none;
     padding: 5px;
     width: 75%;
 }
@@ -91,13 +132,15 @@ header {
 }
 
 .chats li {
+    background-color: #eee;
     clear: both;
     float: left;
-    margin-bottom: 5px;
+    margin-bottom: 1px;
     width: 100%;
 }
 
 .chats li img {
+    border-radius: 25px;
     display: block;
     float: left;
     min-width: 128px;
@@ -105,12 +148,13 @@ header {
 }
 
 .chats li p {
-    color: #3b444a;
+    color: #777;
     float: left;
-    font-size: 1.8rem;
-    margin-left: 10px;
+    font-size: 1.7rem;
     min-width: 182px;
     overflow: hidden;
+    padding: 5px 10px;
+    text-shadow: #f1f1f1 -1px 1px 0;
     width: 60%;
 }
 
@@ -147,26 +191,12 @@ ul li.on {
     bottom: 0;
     color: #111;
     font-size: 2rem;
-    height: 65px;
+    height: 55px;
     left: 0;
     line-height: 2rem;
     position: absolute;
     right: 0;
     text-align: center;
-}
-
-.signin {
-    float: right;
-    padding: 0 10px;
-    position: relative;
-}
-
-.signin a {
-    background-color: rgba(1, 1, 1, 0.8);
-    color: #fff;
-    display: inline-block;
-    padding: 5px 10px;
-    text-decoration: none;
 }
 
 .footer {

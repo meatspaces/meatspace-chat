@@ -1,7 +1,7 @@
 !!! 5
 html
   head
-    title Parallax
+    title parallax: messages self destruct in 10 minutes
     meta(content='width=device-width, height=device-height, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0', name='viewport')
     meta(content='yes', name='apple-mobile-web-app-capable')
     meta(content='chrome=1', http-equiv='X-UA-Compatible')
@@ -10,12 +10,16 @@ html
 
   body(data-authenticated='#{!!session.email}')
     #wrapper
-      header
-        .signin
+      ul.header
+        li.title parallax
+        li.github
+          a(href='http://github.com/meatspaces/parallax', target='_blank') Github
+        li.signin
           if session.email
             a(href='javascript:;', data-action='logout') Log out
           else
             a(href='javascript:;', data-action='login') Log in
+
 
       .chats.list
         ul
