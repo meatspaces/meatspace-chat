@@ -5,10 +5,13 @@ define(['jquery', './base/gumhelper', './base/videoshooter'],
   var body = $('body');
   var addChat = $('#add-chat-form');
   var chatList = $('.chats ul');
-  var footer = $('.footer');
+  var end = $('.end')[0];
+  var posting = false;
   var videoShooter;
   var socket = io.connect(location.protocol + '//' + location.hostname +
     (location.port ? ':' + location.port : ''));
+
+  var CHAT_LIMIT = 35;
 
   var escapeHtml = function (text) {
     return text
@@ -18,15 +21,18 @@ define(['jquery', './base/gumhelper', './base/videoshooter'],
   };
 
   var renderChat = function (c) {
-    setTimeout(function () {
-      if (body.find('li[data-key="' + c.chat.key + '"]').length === 0) {
-        var li = $('<li data-action="chat-message" data-key="' + c.chat.key +
-          '"><img src="' + escapeHtml(c.chat.value.media) + '"><p>' +
-          escapeHtml(c.chat.value.message) + '</p><li>');
-        chatList.append(li);
-        li[0].scrollIntoView(true);
+    if (body.find('li[data-key="' + c.chat.key + '"]').length === 0) {
+      var li = $('<li data-action="chat-message" data-key="' + c.chat.key +
+        '"><img src="' + escapeHtml(c.chat.value.media) + '"><p>' +
+        escapeHtml(c.chat.value.message) + '</p><li>');
+      chatList.append(li);
+
+      if (body.find('.chats.list > ul > li').length > CHAT_LIMIT) {
+        body.find('.chats.list > ul > li')[0].remove();
       }
-    }, 1);
+
+      end.scrollIntoView(true);
+    }
   };
 
   socket.on('connect', function () {
@@ -60,7 +66,10 @@ define(['jquery', './base/gumhelper', './base/videoshooter'],
       footer.append(videoElement);
       videoElement.play();
       videoShooter = new VideoShooter(videoElement);
+      addChat.click();
     });
+  } else {
+    addChat.click();
   }
 
   body.on('click', function (ev) {
@@ -111,8 +120,6 @@ define(['jquery', './base/gumhelper', './base/videoshooter'],
         break;
     }
   });
-
-  var posting = false;
 
   addChat.on('submit', function (ev) {
     ev.preventDefault();

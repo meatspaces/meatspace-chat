@@ -39,7 +39,7 @@ module.exports = function (app, io, isLoggedIn) {
   app.post('/add/chat', isLoggedIn, function (req, res) {
     publico.addChat(req.body.message, {
       ttl: 600000,
-      media: req.body.picture || gravatar.url(req.session.email, { s: 100 })
+      media: req.body.picture || gravatar.url(req.session.email, { s: 300 })
     }, function (err, c) {
       if (err) {
         res.status(400);
