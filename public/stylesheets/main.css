@@ -201,7 +201,7 @@ ul li.on {
 
 #footer {
     bottom: 0;
-    position: absolute;
+    position: fixed;
     right: 0;
 }
 
