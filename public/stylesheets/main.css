@@ -126,9 +126,9 @@ h1 {
 
 .chats {
     float: left;
-    margin-bottom: 80px;
     position: relative;
     width: 100%;
+    padding-bottom: 60px;
 }
 
 .chats li {
