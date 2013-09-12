@@ -199,7 +199,7 @@ ul li.on {
     text-align: center;
 }
 
-.footer {
+#footer {
     bottom: 0;
     position: absolute;
     right: 0;
