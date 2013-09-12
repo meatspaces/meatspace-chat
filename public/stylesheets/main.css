@@ -205,9 +205,20 @@ ul li.on {
     right: 0;
 }
 
+.end {
+    float: left;
+    height: 20px;
+    position: relative;
+    width: 1px;
+}
+
 @media only screen and (max-width: 460px) {
     .input {
         width: 50%;
+    }
+
+    .chats li p {
+        font-size: 1.4rem;
     }
 
     #add-chat-blocker {
