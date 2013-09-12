@@ -2,10 +2,10 @@ define(['jquery', './base/gumhelper', './base/videoshooter'],
   function($, gumHelper, VideoShooter) {
   'use strict';
 
+  var html = $('html');
   var body = $('body');
   var addChat = $('#add-chat-form');
   var chatList = $('.chats ul');
-  var footer = $('#footer');
   var end = $('.end')[0];
   var posting = false;
   var videoShooter;
@@ -27,12 +27,13 @@ define(['jquery', './base/gumhelper', './base/videoshooter'],
         '"><img src="' + escapeHtml(c.chat.value.media) + '"><p>' +
         escapeHtml(c.chat.value.message) + '</p><li>');
       chatList.append(li);
+      var scrollHeight = body[0].scrollHeight;
+      body[0].scrollTop = scrollHeight;
+      html[0].scrollTop = scrollHeight;
 
       if (body.find('.chats.list > ul > li').length > CHAT_LIMIT) {
         body.find('.chats.list > ul > li')[0].remove();
       }
-
-      end.scrollIntoView(true);
     }
   };
 
