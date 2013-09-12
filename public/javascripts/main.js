@@ -6,7 +6,7 @@ define(['jquery', './base/gumhelper', './base/videoshooter'],
   var body = $('body');
   var addChat = $('#add-chat-form');
   var chatList = $('.chats ul');
-  var end = $('.end')[0];
+  var footer = $('#footer');
   var posting = false;
   var videoShooter;
   var socket = io.connect(location.protocol + '//' + location.hostname +
