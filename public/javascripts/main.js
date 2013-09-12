@@ -5,6 +5,7 @@ define(['jquery', './base/gumhelper', './base/videoshooter'],
   var body = $('body');
   var addChat = $('#add-chat-form');
   var chatList = $('.chats ul');
+  var footer = $('#footer');
   var end = $('.end')[0];
   var posting = false;
   var videoShooter;
