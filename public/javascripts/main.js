@@ -15,10 +15,23 @@ define(['jquery', './base/gumhelper', './base/videoshooter'],
   var CHAT_LIMIT = 35;
 
   var escapeHtml = function (text) {
-    return text
+    text = text
       .replace(/&/g, '&amp;')
       .replace(/</g, '&lt;')
       .replace(/>/g, '&gt;');
+
+    var txtArray = text.split(/\s/);
+    var newTxt = [];
+
+    for (var i = 0; i < txtArray.length; i ++) {
+      if (txtArray[i].match(/^(http|www)+/)) {
+        newTxt.push('<a href="' + txtArray[i] + '" target="_blank">' + txtArray[i] + '</a>');
+      } else {
+        newTxt.push(txtArray[i]);
+      }
+    }
+
+    return newTxt.join(' ');
   };
 
   var renderChat = function (c) {

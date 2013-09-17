@@ -151,6 +151,7 @@ h1 {
     color: #777;
     float: left;
     font-size: 1.7rem;
+    line-height: 1.9rem;
     min-width: 182px;
     overflow: hidden;
     padding: 5px 10px;
@@ -160,7 +161,16 @@ h1 {
 
 .chats li p span {
     color: #70b4e4;
-    font-size: 0.9rem;
+    font-size: 0.8rem;
+}
+
+.chats li p a {
+    color: #34a4b8;
+    text-decoration: none;
+}
+
+.chats li p a:hover {
+    background-color: #fff;
 }
 
 ul li.on {
@@ -218,7 +228,8 @@ ul li.on {
     }
 
     .chats li p {
-        font-size: 1.4rem;
+        font-size: 1.3rem;
+        line-height: 1.3rem;
     }
 
     #add-chat-blocker {
