@@ -24,7 +24,7 @@ define(['jquery', './base/gumhelper', './base/videoshooter'],
     var newTxt = [];
 
     for (var i = 0; i < txtArray.length; i ++) {
-      if (txtArray[i].match(/^(http|www)+/)) {
+      if (txtArray[i].match(/^(http|www)+/) && txtArray[i].indexOf('gravatar') === -1) {
         newTxt.push('<a href="' + txtArray[i] + '" target="_blank">' + txtArray[i] + '</a>');
       } else {
         newTxt.push(txtArray[i]);
