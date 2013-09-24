@@ -14,12 +14,6 @@ html
         li.title parallax
         li.github
           a(href='http://github.com/meatspaces/parallax', target='_blank') Github
-        li.signin
-          if session.email
-            a(href='javascript:;', data-action='logout') Log out
-          else
-            a(href='javascript:;', data-action='login') Log in
-
 
       .chats.list
         ul
@@ -27,6 +21,5 @@ html
         block content
     #footer
 
-    script(src='https://login.persona.org/include.js', type='text/javascript')
     script(src='/socket.io/socket.io.js')
     script(src='/javascripts/require.js', data-main='/javascripts/config')
