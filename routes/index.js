@@ -25,7 +25,7 @@ module.exports = function (app, io, isLoggedIn) {
   app.post('/add/chat', function (req, res) {
     publico.addChat(req.body.message, {
       ttl: 600000,
-      media: req.body.picture || '/images/avatar.jpg'
+      media: req.body.picture || '/images/avatar.png'
     }, function (err, c) {
       if (err) {
         res.status(400);
