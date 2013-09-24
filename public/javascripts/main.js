@@ -73,7 +73,7 @@ define(['jquery', './base/gumhelper', './base/videoshooter'],
     }
   };
 
-  if (navigator.getMedia && !!body.data('authenticated')) {
+  if (navigator.getMedia) {
     gumHelper.startVideoStreaming(function errorCb() {
     }, function successCallback(stream, videoElement, width, height) {
       videoElement.width = width / 5;
@@ -86,55 +86,6 @@ define(['jquery', './base/gumhelper', './base/videoshooter'],
   } else {
     addChat.click();
   }
-
-  body.on('click', function (ev) {
-    var self = $(ev.target);
-
-    switch (self.data('action')) {
-      case 'login':
-        ev.preventDefault();
-
-        navigator.id.get(function (assertion) {
-          if (!assertion) {
-            return;
-          }
-
-          $.ajax({
-            url: '/persona/verify',
-            type: 'POST',
-            data: { assertion: assertion },
-            dataType: 'json',
-            cache: false
-          }).done(function (data) {
-            if (data.status === 'okay') {
-              localStorage.setItem('personaEmail', data.email);
-              document.location.href = '/login';
-            } else {
-              console.log('Login failed because ' + data.reason);
-            }
-          });
-        });
-        break;
-
-      case 'logout':
-        ev.preventDefault();
-
-        $.ajax({
-          url: '/persona/logout',
-          type: 'POST',
-          dataType: 'json',
-          cache: false
-        }).done(function (data) {
-          if (data.status === 'okay') {
-            localStorage.removeItem('personaEmail');
-            document.location.href = '/logout';
-          } else {
-            console.log('Logout failed because ' + data.reason);
-          }
-        });
-        break;
-    }
-  });
 
   addChat.on('submit', function (ev) {
     ev.preventDefault();
