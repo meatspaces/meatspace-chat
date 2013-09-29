@@ -107,7 +107,7 @@ define(['jquery', './base/gumhelper', './base/videoshooter'],
           blocker.addClass('hidden');
           posting = false;
         });
-      }, 5, 0.2);
+      }, 10, 0.2);
     }
   });
 });
