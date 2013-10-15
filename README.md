@@ -1,4 +1,4 @@
-# Parallax
+# PUBLICO
 
 ## Setting up
 
