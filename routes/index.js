@@ -23,32 +23,37 @@ module.exports = function (app, io, isLoggedIn) {
   });
 
   app.post('/add/chat', function (req, res) {
-    publico.addChat(req.body.message, {
-      ttl: 600000,
-      media: req.body.picture || '/images/avatar.png'
-    }, function (err, c) {
-      if (err) {
-        res.status(400);
-        res.json({ error: err.toString() });
-      } else {
-        try {
-          io.sockets.emit('message', {
-            chat: {
-              key: c.key,
-              value: {
-                created: c.created,
-                media: c.media,
-                ttl: c.ttl,
-                message: c.message
+    if (req.body.picture) {
+      publico.addChat(req.body.message, {
+        ttl: 600000,
+        media: req.body.picture
+      }, function (err, c) {
+        if (err) {
+          res.status(400);
+          res.json({ error: err.toString() });
+        } else {
+          try {
+            io.sockets.emit('message', {
+              chat: {
+                key: c.key,
+                value: {
+                  created: c.created,
+                  media: c.media,
+                  ttl: c.ttl,
+                  message: c.message
+                }
               }
-            }
-          });
-        } catch (err) {
-          console.log('Could not emit message');
-        }
+            });
+          } catch (err) {
+            console.log('Could not emit message');
+          }
 
-        res.json({ status: 'sent!' });
-      }
-    });
+          res.json({ status: 'sent!' });
+        }
+      });
+    } else {
+      res.status(400);
+      res.json({ error: 'you need webrtc' });
+    }
   });
 };
