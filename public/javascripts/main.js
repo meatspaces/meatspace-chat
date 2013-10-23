@@ -39,19 +39,23 @@ define(['jquery', './base/gumhelper', './base/videoShooter'],
   };
 
   var renderChat = function (c) {
-    if (body.find('li[data-key="' + c.chat.key + '"]').length === 0) {
-      var li = $('<li data-action="chat-message" data-key="' + c.chat.key +
-        '"><img src="' + escapeHtml(c.chat.value.media) + '"><p>' +
-        escapeHtml(c.chat.value.message) + '</p><li>');
-      chatList.append(li);
-      var scrollHeight = body[0].scrollHeight;
-      body[0].scrollTop = scrollHeight;
-      html[0].scrollTop = scrollHeight;
+    var img = new Image();
+    img.onload = function() {  
+      if (body.find('li[data-key="' + c.chat.key + '"]').length === 0) {
+        var li = $('<li data-action="chat-message" data-key="' + c.chat.key +
+          '"><img src="' + escapeHtml(c.chat.value.media) + '"><p>' +
+          escapeHtml(c.chat.value.message) + '</p><li>');
+        chatList.append(li);
+        var scrollHeight = body[0].scrollHeight;
+        body[0].scrollTop = scrollHeight;
+        html[0].scrollTop = scrollHeight;
 
-      if (body.find('.chats.list > ul > li').length > CHAT_LIMIT) {
-        body.find('.chats.list > ul > li')[0].remove();
+        if (body.find('.chats.list > ul > li').length > CHAT_LIMIT) {
+          body.find('.chats.list > ul > li')[0].remove();
+        }
       }
     }
+    img.src = escapeHtml(c.chat.value.media);
   };
 
   socket.on('connect', function () {
