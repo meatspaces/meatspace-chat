@@ -1,6 +1,6 @@
 define(['jquery', './base/gumhelper', './base/videoShooter'],
   function($, gumHelper, VideoShooter) {
-//  'use strict';
+  'use strict';
 
   var html = $('html');
   var body = $('body');
