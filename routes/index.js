@@ -22,7 +22,7 @@ module.exports = function (app, io, isLoggedIn) {
     });
   });
 
-  app.post('/add/chat', function (req, res) {
+  app.post('/add/chat', function (req, res, next) {
     if (req.body.picture) {
       publico.addChat(req.body.message.slice(0, 150), {
         ttl: 600000,
