@@ -4,5 +4,7 @@
     "authPort": 3000,
     "authUrl": "https://login.persona.org",
     "session_secret": "secret",
-    "session_cookie": "session"
+    "session_cookie": "session",
+    "analytics": "your google analytics value",
+    "analyticsHost": "your domain without the protocol (e.g. someurl.com)"
 }
