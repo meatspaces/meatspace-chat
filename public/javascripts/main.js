@@ -44,14 +44,24 @@ define(['jquery', './base/gumhelper', './base/videoShooter'],
       if (body.find('li[data-key="' + c.chat.key + '"]').length === 0) {
         var li = $('<li data-action="chat-message" data-key="' + c.chat.key +
           '"><img src="' + escapeHtml(c.chat.value.media) + '"><p>' +
-          escapeHtml(c.chat.value.message) + '</p><li>');
-        chatList.append(li);
-        var scrollHeight = body[0].scrollHeight;
-        body[0].scrollTop = scrollHeight;
-        html[0].scrollTop = scrollHeight;
+          escapeHtml(c.chat.value.message) + '</p></li>');
 
-        if (body.find('.chats.list > ul > li').length > CHAT_LIMIT) {
-          body.find('.chats.list > ul > li')[0].remove();
+        var size = body.find('#add-chat')[0].getBoundingClientRect().bottom
+        var last = body.find('.chats > ul')[0].lastChild
+        var bottom = last ? last.getBoundingClientRect().bottom : 0
+
+        var follow = bottom < size + 50
+
+        chatList.append(li)
+
+        // if scrolled to bottom of window then scroll the new thing into view
+        // otherwise, you are reading the history... allow user to scroll up.
+        // TODO: play an annoying noise if user is not on this tab?
+        if(follow) {
+          if (body.find('.chats.list > ul > li').length > CHAT_LIMIT) {
+            body.find('.chats.list > ul > li')[0].remove();
+          }
+          li[0].scrollIntoView()
         }
       }
     }
