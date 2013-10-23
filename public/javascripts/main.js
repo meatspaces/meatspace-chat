@@ -24,16 +24,12 @@ define(['jquery', './base/gumhelper', './base/videoShooter'],
     var newTxt = [];
 
     for (var i = 0; i < txtArray.length; i ++) {
-      if (txtArray[i].indexOf('gravatar') === -1) {
-        if (txtArray[i].match(/^(http)+/)) {
-          newTxt.push('<a href="' + txtArray[i] + '" target="_blank">' + txtArray[i] + '</a>');
-        } else if (txtArray[i].match(/^(www)+/)) {
-          newTxt.push('<a href="http://' + txtArray[i] + '" target="_blank">' + txtArray[i] + '</a>');
-        } else if (txtArray[i].match(/(^|[^@\w])@(\w{1,15})\b/)) {
-          newTxt.push('<a href="https://twitter.com/' + txtArray[i].replace('@','') + '" target="_blank">' + txtArray[i] + '</a>');
-        } else {
-          newTxt.push(txtArray[i]);
-        }
+      if (txtArray[i].match(/^(http)+/)) {
+        newTxt.push('<a href="' + txtArray[i] + '" target="_blank">' + txtArray[i] + '</a>');
+      } else if (txtArray[i].match(/^(www)+/)) {
+        newTxt.push('<a href="http://' + txtArray[i] + '" target="_blank">' + txtArray[i] + '</a>');
+      } else if (txtArray[i].match(/(^|[^@\w])@(\w{1,15})/)) {
+        newTxt.push('<a href="https://twitter.com/' + txtArray[i].replace(/[\W]/g,'') + '" target="_blank">' + txtArray[i] + '</a>');
       } else {
         newTxt.push(txtArray[i]);
       }
