@@ -24,7 +24,7 @@ module.exports = function (app, io, isLoggedIn) {
 
   app.post('/add/chat', function (req, res) {
     if (req.body.picture) {
-      publico.addChat(req.body.message, {
+      publico.addChat(req.body.message.slice(0, 150), {
         ttl: 600000,
         media: req.body.picture
       }, function (err, c) {
