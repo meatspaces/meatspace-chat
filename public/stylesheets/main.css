@@ -30,6 +30,16 @@ footer, header, hgroup, menu, nav, section {
 }
 body {
     line-height: 1;
+    background-color:#556;
+background-image: linear-gradient(30deg, #445 12%, transparent 12.5%, transparent 87%, #445 87.5%, #445),
+linear-gradient(150deg, #445 12%, transparent 12.5%, transparent 87%, #445 87.5%, #445),
+linear-gradient(30deg, #445 12%, transparent 12.5%, transparent 87%, #445 87.5%, #445),
+linear-gradient(150deg, #445 12%, transparent 12.5%, transparent 87%, #445 87.5%, #445),
+linear-gradient(60deg, #99a 25%, transparent 25.5%, transparent 75%, #99a 75%, #99a), 
+linear-gradient(60deg, #99a 25%, transparent 25.5%, transparent 75%, #99a 75%, #99a);
+background-size:80px 140px;
+background-position: 0 0, 0 0, 40px 70px, 40px 70px, 0 0, 40px 70px;
+    min-height: 100%;
 }
 ol, ul {
     list-style: none;
@@ -108,6 +118,7 @@ h1 {
 }
 
 .input {
+    border-radius: 25px;
     background-color: rgba(255, 255, 255, 0.8);
     border: 1px solid #eee;
     color: #164352;
@@ -132,7 +143,9 @@ h1 {
 }
 
 .chats li {
-    background-color: #eee;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius:25px;
+    background-color: rgba(255, 255, 255, 0.8);
     clear: both;
     float: left;
     margin-bottom: 1px;
@@ -140,7 +153,7 @@ h1 {
 }
 
 .chats li:nth-child(odd) {
-    background-color: #ddd;
+    background-color: rgba(225, 225, 225, 0.8);
 }
 
 .chats li img {
