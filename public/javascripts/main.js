@@ -114,30 +114,30 @@ define(['jquery', './base/gumhelper', './base/videoShooter'],
     var addChat = self.find('#add-chat');
 
     if (!posting) {
-      canSend = false;
-
       if (!canSend) {
-        alert("please wait a wee bit...");
-        return;
+        alert('please wait a wee bit...');
       }
 
-      setTimeout(function() {
-        canSend = true;
-      }, 5000);
+      if (canSend) {
+        canSend = false;
+        blocker.removeClass('hidden');
+        posting = true;
 
-      blocker.removeClass('hidden');
-      posting = true;
+        setTimeout(function () {
+          canSend = true;
+        }, 5000);
 
-      getScreenshot(function (pictureData) {
-        var picField = self.find('#picture').val(pictureData);
+        getScreenshot(function (pictureData) {
+          var picField = self.find('#picture').val(pictureData);
 
-        $.post('/add/chat', self.serialize(), function () {
-          picField.val('');
-          addChat.val('');
-          blocker.addClass('hidden');
-          posting = false;
-        });
-      }, 10, 0.2);
+          $.post('/add/chat', self.serialize(), function () {
+            picField.val('');
+            addChat.val('');
+            blocker.addClass('hidden');
+            posting = false;
+          });
+        }, 10, 0.2);
+      }
     }
   });
 });
