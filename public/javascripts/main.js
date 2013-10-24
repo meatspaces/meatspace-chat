@@ -24,7 +24,7 @@ define(['jquery', './base/gumhelper', './base/videoShooter'],
       //    [        urls        ]      [ twitter ]
       /(?:\b((?:https?:|www\.)\S+)|(\W?)@(\w{1,20}))/g,
       function(match, link, notWord, handle) {
-        if (handle.length > 0) {
+        if (handle && handle.length > 0) {
           return notWord + linkHtml('https://twitter.com/' + handle,
             '@' + handle);
         }
