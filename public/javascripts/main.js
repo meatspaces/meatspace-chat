@@ -15,6 +15,16 @@ define(['jquery', './base/gumhelper', './base/videoShooter'],
 
   var CHAT_LIMIT = 35;
 
+  emojify.setConfig({
+      emojify_tag_type: 'img',
+      emoticons_enabled: true,
+      people_enabled: true,
+      nature_enabled: true,
+      objects_enabled: true,
+      places_enabled: true,
+      symbols_enabled: true
+  });
+
   var linkify = function (text) {
     var linkHtml = function(href, text) {
       return '<a href="' + href + '" target="_blank">' + text + '</a>';
@@ -55,6 +65,7 @@ define(['jquery', './base/gumhelper', './base/videoShooter'],
         var follow = bottom < size + 50
 
         chatList.append(li)
+        emojify.run(li);
 
         // if scrolled to bottom of window then scroll the new thing into view
         // otherwise, you are reading the history... allow user to scroll up.
@@ -69,6 +80,7 @@ define(['jquery', './base/gumhelper', './base/videoShooter'],
     }
     img.src = c.chat.value.media;
   };
+
 
   socket.on('connect', function () {
     socket.on('message', function (data) {
