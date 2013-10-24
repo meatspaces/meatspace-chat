@@ -9,6 +9,7 @@ define(['jquery', './base/gumhelper', './base/videoShooter'],
   var footer = $('#footer');
   var posting = false;
   var videoShooter;
+  var canSend = true;
   var socket = io.connect(location.protocol + '//' + location.hostname +
     (location.port ? ':' + location.port : ''));
 
@@ -40,7 +41,7 @@ define(['jquery', './base/gumhelper', './base/videoShooter'],
 
   var renderChat = function (c) {
     var img = new Image();
-    img.onload = function() {  
+    img.onload = function() {
       if (body.find('li[data-key="' + c.chat.key + '"]').length === 0) {
         var li = $('<li data-action="chat-message" data-key="' + c.chat.key +
           '"><img src="' + escapeHtml(c.chat.value.media) + '"><p>' +
@@ -113,6 +114,17 @@ define(['jquery', './base/gumhelper', './base/videoShooter'],
     var addChat = self.find('#add-chat');
 
     if (!posting) {
+      canSend = false;
+
+      if (!canSend) {
+        alert("please wait a wee bit...");
+        return;
+      }
+
+      setTimeout(function() {
+        canSend = true;
+      }, 5000);
+
       blocker.removeClass('hidden');
       posting = true;
 

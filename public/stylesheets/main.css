@@ -137,6 +137,8 @@ h1 {
     float: left;
     margin-bottom: 1px;
     width: 100%;
+    max-height: 185px;
+    overflow: hidden;
 }
 
 .chats li img {
