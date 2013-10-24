@@ -225,7 +225,7 @@ ul li.on {
 }
 
 .chats li img.emojify {
-    width: auto;
+    width: 50px;
     color: transparent;
     min-width: 0;
 }
