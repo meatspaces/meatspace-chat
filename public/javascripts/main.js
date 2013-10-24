@@ -15,37 +15,38 @@ define(['jquery', './base/gumhelper', './base/videoShooter'],
 
   var CHAT_LIMIT = 35;
 
-  var escapeHtml = function (text) {
-    text = text
-      .replace(/&/g, '&amp;')
-      .replace(/</g, '&lt;')
-      .replace(/>/g, '&gt;');
+  var linkify = function (text) {
+    var linkHtml = function(href, text) {
+      return '<a href="' + href + '" target="_blank">' + text + '</a>';
+    };
 
-    var txtArray = text.split(/\s/);
-    var newTxt = [];
-
-    for (var i = 0; i < txtArray.length; i ++) {
-      if (txtArray[i].match(/^(http)+/)) {
-        newTxt.push('<a href="' + txtArray[i] + '" target="_blank">' + txtArray[i] + '</a>');
-      } else if (txtArray[i].match(/^(www)+/)) {
-        newTxt.push('<a href="http://' + txtArray[i] + '" target="_blank">' + txtArray[i] + '</a>');
-      } else if (txtArray[i].match(/(^|[^@\w])@(\w{1,15})/)) {
-        newTxt.push('<a href="https://twitter.com/' + txtArray[i].replace(/[\W]/g,'') + '" target="_blank">' + txtArray[i] + '</a>');
-      } else {
-        newTxt.push(txtArray[i]);
-      }
-    }
-
-    return newTxt.join(' ');
+    return text.replace(
+      //    [        urls        ]      [ twitter ]
+      /(?:\b((?:https?:|www\.)\S+)|(\W?)@(\w{1,20}))/g,
+      function(match, link, notWord, handle) {
+        if (handle.length > 0) {
+          return notWord + linkHtml('https://twitter.com/' + handle,
+            '@' + handle);
+        }
+        if (link.substr(0, 3) == 'www') {
+          link = 'http://' + link;
+        }
+        return linkHtml(link, match);
+    });
   };
 
   var renderChat = function (c) {
     var img = new Image();
     img.onload = function() {
       if (body.find('li[data-key="' + c.chat.key + '"]').length === 0) {
-        var li = $('<li data-action="chat-message" data-key="' + c.chat.key +
-          '"><img src="' + escapeHtml(c.chat.value.media) + '"><p>' +
-          escapeHtml(c.chat.value.message) + '</p></li>');
+        var li = document.createElement('li');
+        li.dataset.action = 'chat-message';
+        li.dataset.key = c.chat.key;
+        li.appendChild(img);
+        var message = document.createElement('p');
+        message.textContent = c.chat.value.message;
+        message.innerHTML = linkify(message.innerHTML);
+        li.appendChild(message);
 
         var size = body.find('#add-chat')[0].getBoundingClientRect().bottom
         var last = body.find('.chats > ul')[0].lastChild
@@ -62,11 +63,11 @@ define(['jquery', './base/gumhelper', './base/videoShooter'],
           if (body.find('.chats.list > ul > li').length > CHAT_LIMIT) {
             body.find('.chats.list > ul > li')[0].remove();
           }
-          li[0].scrollIntoView()
+          li.scrollIntoView()
         }
       }
     }
-    img.src = escapeHtml(c.chat.value.media);
+    img.src = c.chat.value.media;
   };
 
   socket.on('connect', function () {
@@ -76,12 +77,11 @@ define(['jquery', './base/gumhelper', './base/videoShooter'],
   });
 
   $.get('/get/chats', function (data) {
-    for (var i = 0; i < data.chats.chats.length; i ++) {
-      var chat = {
-        chat: data.chats.chats[i]
-      };
-      renderChat(chat);
-    }
+    data.chats.chats.sort(function(a, b) {
+      return a.value.created - b.value.created;
+    }).forEach(function(chat) {
+      renderChat({chat: chat});
+    });
   });
 
   var getScreenshot = function (callback, numFrames, interval) {
