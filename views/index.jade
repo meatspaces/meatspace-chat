@@ -4,7 +4,7 @@ block content
   form(method='post', id='add-chat-form')
     input(type='hidden', name='picture', id='picture')
     .message-content
-      input(type='text', name='message', id='add-chat', class='input', autocomplete='off', placeholder='Send a public message')
+      input(type='text', name='message', id='add-chat', class='input', autocomplete='off', placeholder='Send a public message', maxlength='150')
       input(type='hidden', name='_csrf', value='#{csrf}')
       #add-chat-blocker.hidden
         span Sending, please wait!
