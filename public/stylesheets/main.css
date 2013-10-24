@@ -246,3 +246,10 @@ ul li.on {
         width: 155px;
     }
 }
+
+/* breakpoint depends on .chats li max-height */
+@media only screen and (min-width: 1225px) {
+    .chats li img {
+        width: 245px;
+    }
+}
