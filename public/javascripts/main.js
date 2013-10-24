@@ -76,12 +76,11 @@ define(['jquery', './base/gumhelper', './base/videoShooter'],
   });
 
   $.get('/get/chats', function (data) {
-    for (var i = 0; i < data.chats.chats.length; i ++) {
-      var chat = {
-        chat: data.chats.chats[i]
-      };
-      renderChat(chat);
-    }
+    data.chats.chats.sort(function(a, b) {
+      return a.value.created - b.value.created;
+    }).forEach(function(chat) {
+      renderChat({chat: chat});
+    });
   });
 
   var getScreenshot = function (callback, numFrames, interval) {
