@@ -141,6 +141,10 @@ h1 {
     overflow: hidden;
 }
 
+.chats li:nth-child(odd) {
+    background-color: #ddd;
+}
+
 .chats li img {
     border-radius: 25px;
     display: block;
