@@ -16,13 +16,13 @@ define(['jquery', './base/gumhelper', './base/videoShooter'],
   var CHAT_LIMIT = 35;
 
   emojify.setConfig({
-      emojify_tag_type: 'img',
-      emoticons_enabled: true,
-      people_enabled: true,
-      nature_enabled: true,
-      objects_enabled: true,
-      places_enabled: true,
-      symbols_enabled: true
+    emojify_tag_type: 'img',
+    emoticons_enabled: true,
+    people_enabled: true,
+    nature_enabled: true,
+    objects_enabled: true,
+    places_enabled: true,
+    symbols_enabled: true
   });
 
   var linkify = function (text) {
@@ -143,10 +143,14 @@ define(['jquery', './base/gumhelper', './base/videoShooter'],
           var picField = self.find('#picture').val(pictureData);
 
           $.post('/add/chat', self.serialize(), function () {
+
+          }).error(function (data) {
+            alert(data.responseJSON.error);
+          }).always(function (data) {
             picField.val('');
             addChat.val('');
-            blocker.addClass('hidden');
             posting = false;
+            blocker.addClass('hidden');
           });
         }, 10, 0.2);
       }
