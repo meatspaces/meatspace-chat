@@ -149,8 +149,9 @@ h1 {
     clear: both;
     float: left;
     margin-bottom: 1px;
+    max-height: 250px;
     width: 100%;
-    overflow: hidden;
+    overflow-y: scroll;
 }
 
 .chats li:nth-child(odd) {
