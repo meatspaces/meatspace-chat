@@ -16,7 +16,7 @@ define(['jquery', './base/gumhelper', './base/videoShooter'],
   var CHAT_LIMIT = 35;
 
   emojify.setConfig({
-    emojify_tag_type: 'img',
+    emojify_tag_type: 'div',
     emoticons_enabled: true,
     people_enabled: true,
     nature_enabled: true,
