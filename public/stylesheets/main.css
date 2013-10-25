@@ -30,14 +30,14 @@ footer, header, hgroup, menu, nav, section {
 }
 body {
     line-height: 1;
-    background-color:#556;
-    background-image: linear-gradient(30deg, #445 12%, transparent 12.5%, transparent 87%, #445 87.5%, #445),
-    linear-gradient(150deg, #445 12%, transparent 12.5%, transparent 87%, #445 87.5%, #445),
-    linear-gradient(30deg, #445 12%, transparent 12.5%, transparent 87%, #445 87.5%, #445),
-    linear-gradient(150deg, #445 12%, transparent 12.5%, transparent 87%, #445 87.5%, #445),
-    linear-gradient(60deg, #99a 25%, transparent 25.5%, transparent 75%, #99a 75%, #99a), 
-    linear-gradient(60deg, #99a 25%, transparent 25.5%, transparent 75%, #99a 75%, #99a);
-    background-size:80px 140px;
+    background-color: #ccc;
+    background-image: linear-gradient(30deg, #aaa 12%, transparent 12.5%, transparent 87%, #aaa 87.5%, #aaa),
+    linear-gradient(150deg, #aaa 12%, transparent 12.5%, transparent 87%, #aaa 87.5%, #aaa),
+    linear-gradient(30deg, #aaa 12%, transparent 12.5%, transparent 87%, #aaa 87.5%, #aaa),
+    linear-gradient(150deg, #aaa 12%, transparent 12.5%, transparent 87%, #aaa 87.5%, #aaa),
+    linear-gradient(60deg, #888 25%, transparent 25.5%, transparent 75%, #888 75%, #888),
+    linear-gradient(60deg, #888 25%, transparent 25.5%, transparent 75%, #888 75%, #888);
+    background-size: 80px 140px;
     background-position: 0 0, 0 0, 40px 70px, 40px 70px, 0 0, 40px 70px;
     min-height: 100%;
 }
@@ -118,8 +118,8 @@ h1 {
 }
 
 .input {
-    border-radius: 25px;
-    background-color: rgba(255, 255, 255, 0.8);
+    border-radius: 5px;
+    background-color: rgba(255, 255, 255, 0.85);
     border: 1px solid #eee;
     color: #164352;
     font-family: 'latin_modern_mono10_regular', sans-serif;
@@ -143,23 +143,22 @@ h1 {
 }
 
 .chats li {
-    border-top: 1px solid rgba(255, 255, 255, 0.08);
-    border-radius:25px;
-    background-color: rgba(255, 255, 255, 0.8);
+    border-top: 1px solid rgba(255, 255, 255, 0.085);
+    border-radius: 5px;
+    background-color: rgba(255, 255, 255, 0.85);
     clear: both;
     float: left;
     margin-bottom: 1px;
     width: 100%;
-    max-height: 185px;
     overflow: hidden;
 }
 
 .chats li:nth-child(odd) {
-    background-color: rgba(225, 225, 225, 0.8);
+    background-color: rgba(225, 225, 225, 0.85);
 }
 
 .chats li img {
-    border-radius: 25px;
+    border-radius: 5px;
     display: block;
     float: left;
     min-width: 128px;
@@ -249,22 +248,29 @@ ul li.on {
 
 @media only screen and (max-width: 460px) {
     .input {
-        width: 50%;
+        width: 57%;
     }
 
     .chats li p {
         font-size: 1.3rem;
         line-height: 1.3rem;
+        width: 98%;
     }
 
     #add-chat-blocker {
-        font-size: 1.6rem;
+        font-size: 1.5rem;
         left: -150px;
         line-height: 3.6rem;
     }
 }
 
 @media only screen and (max-width: 320px) {
+    .chats li p {
+        font-size: 1.2rem;
+        line-height: 1.2rem;
+        width: 95%;
+    }
+
     .input {
         width: 155px;
     }
