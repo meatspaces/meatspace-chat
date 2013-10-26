@@ -93,6 +93,11 @@ body > img {
     left: 0;
 }
 
+.flipped .toggle-flipped {
+  direction: rtl;
+  text-align: right;
+}
+
 .header li {
     clear: both;
     float: left;
