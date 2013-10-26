@@ -110,6 +110,9 @@ define(['jquery', './base/gumhelper', './base/videoShooter'],
       videoElement.width = width / 5;
       videoElement.height = height / 5;
       footer.append(videoElement);
+
+      $('.chats').css({'padding-bottom': height / 5});
+
       videoElement.play();
       videoShooter = new VideoShooter(videoElement);
       addChat.click();
