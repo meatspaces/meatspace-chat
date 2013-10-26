@@ -290,7 +290,9 @@ ul li.on {
     .chats li p {
         font-size: 1.3rem;
         line-height: 1.3rem;
-        width: 98%;
+        min-width: 0;
+        width: auto;
+        float: none;
     }
 
     #add-chat-blocker {
@@ -304,7 +306,9 @@ ul li.on {
     .chats li p {
         font-size: 1.2rem;
         line-height: 1.2rem;
-        width: 95%;
+        min-width: 0;
+        width: auto;
+        float: none;
     }
 
     .input {
