@@ -1,3 +1,4 @@
+
 /* http://meyerweb.com/eric/tools/css/reset/
    v2.0 | 20110126
    License: none (public domain)
@@ -85,6 +86,13 @@ body > img {
     z-index: 2;
 }
 
+.flipped .header {
+    border-bottom-left-radius: 0px;
+    border-bottom-right-radius: 5px;
+    right: auto;
+    left: 0;
+}
+
 .header li {
     clear: both;
     float: left;
@@ -152,6 +160,11 @@ h1 {
     width: 75%;
 }
 
+.flipped .input {
+    float: right;
+    margin-right: 10px;
+}
+
 .list {
     float: left;
     position: relative;
@@ -189,6 +202,10 @@ h1 {
     width: 20%;
 }
 
+.flipped .chats li img {
+    float: right;
+}
+
 .chats li p {
     color: #777;
     float: left;
@@ -199,6 +216,11 @@ h1 {
     padding: 5px 10px;
     text-shadow: #f1f1f1 -1px 1px 0;
     width: 60%;
+}
+
+.flipped .chats li p {
+    float: right;
+    text-align: right;
 }
 
 .chats li p span {
@@ -255,6 +277,11 @@ ul li.on {
     bottom: 0;
     position: fixed;
     right: 0;
+}
+
+.flipped #footer {
+    right: auto;
+    left: 0;
 }
 
 .end {
