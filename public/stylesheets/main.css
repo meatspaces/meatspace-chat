@@ -85,6 +85,18 @@ body > img {
     z-index: 2;
 }
 
+.flipped .header {
+    border-bottom-left-radius: 0px;
+    border-bottom-right-radius: 5px;
+    right: auto;
+    left: 0;
+}
+
+.flipped .toggle-flipped {
+    direction: rtl;
+    text-align: right;
+}
+
 .header li {
     clear: both;
     float: left;
@@ -152,6 +164,11 @@ h1 {
     width: 75%;
 }
 
+.flipped .input {
+    float: right;
+    margin-right: 10px;
+}
+
 .list {
     float: left;
     position: relative;
@@ -189,6 +206,10 @@ h1 {
     width: 20%;
 }
 
+.flipped .chats li img {
+    float: right;
+}
+
 .chats li p {
     color: #777;
     float: left;
@@ -199,6 +220,11 @@ h1 {
     padding: 5px 10px;
     text-shadow: #f1f1f1 -1px 1px 0;
     width: 60%;
+}
+
+.flipped .chats li p {
+    float: right;
+    text-align: right;
 }
 
 .chats li p span {
@@ -257,6 +283,11 @@ ul li.on {
     right: 0;
 }
 
+.flipped #footer {
+    right: auto;
+    left: 0;
+}
+
 .end {
     float: left;
     height: 20px;
@@ -281,6 +312,10 @@ ul li.on {
         width: 98%;
     }
 
+    .flipped .chats li p {
+        float: none;
+    }
+
     #add-chat-blocker {
         font-size: 1.5rem;
         left: -150px;
@@ -293,6 +328,10 @@ ul li.on {
         font-size: 1.2rem;
         line-height: 1.2rem;
         width: 95%;
+    }
+
+    .flipped .chats li p {
+        float: none;
     }
 
     .input {
