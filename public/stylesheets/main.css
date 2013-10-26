@@ -151,7 +151,7 @@ h1 {
     margin-bottom: 1px;
     max-height: 250px;
     width: 100%;
-    overflow-y: scroll auto;
+    overflow-y: auto;
 }
 
 .chats li:nth-child(odd) {
