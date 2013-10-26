@@ -312,6 +312,10 @@ ul li.on {
         width: 98%;
     }
 
+    .flipped .chats li p {
+        float: none;
+    }
+
     #add-chat-blocker {
         font-size: 1.5rem;
         left: -150px;
@@ -324,6 +328,10 @@ ul li.on {
         font-size: 1.2rem;
         line-height: 1.2rem;
         width: 95%;
+    }
+
+    .flipped .chats li p {
+        float: none;
     }
 
     .input {
