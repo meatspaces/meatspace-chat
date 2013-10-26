@@ -156,4 +156,9 @@ define(['jquery', './base/gumhelper', './base/videoShooter'],
       }
     }
   });
+
+  $('.toggle-flipped').on('click', function (ev) {
+    ev.preventDefault();
+    body.toggleClass('flipped');
+  });
 });
