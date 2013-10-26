@@ -13,10 +13,13 @@ html
   body(data-authenticated='#{!!session.email}')
     #wrapper
       ul.header
-        li.title Meatspace chat
-        li.github
-          a(href='http://github.com/meatspaces/meatspace-chat', target='_blank') Github
-
+        li
+          a#logo(href='http://github.com/meatspaces/meatspace-chat', target='_blank', title='Github') Github
+        li
+          span created by
+          a(href='http://twitter.com/ednapiranha', target='_blank') ednapiranha
+          span and
+          a(href='http://twitter.com/supersole', target='_blank') supersole
       .chats.list
         ul
         .end
