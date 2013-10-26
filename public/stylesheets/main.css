@@ -275,7 +275,7 @@ ul li.on {
       width: auto;
     }
 
-    .header li:not(:first-child) {
+    .header li:nth-child(2) {
       display: none;
     }
 
