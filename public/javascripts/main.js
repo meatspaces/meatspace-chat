@@ -106,6 +106,8 @@ define(['jquery', './base/gumhelper', './base/videoShooter'],
 
   if (navigator.getMedia) {
     gumHelper.startVideoStreaming(function errorCb() {
+      addChat.hide();
+      footer.hide();
     }, function successCallback(stream, videoElement, width, height) {
       videoElement.width = width / 5;
       videoElement.height = height / 5;
@@ -115,6 +117,8 @@ define(['jquery', './base/gumhelper', './base/videoShooter'],
       addChat.click();
     });
   } else {
+    addChat.hide();
+    footer.hide();
     addChat.click();
   }
 
