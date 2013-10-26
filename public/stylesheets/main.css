@@ -75,8 +75,10 @@ body > img {
 
 .header {
     background-color: rgba(255, 255, 255, 0.6);
+    border-bottom-left-radius: 5px;
     display: block;
     font-size: 0.9rem;
+    padding: 0 0 5px 5px;
     position: fixed;
     right: 0;
     top: 0;
@@ -88,21 +90,24 @@ body > img {
     float: left;
     padding: 2px;
     position: relative;
-    width: 130px;
+    width: 120px;
 }
 
-.header a {
+.header a, .header span {
     color: #333;
     display: block;
     outline: none;
     padding: 2px 5px;
-    text-align: right;
     text-decoration: none;
 }
 
-.header a:hover {
-    background-color: #0eabde;
-    color: #fff;
+.header span {
+    color: #666;
+}
+
+.header a {
+    font-size: 17px;
+    font-weight: 600;
 }
 
 #wrapper {
@@ -110,6 +115,23 @@ body > img {
     margin: 0 auto;
     padding: 3px;
     position: relative;
+}
+
+#logo {
+    background-image: url('../images/meatspace.svg');
+    background-repeat: no-repeat;
+    display: block;
+    float: right;
+    font-size: 1px;
+    line-height: 35px;
+    height: 35px;
+    text-indent: -9999px;
+    width: 35px;
+}
+
+#logo:hover {
+    font-size: 20px;
+    text-indent: -75px;
 }
 
 h1 {
