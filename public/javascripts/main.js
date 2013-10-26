@@ -115,6 +115,8 @@ define(['jquery', './base/gumhelper', './base/videoShooter'],
       addChat.click();
     });
   } else {
+    addChat.hide();
+    footer.hide();
     addChat.click();
   }
 
