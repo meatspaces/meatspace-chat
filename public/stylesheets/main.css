@@ -270,7 +270,19 @@ ul li.on {
     min-width: 0;
 }
 
-@media only screen and (max-width: 460px) {
+@media only screen and (max-width: 480px) {
+    .header li {
+      width: auto;
+    }
+
+    .header li:not(:first-child) {
+      display: none;
+    }
+
+    #logo:hover {
+      text-indent: -9999px;
+    }
+
     .input {
         width: 57%;
     }
