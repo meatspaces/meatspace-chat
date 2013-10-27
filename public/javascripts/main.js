@@ -34,6 +34,7 @@ define(['jquery', './base/gumhelper', './base/videoShooter'],
     regexps.url = /\b((?:https?:|www\.)\S+)/g;
     regexps.twitter = /(\W?)@(\w{1,20})/g;
     regexps.reddit = /(\W?)\/r\/(\w+)/g;
+    regexps.me = /^\/me\s+/;
 
     var funs = {};
 
@@ -59,10 +60,14 @@ define(['jquery', './base/gumhelper', './base/videoShooter'],
                    '/r/' + subreddit);
       }
     };
+    
+    funs.me = function(match, notWords,me) {
+      return "* dudebro ";
+    }
 
     var matched = false;
 
-    $.each(['url', 'twitter', 'reddit'], function (idx, key){
+    $.each(['me', 'url', 'twitter', 'reddit'], function (idx, key){
       if (matched) return;
 
       var regexp = regexps[key];
