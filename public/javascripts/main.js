@@ -30,19 +30,41 @@ define(['jquery', './base/gumhelper', './base/videoShooter'],
       return '<a href="' + href + '" target="_blank">' + text + '</a>';
     };
 
-    return text.replace(
-      //    [        urls        ]      [ twitter ]
-      /(?:\b((?:https?:|www\.)\S+)|(\W?)@(\w{1,20}))/g,
-      function(match, link, notWord, handle) {
-        if (handle && handle.length > 0) {
-          return notWord + linkHtml('https://twitter.com/' + handle,
-            '@' + handle);
-        }
-        if (link.substr(0, 3) == 'www') {
-          link = 'http://' + link;
-        }
-        return linkHtml(link, match);
+    var regexps = {};
+    regexps.url = /\b((?:https?:|www\.)\S+)/g;
+    regexps.twitter = /(\W?)@(\w{1,20})/g;
+    regexps.reddit = /(\W?)\/r\/(\w+)/g;
+
+    var funs = {};
+
+    funs.url = function(match, link) {
+      if (link.substr(0, 3) == 'www') {
+        link = 'http://' + link;
+      }
+      return linkHtml(link, match);
+    };
+
+    funs.twitter = function(match, notWord, handle) {
+      if (handle && handle.length > 0) {
+        return notWord +
+          linkHtml('https://twitter.com/' + handle,
+                   '@' + handle);
+      }
+    };
+
+    funs.reddit = function(match, notWord, subreddit) {
+      if (subreddit && subreddit.length > 0) {
+        return notWord +
+          linkHtml('http://www.reddit.com/r/' + subreddit,
+                   '/r/' + subreddit);
+      }
+    };
+
+    $.each(regexps, function (key, value){
+      text = text.replace(regexps[key], funs[key]);
     });
+
+    return text;
   };
 
   var renderChat = function (c) {
