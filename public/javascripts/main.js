@@ -122,13 +122,11 @@ define(['jquery', './base/gumhelper', './base/videoShooter'],
     addChat.click();
   }
 
-  // allow multiple lines of input with carraige return mapped to shift+enter
+  // allow multiple lines of input with carriage return mapped to shift+enter
   addChat.keydown(function(ev){
     // Enter was pressed without shift key
     if (ev.keyCode == 13 && !ev.shiftKey) {
-      // prevent default behavior
       ev.preventDefault();
-      // submit
       addChat.submit();
     }
   });
