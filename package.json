@@ -20,7 +20,9 @@
     "meatspace-publico": "0.0.3",
     "gravatar": "1.0.6",
     "gumhelper": "0.0.3",
-    "socket.io": ">= 0.9.16"
+    "socket.io": ">= 0.9.16",
+    "requirejs": "~2.1.9",
+    "amdefine": "~0.1.0"
   },
   "devDependencies": {
     "grunt": ">= 0.4.x",
@@ -29,6 +31,7 @@
     "grunt-contrib-requirejs": ">= 0.4.0",
     "grunt-contrib-cssmin": ">= 0.4.1",
     "grunt-contrib-copy": "~0.4.1",
+    "grunt-contrib-nodeunit": ">= 0.2.2",
     "nodemon": "*"
   }
 }
