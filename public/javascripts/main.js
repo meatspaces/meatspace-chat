@@ -32,15 +32,22 @@ define(['jquery', './base/gumhelper', './base/videoShooter'],
 
     return text.replace(
       //    [        urls        ]      [ twitter ]
-      /(?:\b((?:https?:|www\.)\S+)|(\W?)@(\w{1,20}))/g,
-      function(match, link, notWord, handle) {
+      /(?:\b((?:https?:|www\.)\S+)|(\W?)@(\w{1,20})|(\W?)\/r\/(\w+))/g,
+      function(match, link, notWord, handle, notWordUrk, subreddit) {
         if (handle && handle.length > 0) {
           return notWord + linkHtml('https://twitter.com/' + handle,
             '@' + handle);
         }
+
+        if (subreddit && subreddit.length > 0) {
+          return notWordUrk + linkHtml('http://www.reddit.com/r/' + subreddit,
+            '/r/' + subreddit);
+        }
+
         if (link.substr(0, 3) == 'www') {
           link = 'http://' + link;
         }
+
         return linkHtml(link, match);
     });
   };
