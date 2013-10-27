@@ -21,21 +21,20 @@ define(['Animated_GIF'], function (Animated_GIF) {
       captureFrame();
 
       function captureFrame() {
-          ag.addFrame(videoElement);
-          pendingFrames--;
+        ag.addFrame(videoElement);
+        pendingFrames--;
 
-          if(pendingFrames > 0) {
-              setTimeout(captureFrame, interval * 1000); // timeouts are in milliseconds
-          } else {
-              ag.getBase64GIF(function(image) {
-                  var img = document.createElement('img');
-                  img.src = image;
-                  document.body.appendChild(img);
-                  callback(image);
-              });
-          }
+        if(pendingFrames > 0) {
+          setTimeout(captureFrame, interval * 1000); // timeouts are in milliseconds
+        } else {
+          ag.getBase64GIF(function(image) {
+            var img = document.createElement('img');
+            img.src = image;
+            document.body.appendChild(img);
+            callback(image);
+          });
+        }
       }
-
     };
   };
 
