@@ -62,7 +62,7 @@ define(['jquery', './base/gumhelper', './base/videoShooter'],
 
     var matched = false;
 
-    $.each(regexps, function (key, value){
+    $.each(['url', 'twitter', 'reddit'], function (idx, key){
       if (matched) return;
 
       var regexp = regexps[key];
