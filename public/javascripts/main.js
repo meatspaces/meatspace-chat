@@ -60,8 +60,17 @@ define(['jquery', './base/gumhelper', './base/videoShooter'],
       }
     };
 
+    var matched = false;
+
     $.each(regexps, function (key, value){
-      text = text.replace(regexps[key], funs[key]);
+      if (matched) return;
+
+      var regexp = regexps[key];
+
+      if (text.match(regexp)) {
+        matched = true;
+        text = text.replace(regexp, funs[key]);
+      }
     });
 
     return text;
