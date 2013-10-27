@@ -186,6 +186,7 @@ define(['jquery', './base/gumhelper', './base/videoShooter'],
             addChat.val('');
             posting = false;
             blocker.addClass('hidden');
+            body.find('> img').remove();
           });
         }, 10, 0.2);
       }
