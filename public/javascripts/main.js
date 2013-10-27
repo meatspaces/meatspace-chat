@@ -90,7 +90,7 @@ define(['jquery', './base/gumhelper', './base/videoShooter'],
         li.appendChild(message);
 
         var size = body.find('#add-chat')[0].getBoundingClientRect().bottom
-        var last = body.find('.chats > ul')[0].lastChild
+        var last = chatList[0].lastChild
         var bottom = last ? last.getBoundingClientRect().bottom : 0
 
         var follow = bottom < size + 50
@@ -101,8 +101,9 @@ define(['jquery', './base/gumhelper', './base/videoShooter'],
         // if scrolled to bottom of window then scroll the new thing into view
         // otherwise, you are reading the history... allow user to scroll up.
         if(follow) {
-          if (body.find('.chats > ul > li').length > CHAT_LIMIT) {
-            body.find('.chats > ul > li')[0].remove();
+          var children = chatList.children();
+          if (children.length > CHAT_LIMIT) {
+            children.first().remove();
           }
           li.scrollIntoView()
         }
