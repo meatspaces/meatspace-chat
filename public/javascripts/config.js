@@ -3,7 +3,8 @@ requirejs.config({
   paths: {
     'jquery': 'lib/jquery',
     'Animated_GIF': 'lib/Animated_GIF/Animated_GIF',
-    'GifWriter': 'lib/Animated_GIF/omggif'
+    'GifWriter': 'lib/Animated_GIF/omggif',
+    'linkify': 'lib/linkify'
   },
   shim: {
     'jquery': {
