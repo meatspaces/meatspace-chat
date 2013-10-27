@@ -36,6 +36,9 @@ module.exports = function(grunt) {
           'public/stylesheets/main-min.css': ['public/stylesheets/main.css']
         }
       }
+    },
+    nodeunit: {
+      files: ["tests/**/*.js"],
     }
   });
 
@@ -43,6 +46,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-concat');
   grunt.loadNpmTasks('grunt-contrib-requirejs');
   grunt.loadNpmTasks('grunt-contrib-cssmin');
+  grunt.loadNpmTasks('grunt-contrib-nodeunit');
 
   grunt.registerTask('default', ['copy', 'cssmin', 'requirejs', 'concat']);
 };
