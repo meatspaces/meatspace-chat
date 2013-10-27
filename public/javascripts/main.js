@@ -100,7 +100,6 @@ define(['jquery', './base/gumhelper', './base/videoShooter'],
 
         // if scrolled to bottom of window then scroll the new thing into view
         // otherwise, you are reading the history... allow user to scroll up.
-        // TODO: play an annoying noise if user is not on this tab?
         if(follow) {
           if (body.find('.chats.list > ul > li').length > CHAT_LIMIT) {
             body.find('.chats.list > ul > li')[0].remove();
