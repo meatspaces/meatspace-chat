@@ -101,8 +101,8 @@ define(['jquery', './base/gumhelper', './base/videoShooter'],
         // if scrolled to bottom of window then scroll the new thing into view
         // otherwise, you are reading the history... allow user to scroll up.
         if(follow) {
-          if (body.find('.chats.list > ul > li').length > CHAT_LIMIT) {
-            body.find('.chats.list > ul > li')[0].remove();
+          if (body.find('.chats > ul > li').length > CHAT_LIMIT) {
+            body.find('.chats > ul > li')[0].remove();
           }
           li.scrollIntoView()
         }
