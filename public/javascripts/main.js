@@ -1,5 +1,5 @@
 define(['jquery', 'linkify', './base/gumhelper', './base/videoShooter', 'fingerprint', 'md5'],
-  function($, linkify, gumHelper, VideoShooter, Fingerprint, md5) {
+  function ($, linkify, gumHelper, VideoShooter, Fingerprint, md5) {
   'use strict';
 
   var html = $('html');
@@ -40,7 +40,7 @@ define(['jquery', 'linkify', './base/gumhelper', './base/videoShooter', 'fingerp
 
     if (mutedArr.indexOf(renderFP) === -1) {
       var img = new Image();
-      img.onload = function() {
+      img.onload = function () {
         // Don't want duplicates and don't want muted messages
         if (body.find('li[data-key="' + c.chat.key + '"]').length === 0 &&
             mutedArr.indexOf(renderFP) === -1) {
@@ -134,15 +134,6 @@ define(['jquery', 'linkify', './base/gumhelper', './base/videoShooter', 'fingerp
     footer.hide();
   }
 
-  // allow multiple lines of input with carriage return mapped to shift+enter
-  addChat.keydown(function(ev){
-    // Enter was pressed without shift key
-    if (ev.keyCode === 13 && !ev.shiftKey) {
-      ev.preventDefault();
-      addChat.submit();
-    }
-  });
-
   body.on('click', '.mute', function (ev) {
     var self = $(ev.target);
     var fp = self.parent().data('fingerprint');
@@ -154,7 +145,14 @@ define(['jquery', 'linkify', './base/gumhelper', './base/videoShooter', 'fingerp
     }
   });
 
-  addChat.on('submit', function (ev) {
+  // allow multiple lines of input with carriage return mapped to shift+enter
+  addChat.on('keydown', function (ev) {
+    // Enter was pressed without shift key
+    if (ev.keyCode === 13 && !ev.shiftKey) {
+      ev.preventDefault();
+      addChat.submit();
+    }
+  }).on('submit', function (ev) {
     ev.preventDefault();
 
     var self = $(ev.target);
