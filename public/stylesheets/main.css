@@ -180,7 +180,7 @@ h1 {
     float: left;
     position: relative;
     width: 100%;
-    padding-bottom: 60px;
+    padding-bottom: 78px;
 }
 
 .chats li {
@@ -193,6 +193,7 @@ h1 {
     max-height: 250px;
     width: 100%;
     overflow-y: auto;
+    position: relative;
     white-space: pre-wrap;
 }
 
@@ -219,6 +220,18 @@ h1 {
     padding: 5px 10px;
     text-shadow: #f1f1f1 -1px 1px 0;
     width: 60%;
+}
+
+.chats li .mute {
+    background-color: #ccc !important;
+    bottom: 0;
+    border: 0;
+    border-bottom-right-radius: 5px;
+    display: block;
+    font-size: 0.9rem;
+    padding: 3px 5px;
+    position: absolute;
+    right: 0;
 }
 
 .chats li p span {
@@ -252,10 +265,10 @@ ul li.on {
 }
 
 #add-chat-form {
+    position: absolute;
+    right: 0;
     bottom: 0;
     left: 0;
-    position: fixed;
-    right: 0;
 }
 
 #add-chat-blocker {
@@ -272,18 +285,15 @@ ul li.on {
 }
 
 #footer {
-    bottom: 0;
+    font-family: 'latin_modern_mono10_regular', sans-serif;
     position: fixed;
     right: 0;
+    bottom: 0;
+    left: 0;
 }
 
 #footer video {
-    /* Mirror the preview window like other chat clients */
-    -webkit-transform: rotateY(180deg);
-    -moz-transform: rotateY(180deg);
-    -ms-transform: rotateY(180deg);
-    -o-transform: rotateY(180deg);
-    transform: rotateY(180deg);
+    float: left;
 }
 
 .end {

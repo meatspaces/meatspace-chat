@@ -1,5 +1,5 @@
-define(['jquery', 'linkify', './base/gumhelper', './base/videoShooter', 'fingerprint'],
-  function($, linkify, gumHelper, VideoShooter, Fingerprint) {
+define(['jquery', 'linkify', './base/gumhelper', './base/videoShooter', 'fingerprint', 'md5'],
+  function($, linkify, gumHelper, VideoShooter, Fingerprint, md5) {
   'use strict';
 
   var html = $('html');
@@ -8,15 +8,22 @@ define(['jquery', 'linkify', './base/gumhelper', './base/videoShooter', 'fingerp
   var chatList = $('.chats ul');
   var footer = $('#footer');
   var muteBtn = $('.mute');
+  var userId = $('#userid');
+  var fp = $('#fp');
   var posting = false;
   var videoShooter;
   var canSend = true;
-  var fp = new Fingerprint({ canvas: true }).get();
+  var fingerprint = new Fingerprint({ canvas: true }).get();
   var mutedArr = JSON.parse(localStorage.getItem('muted')) || [];
   var socket = io.connect(location.protocol + '//' + location.hostname +
     (location.port ? ':' + location.port : ''));
 
   var CHAT_LIMIT = 35;
+
+  $.get('/ip', function (data) {
+    fp.val(fingerprint);
+    userId.val(md5(fingerprint + data.ip));
+  });
 
   emojify.setConfig({
     emojify_tag_type: 'div',
@@ -29,44 +36,57 @@ define(['jquery', 'linkify', './base/gumhelper', './base/videoShooter', 'fingerp
   });
 
   var renderChat = function (c) {
-    var img = new Image();
-    img.onload = function() {
-      // Don't want duplicates and don't want muted messages
-      if (body.find('li[data-key="' + c.chat.key + '"]').length === 0 &&
-          mutedArr.indexOf(c.fingerprint) === -1) {
+    var renderFP = c.chat.value.fingerprint;
 
-        var li = document.createElement('li');
-        li.dataset.action = 'chat-message';
-        li.dataset.key = c.chat.key;
-        li.appendChild(img);
+    if (mutedArr.indexOf(renderFP) === -1) {
+      var img = new Image();
+      img.onload = function() {
+        // Don't want duplicates and don't want muted messages
+        if (body.find('li[data-key="' + c.chat.key + '"]').length === 0 &&
+            mutedArr.indexOf(renderFP) === -1) {
 
-        var message = document.createElement('p');
-        message.textContent = c.chat.value.message;
-        message.innerHTML = linkify(message.innerHTML);
-        li.appendChild(message);
+          var li = document.createElement('li');
+          li.dataset.action = 'chat-message';
+          li.dataset.key = c.chat.key;
+          li.dataset.fingerprint = renderFP;
+          li.appendChild(img);
 
-        var size = body.find('#add-chat')[0].getBoundingClientRect().bottom;
-        var last = chatList[0].lastChild;
-        var bottom = last ? last.getBoundingClientRect().bottom : 0;
-
-        var follow = bottom < size + 50;
-
-        chatList.append(li);
-        emojify.run(li);
-
-        // if scrolled to bottom of window then scroll the new thing into view
-        // otherwise, you are reading the history... allow user to scroll up.
-        if(follow) {
-          var children = chatList.children();
-          if (children.length > CHAT_LIMIT) {
-            children.first().remove();
+          // This is likely your own fingerprint so you don't mute yourself. Unless you're weird.
+          if (userId.val() !== renderFP) {
+            var btn = document.createElement('button');
+            btn.textContent = 'mute';
+            btn.className = 'mute';
+            li.appendChild(btn);
           }
 
-          li.scrollIntoView();
+          var message = document.createElement('p');
+          message.textContent = c.chat.value.message;
+          message.innerHTML = linkify(message.innerHTML);
+          li.appendChild(message);
+
+          var size = body.find('#add-chat')[0].getBoundingClientRect().bottom;
+          var last = chatList[0].lastChild;
+          var bottom = last ? last.getBoundingClientRect().bottom : 0;
+
+          var follow = bottom < size + 50;
+
+          chatList.append(li);
+          emojify.run(li);
+
+          // if scrolled to bottom of window then scroll the new thing into view
+          // otherwise, you are reading the history... allow user to scroll up.
+          if(follow) {
+            var children = chatList.children();
+            if (children.length > CHAT_LIMIT) {
+              children.first().remove();
+            }
+
+            li.scrollIntoView();
+          }
         }
-      }
-    };
-    img.src = c.chat.value.media;
+      };
+      img.src = c.chat.value.media;
+    }
   };
 
   socket.on('connect', function () {
@@ -98,8 +118,14 @@ define(['jquery', 'linkify', './base/gumhelper', './base/videoShooter', 'fingerp
     }, function successCallback(stream, videoElement, width, height) {
       videoElement.width = width / 5;
       videoElement.height = height / 5;
-      footer.append(videoElement);
+      footer.prepend(videoElement);
       videoElement.play();
+
+      // set offset to video width if it isn't already set
+      if ( addChat.css('left') === '0px' ) {
+        addChat.css('left', width / 5);
+      }
+
       videoShooter = new VideoShooter(videoElement);
       addChat.click();
     });
@@ -117,12 +143,14 @@ define(['jquery', 'linkify', './base/gumhelper', './base/videoShooter', 'fingerp
     }
   });
 
-  muteBtn.on('click', function (ev) {
-    var fp = $(ev.target).data('fp');
+  body.on('click', '.mute', function (ev) {
+    var self = $(ev.target);
+    var fp = self.parent().data('fingerprint');
 
     if (mutedArr.indexOf(fp === -1)) {
       mutedArr.push(fp);
       localStorage.setItem('muted', JSON.stringify(mutedArr));
+      self.text('muted!');
     }
   });
 
@@ -132,7 +160,6 @@ define(['jquery', 'linkify', './base/gumhelper', './base/videoShooter', 'fingerp
     var self = $(ev.target);
     var blocker = self.find('#add-chat-blocker');
     var addChat = self.find('#add-chat');
-    var fpField = self.find('#fp');
 
     if (!posting) {
       if (!canSend) {
@@ -150,7 +177,6 @@ define(['jquery', 'linkify', './base/gumhelper', './base/videoShooter', 'fingerp
 
         getScreenshot(function (pictureData) {
           var picField = self.find('#picture').val(pictureData);
-          var fpField = fp;
 
           $.post('/add/chat', self.serialize(), function () {
 
