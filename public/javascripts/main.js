@@ -147,7 +147,7 @@ define(['jquery', 'linkify', './base/gumhelper', './base/videoShooter', 'fingerp
     var self = $(ev.target);
     var fp = self.parent().data('fingerprint');
 
-    if (mutedArr.indexOf(fp === -1)) {
+    if (mutedArr.indexOf(fp) === -1) {
       mutedArr.push(fp);
       localStorage.setItem('muted', JSON.stringify(mutedArr));
       self.text('muted!');
