@@ -5,6 +5,9 @@ define(['jquery', 'linkify', './base/gumhelper', './base/videoShooter', 'fingerp
   var html = $('html');
   var body = $('body');
   var addChatForm = $('#add-chat-form');
+  var addChatBlocker = $('#add-chat-blocker');
+  var addChat = $('#add-chat');
+  var picField = $('#picture');
   var chatList = $('.chats ul');
   var footer = $('#footer');
   var muteBtn = $('.mute');
@@ -64,7 +67,7 @@ define(['jquery', 'linkify', './base/gumhelper', './base/videoShooter', 'fingerp
           message.innerHTML = linkify(message.innerHTML);
           li.appendChild(message);
 
-          var size = body.find('#add-chat')[0].getBoundingClientRect().bottom;
+          var size = addChat[0].getBoundingClientRect().bottom;
           var last = chatList[0].lastChild;
           var bottom = last ? last.getBoundingClientRect().bottom : 0;
 
@@ -156,8 +159,7 @@ define(['jquery', 'linkify', './base/gumhelper', './base/videoShooter', 'fingerp
     ev.preventDefault();
 
     var self = $(ev.target);
-    var blocker = self.find('#add-chat-blocker');
-    var addChat = self.find('#add-chat');
+
 
     if (!posting) {
       if (!canSend) {
@@ -166,7 +168,7 @@ define(['jquery', 'linkify', './base/gumhelper', './base/videoShooter', 'fingerp
 
       if (canSend) {
         canSend = false;
-        blocker.removeClass('hidden');
+        addChatBlocker.removeClass('hidden');
         posting = true;
 
         setTimeout(function () {
@@ -174,7 +176,7 @@ define(['jquery', 'linkify', './base/gumhelper', './base/videoShooter', 'fingerp
         }, 5000);
 
         getScreenshot(function (pictureData) {
-          var picField = self.find('#picture').val(pictureData);
+          picField.val(pictureData);
 
           $.post('/add/chat', self.serialize(), function () {
 
@@ -184,7 +186,7 @@ define(['jquery', 'linkify', './base/gumhelper', './base/videoShooter', 'fingerp
             picField.val('');
             addChat.val('');
             posting = false;
-            blocker.addClass('hidden');
+            addChatBlocker.addClass('hidden');
             body.find('> img').remove();
           });
         }, 10, 0.2);
