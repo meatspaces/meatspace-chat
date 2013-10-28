@@ -55,5 +55,6 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-contrib-nodeunit');
   grunt.loadNpmTasks('grunt-contrib-requirejs');
-  grunt.registerTask('default', ['jshint', 'cssmin', 'requirejs', 'concat', 'nodeunit']);
+  grunt.registerTask('build', ['cssmin', 'requirejs', 'concat']);
+  grunt.registerTask('default', ['jshint', 'build', 'nodeunit']);
 };

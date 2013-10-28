@@ -6,6 +6,7 @@
     > cp clients.json-dist clients.json
     > npm install
     > npm -g install nodemon
+    > grunt build
     > npm start
 
 ## Native Apps (iOS/Android)
