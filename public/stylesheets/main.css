@@ -222,12 +222,12 @@ h1 {
     width: 60%;
 }
 
-button {
-    background-color: #f00 !important;
+.chats li .mute {
+    background-color: #ccc !important;
     bottom: 5px;
     border: 0;
     display: block;
-    font-size: 3.1rem;
+    font-size: 1rem;
     padding: 3px 5px;
     position: absolute;
     right: 5px;
