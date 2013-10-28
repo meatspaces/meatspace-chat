@@ -6,6 +6,7 @@ block content
     .message-content
       textarea(rows:1, name='message', id='add-chat', class='input', autocomplete='off', placeholder='Send a public message', maxlength='150')
       input(type='hidden', name='_csrf', value='#{csrf}')
+      input(type='hidden', name='fingerprint', id='fpField')
       #add-chat-blocker.hidden
         span Sending, please wait!
     .footer
