@@ -1,5 +1,5 @@
-define(['jquery', 'linkify', './base/gumhelper', './base/videoShooter'],
-  function($, linkify, gumHelper, VideoShooter) {
+define(['jquery', 'linkify', './base/gumhelper', './base/videoShooter', 'fingerprint'],
+  function($, linkify, gumHelper, VideoShooter, fingerprint) {
   'use strict';
 
   var html = $('html');
@@ -7,9 +7,12 @@ define(['jquery', 'linkify', './base/gumhelper', './base/videoShooter'],
   var addChat = $('#add-chat-form');
   var chatList = $('.chats ul');
   var footer = $('#footer');
+  var muteBtn = $('.mute');
   var posting = false;
   var videoShooter;
   var canSend = true;
+  var fp = new Fingerprint({ canvas: true }).get();
+  var mutedArr = JSON.parse(localStorage.getItem('muted')) || [];
   var socket = io.connect(location.protocol + '//' + location.hostname +
     (location.port ? ':' + location.port : ''));
 
@@ -28,23 +31,27 @@ define(['jquery', 'linkify', './base/gumhelper', './base/videoShooter'],
   var renderChat = function (c) {
     var img = new Image();
     img.onload = function() {
-      if (body.find('li[data-key="' + c.chat.key + '"]').length === 0) {
+      // Don't want duplicates and don't want muted messages
+      if (body.find('li[data-key="' + c.chat.key + '"]').length === 0 &&
+          mutedArr.indexOf(c.fingerprint) === -1) {
+
         var li = document.createElement('li');
         li.dataset.action = 'chat-message';
         li.dataset.key = c.chat.key;
         li.appendChild(img);
+
         var message = document.createElement('p');
         message.textContent = c.chat.value.message;
         message.innerHTML = linkify(message.innerHTML);
         li.appendChild(message);
 
-        var size = body.find('#add-chat')[0].getBoundingClientRect().bottom
-        var last = body.find('.chats > ul')[0].lastChild
-        var bottom = last ? last.getBoundingClientRect().bottom : 0
+        var size = body.find('#add-chat')[0].getBoundingClientRect().bottom;
+        var last = body.find('.chats > ul')[0].lastChild;
+        var bottom = last ? last.getBoundingClientRect().bottom : 0;
 
-        var follow = bottom < size + 50
+        var follow = bottom < size + 50;
 
-        chatList.append(li)
+        chatList.append(li);
         emojify.run(li);
 
         // if scrolled to bottom of window then scroll the new thing into view
@@ -53,13 +60,13 @@ define(['jquery', 'linkify', './base/gumhelper', './base/videoShooter'],
           if (body.find('.chats.list > ul > li').length > CHAT_LIMIT) {
             body.find('.chats.list > ul > li')[0].remove();
           }
-          li.scrollIntoView()
+
+          li.scrollIntoView();
         }
       }
     }
     img.src = c.chat.value.media;
   };
-
 
   socket.on('connect', function () {
     socket.on('message', function (data) {
@@ -68,9 +75,9 @@ define(['jquery', 'linkify', './base/gumhelper', './base/videoShooter'],
   });
 
   $.get('/get/chats', function (data) {
-    data.chats.chats.sort(function(a, b) {
+    data.chats.chats.sort(function (a, b) {
       return a.value.created - b.value.created;
-    }).forEach(function(chat) {
+    }).forEach(function (chat) {
       renderChat({chat: chat});
     });
   });
@@ -98,7 +105,6 @@ define(['jquery', 'linkify', './base/gumhelper', './base/videoShooter'],
   } else {
     addChat.hide();
     footer.hide();
-    addChat.click();
   }
 
   // allow multiple lines of input with carriage return mapped to shift+enter
@@ -107,6 +113,15 @@ define(['jquery', 'linkify', './base/gumhelper', './base/videoShooter'],
     if (ev.keyCode == 13 && !ev.shiftKey) {
       ev.preventDefault();
       addChat.submit();
+    }
+  });
+
+  muteBtn.on('click', function (ev) {
+    var fp = $(ev.target).data('fp');
+
+    if (mutedArr.indexOf(fp === -1)) {
+      mutedArr.push(fp);
+      localStorage.setItem('muted', JSON.stringify(mutedArr));
     }
   });
 
