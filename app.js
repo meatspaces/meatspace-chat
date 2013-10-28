@@ -19,21 +19,7 @@ io.configure(function () {
   io.set('log level', 1);
 });
 
-/* Filters for routes */
-
-var isLoggedIn = function (req, res, next) {
-  if (req.session.email) {
-    next();
-  } else {
-    res.redirect('/');
-  }
-};
-
-require('express-persona')(app, {
-  audience: nconf.get('domain') + ':' + nconf.get('authPort')
-});
-
 // routes
-require('./routes')(app, io, isLoggedIn);
+require('./routes')(app, io);
 
 server.listen(process.env.PORT || nconf.get('port'));
