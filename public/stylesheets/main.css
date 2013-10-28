@@ -176,11 +176,6 @@ h1 {
     resize: none;
 }
 
-.list {
-    float: left;
-    position: relative;
-}
-
 .chats {
     float: left;
     position: relative;
