@@ -4,10 +4,10 @@ requirejs.config({
   nodeRequire: require
 });
 
-var linkify = requirejs('../public/javascripts/lib/linkify');
+var linkify = requirejs('./public/javascripts/linkify');
 var tests = {};
 var valid, inline;
-
+console.log('********** ', linkify)
 valid = {
   values: [
     'http://www.example.org/',

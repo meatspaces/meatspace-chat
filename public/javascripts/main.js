@@ -1,5 +1,5 @@
 define(['jquery', 'linkify', './base/gumhelper', './base/videoShooter', 'fingerprint'],
-  function($, linkify, gumHelper, VideoShooter, fingerprint) {
+  function($, linkify, gumHelper, VideoShooter, Fingerprint) {
   'use strict';
 
   var html = $('html');
@@ -64,7 +64,7 @@ define(['jquery', 'linkify', './base/gumhelper', './base/videoShooter', 'fingerp
           li.scrollIntoView();
         }
       }
-    }
+    };
     img.src = c.chat.value.media;
   };
 
@@ -110,7 +110,7 @@ define(['jquery', 'linkify', './base/gumhelper', './base/videoShooter', 'fingerp
   // allow multiple lines of input with carriage return mapped to shift+enter
   addChat.keydown(function(ev){
     // Enter was pressed without shift key
-    if (ev.keyCode == 13 && !ev.shiftKey) {
+    if (ev.keyCode === 13 && !ev.shiftKey) {
       ev.preventDefault();
       addChat.submit();
     }
@@ -131,6 +131,7 @@ define(['jquery', 'linkify', './base/gumhelper', './base/videoShooter', 'fingerp
     var self = $(ev.target);
     var blocker = self.find('#add-chat-blocker');
     var addChat = self.find('#add-chat');
+    var fpField = self.find('#fp');
 
     if (!posting) {
       if (!canSend) {
@@ -148,6 +149,7 @@ define(['jquery', 'linkify', './base/gumhelper', './base/videoShooter', 'fingerp
 
         getScreenshot(function (pictureData) {
           var picField = self.find('#picture').val(pictureData);
+          var fpField = fp;
 
           $.post('/add/chat', self.serialize(), function () {
 

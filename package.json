@@ -20,7 +20,8 @@
     "gravatar": "1.0.6",
     "socket.io": ">= 0.9.16",
     "requirejs": "~2.1.9",
-    "amdefine": "~0.1.0"
+    "amdefine": "~0.1.0",
+    "grunt-contrib-jshint": "~0.7.0"
   },
   "devDependencies": {
     "grunt": ">= 0.4.x",

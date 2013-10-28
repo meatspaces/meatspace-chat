@@ -31,14 +31,29 @@ module.exports = function(grunt) {
       }
     },
     nodeunit: {
-      files: ["tests/**/*.js"],
+      files: ['tests/**/*.js']
+    },
+    jshint: {
+      all: [
+        'public/**/*.js',
+        'routes/**/*.js',
+        'test/**/*.js',
+        // Ignore these, they are someone else's problem
+        '!public/javascripts/require.js',
+        '!public/javascripts/base/*.js',
+        '!public/javascripts/build/*.js',
+        '!public/javascripts/lib/**/*.js'
+      ],
+      options: {
+        jshintrc: '.jshintrc'
+      }
     }
   });
 
   grunt.loadNpmTasks('grunt-contrib-concat');
-  grunt.loadNpmTasks('grunt-contrib-requirejs');
   grunt.loadNpmTasks('grunt-contrib-cssmin');
+  grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-contrib-nodeunit');
-
-  grunt.registerTask('default', ['cssmin', 'requirejs', 'concat']);
+  grunt.loadNpmTasks('grunt-contrib-requirejs');
+  grunt.registerTask('default', ['jshint', 'cssmin', 'requirejs', 'concat', 'nodeunit']);
 };
