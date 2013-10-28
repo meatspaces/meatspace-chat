@@ -5,7 +5,8 @@ requirejs.config({
     'Animated_GIF': 'lib/Animated_GIF/Animated_GIF',
     'GifWriter': 'lib/Animated_GIF/omggif',
     'fingerprint': 'lib/fingerprint',
-    'linkify': 'linkify'
+    'linkify': 'linkify',
+    'md5': 'lib/md5'
   },
   shim: {
     'jquery': {
