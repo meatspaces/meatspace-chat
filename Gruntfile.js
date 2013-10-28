@@ -4,13 +4,6 @@ module.exports = function(grunt) {
 
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
-    copy: {
-      main: {
-        files: [
-          { expand: true, flatten: true, src: ['node_modules/gumhelper/gumhelper.js'], dest: JS_FILE_PATH + 'base/' }
-        ]
-      }
-    },
     concat: {
       options: {
         separator: ';'
@@ -42,11 +35,10 @@ module.exports = function(grunt) {
     }
   });
 
-  grunt.loadNpmTasks('grunt-contrib-copy');
   grunt.loadNpmTasks('grunt-contrib-concat');
   grunt.loadNpmTasks('grunt-contrib-requirejs');
   grunt.loadNpmTasks('grunt-contrib-cssmin');
   grunt.loadNpmTasks('grunt-contrib-nodeunit');
 
-  grunt.registerTask('default', ['copy', 'cssmin', 'requirejs', 'concat']);
+  grunt.registerTask('default', ['cssmin', 'requirejs', 'concat']);
 };
