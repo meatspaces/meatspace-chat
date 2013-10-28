@@ -98,10 +98,12 @@ define(['jquery', 'linkify', './base/gumhelper', './base/videoShooter', 'fingerp
     }, function successCallback(stream, videoElement, width, height) {
       videoElement.width = width / 5;
       videoElement.height = height / 5;
+
+      var style = document.createElement('style');
+      style.innerHTML = ".chats { padding-bottom: " + height / 5 + "px; }";
+      body.append(style);
+
       footer.append(videoElement);
-
-      $('.chats').css({'padding-bottom': height / 5});
-
       videoElement.play();
       videoShooter = new VideoShooter(videoElement);
       addChat.click();
