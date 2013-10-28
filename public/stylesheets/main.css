@@ -284,6 +284,7 @@ ul li.on {
 }
 
 #footer {
+    font-family: 'latin_modern_mono10_regular', sans-serif;
     position: fixed;
     right: 0;
     bottom: 0;
