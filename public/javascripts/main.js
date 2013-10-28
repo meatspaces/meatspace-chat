@@ -38,13 +38,13 @@ define(['jquery', 'linkify', './base/gumhelper', './base/videoShooter'],
         message.innerHTML = linkify(message.innerHTML);
         li.appendChild(message);
 
-        var size = body.find('#add-chat')[0].getBoundingClientRect().bottom
-        var last = body.find('.chats > ul')[0].lastChild
-        var bottom = last ? last.getBoundingClientRect().bottom : 0
+        var size = body.find('#add-chat')[0].getBoundingClientRect().bottom;
+        var last = body.find('.chats > ul')[0].lastChild;
+        var bottom = last ? last.getBoundingClientRect().bottom : 0;
 
-        var follow = bottom < size + 50
+        var follow = bottom < size + 50;
 
-        chatList.append(li)
+        chatList.append(li);
         emojify.run(li);
 
         // if scrolled to bottom of window then scroll the new thing into view
@@ -53,10 +53,10 @@ define(['jquery', 'linkify', './base/gumhelper', './base/videoShooter'],
           if (body.find('.chats.list > ul > li').length > CHAT_LIMIT) {
             body.find('.chats.list > ul > li')[0].remove();
           }
-          li.scrollIntoView()
+          li.scrollIntoView();
         }
       }
-    }
+    };
     img.src = c.chat.value.media;
   };
 
@@ -104,7 +104,7 @@ define(['jquery', 'linkify', './base/gumhelper', './base/videoShooter'],
   // allow multiple lines of input with carriage return mapped to shift+enter
   addChat.keydown(function(ev){
     // Enter was pressed without shift key
-    if (ev.keyCode == 13 && !ev.shiftKey) {
+    if (ev.keyCode === 13 && !ev.shiftKey) {
       ev.preventDefault();
       addChat.submit();
     }
