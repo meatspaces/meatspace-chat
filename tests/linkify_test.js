@@ -87,12 +87,14 @@ invalid = {
   values: [
     '7.0.3',
     'a.0.3',
-    'a.b.c'
+    'a.b.c',
+    'what happens when it\'s inline? 1.1.1 like that?'
   ],
   expects: [
     '7.0.3',
     'a.0.3',
-    'a.b.c'
+    'a.b.c',
+    'what happens when it\'s inline? 1.1.1 like that?'
   ]
 };
 
