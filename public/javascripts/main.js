@@ -38,15 +38,19 @@ define(['jquery', 'linkify', './base/gumhelper', './base/videoShooter', 'fingerp
     symbols_enabled: true
   });
 
+  var isMuted = function(fingerprint) {
+    return mutedArr.indexOf(fingerprint) !== -1;
+  };
+
   var renderChat = function (c) {
     var renderFP = c.chat.value.fingerprint;
 
-    if (mutedArr.indexOf(renderFP) === -1) {
+    if (!isMuted(renderFP)) {
       var img = new Image();
       img.onload = function () {
         // Don't want duplicates and don't want muted messages
         if (body.find('li[data-key="' + c.chat.key + '"]').length === 0 &&
-            mutedArr.indexOf(renderFP) === -1) {
+            !isMuted(renderFP)) {
 
           var li = document.createElement('li');
           li.dataset.action = 'chat-message';
@@ -70,7 +74,6 @@ define(['jquery', 'linkify', './base/gumhelper', './base/videoShooter', 'fingerp
           var size = addChat[0].getBoundingClientRect().bottom;
           var last = chatList[0].lastChild;
           var bottom = last ? last.getBoundingClientRect().bottom : 0;
-
           var follow = bottom < size + 50;
 
           chatList.append(li);
@@ -138,10 +141,10 @@ define(['jquery', 'linkify', './base/gumhelper', './base/videoShooter', 'fingerp
   }
 
   body.on('click', '.mute', function (ev) {
-    var self = $(ev.target);
-    var fp = self.parent().data('fingerprint');
+    var self = $(this);
+    var fp = self.parent('[data-fingerprint]').data('fingerprint');
 
-    if (mutedArr.indexOf(fp) === -1) {
+    if (!isMuted(fp)) {
       mutedArr.push(fp);
       localStorage.setItem('muted', JSON.stringify(mutedArr));
       self.text('muted!');
