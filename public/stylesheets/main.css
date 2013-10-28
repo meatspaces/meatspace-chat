@@ -193,6 +193,7 @@ h1 {
     max-height: 250px;
     width: 100%;
     overflow-y: auto;
+    position: relative;
     white-space: pre-wrap;
 }
 
@@ -219,6 +220,17 @@ h1 {
     padding: 5px 10px;
     text-shadow: #f1f1f1 -1px 1px 0;
     width: 60%;
+}
+
+button {
+    background-color: #f00 !important;
+    bottom: 5px;
+    border: 0;
+    display: block;
+    font-size: 3.1rem;
+    padding: 3px 5px;
+    position: absolute;
+    right: 5px;
 }
 
 .chats li p span {

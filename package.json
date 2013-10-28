@@ -16,12 +16,13 @@
     "express": ">= 3.2.0",
     "jade": ">= 0.29.0",
     "nconf": ">= 0.6.7",
-    "meatspace-publico": "0.0.3",
+    "meatspace-publico": "0.0.4",
     "gravatar": "1.0.6",
     "socket.io": ">= 0.9.16",
     "requirejs": "~2.1.9",
     "amdefine": "~0.1.0",
-    "grunt-contrib-jshint": "~0.7.0"
+    "grunt-contrib-jshint": "~0.7.0",
+    "crypto": "0.0.3"
   },
   "devDependencies": {
     "grunt": ">= 0.4.x",
