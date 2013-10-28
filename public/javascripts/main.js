@@ -4,7 +4,7 @@ define(['jquery', 'linkify', './base/gumhelper', './base/videoShooter', 'fingerp
 
   var html = $('html');
   var body = $('body');
-  var addChat = $('#add-chat-form');
+  var addChatForm = $('#add-chat-form');
   var chatList = $('.chats ul');
   var footer = $('#footer');
   var muteBtn = $('.mute');
@@ -113,7 +113,7 @@ define(['jquery', 'linkify', './base/gumhelper', './base/videoShooter', 'fingerp
 
   if (navigator.getMedia) {
     gumHelper.startVideoStreaming(function errorCb() {
-      addChat.hide();
+      addChatForm.hide();
       footer.hide();
     }, function successCallback(stream, videoElement, width, height) {
       videoElement.width = width / 5;
@@ -122,15 +122,15 @@ define(['jquery', 'linkify', './base/gumhelper', './base/videoShooter', 'fingerp
       videoElement.play();
 
       // set offset to video width if it isn't already set
-      if ( addChat.css('left') === '0px' ) {
-        addChat.css('left', width / 5);
+      if ( addChatForm.css('left') === '0px' ) {
+        addChatForm.css('left', width / 5);
       }
 
       videoShooter = new VideoShooter(videoElement);
-      addChat.click();
+      addChatForm.click();
     });
   } else {
-    addChat.hide();
+    addChatForm.hide();
     footer.hide();
   }
 
@@ -146,11 +146,11 @@ define(['jquery', 'linkify', './base/gumhelper', './base/videoShooter', 'fingerp
   });
 
   // allow multiple lines of input with carriage return mapped to shift+enter
-  addChat.on('keydown', function (ev) {
+  addChatForm.on('keydown', function (ev) {
     // Enter was pressed without shift key
     if (ev.keyCode === 13 && !ev.shiftKey) {
       ev.preventDefault();
-      addChat.submit();
+      addChatForm.submit();
     }
   }).on('submit', function (ev) {
     ev.preventDefault();
