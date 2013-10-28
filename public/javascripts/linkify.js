@@ -4,10 +4,25 @@ var define = typeof define !== 'function' ?
 define([], function() {
   var linkables = {
     url: {
+      ipv4: /^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/,
       pattern: /(https?:\/\/)?((?:\.?[-\w]){1,256})(\.\w{1,10})(?::[0-9]{1,5})?(?:\.?\/(?:[^\s.,?:;!]|[.,?:;!](?!\s|$)){0,2048})?/gim,
       transformer: function(match) {
         var href = '';
         var text = '';
+        var tld = match[3].slice(1);
+
+        // Look at the value that was matched as a TLD, if it's
+        // a number, then this might be an IP address.
+        if (isFinite(tld)) {
+          if (!linkables.url.ipv4.test(match[2] + match[3])) {
+            return match[0];
+          }
+        } else {
+        // There are no single letter TLDs
+          if (tld.length === 1) {
+            return match[0];
+          }
+        }
 
         if (match[1] === undefined) {
           href += 'http://';
