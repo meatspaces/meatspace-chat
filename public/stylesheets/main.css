@@ -224,13 +224,14 @@ h1 {
 
 .chats li .mute {
     background-color: #ccc !important;
-    bottom: 5px;
+    bottom: 0;
     border: 0;
+    border-bottom-right-radius: 5px;
     display: block;
-    font-size: 1rem;
+    font-size: 0.9rem;
     padding: 3px 5px;
     position: absolute;
-    right: 5px;
+    right: 0;
 }
 
 .chats li p span {
