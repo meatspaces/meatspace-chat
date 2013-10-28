@@ -180,7 +180,7 @@ h1 {
     float: left;
     position: relative;
     width: 100%;
-    padding-bottom: 60px;
+    padding-bottom: 78px;
 }
 
 .chats li {
@@ -264,10 +264,10 @@ ul li.on {
 }
 
 #add-chat-form {
+    position: absolute;
+    right: 0;
     bottom: 0;
     left: 0;
-    position: fixed;
-    right: 0;
 }
 
 #add-chat-blocker {
@@ -284,18 +284,14 @@ ul li.on {
 }
 
 #footer {
-    bottom: 0;
     position: fixed;
     right: 0;
+    bottom: 0;
+    left: 0;
 }
 
 #footer video {
-    /* Mirror the preview window like other chat clients */
-    -webkit-transform: rotateY(180deg);
-    -moz-transform: rotateY(180deg);
-    -ms-transform: rotateY(180deg);
-    -o-transform: rotateY(180deg);
-    transform: rotateY(180deg);
+    float: left;
 }
 
 .end {
