@@ -98,8 +98,14 @@ define(['jquery', 'linkify', './base/gumhelper', './base/videoShooter', 'fingerp
     }, function successCallback(stream, videoElement, width, height) {
       videoElement.width = width / 5;
       videoElement.height = height / 5;
-      footer.append(videoElement);
+      footer.prepend(videoElement);
       videoElement.play();
+
+      // set offset to video width if it isn't already set
+      if ( addChat.css('left') === '0px' ) {
+        addChat.css('left', width / 5);
+      }
+
       videoShooter = new VideoShooter(videoElement);
       addChat.click();
     });
