@@ -1,0 +1,21 @@
+{
+  "version": "0.0.1",
+  "name": "meatspace-chat",
+  "description": "A highly addictive chat app",
+  "launch_path": "/",
+  "icons": {
+    "16": "/images/icon-16.png",
+    "72": "/images/icon-72.png",
+    "114": "/images/icon-114.png",
+    "128": "/images/icon-128.png",
+    "256": "/images/icon-256.png"
+  },
+  "developer": {
+    "name": "Edna Piranha and Sole and friends",
+    "url": "http://github.com/meatspaces/meatspace-chat"
+  },
+  "installs_allowed_from": ["https://marketplace.firefox.com"],
+  "locales": {
+  },
+  "default_locale": "en"
+}

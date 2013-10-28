@@ -3,10 +3,20 @@ module.exports = function(app, configurations, express) {
   var clientSessions = require('client-sessions');
   var nconf = require('nconf');
   var maxAge = 24 * 60 * 60 * 1000 * 28;
+  var nativeClients = require('./clients.json');
+  var csrf = express.csrf();
 
   nconf.argv().env().file({ file: 'local.json' });
 
   // Configuration
+
+  var clientBypassCSRF = function (req, res, next) {
+    if (req.body.apiKey && nativeClients.indexOf(req.body.apiKey) > -1) {
+      next();
+    } else {
+      csrf(req, res, next);
+    }
+  };
 
   app.configure(function () {
     app.set('views', __dirname + '/views');
@@ -27,10 +37,14 @@ module.exports = function(app, configurations, express) {
         maxAge: maxAge
       }
     }));
-    app.use(express.csrf());
+    app.use(clientBypassCSRF);
     app.use(function (req, res, next) {
       res.locals.session = req.session;
-      res.locals.csrf = req.csrfToken();
+      if (!req.body.apiKey) {
+        res.locals.csrf = req.csrfToken();
+      } else {
+        res.locals.csrf = false;
+      }
       res.locals.analytics = nconf.get('analytics');
       res.locals.analyticsHost = nconf.get('analyticsHost');
       next();

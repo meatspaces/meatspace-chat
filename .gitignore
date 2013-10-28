@@ -1,7 +1,7 @@
 .DS_Store
 db
 node_modules
+clients.json
 local.json
 public/stylesheets/*-min.css
 public/javascripts/build
-public/javascripts/gumhelper.js

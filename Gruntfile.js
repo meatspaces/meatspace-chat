@@ -4,13 +4,6 @@ module.exports = function(grunt) {
 
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
-    copy: {
-      main: {
-        files: [
-          { expand: true, flatten: true, src: ['node_modules/gumhelper/gumhelper.js'], dest: JS_FILE_PATH + 'base/' }
-        ]
-      }
-    },
     concat: {
       options: {
         separator: ';'
@@ -36,13 +29,32 @@ module.exports = function(grunt) {
           'public/stylesheets/main-min.css': ['public/stylesheets/main.css']
         }
       }
+    },
+    nodeunit: {
+      files: ['tests/**/*.js']
+    },
+    jshint: {
+      all: [
+        'public/**/*.js',
+        'routes/**/*.js',
+        'test/**/*.js',
+        // Ignore these, they are someone else's problem
+        '!public/javascripts/require.js',
+        '!public/javascripts/base/*.js',
+        '!public/javascripts/build/*.js',
+        '!public/javascripts/lib/**/*.js'
+      ],
+      options: {
+        jshintrc: '.jshintrc'
+      }
     }
   });
 
-  grunt.loadNpmTasks('grunt-contrib-copy');
   grunt.loadNpmTasks('grunt-contrib-concat');
-  grunt.loadNpmTasks('grunt-contrib-requirejs');
   grunt.loadNpmTasks('grunt-contrib-cssmin');
-
-  grunt.registerTask('default', ['copy', 'cssmin', 'requirejs', 'concat']);
+  grunt.loadNpmTasks('grunt-contrib-jshint');
+  grunt.loadNpmTasks('grunt-contrib-nodeunit');
+  grunt.loadNpmTasks('grunt-contrib-requirejs');
+  grunt.registerTask('build', ['cssmin', 'requirejs', 'concat']);
+  grunt.registerTask('default', ['jshint', 'build', 'nodeunit']);
 };

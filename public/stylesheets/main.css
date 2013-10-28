@@ -118,20 +118,42 @@ body > img {
 }
 
 #logo {
-    background-image: url('../images/meatspace.svg');
-    background-repeat: no-repeat;
     display: block;
     float: right;
-    font-size: 1px;
-    line-height: 35px;
-    height: 35px;
-    text-indent: -9999px;
+    position: relative;
     width: 35px;
+    height: 35px;
+    line-height: 35px;
+    text-indent: -9999px;
+}
+
+#logo::after {
+    content: '';
+
+    position: absolute;
+    top: 0;
+    right: 0;
+
+    height: 35px;
+    width: 35px;
+    line-height: 35px;
+    padding: 2px 5px;
+
+    background-image: url('../images/meatspace.svg');
+    background-repeat: no-repeat;
+
+    -webkit-transition: -webkit-transform 0.5s;
+    transition: transform 0.5s;
 }
 
 #logo:hover {
     font-size: 20px;
     text-indent: -75px;
+}
+
+#logo:hover::after {
+    -webkit-transform: rotate(20deg);
+    transform: rotate(20deg);
 }
 
 h1 {
@@ -150,11 +172,8 @@ h1 {
     outline: none;
     padding: 5px;
     width: 75%;
-}
-
-.list {
-    float: left;
-    position: relative;
+    height: 1.5rem;
+    resize: none;
 }
 
 .chats {
@@ -173,6 +192,7 @@ h1 {
     max-height: 250px;
     width: 100%;
     overflow-y: auto;
+    white-space: pre-wrap;
 }
 
 .chats li:nth-child(odd) {
@@ -256,6 +276,15 @@ ul li.on {
     right: 0;
 }
 
+#footer video {
+    /* Mirror the preview window like other chat clients */
+    -webkit-transform: rotateY(180deg);
+    -moz-transform: rotateY(180deg);
+    -ms-transform: rotateY(180deg);
+    -o-transform: rotateY(180deg);
+    transform: rotateY(180deg);
+}
+
 .end {
     float: left;
     height: 20px;
@@ -269,7 +298,19 @@ ul li.on {
     min-width: 0;
 }
 
-@media only screen and (max-width: 460px) {
+@media only screen and (max-width: 480px) {
+    .header li {
+      width: auto;
+    }
+
+    .header li:nth-child(2) {
+      display: none;
+    }
+
+    #logo:hover {
+      text-indent: -9999px;
+    }
+
     .input {
         width: 57%;
     }
@@ -277,7 +318,9 @@ ul li.on {
     .chats li p {
         font-size: 1.3rem;
         line-height: 1.3rem;
-        width: 98%;
+        min-width: 0;
+        width: auto;
+        float: none;
     }
 
     #add-chat-blocker {
@@ -291,7 +334,9 @@ ul li.on {
     .chats li p {
         font-size: 1.2rem;
         line-height: 1.2rem;
-        width: 95%;
+        min-width: 0;
+        width: auto;
+        float: none;
     }
 
     .input {

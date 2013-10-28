@@ -1,5 +1,5 @@
 {
-  "name": "publico",
+  "name": "meatspace-chat",
   "version": "0.0.1",
   "private": true,
   "engines": {
@@ -16,11 +16,12 @@
     "express": ">= 3.2.0",
     "jade": ">= 0.29.0",
     "nconf": ">= 0.6.7",
-    "express-persona": "git://github.com/jbuck/express-persona.git",
     "meatspace-publico": "0.0.3",
     "gravatar": "1.0.6",
-    "gumhelper": "0.0.3",
-    "socket.io": ">= 0.9.16"
+    "socket.io": ">= 0.9.16",
+    "requirejs": "~2.1.9",
+    "amdefine": "~0.1.0",
+    "grunt-contrib-jshint": "~0.7.0"
   },
   "devDependencies": {
     "grunt": ">= 0.4.x",
@@ -28,7 +29,7 @@
     "grunt-contrib-uglify": ">= 0.1.2",
     "grunt-contrib-requirejs": ">= 0.4.0",
     "grunt-contrib-cssmin": ">= 0.4.1",
-    "grunt-contrib-copy": "~0.4.1",
+    "grunt-contrib-nodeunit": ">= 0.2.2",
     "nodemon": "*"
   }
 }
