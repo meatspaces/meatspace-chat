@@ -37,7 +37,8 @@ valid = {
     '@a @b @c',
     '@a @b @c',
     '@a @b @c',
-    '/r/puppies'
+    '/r/puppies',
+    '7.0.3 isn\'t a link'
   ],
 
   expects: [
@@ -68,7 +69,8 @@ valid = {
     '<a href="https://twitter.com/a" target="_blank">@a</a>',
     '<a href="https://twitter.com/b" target="_blank">@b</a>',
     '<a href="https://twitter.com/c" target="_blank">@c</a>',
-    '<a href="http://www.reddit.com/r/puppies" target="_blank">/r/puppies</a>'
+    '<a href="http://www.reddit.com/r/puppies" target="_blank">/r/puppies</a>',
+    '7.0.3 isn\'t a link'
   ]
 };
 
@@ -105,4 +107,3 @@ inline.values.forEach(function(value, i) {
 
 
 module.exports = tests;
-
