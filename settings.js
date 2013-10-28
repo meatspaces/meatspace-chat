@@ -12,10 +12,8 @@ module.exports = function(app, configurations, express) {
 
   var clientBypassCSRF = function (req, res, next) {
     if (req.body.apiKey && nativeClients.indexOf(req.body.apiKey) > -1) {
-      console.log('bypass')
       next();
     } else {
-      console.log('regular')
       csrf(req, res, next);
     }
   };

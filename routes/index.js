@@ -1,6 +1,6 @@
 'use strict';
 
-module.exports = function (app, io, isLoggedIn) {
+module.exports = function (app, io) {
   var Publico = require('meatspace-publico');
   var publico = new Publico('none', {
     db: './db',
