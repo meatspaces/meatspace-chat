@@ -11,8 +11,8 @@
     "256": "/images/icon-256.png"
   },
   "developer": {
-    "name": "Edna Piranha and Sole",
-    "url": "http://github.com/meatspaces"
+    "name": "Edna Piranha and Sole and friends",
+    "url": "http://github.com/meatspaces/meatspace-chat"
   },
   "installs_allowed_from": ["https://marketplace.firefox.com"],
   "locales": {
