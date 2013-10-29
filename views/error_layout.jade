@@ -10,11 +10,4 @@ html
 
   body
     #wrapper
-      header
-        .signin
-          if session.email
-            a(href='javascript:;', data-action='logout') Log out
-          else
-            a(href='javascript:;', data-action='login') Log in
-
       block content
