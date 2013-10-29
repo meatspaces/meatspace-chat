@@ -39,7 +39,9 @@ valid = {
     '@a @b @c',
     '/r/puppies',
     '1.1.1.1',
-    'http://1.1.1.1'
+    'http://1.1.1.1',
+    'http://www.reddit.com/r/IAmA/comments/1phhx1/we_are_mozilla_ask_us_anything/cd2ciw3',
+    'http://www.reddit.com/r/IAmA/comments/1phhx1/we_are_mozilla_ask_us_anything/'
   ],
 
   expects: [
@@ -72,7 +74,9 @@ valid = {
     '<a href="https://twitter.com/c" target="_blank">@c</a>',
     '<a href="http://www.reddit.com/r/puppies" target="_blank">/r/puppies</a>',
     '<a href="http://1.1.1.1" target="_blank">1.1.1.1</a>',
-    '<a href="http://1.1.1.1" target="_blank">http://1.1.1.1</a>'
+    '<a href="http://1.1.1.1" target="_blank">http://1.1.1.1</a>',
+    '<a href="http://www.reddit.com/r/IAmA/comments/1phhx1/we_are_mozilla_ask_us_anything/cd2ciw3" target="_blank">http://www.reddit.com/r/IAmA/comments/1phhx1/we_are_mozilla_ask_us_anything/cd2ciw3</a>',
+    '<a href="http://www.reddit.com/r/IAmA/comments/1phhx1/we_are_mozilla_ask_us_anything/cd2ciw3" target="_blank">http://www.reddit.com/r/IAmA/comments/1phhx1/we_are_mozilla_ask_us_anything/</a>'
   ]
 };
 
