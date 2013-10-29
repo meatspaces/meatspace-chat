@@ -3,6 +3,7 @@
 module.exports = function (app, io) {
   var crypto = require('crypto');
   var Publico = require('meatspace-publico');
+  var nativeClients = require('../clients.json');
   var publico = new Publico('none', {
     db: './db',
     limit: 20
@@ -33,7 +34,7 @@ module.exports = function (app, io) {
     if (req.body.picture) {
       var userId = crypto.createHash('md5').update(req.body.fingerprint + req.connection.remoteAddress).digest('hex');
 
-      if ((userId === req.body.userid && !req.body.apiKey) || req.body.apiKey) {
+      if ((userId === req.body.userid && !req.body.apiKey) || nativeClients.indexOf(req.body.apiKey) > -1) {
         publico.addChat(req.body.message.slice(0, 150), {
           ttl: 600000,
           media: req.body.picture,
