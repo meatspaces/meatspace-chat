@@ -73,4 +73,44 @@ module.exports = function (app, io) {
       res.json({ error: 'you need webrtc' });
     }
   });
+
+  var nativeClients = require('../clients.json');
+
+  io.sockets.on('connection', function (socket) {
+    socket.on('message', function (data) {
+      if (nativeClients.indexOf(data.apiKey) > -1) {
+        publico.addChat(data.message.slice(0, 150), {
+          ttl: 600000,
+          media: data.picture,
+          fingerprint: data.fingerprint
+        }, function (err, c) {
+          if (err) {
+            console.log(err.toString());
+          } else {
+            try {
+              io.sockets.emit('message', {
+                chat: {
+                  key: c.key,
+                  value: {
+                    fingerprint: data.fingerprint,
+                    created: c.created,
+                    media: c.media,
+                    ttl: c.ttl,
+                    message: c.message
+                  }
+                }
+              });
+            } catch (err) {
+              console.log(err.toString());
+              console.log('Could not emit message');
+            }
+
+          }
+        });
+
+      } else {
+        console.log('Invalid apiKey: ' + data.apiKey);
+      }
+    });
+  });
 };
