@@ -190,11 +190,15 @@ h1 {
     clear: both;
     float: left;
     margin-bottom: 1px;
-    max-height: 250px;
+    height: 185px;
     width: 100%;
     overflow-y: auto;
     position: relative;
     white-space: pre-wrap;
+}
+
+.chats li.unrender * {
+    display: none;
 }
 
 .chats li:nth-child(odd) {
