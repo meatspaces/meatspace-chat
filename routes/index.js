@@ -62,7 +62,6 @@ module.exports = function (app, io, isLoggedIn) {
   io.sockets.on('connection', function (socket) {
     socket.on('message', function (data) {
       if (nativeClients.indexOf(data.apiKey) > -1) {
-        // console.log(data);
         publico.addChat(data.message.slice(0, 150), {
           ttl: 600000,
           media: data.picture,
