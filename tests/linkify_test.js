@@ -41,7 +41,7 @@ valid = {
     '1.1.1.1',
     'http://1.1.1.1',
     'http://www.reddit.com/r/IAmA/comments/1phhx1/we_are_mozilla_ask_us_anything/cd2ciw3',
-	'http://www.reddit.com/r/IAmA/comments/1phhx1/we_are_mozilla_ask_us_anything/'
+    'http://www.reddit.com/r/IAmA/comments/1phhx1/we_are_mozilla_ask_us_anything/'
   ],
 
   expects: [
