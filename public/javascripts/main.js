@@ -21,7 +21,7 @@ define(['jquery', 'linkify', './base/gumhelper', './base/videoShooter', 'fingerp
   var socket = io.connect(location.protocol + '//' + location.hostname +
     (location.port ? ':' + location.port : ''));
 
-  var CHAT_LIMIT = 35;
+  var CHAT_LIMIT = 25;
 
   $.get('/ip', function (data) {
     fp.val(fingerprint);
