@@ -61,6 +61,12 @@ define([], function() {
 
         return template('http://www.reddit.com/r/' + subreddit, match[0]);
       }
+    },
+    me: {
+      pattern: /^\/me\s+/g,
+      transformer: function(match) {
+        return "* dudebro ";
+      }
     }
   };
 
