@@ -51,7 +51,7 @@ define([], function() {
       }
     },
     reddit: {
-      pattern: /\/r\/(\w+)/g,
+      pattern: /^\/r\/(\w+)/,
       transformer: function(match) {
         var subreddit = match[1];
 
