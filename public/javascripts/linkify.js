@@ -51,15 +51,15 @@ define([], function() {
       }
     },
     reddit: {
-      pattern: /\/r\/(\w+)/g,
+      pattern: /(\B|\s)(\/r\/(\w+))/g,
       transformer: function(match) {
-        var subreddit = match[1];
+        var subreddit = match[3];
 
         if (!subreddit) {
           return null;
         }
 
-        return template('http://www.reddit.com/r/' + subreddit, match[0]);
+        return match[1] + template('http://www.reddit.com/r/' + subreddit, match[2]);
       }
     }
   };
