@@ -112,14 +112,16 @@ inline = {
     'An inline link, like http://example.com, is replaced inline',
     'An inline twitter handle, like @twitter, is replaced inline',
     'An inline subreddit, like /r/puppies, is replaced inline',
-    'All linkables, ie. example.com, @twitter, and /r/puppies are replaced inline'
+    'All linkables, ie. example.com, @twitter, and /r/puppies are replaced inline',
+    'Hey Edna is doing an AMA over on /r/iama, check it out http://www.reddit.com/r/IAmA/comments/1phhx1/we_are_mozilla_ask_us_anything'
   ],
   expects: [
     'An inline link, like <a href="http://example.com" target="_blank">example.com</a>, is replaced inline',
     'An inline link, like <a href="http://example.com" target="_blank">http://example.com</a>, is replaced inline',
     'An inline twitter handle, like <a href="https://twitter.com/twitter" target="_blank">@twitter</a>, is replaced inline',
     'An inline subreddit, like <a href="http://www.reddit.com/r/puppies" target="_blank">/r/puppies</a>, is replaced inline',
-    'All linkables, ie. <a href="http://example.com" target="_blank">example.com</a>, <a href="https://twitter.com/twitter" target="_blank">@twitter</a>, and <a href="http://www.reddit.com/r/puppies" target="_blank">/r/puppies</a> are replaced inline'
+    'All linkables, ie. <a href="http://example.com" target="_blank">example.com</a>, <a href="https://twitter.com/twitter" target="_blank">@twitter</a>, and <a href="http://www.reddit.com/r/puppies" target="_blank">/r/puppies</a> are replaced inline',
+    'Hey Edna is doing an AMA over on <a href="http://www.reddit.com/r/iama" target="_blank">/r/iama</a>, check it out <a href="http://www.reddit.com/r/IAmA/comments/1phhx1/we_are_mozilla_ask_us_anything" target="_blank">http://www.reddit.com/r/IAmA/comments/1phhx1/we_are_mozilla_ask_us_anything</a>'
   ]
 };
 
@@ -132,4 +134,3 @@ inline.values.forEach(function(value, i) {
 
 
 module.exports = tests;
-
