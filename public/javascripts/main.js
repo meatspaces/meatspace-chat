@@ -143,11 +143,11 @@ define(['jquery', 'linkify', './base/gumhelper', './base/videoShooter', 'fingerp
   body.on('click', '.mute', function (ev) {
     var self = $(this);
     var fp = self.parent('[data-fingerprint]').data('fingerprint');
+    self.parent().hide();
 
     if (!isMuted(fp)) {
       mutedArr.push(fp);
       localStorage.setItem('muted', JSON.stringify(mutedArr));
-      self.text('muted!');
     }
   });
 
