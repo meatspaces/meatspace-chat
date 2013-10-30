@@ -39,7 +39,8 @@ valid = {
     '@a @b @c',
     '/r/puppies',
     '1.1.1.1',
-    'http://1.1.1.1'
+    'http://1.1.1.1',
+    'http://meat.spaces should be treated like a link'
   ],
 
   expects: [
@@ -72,7 +73,8 @@ valid = {
     '<a href="https://twitter.com/c" target="_blank">@c</a>',
     '<a href="http://www.reddit.com/r/puppies" target="_blank">/r/puppies</a>',
     '<a href="http://1.1.1.1" target="_blank">1.1.1.1</a>',
-    '<a href="http://1.1.1.1" target="_blank">http://1.1.1.1</a>'
+    '<a href="http://1.1.1.1" target="_blank">http://1.1.1.1</a>',
+    '<a href="http://meat.spaces" target="_blank">http://meat.spaces</a> should be treated like a link'
   ]
 };
 
@@ -88,13 +90,15 @@ invalid = {
     '7.0.3',
     'a.0.3',
     'a.b.c',
-    'what happens when it\'s inline? 1.1.1 like that?'
+    'what happens when it\'s inline? 1.1.1 like that?',
+    'meat.spaces is not a link'
   ],
   expects: [
     '7.0.3',
     'a.0.3',
     'a.b.c',
-    'what happens when it\'s inline? 1.1.1 like that?'
+    'what happens when it\'s inline? 1.1.1 like that?',
+    'meat.spaces is not a link'
   ]
 };
 

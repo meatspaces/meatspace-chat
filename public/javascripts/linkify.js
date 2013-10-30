@@ -2,6 +2,37 @@ var define = typeof define !== 'function' ?
               require('amdefine')(module) : define;
 
 define([], function() {
+
+  var KNOWN_TLDS = [
+    'aero', 'asia', 'biz', 'cat', 'com', 'coop', 'info',
+    'int', 'jobs', 'mobi', 'museum', 'name', 'net', 'org', 'post', 'pro',
+    'tel', 'travel', 'xxx', 'edu', 'gov', 'mil', 'nyc', 'ac',
+    'ad', 'ae', 'af', 'ag', 'ai', 'al', 'am', 'an', 'ao', 'aq', 'ar',
+    'as', 'at', 'au', 'aw', 'ax', 'az', 'ba', 'bb', 'bd', 'be', 'bf',
+    'bg', 'bh', 'bi', 'bj', 'bm', 'bn', 'bo', 'br', 'bs', 'bt', 'bv',
+    'no', 'bw', 'by', 'bz', 'ca', 'cc', 'cd', 'cf', 'cg', 'ch', 'ci',
+    'ck', 'cl', 'cm', 'cn', 'co', 'cr', 'cs', 'cu', 'cv', 'cx', 'cy',
+    'cz', 'dd', 'de', 'dj', 'dk', 'dm', 'do', 'dz', 'ec', 'ee', 'eg',
+    'eh', 'er', 'es', 'et', 'eu', 'fi', 'fj', 'fk', 'fm', 'fo', 'fr',
+    'ga', 'gb', 'gd', 'ge', 'gf', 'gg', 'gh', 'gi', 'gl', 'gm', 'gn',
+    'gp', 'gq', 'gr', 'gs', 'gt', 'gu', 'gw', 'gy', 'hk', 'hm', 'hn',
+    'hr', 'ht', 'hu', 'id', 'ie', 'il', 'im', 'in', 'io', 'iq', 'ir',
+    'is', 'it', 'je', 'jm', 'jo', 'jp', 'ke', 'kg', 'kh', 'ki', 'km',
+    'kn', 'kp', 'kr', 'kw', 'ky', 'kz', 'la', 'lb', 'lc', 'li', 'lk',
+    'lr', 'ls', 'lt', 'lu', 'lv', 'ly', 'ma', 'mc', 'md', 'me', 'mg',
+    'mh', 'mk', 'ml', 'mm', 'mn', 'mn', 'mo', 'mp', 'mq', 'mr', 'ms',
+    'mt', 'mu', 'mv', 'mw', 'mx', 'my', 'mz', 'na', 'nc', 'ne', 'nf',
+    'ng', 'ni', 'nl', 'no', 'np', 'nr', 'nu', 'nz', 'om', 'pa', 'pe',
+    'pf', 'pg', 'ph', 'pk', 'pl', 'pm', 'pn', 'pr', 'ps', 'pt', 'pw',
+    'py', 'qa', 're', 'ro', 'rs', 'ru', 'su', 'рф', 'rw', 'sa', 'sb',
+    'sc', 'sd', 'se', 'sg', 'sh', 'si', 'sj', 'no', 'sk', 'sl', 'sm',
+    'sn', 'so', 'sr', 'ss', 'st', 'su', 'sv', 'sx', 'sy', 'sz', 'tc',
+    'td', 'tf', 'tg', 'th', 'tj', 'tk', 'tl', 'tp', 'tm', 'tn', 'to',
+    'tp', 'tl', 'tr', 'tt', 'tv', 'tw', 'tz', 'ua', 'ug', 'uk', 'us',
+    'gov', 'uy', 'uz', 'va', 'vc', 've', 'vg', 'vi', 'vn', 'vu', 'wf',
+    'ws', 'ye', 'yt', 'yu', 'za', 'zm', 'zw'
+  ];
+
   var linkables = {
     url: {
       ipv4: /^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/,
@@ -9,18 +40,23 @@ define([], function() {
       transformer: function(match) {
         var href = '';
         var text = '';
+        var candidate = match[0];
+        var scheme = match[1];
+        var domain = match[2];
         var tld = match[3].slice(1);
 
         // Look at the value that was matched as a TLD, if it's
         // a number, then this might be an IP address.
         if (isFinite(tld)) {
-          if (!linkables.url.ipv4.test(match[2] + match[3])) {
-            return match[0];
+          if (!linkables.url.ipv4.test(domain + '.' + tld)) {
+            return candidate;
           }
         } else {
-        // There are no single letter TLDs
-          if (tld.length === 1) {
-            return match[0];
+        // Match the list of known TLDs.
+        // * Previously invalidated only tld with length 1
+        // but that was too lenient.
+          if (!scheme && KNOWN_TLDS.indexOf(tld) === -1) {
+            return candidate;
           }
         }
 
@@ -28,12 +64,12 @@ define([], function() {
           href += 'http://';
         }
 
-        if (match[0].indexOf('(') === -1 && match[0].slice(-1) === ')') {
-          match[0] = match[0].slice(0, -1);
+        if (candidate.indexOf('(') === -1 && candidate.slice(-1) === ')') {
+          candidate = candidate.slice(0, -1);
         }
 
-        href += match[0];
-        text += match[0];
+        href += candidate;
+        text += candidate;
 
         return template(href, text);
       }
