@@ -151,6 +151,12 @@ define(['jquery', 'linkify', './base/gumhelper', './base/videoShooter', 'fingerp
     if (!isMuted(fp)) {
       mutedArr.push(fp);
       localStorage.setItem('muted', JSON.stringify(mutedArr));
+      $('.chats > ul > li').each( function (i, v) {
+        var chat = $(v);
+        if ( chat.data('fingerprint') === fp ) {
+          chat.children('button.mute').text('muted!').addClass('muted');
+        }
+      });
     }
   });
 
