@@ -165,7 +165,7 @@ define(['jquery', 'linkify', './base/gumhelper', './base/videoShooter', 'fingerp
       $('.chats > ul > li').each( function (i, v) {
         var chat = $(v);
         if ( chat.data('fingerprint') === fp ) {
-          chat.children('button.mute').text('mute').removeClass('muted');
+          chat.children('button.mute:first').removeClass('muted').text('mute');
           chat.show();
         }
       });
