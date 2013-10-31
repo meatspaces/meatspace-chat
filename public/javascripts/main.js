@@ -156,7 +156,9 @@ define(['jquery', 'linkify', './base/gumhelper', './base/videoShooter', 'fingerp
     // hide one chat when muting
     if (!isMuted(fp) && !self.hasClass('muted')) {
       setTimeout(function () {
-        self.parent().hide();
+        if (self.hasClass('muted')) {
+          self.parent().hide();
+        }
       }, 1500);
       $('[data-fingerprint="' + fp + '"]').each(function (index, chat) {
         toggleMuteButton($(chat));
