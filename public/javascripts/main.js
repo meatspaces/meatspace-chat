@@ -143,7 +143,10 @@ define(['jquery', 'linkify', './base/gumhelper', './base/videoShooter', 'fingerp
   body.on('click', '.mute', function (ev) {
     var self = $(this);
     var fp = self.parent('[data-fingerprint]').data('fingerprint');
-    self.parent().hide();
+    self.text('muted!');
+    setTimeout( function () {
+      self.parent().hide();
+    }, 1500);
 
     if (!isMuted(fp)) {
       mutedArr.push(fp);
