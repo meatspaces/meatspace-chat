@@ -144,6 +144,15 @@ define(['jquery', 'linkify', './base/gumhelper', './base/videoShooter', 'fingerp
     var self = $(this);
     var fp = self.parent('[data-fingerprint]').data('fingerprint');
 
+    var toggleMuteButton = function (chat) {
+      var button = chat.children('button.mute:first');
+      if (button.hasClass('muted')) { 
+        button.removeClass('muted').text('mute');
+      } else {
+        button.addClass('muted').text('unmute');
+      }
+    };
+
     if (!isMuted(fp) & !self.hasClass('muted')) {
       setTimeout( function () {
         self.parent().hide();
@@ -153,7 +162,7 @@ define(['jquery', 'linkify', './base/gumhelper', './base/videoShooter', 'fingerp
       $('.chats > ul > li').each( function (i, v) {
         var chat = $(v);
         if ( chat.data('fingerprint') === fp ) {
-          chat.children('button.mute:first').addClass('muted').text('unmute');
+          toggleMuteButton(chat);
         }
       });
     } else if (isMuted(fp) & self.hasClass('muted')) {
@@ -165,7 +174,7 @@ define(['jquery', 'linkify', './base/gumhelper', './base/videoShooter', 'fingerp
       $('.chats > ul > li').each( function (i, v) {
         var chat = $(v);
         if ( chat.data('fingerprint') === fp ) {
-          chat.children('button.mute:first').removeClass('muted').text('mute');
+          toggleMuteButton(chat);
           chat.show();
         }
       });
