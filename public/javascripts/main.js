@@ -143,18 +143,30 @@ define(['jquery', 'linkify', './base/gumhelper', './base/videoShooter', 'fingerp
   body.on('click', '.mute', function (ev) {
     var self = $(this);
     var fp = self.parent('[data-fingerprint]').data('fingerprint');
-    self.text('muted!');
-    setTimeout( function () {
-      self.parent().hide();
-    }, 1500);
 
-    if (!isMuted(fp)) {
+    if (!isMuted(fp) & !self.hasClass('muted')) {
+      setTimeout( function () {
+        self.parent().hide();
+      }, 1500);
       mutedArr.push(fp);
       localStorage.setItem('muted', JSON.stringify(mutedArr));
       $('.chats > ul > li').each( function (i, v) {
         var chat = $(v);
         if ( chat.data('fingerprint') === fp ) {
-          chat.children('button.mute').text('muted!').addClass('muted');
+          chat.children('button.mute:first').addClass('muted').text('unmute');
+        }
+      });
+    } else if (isMuted(fp) & self.hasClass('muted')) {
+      var i = mutedArr.indexOf(fp);
+      if (i !== -1) {
+        mutedArr.splice(i, 1);
+        localStorage.setItem('muted', JSON.stringify(mutedArr));
+      }
+      $('.chats > ul > li').each( function (i, v) {
+        var chat = $(v);
+        if ( chat.data('fingerprint') === fp ) {
+          chat.children('button.mute').text('mute').removeClass('muted');
+          chat.show();
         }
       });
     }
