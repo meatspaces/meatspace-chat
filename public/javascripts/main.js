@@ -158,23 +158,18 @@ define(['jquery', 'linkify', './base/gumhelper', './base/videoShooter', 'fingerp
       setTimeout(function () {
         self.parent().hide();
       }, 1500);
-      $('.chats > ul > li').each(function (i, v) {
-        var chat = $(v);
-        if (chat.data('fingerprint') === fp) {
-          toggleMuteButton(chat);
-        }
+      $('[data-fingerprint="' + fp + '"]').each(function (index, chat) {
+        toggleMuteButton($(chat));
       });
       mutedArr.push(fp);
       localStorage.setItem('muted', JSON.stringify(mutedArr));
 
     // unhide all chats when unmuting
     } else {
-      $('.chats > ul > li').each(function (i, v) {
-        var chat = $(v);
-        if (chat.data('fingerprint') === fp) {
-          toggleMuteButton(chat);
-          chat.show();
-        }
+      $('[data-fingerprint="' + fp + '"]').each(function (index, chat) {
+        var chat = $(chat);
+        toggleMuteButton(chat);
+        chat.show();
       });
       var i = mutedArr.indexOf(fp);
       if (i !== -1) {
