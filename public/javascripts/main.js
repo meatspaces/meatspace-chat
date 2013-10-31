@@ -154,13 +154,13 @@ define(['jquery', 'linkify', './base/gumhelper', './base/videoShooter', 'fingerp
     };
 
     // hide one chat when muting
-    if (!isMuted(fp) & !self.hasClass('muted')) {
-      setTimeout( function () {
+    if (!isMuted(fp) && !self.hasClass('muted')) {
+      setTimeout(function () {
         self.parent().hide();
       }, 1500);
-      $('.chats > ul > li').each( function (i, v) {
+      $('.chats > ul > li').each(function (i, v) {
         var chat = $(v);
-        if ( chat.data('fingerprint') === fp ) {
+        if (chat.data('fingerprint') === fp) {
           toggleMuteButton(chat);
         }
       });
@@ -168,10 +168,10 @@ define(['jquery', 'linkify', './base/gumhelper', './base/videoShooter', 'fingerp
       localStorage.setItem('muted', JSON.stringify(mutedArr));
 
     // unhide all chats when unmuting
-    } else if (isMuted(fp) & self.hasClass('muted')) {
-      $('.chats > ul > li').each( function (i, v) {
+    } else {
+      $('.chats > ul > li').each(function (i, v) {
         var chat = $(v);
-        if ( chat.data('fingerprint') === fp ) {
+        if (chat.data('fingerprint') === fp) {
           toggleMuteButton(chat);
           chat.show();
         }
