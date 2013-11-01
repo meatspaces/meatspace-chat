@@ -144,10 +144,40 @@ define(['jquery', 'linkify', './base/gumhelper', './base/videoShooter', 'fingerp
     var self = $(this);
     var fp = self.parent('[data-fingerprint]').data('fingerprint');
 
-    if (!isMuted(fp)) {
+    var toggleMuteButton = function (chat) {
+      var button = chat.children('button.mute:first');
+      if (button.hasClass('muted')) { 
+        button.removeClass('muted').text('mute');
+      } else {
+        button.addClass('muted').text('unmute');
+      }
+    };
+
+    // hide one chat when muting
+    if (!isMuted(fp) && !self.hasClass('muted')) {
+      setTimeout(function () {
+        if (self.hasClass('muted')) {
+          self.parent().hide();
+        }
+      }, 1500);
+      $('[data-fingerprint="' + fp + '"]').each(function (index, chat) {
+        toggleMuteButton($(chat));
+      });
       mutedArr.push(fp);
       localStorage.setItem('muted', JSON.stringify(mutedArr));
-      self.text('muted!');
+
+    // unhide all chats when unmuting
+    } else {
+      $('[data-fingerprint="' + fp + '"]').each(function (index, chat) {
+        var chat = $(chat);
+        toggleMuteButton(chat);
+        chat.show();
+      });
+      var i = mutedArr.indexOf(fp);
+      if (i !== -1) {
+        mutedArr.splice(i, 1);
+        localStorage.setItem('muted', JSON.stringify(mutedArr));
+      }
     }
   });
 
