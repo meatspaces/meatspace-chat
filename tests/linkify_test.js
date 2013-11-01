@@ -40,7 +40,8 @@ valid = {
     '/r/puppies',
     '1.1.1.1',
     'http://1.1.1.1',
-    'http://meat.spaces should be treated like a link'
+    'http://meat.spaces should be treated like a link',
+    'test.com/"/onmouseover="alert(document.cookie)'
   ],
 
   expects: [
@@ -74,7 +75,8 @@ valid = {
     '<a href="http://www.reddit.com/r/puppies" target="_blank">/r/puppies</a>',
     '<a href="http://1.1.1.1" target="_blank">1.1.1.1</a>',
     '<a href="http://1.1.1.1" target="_blank">http://1.1.1.1</a>',
-    '<a href="http://meat.spaces" target="_blank">http://meat.spaces</a> should be treated like a link'
+    '<a href="http://meat.spaces" target="_blank">http://meat.spaces</a> should be treated like a link',
+    '<a href="http://test.com/"/onmouseover="alert(document.cookie)">test.com/"/onmouseover="alert(document.cookie)</a>'
   ]
 };
 
