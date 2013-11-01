@@ -103,7 +103,7 @@ define(['jquery'], function($) {
   var types = Object.keys(linkables);
 
   function template(href, text) {
-    var link = $('<div><a></a><div>');
+    var link = $('<span><a></a></span>');
 
     link.find('a').attr('href', href).text(text)
                   .attr('target', '_blank');
