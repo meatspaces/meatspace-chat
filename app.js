@@ -20,6 +20,6 @@ io.configure(function () {
 });
 
 // routes
-require('./routes')(app, io);
+require('./routes')(app, nconf, io);
 
 server.listen(process.env.PORT || nconf.get('port'));
