@@ -25,6 +25,10 @@ module.exports = function (app, nconf, io) {
     return false;
   };
 
+  app.get('/info', function (req, res) {
+    res.render('info');
+  });
+
   app.get('/', function (req, res) {
     var currDate = Date.now();
     logger.put('landing-page!' + currDate, {
