@@ -296,6 +296,21 @@ ul li.on {
     float: left;
 }
 
+
+#footer svg.progress {
+    z-index: 99;
+    opacity: 0;
+    width: 128px; 
+    height: 96px;   
+    position: absolute;
+    bottom:0; 
+    left:0;
+}
+
+#footer svg.progress.visible {
+    opacity: 1;
+}
+
 .end {
     float: left;
     height: 20px;
