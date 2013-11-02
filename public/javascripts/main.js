@@ -109,15 +109,18 @@ define(['jquery', 'linkify', './base/gumhelper', './base/videoShooter', 'fingerp
     });
   });
 
-  var getScreenshot = function (callback, numFrames, interval) {
+  var getScreenshot = function (callback, numFrames, interval, progressCallback) {
     if (videoShooter) {
-      videoShooter.getShot(callback, numFrames, interval);
+      videoShooter.getShot(callback, numFrames, interval, progressCallback);
     } else {
       callback('');
     }
   };
 
   if (navigator.getMedia) {
+    var svg = $('<svg class="progress" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 128 64" preserveAspectRatio="xMidYMid"><path d="M0,0 " id="arc" fill="none" stroke="rgba(226,38,97,0.8)" /></svg>');
+    footer.prepend(svg);
+
     gumHelper.startVideoStreaming(function errorCb() {
       addChatForm.hide();
       footer.hide();
@@ -151,6 +154,27 @@ define(['jquery', 'linkify', './base/gumhelper', './base/videoShooter', 'fingerp
     }
   });
 
+  var progressCircleTo = function (progressRatio) {
+    var circle = $('path#arc');
+
+    var angle = progressRatio * 360;
+    var offsetX = 128 / 2;
+    var offsetY = 64 / 2;
+    var thickness = 10;
+    var radius = offsetY - (thickness / 2);
+    
+    var radians= (angle/180) * Math.PI;
+    var x = offsetX + Math.cos(radians) * radius;
+    var y = offsetY + Math.sin(radians) * radius;
+
+    if(progressRatio === 0) {
+      var d = 'M0,0 M ' + x + ' ' + y;
+    } else {
+      var d = circle.attr('d') + ' L ' + x + ' ' + y;
+    }  
+    circle.attr('d', d).attr('stroke-width', thickness);
+  };
+
   // allow multiple lines of input with carriage return mapped to shift+enter
   addChatForm.on('keydown', function (ev) {
     // Enter was pressed without shift key
@@ -178,8 +202,13 @@ define(['jquery', 'linkify', './base/gumhelper', './base/videoShooter', 'fingerp
           canSend = true;
         }, 5000);
 
+        progressCircleTo(0);
+        $('svg.progress').attr('class', 'progress visible');
+
         getScreenshot(function (pictureData) {
           picField.val(pictureData);
+
+          $('svg.progress').attr('class', 'progress');
 
           $.post('/add/chat', self.serialize(), function () {
 
@@ -192,7 +221,9 @@ define(['jquery', 'linkify', './base/gumhelper', './base/videoShooter', 'fingerp
             addChatBlocker.addClass('hidden');
             body.find('> img').remove();
           });
-        }, 10, 0.2);
+        }, 10, 0.2, function(captureProgress){
+          progressCircleTo(captureProgress);
+        });
       }
     }
   });
