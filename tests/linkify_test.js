@@ -76,7 +76,7 @@ valid = {
     '<a href="http://1.1.1.1" target="_blank">1.1.1.1</a>',
     '<a href="http://1.1.1.1" target="_blank">http://1.1.1.1</a>',
     '<a href="http://meat.spaces" target="_blank">http://meat.spaces</a> should be treated like a link',
-    '<a href="http://test.com/"/onmouseover="alert(document.cookie)">test.com/"/onmouseover="alert(document.cookie)</a>'
+    '<a href="http://test.com/&quot;/onmouseover=&quot;alert(document.cookie)" target="_blank">test.com/&quot;/onmouseover=&quot;alert(document.cookie)</a>'
   ]
 };
 
@@ -99,7 +99,7 @@ invalid = {
     '7.0.3',
     'a.0.3',
     'a.b.c',
-    'what happens when it\'s inline? 1.1.1 like that?',
+    'what happens when it&apos;s inline? 1.1.1 like that?',
     'meat.spaces is not a link'
   ]
 };

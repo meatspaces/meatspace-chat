@@ -1,7 +1,17 @@
 var define = typeof define !== 'function' ?
               require('amdefine')(module) : define;
 
-define(['jquery'], function($) {
+define([], function() {
+
+  var rentity = /[&<>"']/g;
+
+  var rentities = {
+    '&': '&amp;',
+    '<': '&lt;',
+    '>': '&gt;',
+    '"': '&quot;',
+    '\'': '&apos;'
+  };
 
   var KNOWN_TLDS = [
     'aero', 'asia', 'biz', 'cat', 'com', 'coop', 'info',
@@ -102,16 +112,23 @@ define(['jquery'], function($) {
 
   var types = Object.keys(linkables);
 
-  function template(href, text) {
-    var link = $('<span><a></a></span>');
+  function escape(str) {
+    if (typeof str !== 'string') {
+      str += '';
+    }
+    return str.replace(rentity, function(s) {
+      return rentities[s];
+    });
+  }
 
-    link.find('a').attr('href', href).text(text)
-                  .attr('target', '_blank');
-    return link.html();
+  function template(href, text) {
+    return '<a href="' + href + '" target="_blank">' + text + '</a>';
   }
 
   function linkify(text) {
     var replacements = [];
+
+    text = escape(text);
 
     types.forEach(function(type) {
       var pattern = linkables[type].pattern;
