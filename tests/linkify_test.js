@@ -76,7 +76,7 @@ valid = {
     '<a href="http://1.1.1.1" target="_blank">1.1.1.1</a>',
     '<a href="http://1.1.1.1" target="_blank">http://1.1.1.1</a>',
     '<a href="http://meat.spaces" target="_blank">http://meat.spaces</a> should be treated like a link',
-    '<a href="http://test.com/"/onmouseover="alert(document.cookie)">test.com/"/onmouseover="alert(document.cookie)</a>'
+    '<a href="http://test.com/"/onmouseover="alert(document.cookie)" target="_blank">test.com/"/onmouseover="alert(document.cookie)</a>'
   ]
 };
 

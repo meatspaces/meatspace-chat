@@ -1,7 +1,7 @@
 var define = typeof define !== 'function' ?
               require('amdefine')(module) : define;
 
-define(['jquery'], function($) {
+define([], function() {
 
   var KNOWN_TLDS = [
     'aero', 'asia', 'biz', 'cat', 'com', 'coop', 'info',
@@ -103,11 +103,7 @@ define(['jquery'], function($) {
   var types = Object.keys(linkables);
 
   function template(href, text) {
-    var link = $('<span><a></a></span>');
-
-    link.find('a').attr('href', href).text(text)
-                  .attr('target', '_blank');
-    return link.html();
+    return ['<a href="', href, '" target="_blank">', text, "</a>"].join('')
   }
 
   function linkify(text) {
