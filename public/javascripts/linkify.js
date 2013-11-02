@@ -112,7 +112,7 @@ define([], function() {
 
   var types = Object.keys(linkables);
 
-  function escape(str) {
+  function sanitize(str) {
     if (typeof str !== 'string') {
       str += '';
     }
@@ -128,7 +128,7 @@ define([], function() {
   function linkify(text) {
     var replacements = [];
 
-    text = escape(text);
+    text = sanitize(text);
 
     types.forEach(function(type) {
       var pattern = linkables[type].pattern;

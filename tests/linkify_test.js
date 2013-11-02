@@ -41,7 +41,8 @@ valid = {
     '1.1.1.1',
     'http://1.1.1.1',
     'http://meat.spaces should be treated like a link',
-    'test.com/"/onmouseover="alert(document.cookie)'
+    'test.com/"/onmouseover="alert(document.cookie)',
+    'test.com/"></a><script>alert(document.cookie);</script><a href="http://example.com'
   ],
 
   expects: [
@@ -76,7 +77,8 @@ valid = {
     '<a href="http://1.1.1.1" target="_blank">1.1.1.1</a>',
     '<a href="http://1.1.1.1" target="_blank">http://1.1.1.1</a>',
     '<a href="http://meat.spaces" target="_blank">http://meat.spaces</a> should be treated like a link',
-    '<a href="http://test.com/&quot;/onmouseover=&quot;alert(document.cookie)" target="_blank">test.com/&quot;/onmouseover=&quot;alert(document.cookie)</a>'
+    '<a href="http://test.com/&quot;/onmouseover=&quot;alert(document.cookie)" target="_blank">test.com/&quot;/onmouseover=&quot;alert(document.cookie)</a>',
+    '<a href="http://test.com/&quot;&gt;&lt;/a&gt;&lt;script&gt;alert(document.cookie);&lt;/script&gt;&lt;a" target="_blank">test.com/&quot;&gt;&lt;/a&gt;&lt;script&gt;alert(document.cookie);&lt;/script&gt;&lt;a</a> href=&quot;<a href="http://example.com" target="_blank">http://example.com</a>'
   ]
 };
 
