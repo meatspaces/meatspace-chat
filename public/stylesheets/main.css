@@ -73,6 +73,60 @@ body > img {
     display: none;
 }
 
+.infobox {
+    background-color: rgba(255, 255, 255, 0.75);
+    margin: 0 auto;
+    max-width: 960px;
+    min-width: 280px;
+    width: 100%;
+}
+
+.infobox-wrapper {
+    padding: 20px;
+}
+
+.infobox a {
+    color: #34a4b8;
+    padding: 0 5px;
+    text-decoration: none;
+    text-shadow: #fff 1px 1px 0;
+}
+
+.infobox a:hover {
+    background-color: #fff;
+}
+
+.infobox ul, .infobox p, .infobox h1, .infobox h2 {
+    display: block;
+    line-height: 1.3rem;
+    padding: 0 20px;
+}
+
+.infobox ul {
+    padding: 0 10px;
+}
+
+.infobox h1 {
+    font-size: 2.4rem;
+    line-height: 2.5rem;
+    margin-bottom: 20px;
+}
+
+.infobox h2 {
+    font-size: 2rem;
+    line-height: 2.2rem;
+    margin-top: 30px;
+}
+
+.infobox p, .infobox li {
+    font-size: 1.2rem;
+    line-height: 1.4rem;
+}
+
+.infobox li {
+    margin: 15px 0;
+}
+
 .header {
     background-color: rgba(255, 255, 255, 0.6);
     border-bottom-left-radius: 5px;
@@ -90,7 +144,7 @@ body > img {
     float: left;
     padding: 2px;
     position: relative;
-    width: 120px;
+    width: auto;
 }
 
 .header a, .header span {
@@ -310,14 +364,6 @@ ul li.on {
 }
 
 @media only screen and (max-width: 480px) {
-    .header li {
-      width: auto;
-    }
-
-    .header li:nth-child(2) {
-      display: none;
-    }
-
     #logo:hover {
       text-indent: -9999px;
     }
@@ -342,6 +388,10 @@ ul li.on {
 }
 
 @media only screen and (max-width: 320px) {
+    .infobox-wrapper {
+        padding: 5px;
+    }
+
     .chats li p {
         font-size: 1.2rem;
         line-height: 1.2rem;
