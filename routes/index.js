@@ -17,11 +17,20 @@ module.exports = function (app, nconf, io) {
     limit: 20
   });
 
+  var blacklisted = function (fingerprint, userid) {
+    if (blacklist.indexOf(fingerprint) > -1 || blacklist.indexOf(userid) > -1) {
+      return true;
+    }
+
+    return false;
+  };
+
   app.get('/', function (req, res) {
-    logger.put('landing page', {
+    var currDate = Date.now();
+    logger.put('landing-page!' + currDate, {
       ip: req.connection.remoteAddress,
       fingerprint: req.body.fingerprint,
-      created: Date.now()
+      created: currDate
     });
     res.render('index');
   });
@@ -43,80 +52,80 @@ module.exports = function (app, nconf, io) {
     });
   });
 
-  var addChat = function (message, picture, fingerprint, next) {
-    publico.addChat(message.slice(0, 150), {
-      ttl: 600000,
-      media: picture,
-      fingerprint: fingerprint
-    }, function (err, c) {
-      if (err) {
-        next(err);
-      } else {
-        try {
-          io.sockets.emit('message', {
-            chat: {
-              key: c.key,
-              value: {
-                fingerprint: fingerprint,
-                created: c.created,
-                media: c.media,
-                ttl: c.ttl,
-                message: c.message
+  var addChat = function (message, picture, fingerprint, userId, next) {
+    if (!blacklisted(fingerprint, userId)) {
+      publico.addChat(message.slice(0, 150), {
+        ttl: 600000,
+        media: picture,
+        fingerprint: fingerprint
+      }, function (err, c) {
+        if (err) {
+          next(err);
+        } else {
+          try {
+            io.sockets.emit('message', {
+              chat: {
+                key: c.key,
+                value: {
+                  fingerprint: fingerprint,
+                  created: c.created,
+                  media: c.media,
+                  ttl: c.ttl,
+                  message: c.message
+                }
               }
-            }
-          });
+            });
 
-          next(null, 'sent!');
-        } catch (err) {
-          next(new Error('Could not emit message'));
+            next(null, 'sent!');
+          } catch (err) {
+            next(new Error('Could not emit message'));
+          }
         }
-      }
-    });
+      });
+    } else {
+      next(new Error('access denied'));
+    }
   };
 
   app.post('/add/chat', function (req, res, next) {
     var userId = crypto.createHash('md5').update(req.body.fingerprint + req.connection.remoteAddress).digest('hex');
 
-    var blacklisted = function () {
-      if (blacklist.indexOf(req.body.fingerprint) > -1 || blacklist.indexOf(req.body.userid) > -1) {
-        return true;
-      }
-
-      return false;
-    };
-
     if (blacklisted()) {
-      logger.put('blacklisted', {
+      var currDate = Date.now();
+      logger.put('blacklisted!' + currDate, {
         ip: req.connection.remoteAddress,
         fingerprint: req.body.fingerprint,
-        created: Date.now()
+        created: currDate
       });
-    }
 
-    if (req.body.picture) {
-      if (userId === req.body.userid) {
-
-        addChat(req.body.message, req.body.picture, userId, function (err, status) {
-          if (err) {
-            res.status(400);
-            res.json({ error: err.toString() });
-          } else {
-            logger.put('posted via web', {
-              ip: req.connection.remoteAddress,
-              fingerprint: req.body.fingerprint,
-              created: Date.now()
-            });
-
-            res.json({ status: status });
-          }
-        });
-      } else {
-        res.status(403);
-        res.json({ error: 'invalid fingerprint' });
-      }
+      res.status(403);
+      res.json({ error: 'access denied' });
     } else {
-      res.status(400);
-      res.json({ error: 'you need webrtc' });
+      if (req.body.picture) {
+        if (userId === req.body.userid) {
+          addChat(req.body.message, req.body.picture, req.body.fingerprint, userId, function (err, status) {
+            if (err) {
+              res.status(400);
+              res.json({ error: err.toString() });
+            } else {
+              var currDate = Date.now();
+              logger.put('web!' +currDate, {
+                ip: req.connection.remoteAddress,
+                fingerprint: req.body.fingerprint,
+                created: currDate
+              });
+
+              res.json({ status: status });
+            }
+          });
+        } else {
+          res.status(403);
+          res.json({ error: 'invalid fingerprint' });
+        }
+      } else {
+        res.status(400);
+        res.json({ error: 'you need webrtc' });
+      }
     }
   });
 
@@ -124,14 +133,15 @@ module.exports = function (app, nconf, io) {
     socket.on('message', function (data) {
       if (nativeClients.indexOf(data.apiKey) > -1) {
 
-        addChat(data.message, data.picture, data.fingerprint, function (err) {
+        addChat(data.message, data.picture, data.fingerprint, '', function (err) {
           if (err) {
             console.log('error posting ', err.toString());
           } else {
-            logger.put('posted via api', {
+            var currDate = Date.now();
+            logger.put('api!' + currDate, {
               ip: req.connection.remoteAddress,
               fingerprint: req.body.fingerprint,
-              created: Date.now()
+              created: currDate
             });
           }
         });
