@@ -43,7 +43,7 @@ module.exports = function (app, nconf, io) {
     });
   });
 
-  var addChat = function (message, picture, fingerprint, blacklisted, next) {
+  var addChat = function (message, picture, fingerprint, next) {
     publico.addChat(message.slice(0, 150), {
       ttl: 600000,
       media: picture,
@@ -53,20 +53,18 @@ module.exports = function (app, nconf, io) {
         next(err);
       } else {
         try {
-          if (!blacklisted()) {
-            io.sockets.emit('message', {
-              chat: {
-                key: c.key,
-                value: {
-                  fingerprint: fingerprint,
-                  created: c.created,
-                  media: c.media,
-                  ttl: c.ttl,
-                  message: c.message
-                }
+          io.sockets.emit('message', {
+            chat: {
+              key: c.key,
+              value: {
+                fingerprint: fingerprint,
+                created: c.created,
+                media: c.media,
+                ttl: c.ttl,
+                message: c.message
               }
-            });
-          }
+            }
+          });
 
           next(null, 'sent!');
         } catch (err) {
@@ -93,35 +91,32 @@ module.exports = function (app, nconf, io) {
         fingerprint: req.body.fingerprint,
         created: Date.now()
       });
+    }
 
-      res.status(403);
-      res.json({ error: 'access denied' });
-    } else {
-      if (req.body.picture) {
-        if (userId === req.body.userid) {
+    if (req.body.picture) {
+      if (userId === req.body.userid) {
 
-          addChat(req.body.message, req.body.picture, userId, blacklisted, function (err, status) {
-            if (err) {
-              res.status(400);
-              res.json({ error: err.toString() });
-            } else {
-              logger.put('posted via web', {
-                ip: req.connection.remoteAddress,
-                fingerprint: req.body.fingerprint,
-                created: Date.now()
-              });
+        addChat(req.body.message, req.body.picture, userId, function (err, status) {
+          if (err) {
+            res.status(400);
+            res.json({ error: err.toString() });
+          } else {
+            logger.put('posted via web', {
+              ip: req.connection.remoteAddress,
+              fingerprint: req.body.fingerprint,
+              created: Date.now()
+            });
 
-              res.json({ status: status });
-            }
-          });
-        } else {
-          res.status(403);
-          res.json({ error: 'invalid fingerprint' });
-        }
+            res.json({ status: status });
+          }
+        });
       } else {
-        res.status(400);
-        res.json({ error: 'you need webrtc' });
+        res.status(403);
+        res.json({ error: 'invalid fingerprint' });
       }
+    } else {
+      res.status(400);
+      res.json({ error: 'you need webrtc' });
     }
   });
 
