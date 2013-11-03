@@ -33,7 +33,6 @@ module.exports = function (app, nconf, io) {
     var currDate = Date.now();
     logger.put('landing-page!' + currDate, {
       ip: req.connection.remoteAddress,
-      fingerprint: req.body.fingerprint,
       created: currDate
     });
     res.render('index');
@@ -61,7 +60,7 @@ module.exports = function (app, nconf, io) {
       publico.addChat(message.slice(0, 150), {
         ttl: 600000,
         media: picture,
-        fingerprint: fingerprint
+        fingerprint: userId
       }, function (err, c) {
         if (err) {
           next(err);
@@ -71,7 +70,7 @@ module.exports = function (app, nconf, io) {
               chat: {
                 key: c.key,
                 value: {
-                  fingerprint: fingerprint,
+                  fingerprint: userId,
                   created: c.created,
                   media: c.media,
                   ttl: c.ttl,
@@ -98,7 +97,7 @@ module.exports = function (app, nconf, io) {
       var currDate = Date.now();
       logger.put('blacklisted!' + currDate, {
         ip: req.connection.remoteAddress,
-        fingerprint: req.body.fingerprint,
+        fingerprint: userId,
         created: currDate
       });
 
@@ -113,9 +112,9 @@ module.exports = function (app, nconf, io) {
               res.json({ error: err.toString() });
             } else {
               var currDate = Date.now();
-              logger.put('web!' +currDate, {
+              logger.put('web!' + currDate, {
                 ip: req.connection.remoteAddress,
-                fingerprint: req.body.fingerprint,
+                fingerprint: userId,
                 created: currDate
               });
 
