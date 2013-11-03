@@ -16,7 +16,7 @@ If you mute a user then you won't see any new posts from them at that machine an
 
     > localStorage.clear()
 
-## Native apps (iOS/Android)
+## Native apps (iOS/Android) or Non-web clients
 
 If you need an apiKey to post from your app, contact me at jen@meatspac.es and I will try to hook you up!
 
