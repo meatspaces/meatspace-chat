@@ -10,7 +10,7 @@ module.exports = function (app, nconf, io) {
   var logger = level(nconf.get('logger'), {
     createIfMissing: true,
     valueEncoding: 'json'
-  })
+  });
 
   var publico = new Publico('none', {
     db: './db',
@@ -143,8 +143,8 @@ module.exports = function (app, nconf, io) {
           } else {
             var currDate = Date.now();
             logger.put('api!' + currDate, {
-              ip: req.connection.remoteAddress,
-              fingerprint: req.body.fingerprint,
+              ip: '0.0.0.0',
+              fingerprint: data.fingerprint,
               created: currDate
             });
           }
