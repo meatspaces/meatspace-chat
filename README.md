@@ -27,6 +27,7 @@ If you are doing native or non-web calls to the API, you will first need a valid
 Push a new message through a socket request and provide the following data:
 
     {
+      apiKey: <apiKey>,
       message: <text message or can be empty>,
       picture: <a base64 blob of the gif data>,
       fingerprint: <a unique identifier for the user posting from the client, preferably md5-hashed>
