@@ -148,6 +148,20 @@ define(['jquery', 'linkify', './base/gumhelper', './base/videoShooter', 'fingerp
       mutedArr.push(fp);
       localStorage.setItem('muted', JSON.stringify(mutedArr));
       self.text('muted!');
+
+      setTimeout(function() {
+        if (isMuted(fp)) {
+          $("li[data-fingerprint='" + fp + "']").hide();
+        }
+      }, 3000)
+    } else {
+      var i = mutedArr.indexOf(fp);
+
+      if (i != -1) {
+        mutedArr.splice(i, 1);
+        localStorage.setItem('muted', JSON.stringify(mutedArr));
+        self.text('mute');
+      }
     }
   });
 
