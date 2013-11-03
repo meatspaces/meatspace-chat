@@ -42,7 +42,8 @@ valid = {
     'http://1.1.1.1',
     'http://meat.spaces should be treated like a link',
     'test.com/"/onmouseover="alert(document.cookie)',
-    'test.com/"></a><script>alert(document.cookie);</script><a href="http://example.com'
+    'test.com/"></a><script>alert(document.cookie);</script><a href="http://example.com',
+    'x.it/onmouseover=alert(null);//\nx.it/onmouseover=alert(null);//'
   ],
 
   expects: [
@@ -77,8 +78,9 @@ valid = {
     '<a href="http://1.1.1.1" target="_blank">1.1.1.1</a>',
     '<a href="http://1.1.1.1" target="_blank">http://1.1.1.1</a>',
     '<a href="http://meat.spaces" target="_blank">http://meat.spaces</a> should be treated like a link',
-    '<a href="http://test.com/&quot;/onmouseover=&quot;alert(document.cookie)" target="_blank">test.com/&quot;/onmouseover=&quot;alert(document.cookie)</a>',
-    '<a href="http://test.com/&quot;&gt;&lt;/a&gt;&lt;script&gt;alert(document.cookie);&lt;/script&gt;&lt;a" target="_blank">test.com/&quot;&gt;&lt;/a&gt;&lt;script&gt;alert(document.cookie);&lt;/script&gt;&lt;a</a> href=&quot;<a href="http://example.com" target="_blank">http://example.com</a>'
+    '<a href="http://test.com/&quot;/onmouseover=&quot;alert(document.cookie)" target="_blank">test.com/"/onmouseover="alert(document.cookie)</a>',
+    '<a href="http://test.com/&quot;&gt;&lt;/a&gt;&lt;script&gt;alert(document.cookie);&lt;/script&gt;&lt;a" target="_blank">test.com/"></a><script>alert(document.cookie);</script><a</a> href="<a href="http://example.com" target="_blank">http://example.com</a>',
+    '<a href="http://<a href="http://x.it/onmouseover=alert(null);//" target="_blank">x.it/onmouseover=alert(null);//</a>" target="_blank">x.it/onmouseover=alert(null);//</a>\nx.it/onmouseover=alert(null);//'
   ]
 };
 
@@ -101,7 +103,7 @@ invalid = {
     '7.0.3',
     'a.0.3',
     'a.b.c',
-    'what happens when it&apos;s inline? 1.1.1 like that?',
+    'what happens when it\'s inline? 1.1.1 like that?',
     'meat.spaces is not a link'
   ]
 };

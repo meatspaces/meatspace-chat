@@ -81,6 +81,8 @@ define([], function() {
         href += candidate;
         text += candidate;
 
+        href = sanitize(href);
+
         return template(href, text);
       }
     },
@@ -127,8 +129,6 @@ define([], function() {
 
   function linkify(text) {
     var replacements = [];
-
-    text = sanitize(text);
 
     types.forEach(function(type) {
       var pattern = linkables[type].pattern;
