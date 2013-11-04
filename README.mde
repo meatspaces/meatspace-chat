@@ -1,14 +1,14 @@
 # Meatspace Chat
 
 ## Setting up
-
-    cp local.json-dist local.json
-    cp clients.json-dist clients.json
-    cp blacklist.json-dist blacklist.json
-    npm install
-    npm -g install nodemon
-    npm run-script grunt build
-    npm start
+    > cp local.json-dist local.json
+    > cp clients.json-dist clients.json
+    > cp blacklist.json-dist blacklist.json
+    > npm install
+    > npm -g install nodemon
+    > bower install
+    > npm run-script grunt build
+    > npm start
 
 ## Mute feature
 
