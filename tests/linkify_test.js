@@ -4,7 +4,7 @@ requirejs.config({
   nodeRequire: require
 });
 
-var linkify = requirejs('../public/javascripts/linkify');
+var linkify = require('../public/javascripts/linkify');
 var tests = {};
 var valid, invalid, inline;
 
@@ -141,6 +141,5 @@ inline.values.forEach(function(value, i) {
     test.done();
   };
 });
-
 
 module.exports = tests;
