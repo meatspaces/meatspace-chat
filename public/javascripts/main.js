@@ -9,6 +9,7 @@ define(['jquery', 'linkify', './base/gumhelper', './base/videoShooter', 'fingerp
   var addChat = $('#add-chat');
   var picField = $('#picture');
   var chatList = $('.chats ul');
+  var chatsContainer = $('.chats');
   var footer = $('#footer');
   var muteBtn = $('.mute');
   var userId = $('#userid');
@@ -117,10 +118,15 @@ define(['jquery', 'linkify', './base/gumhelper', './base/videoShooter', 'fingerp
     }
   };
 
+  var disableVideoMode = function(){
+    addChatForm.hide();
+    footer.hide();
+    chatsContainer.addClass('lean');
+  };
+
   if (navigator.getMedia) {
     gumHelper.startVideoStreaming(function errorCb() {
-      addChatForm.hide();
-      footer.hide();
+      disableVideoMode();
     }, function successCallback(stream, videoElement, width, height) {
       videoElement.width = width / 5;
       videoElement.height = height / 5;
@@ -136,8 +142,7 @@ define(['jquery', 'linkify', './base/gumhelper', './base/videoShooter', 'fingerp
       addChatForm.click();
     });
   } else {
-    addChatForm.hide();
-    footer.hide();
+    disableVideoMode();
   }
 
   body.on('click', '.mute', function (ev) {
