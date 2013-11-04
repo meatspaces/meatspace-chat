@@ -14,7 +14,7 @@ nconf.argv().env().file({ file: 'local.json' });
 var io = require('socket.io').listen(server);
 
 io.configure(function () {
-  io.set('transports', ['websocket', 'xhr-polling']);
+  io.set('transports', ['websocket']);
   io.set('polling duration', 10);
   io.set('log level', 1);
 });
