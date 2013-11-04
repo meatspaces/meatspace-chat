@@ -45,6 +45,11 @@ module.exports = function(app, configurations, express) {
       } else {
         res.locals.csrf = false;
       }
+      if (!process.env.NODE_ENV) {
+        res.locals.debug = true;
+      } else {
+        res.locals.debug = false;
+      }
       res.locals.analytics = nconf.get('analytics');
       res.locals.analyticsHost = nconf.get('analyticsHost');
       next();

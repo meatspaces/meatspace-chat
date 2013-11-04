@@ -6,7 +6,8 @@ requirejs.config({
     'GifWriter': 'lib/Animated_GIF/omggif',
     'fingerprint': 'lib/fingerprint',
     'linkify': 'linkify',
-    'md5': 'lib/md5'
+    'md5': 'lib/md5',
+    'emojify': 'lib/emojify'
   },
   shim: {
     'jquery': {
@@ -15,6 +16,9 @@ requirejs.config({
     'Animated_GIF': ['GifWriter'],
     'fingerprint': {
       exports: 'Fingerprint'
+    },
+    'emojify': {
+      exports: 'emojify'
     }
   }
 });

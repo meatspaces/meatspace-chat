@@ -1,5 +1,5 @@
-define(['jquery', 'linkify', './base/gumhelper', './base/videoShooter', 'fingerprint', 'md5'],
-  function ($, linkify, gumHelper, VideoShooter, Fingerprint, md5) {
+define(['jquery', 'linkify', './base/gumhelper', './base/videoShooter', 'fingerprint', 'md5', 'emojify'],
+  function ($, linkify, gumHelper, VideoShooter, Fingerprint, md5, emojify) {
   'use strict';
 
   var html = $('html');
