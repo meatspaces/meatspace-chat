@@ -14,20 +14,16 @@ define(['jquery', 'linkify', './base/gumhelper', './base/videoShooter', 'fingerp
   var muteBtn = $('.mute');
   var userId = $('#userid');
   var fp = $('#fp');
-  var posting = false;
-  var videoShooter;
+  var svg = $(null);
+  var isPosting = false;
   var canSend = true;
   var fingerprint = new Fingerprint({ canvas: true }).get();
   var mutedArr = JSON.parse(localStorage.getItem('muted')) || [];
   var socket = io.connect(location.protocol + '//' + location.hostname +
     (location.port ? ':' + location.port : ''));
+  var videoShooter;
 
   var CHAT_LIMIT = 25;
-
-  $.get('/ip', function (data) {
-    fp.val(fingerprint);
-    userId.val(md5(fingerprint + data.ip));
-  });
 
   var isMuted = function (fingerprint) {
     return mutedArr.indexOf(fingerprint) !== -1;
@@ -85,22 +81,6 @@ define(['jquery', 'linkify', './base/gumhelper', './base/videoShooter', 'fingerp
     }
   };
 
-  socket.on('connect', function () {
-    socket.on('message', function (data) {
-      renderChat(data);
-    });
-  });
-
-  $.get('/get/chats', function (data) {
-    data.chats.chats.sort(function (a, b) {
-      return a.value.created - b.value.created;
-    }).forEach(function (chat) {
-      renderChat({
-        chat: chat
-      });
-    });
-  });
-
   var getScreenshot = function (callback, numFrames, interval, progressCallback) {
     if (videoShooter) {
       videoShooter.getShot(callback, numFrames, interval, progressCallback);
@@ -114,41 +94,6 @@ define(['jquery', 'linkify', './base/gumhelper', './base/videoShooter', 'fingerp
     footer.hide();
     chatsContainer.addClass('lean');
   };
-
-  if (navigator.getMedia) {
-    var svg = $('<svg class="progress" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 128 64" preserveAspectRatio="xMidYMid"><path d="M0,0 " id="arc" fill="none" stroke="rgba(226,38,97,0.8)" /></svg>');
-    footer.prepend(svg);
-
-    gumHelper.startVideoStreaming(function errorCb() {
-      disableVideoMode();
-    }, function successCallback(stream, videoElement, width, height) {
-      videoElement.width = width / 5;
-      videoElement.height = height / 5;
-      footer.prepend(videoElement);
-      videoElement.play();
-
-      // set offset to video width if it isn't already set
-      if (addChatForm.css('left') === '0px') {
-        addChatForm.css('left', width / 5);
-      }
-
-      videoShooter = new VideoShooter(videoElement);
-      addChatForm.click();
-    });
-  } else {
-    disableVideoMode();
-  }
-
-  body.on('click', '.mute', function (ev) {
-    var self = $(this);
-    var fp = self.parent('[data-fingerprint]').data('fingerprint');
-
-    if (!isMuted(fp)) {
-      mutedArr.push(fp);
-      localStorage.setItem('muted', JSON.stringify(mutedArr));
-      self.text('muted!');
-    }
-  });
 
   var progressCircleTo = function (progressRatio) {
     var circle = $('path#arc');
@@ -172,6 +117,63 @@ define(['jquery', 'linkify', './base/gumhelper', './base/videoShooter', 'fingerp
     circle.attr('d', d).attr('stroke-width', thickness);
   };
 
+  $.get('/ip', function (data) {
+    fp.val(fingerprint);
+    userId.val(md5(fingerprint + data.ip));
+  });
+
+  $.get('/get/chats', function (data) {
+    data.chats.chats.sort(function (a, b) {
+      return a.value.created - b.value.created;
+    }).forEach(function (chat) {
+      renderChat({
+        chat: chat
+      });
+    });
+  });
+
+  if (navigator.getMedia) {
+    svg = $('<svg class="progress" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 128 64" preserveAspectRatio="xMidYMid" hidden><path d="M0,0 " id="arc" fill="none" stroke="rgba(226,38,97,0.8)" /></svg>');
+
+    footer.prepend(svg);
+
+    gumHelper.startVideoStreaming(function errorCb() {
+      disableVideoMode();
+    }, function successCallback(stream, videoElement, width, height) {
+      videoElement.width = width / 5;
+      videoElement.height = height / 5;
+      footer.prepend(videoElement);
+      videoElement.play();
+
+      // set offset to video width if it isn't already set
+      if (addChatForm.css('left') === '0px') {
+        addChatForm.css('left', width / 5);
+      }
+
+      videoShooter = new VideoShooter(videoElement);
+      addChatForm.click();
+    });
+  } else {
+    disableVideoMode();
+  }
+
+  socket.on('connect', function () {
+    socket.on('message', function (data) {
+      renderChat(data);
+    });
+  });
+
+  body.on('click', '.mute', function (ev) {
+    var self = $(this);
+    var fp = self.parent('[data-fingerprint]').data('fingerprint');
+
+    if (!isMuted(fp)) {
+      mutedArr.push(fp);
+      localStorage.setItem('muted', JSON.stringify(mutedArr));
+      self.text('muted!');
+    }
+  });
+
   // allow multiple lines of input with carriage return mapped to shift+enter
   addChatForm.on('keydown', function (ev) {
     // Enter was pressed without shift key
@@ -185,7 +187,7 @@ define(['jquery', 'linkify', './base/gumhelper', './base/videoShooter', 'fingerp
     var self = $(ev.target);
 
 
-    if (!posting) {
+    if (!isPosting) {
       if (!canSend) {
         alert('please wait a wee bit...');
       }
@@ -193,19 +195,20 @@ define(['jquery', 'linkify', './base/gumhelper', './base/videoShooter', 'fingerp
       if (canSend) {
         canSend = false;
         addChatBlocker.removeClass('hidden');
-        posting = true;
+        isPosting = true;
 
         setTimeout(function () {
           canSend = true;
         }, 5000);
 
         progressCircleTo(0);
-        $('svg.progress').attr('class', 'progress visible');
+
+        svg.attr('class', 'progress visible');
 
         getScreenshot(function (pictureData) {
           picField.val(pictureData);
 
-          $('svg.progress').attr('class', 'progress');
+          svg.attr('class', 'progress');
 
           $.post('/add/chat', self.serialize(), function () {
 
@@ -214,7 +217,7 @@ define(['jquery', 'linkify', './base/gumhelper', './base/videoShooter', 'fingerp
           }).always(function (data) {
             picField.val('');
             addChat.val('');
-            posting = false;
+            isPosting = false;
             addChatBlocker.addClass('hidden');
             body.find('> img').remove();
           });
