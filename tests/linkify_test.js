@@ -1,9 +1,3 @@
-var requirejs = require('requirejs');
-
-requirejs.config({
-  nodeRequire: require
-});
-
 var linkify = require('../public/javascripts/linkify');
 var tests = {};
 var valid, invalid, inline;
