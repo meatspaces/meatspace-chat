@@ -8,7 +8,7 @@
   },
   "scripts": {
     "build": "grunt",
-    "test": "grunt",
+    "test": "grunt travis",
     "start": "nodemon app.js"
   },
   "dependencies": {
