@@ -21,7 +21,8 @@
     "gravatar": "1.0.6",
     "socket.io": ">= 0.9.16",
     "crypto": "0.0.3",
-    "level": ">= 0.10.0"
+    "level": ">= 0.10.0",
+    "hood": ">= 0.1.0"
   },
   "devDependencies": {
     "grunt": ">= 0.4.x",

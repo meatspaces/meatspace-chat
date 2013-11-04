@@ -5,6 +5,7 @@ module.exports = function(app, configurations, express) {
   var maxAge = 24 * 60 * 60 * 1000 * 28;
   var nativeClients = require('./clients.json');
   var csrf = express.csrf();
+  var hood = require('hood');
 
   nconf.argv().env().file({ file: 'local.json' });
 
@@ -38,6 +39,12 @@ module.exports = function(app, configurations, express) {
       }
     }));
     app.use(clientBypassCSRF);
+    app.use(hood.csp({
+      policy: {
+        'default-src': ['self', 'unsafe-inline', 'ws://'],
+        'img-src': ['self', 'data:', 'unsafe-inline']
+      }
+    }));
     app.use(function (req, res, next) {
       res.locals.session = req.session;
       if (!req.body.apiKey) {
