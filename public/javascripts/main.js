@@ -160,11 +160,12 @@ define(['jquery', 'linkify', './base/gumhelper', './base/videoShooter', 'fingerp
     var radians= (angle/180) * Math.PI;
     var x = offsetX + Math.cos(radians) * radius;
     var y = offsetY + Math.sin(radians) * radius;
+    var d;
 
     if(progressRatio === 0) {
-      var d = 'M0,0 M ' + x + ' ' + y;
+      d = 'M0,0 M ' + x + ' ' + y;
     } else {
-      var d = circle.attr('d') + ' L ' + x + ' ' + y;
+      d = circle.attr('d') + ' L ' + x + ' ' + y;
     }  
     circle.attr('d', d).attr('stroke-width', thickness);
   };
