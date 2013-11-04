@@ -39,12 +39,7 @@ module.exports = function(app, configurations, express) {
       }
     }));
     app.use(clientBypassCSRF);
-    app.use(hood.csp({
-      policy: {
-        'default-src': ['self', 'unsafe-inline', 'ws://', 'wss://'],
-        'img-src': ['self', 'data:', 'unsafe-inline']
-      }
-    }));
+
     app.use(function (req, res, next) {
       res.locals.session = req.session;
       if (!req.body.apiKey) {
