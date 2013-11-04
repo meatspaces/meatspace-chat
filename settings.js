@@ -44,8 +44,8 @@ module.exports = function(app, configurations, express) {
         'default-src': ['self', 'unsafe-inline'],
         'img-src': ['self', 'data:', 'unsafe-inline'],
         'connect-src': ['self', 'ws:', 'wss:'],
-        'media-src': ['mediastream:'],
-        'script-src': ['https://www.google-analytics.com']
+        'media-src': ['self', 'mediastream:'],
+        'script-src': ['self', 'http://www.google-analytics.com', 'https://www.google-analytics.com', 'unsafe-inline']
       }
     }));
     app.use(function (req, res, next) {
