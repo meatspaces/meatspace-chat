@@ -9,7 +9,7 @@ define(['Animated_GIF'], function (Animated_GIF) {
     canvas.width = videoElement.width;
     canvas.height = videoElement.height;
 
-    this.getShot = function (callback, numFrames, interval) {
+    this.getShot = function (callback, numFrames, interval, progressCallback) {
       numFrames = numFrames !== undefined ? numFrames : 3;
       interval = interval !== undefined ? interval : 0.1; // In seconds
 
@@ -23,6 +23,9 @@ define(['Animated_GIF'], function (Animated_GIF) {
       function captureFrame() {
         ag.addFrame(videoElement);
         pendingFrames--;
+
+        // Call back with an r value indicating how far along we are in capture
+        progressCallback((numFrames - pendingFrames) / numFrames);
 
         if(pendingFrames > 0) {
           setTimeout(captureFrame, interval * 1000); // timeouts are in milliseconds
