@@ -47,7 +47,7 @@ define([], function() {
     url: {
       ipv4: /^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/,
       pattern: /(https?:\/\/)?((?:\.?[-\w]){1,256})(\.\w{1,10})(?::[0-9]{1,5})?(?:\.?\/(?:[^\s.,?:;!]|[.,?:;!](?!\s|$)){0,2048})?/gim,
-      transformer: function(match) {
+      transformer: function (match) {
         var href = '';
         var text = '';
         var candidate = match[0];
@@ -62,9 +62,9 @@ define([], function() {
             return candidate;
           }
         } else {
-        // Match the list of known TLDs.
-        // * Previously invalidated only tld with length 1
-        // but that was too lenient.
+          // Match the list of known TLDs.
+          // * Previously invalidated only tld with length 1
+          // but that was too lenient.
           if (!scheme && KNOWN_TLDS.indexOf(tld) === -1) {
             return candidate;
           }
@@ -88,7 +88,7 @@ define([], function() {
     },
     twitter: {
       pattern: /@(\w{1,20})/g,
-      transformer: function(match) {
+      transformer: function (match) {
         var handle = match[1];
 
         if (!handle) {
@@ -100,7 +100,7 @@ define([], function() {
     },
     reddit: {
       pattern: /(\B|\s)(\/r\/(\w+))/g,
-      transformer: function(match) {
+      transformer: function (match) {
         var subreddit = match[3];
 
         if (!subreddit) {
@@ -118,7 +118,7 @@ define([], function() {
     if (typeof str !== 'string') {
       str += '';
     }
-    return str.replace(rentity, function(s) {
+    return str.replace(rentity, function (s) {
       return rentities[s];
     });
   }
@@ -130,7 +130,7 @@ define([], function() {
   function linkify(text) {
     var replacements = [];
 
-    types.forEach(function(type) {
+    types.forEach(function (type) {
       var pattern = linkables[type].pattern;
       var transformer = linkables[type].transformer;
       var match, replace;
@@ -147,7 +147,7 @@ define([], function() {
       }
     });
 
-    replacements.forEach(function(r) {
+    replacements.forEach(function (r) {
       text = text.replace(r.search, r.replace);
     });
 
