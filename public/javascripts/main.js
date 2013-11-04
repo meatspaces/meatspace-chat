@@ -1,5 +1,5 @@
-define(['jquery', 'linkify', './base/gumhelper', './base/videoShooter', 'fingerprint', 'md5', 'emojify'],
-  function ($, linkify, gumHelper, VideoShooter, Fingerprint, md5, emojify) {
+define(['jquery', 'linkify', './base/gumhelper', './base/videoShooter', 'fingerprint', 'md5'],
+  function ($, linkify, gumHelper, VideoShooter, Fingerprint, md5) {
   'use strict';
 
   var html = $('html');
@@ -27,16 +27,6 @@ define(['jquery', 'linkify', './base/gumhelper', './base/videoShooter', 'fingerp
   $.get('/ip', function (data) {
     fp.val(fingerprint);
     userId.val(md5(fingerprint + data.ip));
-  });
-
-  emojify.setConfig({
-    emojify_tag_type: 'div',
-    emoticons_enabled: true,
-    people_enabled: true,
-    nature_enabled: true,
-    objects_enabled: true,
-    places_enabled: true,
-    symbols_enabled: true
   });
 
   var isMuted = function(fingerprint) {
@@ -78,7 +68,6 @@ define(['jquery', 'linkify', './base/gumhelper', './base/videoShooter', 'fingerp
           var follow = bottom < size + 50;
 
           chatList.append(li);
-          emojify.run(li);
 
           // if scrolled to bottom of window then scroll the new thing into view
           // otherwise, you are reading the history... allow user to scroll up.
