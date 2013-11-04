@@ -29,7 +29,7 @@ define(['jquery', 'linkify', './base/gumhelper', './base/videoShooter', 'fingerp
     userId.val(md5(fingerprint + data.ip));
   });
 
-  var isMuted = function(fingerprint) {
+  var isMuted = function (fingerprint) {
     return mutedArr.indexOf(fingerprint) !== -1;
   };
 
@@ -71,7 +71,7 @@ define(['jquery', 'linkify', './base/gumhelper', './base/videoShooter', 'fingerp
 
           // if scrolled to bottom of window then scroll the new thing into view
           // otherwise, you are reading the history... allow user to scroll up.
-          if(follow) {
+          if (follow) {
             var children = chatList.children();
             if (children.length > CHAT_LIMIT) {
               children.first().remove();
@@ -95,7 +95,9 @@ define(['jquery', 'linkify', './base/gumhelper', './base/videoShooter', 'fingerp
     data.chats.chats.sort(function (a, b) {
       return a.value.created - b.value.created;
     }).forEach(function (chat) {
-      renderChat({chat: chat});
+      renderChat({
+        chat: chat
+      });
     });
   });
 
@@ -107,7 +109,7 @@ define(['jquery', 'linkify', './base/gumhelper', './base/videoShooter', 'fingerp
     }
   };
 
-  var disableVideoMode = function(){
+  var disableVideoMode = function () {
     addChatForm.hide();
     footer.hide();
     chatsContainer.addClass('lean');
@@ -126,7 +128,7 @@ define(['jquery', 'linkify', './base/gumhelper', './base/videoShooter', 'fingerp
       videoElement.play();
 
       // set offset to video width if it isn't already set
-      if ( addChatForm.css('left') === '0px' ) {
+      if (addChatForm.css('left') === '0px') {
         addChatForm.css('left', width / 5);
       }
 
@@ -156,17 +158,17 @@ define(['jquery', 'linkify', './base/gumhelper', './base/videoShooter', 'fingerp
     var offsetY = 64 / 2;
     var thickness = 10;
     var radius = offsetY - (thickness / 2);
-    
-    var radians= (angle/180) * Math.PI;
+
+    var radians = (angle / 180) * Math.PI;
     var x = offsetX + Math.cos(radians) * radius;
     var y = offsetY + Math.sin(radians) * radius;
     var d;
 
-    if(progressRatio === 0) {
+    if (progressRatio === 0) {
       d = 'M0,0 M ' + x + ' ' + y;
     } else {
       d = circle.attr('d') + ' L ' + x + ' ' + y;
-    }  
+    }
     circle.attr('d', d).attr('stroke-width', thickness);
   };
 
@@ -216,7 +218,7 @@ define(['jquery', 'linkify', './base/gumhelper', './base/videoShooter', 'fingerp
             addChatBlocker.addClass('hidden');
             body.find('> img').remove();
           });
-        }, 10, 0.2, function(captureProgress){
+        }, 10, 0.2, function (captureProgress) {
           progressCircleTo(captureProgress);
         });
       }
