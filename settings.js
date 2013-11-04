@@ -41,7 +41,7 @@ module.exports = function(app, configurations, express) {
     app.use(clientBypassCSRF);
     app.use(hood.csp({
       policy: {
-        'default-src': ['self', 'unsafe-inline', 'ws://'],
+        'default-src': ['self', 'unsafe-inline', 'ws://', 'wss://'],
         'img-src': ['self', 'data:', 'unsafe-inline']
       }
     }));
