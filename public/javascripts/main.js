@@ -72,7 +72,7 @@ define(['jquery', 'linkify', './base/gumhelper', './base/videoShooter', 'fingerp
           message.innerHTML = linkify(message.innerHTML);
           li.appendChild(message);
 
-          var size = addChat[0].getBoundingClientRect().bottom;
+          var size = addChat.is(":visible") ? addChat[0].getBoundingClientRect().bottom : $(window).innerHeight();
           var last = chatList[0].lastChild;
           var bottom = last ? last.getBoundingClientRect().bottom : 0;
           var follow = bottom < size + 50;
