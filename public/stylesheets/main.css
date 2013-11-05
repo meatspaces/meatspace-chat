@@ -156,12 +156,12 @@ body > img {
     background-size: auto 100%;
 
     -webkit-transition: -webkit-transform .5s;
-            transition: transform .5s;
+    transition: transform .5s;
 }
 
 #logo:hover {
     -webkit-transform: rotate(20deg);
-            transform: rotate(20deg);
+    transform: rotate(20deg);
 }
 
 h1 {
