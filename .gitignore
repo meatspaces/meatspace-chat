@@ -7,3 +7,4 @@ public/stylesheets/*-min.css
 public/javascripts/build
 blacklist.json
 logger
+public/javascripts/lib
