@@ -1,6 +1,10 @@
 {
   "name": "meatspace-chat",
   "version": "0.0.1",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/meatspaces/meatspace-chat.git"
+  },
   "private": true,
   "engines": {
     "node": ">= 0.10.x",
