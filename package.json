@@ -37,6 +37,7 @@
     "grunt-contrib-nodeunit": ">= 0.2.2",
     "grunt-contrib-jshint": "~0.7.0",
     "amdefine": "~0.1.0",
-    "nodemon": "*"
+    "nodemon": "*",
+    "bower": ">= 1.2.7"
   }
 }

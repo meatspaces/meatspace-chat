@@ -1,12 +1,12 @@
 requirejs.config({
   deps: ['main'],
   paths: {
-    'jquery': 'lib/jquery',
-    'Animated_GIF': 'lib/Animated_GIF/Animated_GIF',
-    'GifWriter': 'lib/Animated_GIF/omggif',
-    'fingerprint': 'lib/fingerprint',
+    'jquery': 'lib/jquery/jquery',
+    'Animated_GIF': 'lib/animated-gif/src/Animated_GIF',
+    'GifWriter': 'lib/animated-gif/src/omggif',
+    'fingerprint': 'lib/fingerprint/fingerprint',
     'linkify': 'linkify',
-    'md5': 'lib/md5'
+    'md5': 'lib/js-md5/js/md5'
   },
   shim: {
     'jquery': {

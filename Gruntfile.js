@@ -9,7 +9,7 @@ module.exports = function(grunt) {
         separator: ';'
       },
       dist: {
-        src: [JS_FILE_PATH + 'require.js', JS_FILE_PATH + 'build/optimized.js'],
+        src: [JS_FILE_PATH + 'lib/requirejs/require.js', JS_FILE_PATH + 'build/optimized.js'],
         dest: JS_FILE_PATH + 'build/<%= pkg.name %>.js'
       }
     },
@@ -39,7 +39,6 @@ module.exports = function(grunt) {
         'routes/**/*.js',
         'test/**/*.js',
         // Ignore these, they are someone else's problem
-        '!public/javascripts/require.js',
         '!public/javascripts/base/*.js',
         '!public/javascripts/build/*.js',
         '!public/javascripts/lib/**/*.js'
