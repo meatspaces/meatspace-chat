@@ -7,7 +7,7 @@
     cp blacklist.json-dist blacklist.json
     npm install
     npm -g install nodemon
-    grunt build
+    npm run-script grunt build
     npm start
 
 ## Mute feature
