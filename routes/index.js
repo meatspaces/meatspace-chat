@@ -105,7 +105,7 @@ module.exports = function (app, nconf, io) {
       res.json({ error: 'access denied' });
     } else {
       if (req.body.picture) {
-        if (userId === req.body.userid) {
+        if (userId && userId === req.body.userid) {
           addChat(req.body.message, req.body.picture, req.body.fingerprint, userId, function (err, status) {
             if (err) {
               res.status(400);
