@@ -15,9 +15,8 @@ html
 
   body(data-authenticated='#{!!session.email}')
     #wrapper
-      ul.header
-        li
-          a#logo(href='/info', target='_blank', title='Info!')
+      .header
+        a#logo(href='/info', target='_blank', title='Info!') Info!
 
       .chats
         ul
