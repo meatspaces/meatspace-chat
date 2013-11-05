@@ -42,7 +42,7 @@ module.exports = function(app, configurations, express) {
     app.use(hood.csp({
       policy: {
         'default-src': ['self', 'unsafe-inline'],
-        'img-src': ['self', 'data:', 'unsafe-inline'],
+        'img-src': ['self', 'data:', 'https://www.google-analytics.com', 'unsafe-inline'],
         'connect-src': ['self', 'ws:', 'wss:'],
         'media-src': ['self', 'mediastream:'],
         'script-src': ['self', 'http://www.google-analytics.com', 'https://www.google-analytics.com', 'unsafe-inline']
