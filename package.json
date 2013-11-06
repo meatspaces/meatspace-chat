@@ -21,7 +21,7 @@
     "express": ">= 3.2.0",
     "jade": ">= 0.29.0",
     "nconf": ">= 0.6.7",
-    "meatspace-publico": "0.0.4",
+    "meatspace-publico": "0.0.5",
     "gravatar": "1.0.6",
     "socket.io": ">= 0.9.16",
     "crypto": "0.0.3",
