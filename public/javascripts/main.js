@@ -98,10 +98,10 @@ define(['jquery', 'linkify', './base/gumhelper', './base/videoShooter', 'fingerp
   var progressCircleTo = function (progressRatio) {
     var circle = $('path#arc');
 
-    var angle = progressRatio * 360;
+    var thickness = 10;
+    var angle = progressRatio * (360 + (thickness / 2)); // adding thickness accounts for overlap
     var offsetX = 128 / 2;
     var offsetY = 64 / 2;
-    var thickness = 10;
     var radius = offsetY - (thickness / 2);
 
     var radians = (angle / 180) * Math.PI;

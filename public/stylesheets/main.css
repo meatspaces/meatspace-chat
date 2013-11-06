@@ -127,43 +127,6 @@ body > img {
     margin: 15px 0;
 }
 
-.header {
-    background-color: rgba(255, 255, 255, 0.6);
-    border-bottom-left-radius: 5px;
-    display: block;
-    font-size: 0.9rem;
-    padding: 0 0 5px 5px;
-    position: fixed;
-    right: 0;
-    top: 0;
-    z-index: 2;
-}
-
-.header li {
-    clear: both;
-    float: left;
-    padding: 2px;
-    position: relative;
-    width: auto;
-}
-
-.header a, .header span {
-    color: #333;
-    display: block;
-    outline: none;
-    padding: 2px 5px;
-    text-decoration: none;
-}
-
-.header span {
-    color: #666;
-}
-
-.header a {
-    font-size: 17px;
-    font-weight: 600;
-}
-
 #wrapper {
     font-family: 'latin_modern_mono10_regular', sans-serif;
     margin: 0 auto;
@@ -171,41 +134,32 @@ body > img {
     position: relative;
 }
 
-#logo {
-    display: block;
-    float: right;
-    position: relative;
-    width: 35px;
-    height: 35px;
-    line-height: 35px;
-    text-indent: -9999px;
+.header {
+    background-color: rgba(255, 255, 255, 0.6);
+    border-bottom-left-radius: 5px;
+    padding: 5px;
+    position: fixed;
+    right: 0;
+    top: 0;
+    z-index: 2;
 }
 
-#logo::after {
-    content: '';
+#logo{    
+    float: right;
+    text-indent: -9999px;
+    display: block;
 
-    position: absolute;
-    top: 0;
-    right: 0;
+    height: 45px;
+    width: 45px;
 
-    height: 35px;
-    width: 35px;
-    line-height: 35px;
-    padding: 2px 5px;
+    background: url('../images/meatspace.svg') center no-repeat;
+    background-size: auto 100%;
 
-    background-image: url('../images/meatspace.svg');
-    background-repeat: no-repeat;
-
-    -webkit-transition: -webkit-transform 0.5s;
-    transition: transform 0.5s;
+    -webkit-transition: -webkit-transform .5s;
+    transition: transform .5s;
 }
 
 #logo:hover {
-    font-size: 20px;
-    text-indent: -75px;
-}
-
-#logo:hover::after {
     -webkit-transform: rotate(20deg);
     transform: rotate(20deg);
 }
