@@ -12,9 +12,7 @@
 
 ## Mute feature
 
-If you mute a user then you won't see any new posts from them at that machine and IP. If you want to unmute you will have to go to your web console on Firefox or Chrome and type the following and refresh:
-
-    localStorage.clear()
+If you mute a user then you won't see any new posts from them at that machine and IP. There is an unmut button below the meatcube logo on the page.
 
 ## Native apps (iOS/Android) or Non-web clients
 
