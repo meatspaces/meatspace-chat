@@ -140,11 +140,13 @@ body > img {
     padding: 5px;
     position: fixed;
     right: 0;
+    text-align: center;
     top: 0;
+    width: 45px;
     z-index: 2;
 }
 
-#logo{    
+#logo{
     float: right;
     text-indent: -9999px;
     display: block;
@@ -162,6 +164,19 @@ body > img {
 #logo:hover {
     -webkit-transform: rotate(20deg);
     transform: rotate(20deg);
+}
+
+#unmute {
+    color: #111;
+    clear: both;
+    display: inline-block;
+    font-family: 'latin_modern_mono10_regular', sans-serif;
+    font-size: 0.8rem;
+    float: right;
+    margin-top: 5px;
+    outline: hidden;
+    padding: 5px 2px 0 2px;
+    text-decoration: none;
 }
 
 h1 {
@@ -311,10 +326,10 @@ ul li.on {
 #footer svg.progress {
     z-index: 99;
     opacity: 0;
-    width: 128px; 
-    height: 96px;   
+    width: 128px;
+    height: 96px;
     position: absolute;
-    bottom:0; 
+    bottom:0;
     left:0;
 }
 

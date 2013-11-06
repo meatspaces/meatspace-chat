@@ -174,6 +174,11 @@ define(['jquery', 'linkify', './base/gumhelper', './base/videoShooter', 'fingerp
     }
   });
 
+  body.on('click', '#unmute', function (ev) {
+    console.log('cleared mutes');
+    localStorage.clear();
+  });
+
   // allow multiple lines of input with carriage return mapped to shift+enter
   addChatForm.on('keydown', function (ev) {
     // Enter was pressed without shift key
