@@ -45,6 +45,14 @@ module.exports = function (app, nconf, io) {
         res.json({ error: err.toString() });
       } else {
         res.json({ chats: c });
+
+        io.sockets.on('connection', function (socket) {
+          socket.on('recent', function (data) {
+            if (nativeClients.indexOf(data.apiKey) > -1) {
+              res.json({ chats: c });
+            }
+          });
+        });
       }
     });
   });
