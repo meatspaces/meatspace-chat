@@ -2,17 +2,10 @@ var define = typeof define !== 'function' ?
               require('amdefine')(module) : define;
 
 define([], function() {
-  var forEach = function(arrayLike, fn) {
-    [].forEach.call(arrayLike, fn);
-  };
 
-  var rnewline = /(\r\n|\n|\r)/gm;
-  var rentity = /[&<>"']/g;
+  var rentity = /["']/g;
 
   var rentities = {
-    '&': '&amp;',
-    '<': '&lt;',
-    '>': '&gt;',
     '"': '&quot;',
     '\'': '&apos;'
   };
@@ -117,28 +110,6 @@ define([], function() {
   };
 
   var types = Object.keys(linkables);
-  var dummy = document.createElement('span');
-  var whitelist = ['href', 'target'];
-
-  function censor(str) {
-    dummy.innerHTML = str.trim();
-
-    var elems = dummy.querySelectorAll('a');
-
-    if (elems.length === 0) {
-      return str;
-    }
-
-    forEach(elems, function(elem) {
-      forEach(elem.attributes, function(attr) {
-        if (whitelist.indexOf(attr.name) === -1) {
-          elem.removeAttribute(attr.name);
-        }
-      });
-    });
-
-    return dummy.innerHTML.replace(rnewline, '<br>');
-  }
 
   function sanitize(str) {
     if (typeof str !== 'string') {
@@ -154,30 +125,44 @@ define([], function() {
   }
 
   function linkify(text) {
-    var replacements = [];
+    var matches = [];
+    var index = 0;
+    var fragments = [];
 
     types.forEach(function (type) {
       var pattern = linkables[type].pattern;
       var transformer = linkables[type].transformer;
       var match, replace;
 
-      while ((match = pattern.exec(text))) {
+      while (match = pattern.exec(text)) {
         replace = transformer(match);
 
         if (replace !== null) {
-          replacements.push({
-            search: match[0],
+          matches.push({
+            index: match.index,
+            length: match[0].length,
             replace: replace
           });
         }
       }
     });
 
-    replacements.forEach(function (r) {
-      text = text.replace(r.search, r.replace);
+    matches.sort(function (a, b) {
+      return a.index - b.index;
+    }).forEach(function (match) {
+      if (index > match.index) {
+        return;
+      }
+      fragments.push(text.substring(index, match.index));
+      index = match.index + match.length;
+      fragments.push(match.replace);
     });
 
-    return censor(text);
+    if (index < text.length) {
+      fragments.push(text.substring(index));
+    }
+
+    return fragments.join('');
   }
 
   return linkify;
