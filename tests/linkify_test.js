@@ -1,12 +1,6 @@
-var jsdom = require('jsdom').jsdom;
-// Create a global document object that linkify.js
-// internals can will reach
-global.document = jsdom("<html><head></head><body></body></html>");
-
 var linkify = require('../public/javascripts/linkify');
 var tests = {};
-var valid, invalid, xss, inline;
-
+var valid, invalid, inline;
 
 valid = {
   values: [
@@ -40,7 +34,15 @@ valid = {
     '/r/puppies',
     '1.1.1.1',
     'http://1.1.1.1',
-    'http://meat.spaces should be treated like a link'
+    'http://meat.spaces should be treated like a link',
+    'test.com/"/onmouseover="alert(document.cookie)',
+    // Stuff is escaped before it gets to linkify via the .textContent API
+    'test.com/"&gt;&lt/a&gt;&ltscript&gt;alert(document.cookie);&lt/script&gt;&lta href="http://example.com',
+    // XSS #96
+    'x.it/onmouseover=alert(null);//\nx.it/onmouseover=alert(null);//',
+    'test.com/onmouseover=alert(1)// est.com/onmouseover=alert(1)//',
+    // Don't encode the same portion of text twice
+    'test.com/@test'
   ],
 
   expects: [
@@ -74,35 +76,18 @@ valid = {
     '<a href="http://www.reddit.com/r/puppies" target="_blank">/r/puppies</a>',
     '<a href="http://1.1.1.1" target="_blank">1.1.1.1</a>',
     '<a href="http://1.1.1.1" target="_blank">http://1.1.1.1</a>',
-    '<a href="http://meat.spaces" target="_blank">http://meat.spaces</a> should be treated like a link'
+    '<a href="http://meat.spaces" target="_blank">http://meat.spaces</a> should be treated like a link',
+    '<a href="http://test.com/&quot;/onmouseover=&quot;alert(document.cookie)" target="_blank">test.com/"/onmouseover="alert(document.cookie)</a>',
+    '<a href="http://test.com/&quot;&gt;&lt/a&gt;&ltscript&gt;alert(document.cookie);&lt/script&gt;&lta" target="_blank">test.com/"&gt;&lt/a&gt;&ltscript&gt;alert(document.cookie);&lt/script&gt;&lta</a> href="<a href="http://example.com" target="_blank">http://example.com</a>',
+    '<a href="http://x.it/onmouseover=alert(null);//" target="_blank">x.it/onmouseover=alert(null);//</a>\n<a href="http://x.it/onmouseover=alert(null);//" target="_blank">x.it/onmouseover=alert(null);//</a>',
+    '<a href="http://test.com/onmouseover=alert(1)//" target="_blank">test.com/onmouseover=alert(1)//</a> <a href="http://est.com/onmouseover=alert(1)//" target="_blank">est.com/onmouseover=alert(1)//</a>',
+    '<a href="http://test.com/@test" target="_blank">test.com/@test</a>'
   ]
 };
 
 valid.values.forEach(function(value, i) {
   tests[value] = function(test) {
     test.ok(linkify(value).indexOf(valid.expects[i]) !== -1);
-    test.done();
-  };
-});
-
-xss = {
-  values: [
-    'test.com/"/onmouseover="alert(document.cookie)',
-    'test.com/"></a><script>alert(document.cookie);</script><a href="http://example.com',
-    'test.com/onmouseover=alert(1)// est.com/onmouseover=alert(1)//',
-    'x.it/onmouseover=alert(null);//\nx.it/onmouseover=alert(null);//'
-  ],
-  expects: [
-    '<a href="http://test.com/&quot;/onmouseover=&quot;alert(document.cookie)" target="_blank">test.com/"/onmouseover="alert(document.cookie)</a>',
-    '<a href="http://test.com/&quot;&gt;&lt;/a&gt;&lt;script&gt;alert(document.cookie);&lt;/script&gt;&lt;a" target="_blank">test.com/"&gt;</a><script>alert(document.cookie);</script>',
-    '<a href="http://t&lt;a href=" target="_blank">est.com/onmouseover=alert(1)//</a>" target="_blank"&gt;test.com/onmouseover=alert(1)// est.com/onmouseover=alert(1)//',
-    '<a href="http://&lt;a href=" target="_blank">x.it/onmouseover=alert(null);//</a>" target="_blank"&gt;x.it/onmouseover=alert(null);//<br>x.it/onmouseover=alert(null);//'
-  ]
-};
-
-xss.values.forEach(function(value, i) {
-  tests[value] = function(test) {
-    test.ok(linkify(value).indexOf(xss.expects[i]) !== -1);
     test.done();
   };
 });
