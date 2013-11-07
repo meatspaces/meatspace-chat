@@ -141,12 +141,8 @@ define(['jquery', 'linkify', './base/gumhelper', './base/videoShooter', 'fingerp
 
   $.get('/get/chats', function (data) {
     debug("Rec'd %s chats from server", data.chats.chats.length);
-    data.chats.chats.sort(function (a, b) {
-      return a.value.created - b.value.created;
-    }).forEach(function (chat) {
-      renderChat({
-        chat: chat
-      });
+    renderChat({
+      chat: chat
     });
   });
 
