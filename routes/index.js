@@ -144,7 +144,7 @@ module.exports = function (app, nconf, io) {
     socket.on('message', function (data) {
       if (nativeClients.indexOf(data.apiKey) > -1) {
 
-        addChat(data.message, data.picture, data.fingerprint, '', function (err) {
+        addChat(data.message, data.picture, data.fingerprint, data.fingerprint, function (err) {
           if (err) {
             console.log('error posting ', err.toString());
           } else {
