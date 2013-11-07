@@ -22,6 +22,9 @@ define(['jquery', 'linkify', './base/gumhelper', './base/videoShooter', 'fingerp
   var socket = io.connect(location.protocol + '//' + location.hostname +
     (location.port ? ':' + location.port : ''));
   var videoShooter;
+  if (/liveDebug/.test(window.location.search)) {
+    window.liveDebug = true;
+  }
 
   var CHAT_LIMIT = 25;
 
@@ -29,7 +32,19 @@ define(['jquery', 'linkify', './base/gumhelper', './base/videoShooter', 'fingerp
     return mutedArr.indexOf(fingerprint) !== -1;
   };
 
+  var debug = function () {
+    if (window.liveDebug) {
+      console.log.apply(console, arguments);
+    }
+  };
+
   var renderChat = function (c) {
+    debug("Rendering chat: key='%s' fingerprint='%s' message='%s' created='%s' imageMd5='%s'",
+      c.chat.key,
+      c.chat.value.fingerprint,
+      c.chat.value.message,
+      c.chat.value.created,
+      md5(c.chat.value.media));
     var renderFP = c.chat.value.fingerprint;
 
     if (!isMuted(renderFP)) {
@@ -64,6 +79,7 @@ define(['jquery', 'linkify', './base/gumhelper', './base/videoShooter', 'fingerp
           var follow = bottom < size + 50;
 
           chatList.append(li);
+          debug('Appended chat %s', c.chat.key);
 
           // if scrolled to bottom of window then scroll the new thing into view
           // otherwise, you are reading the history... allow user to scroll up.
@@ -85,6 +101,7 @@ define(['jquery', 'linkify', './base/gumhelper', './base/videoShooter', 'fingerp
     if (videoShooter) {
       videoShooter.getShot(callback, numFrames, interval, progressCallback);
     } else {
+      debug('Failed to install videoShooter');
       callback('');
     }
   };
@@ -123,6 +140,7 @@ define(['jquery', 'linkify', './base/gumhelper', './base/videoShooter', 'fingerp
   });
 
   $.get('/get/chats', function (data) {
+    debug("Rec'd %s chats from server", data.chats.chats.length);
     data.chats.chats.sort(function (a, b) {
       return a.value.created - b.value.created;
     }).forEach(function (chat) {
@@ -159,6 +177,7 @@ define(['jquery', 'linkify', './base/gumhelper', './base/videoShooter', 'fingerp
 
   socket.on('connect', function () {
     socket.on('message', function (data) {
+      debug("Incoming chat key='%s'", data.chat.key);
       renderChat(data);
     });
   });
@@ -168,6 +187,7 @@ define(['jquery', 'linkify', './base/gumhelper', './base/videoShooter', 'fingerp
     var fp = self.parent('[data-fingerprint]').data('fingerprint');
 
     if (!isMuted(fp)) {
+      debug('Muting %s', fp);
       mutedArr.push(fp);
       localStorage.setItem('muted', JSON.stringify(mutedArr));
       self.text('muted!');
@@ -175,7 +195,7 @@ define(['jquery', 'linkify', './base/gumhelper', './base/videoShooter', 'fingerp
   });
 
   body.on('click', '#unmute', function (ev) {
-    console.log('cleared mutes');
+    debug('clearing mutes');
     localStorage.clear();
   });
 
@@ -215,6 +235,7 @@ define(['jquery', 'linkify', './base/gumhelper', './base/videoShooter', 'fingerp
 
           svg.attr('class', 'progress');
 
+          debug('Sending chat');
           $.post('/add/chat', self.serialize(), function () {
 
           }).error(function (data) {
