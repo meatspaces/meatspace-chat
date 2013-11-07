@@ -4,7 +4,7 @@ block content
   form(method='post', id='add-chat-form')
     input(type='hidden', name='picture', id='picture')
     .message-content
-      textarea(rows:1, name='message', id='add-chat', class='input', autocomplete='off', placeholder='Send a public message', maxlength='150')
+      input(name='message', id='add-chat', class='input', autocomplete='off', placeholder='Send a public message')
       input(type='hidden', name='_csrf', value='#{csrf}')
       input(type='hidden', name='fingerprint', id='fp')
       input(type='hidden', name='userid', id='userid')
