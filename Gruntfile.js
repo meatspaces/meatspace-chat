@@ -46,6 +46,21 @@ module.exports = function(grunt) {
       options: {
         jshintrc: '.jshintrc'
       }
+    },
+    watch: {
+      scripts: {
+        files: [
+          'tests/**/*.js',
+          'public/**/*.js',
+          'routes/**/*.js',
+          'test/**/*.js',
+          // Ignore these, they are someone else's problem
+          '!public/javascripts/base/*.js',
+          '!public/javascripts/build/*.js',
+          '!public/javascripts/lib/**/*.js'
+        ],
+        tasks: ['jshint', 'nodeunit']
+      }
     }
   });
 
@@ -54,6 +69,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-contrib-nodeunit');
   grunt.loadNpmTasks('grunt-contrib-requirejs');
+  grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.registerTask('build', ['cssmin', 'requirejs', 'concat']);
   grunt.registerTask('default', ['jshint', 'build', 'nodeunit']);
   grunt.registerTask('travis', ['jshint', 'nodeunit']);

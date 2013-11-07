@@ -2,7 +2,11 @@ var define = typeof define !== 'function' ?
               require('amdefine')(module) : define;
 
 define([], function() {
+  var forEach = function(arrayLike, fn) {
+    [].forEach.call(arrayLike, fn);
+  };
 
+  var rnewline = /(\r\n|\n|\r)/gm;
   var rentity = /[&<>"']/g;
 
   var rentities = {
@@ -113,6 +117,28 @@ define([], function() {
   };
 
   var types = Object.keys(linkables);
+  var dummy = document.createElement('span');
+  var whitelist = ['href', 'target'];
+
+  function censor(str) {
+    dummy.innerHTML = str.trim();
+
+    var elems = dummy.querySelectorAll('a');
+
+    if (elems.length === 0) {
+      return str;
+    }
+
+    forEach(elems, function(elem) {
+      forEach(elem.attributes, function(attr) {
+        if (whitelist.indexOf(attr.name) === -1) {
+          elem.removeAttribute(attr.name);
+        }
+      });
+    });
+
+    return dummy.innerHTML.replace(rnewline, '<br>');
+  }
 
   function sanitize(str) {
     if (typeof str !== 'string') {
@@ -151,7 +177,7 @@ define([], function() {
       text = text.replace(r.search, r.replace);
     });
 
-    return text;
+    return censor(text);
   }
 
   return linkify;
