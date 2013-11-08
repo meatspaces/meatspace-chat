@@ -173,11 +173,9 @@ define(['jquery', 'linkify', './base/gumhelper', './base/videoShooter', 'fingerp
     disableVideoMode();
   }
 
-  socket.on('connect', function () {
-    socket.on('message', function (data) {
-      debug("Incoming chat key='%s'", data.chat.key);
-      renderChat(data);
-    });
+  socket.on('message', function (data) {
+    debug("Incoming chat key='%s'", data.chat.key);
+    renderChat(data);
   });
 
   body.on('click', '.mute', function (ev) {
