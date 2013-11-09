@@ -39,7 +39,7 @@ module.exports = function (app, nconf, io) {
   });
 
   app.get('/get/chats', function (req, res) {
-    publico.getChats(true, function (err, c) {
+    publico.getChats(false, function (err, c) {
       if (err) {
         res.status(400);
         res.json({ error: err.toString() });
