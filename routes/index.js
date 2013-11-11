@@ -157,7 +157,7 @@ module.exports = function (app, nconf, io) {
           }
         });
       } else {
-        console.log('Invalid apiKey: ', data.apiKey);
+        console.log('Invalid apiKey');
       }
     });
   });
