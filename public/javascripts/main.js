@@ -204,7 +204,7 @@ define(['jquery', 'linkify', './base/gumhelper', './base/videoShooter', 'fingerp
       addChatForm.submit();
     } 
   }).on('keyup', function (ev) {
-    charCounter.text( 150 - addChat.val().length );
+    charCounter.text(150 - addChat.val().length);
   }).on('submit', function (ev) {
     ev.preventDefault();
 
