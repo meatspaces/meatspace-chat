@@ -1,7 +1,7 @@
 define(['jquery', 'linkify', './base/gumhelper', './base/videoShooter', 'fingerprint', 'md5'],
   function ($, linkify, gumHelper, VideoShooter, Fingerprint, md5) {
   'use strict';
-
+  var win = $(window);
   var html = $('html');
   var body = $('body');
   var addChatForm = $('#add-chat-form');
@@ -249,4 +249,25 @@ define(['jquery', 'linkify', './base/gumhelper', './base/videoShooter', 'fingerp
       }
     }
   });
+    var lastScroll = 0;
+    win.on('scroll', function(e) {
+      var winHeight = win.height(),
+        scrollPosn = win.scrollTop(),
+        //obvs this only works if chats are a uniform height
+        chatHeight = chatList.children().height();
+
+      //This is so all this stuff only happens when scrolling has progressed
+      //more than one chat element's height. So if a scroll event gets triggered 40 times
+      //but the movement is only 300px, this only gets called once
+      if (Math.abs(scrollPosn - lastScroll) > chatHeight) {
+        lastScroll = scrollPosn;
+        var chats = chatList.children();
+        var edge = Math.max(chatList.length, Math.floor(scrollPosn / chatHeight)) - 1;
+        var outOfViewport = chats.slice(0, edge);
+        outOfViewport.addClass('unrender');
+        var inViewport = chats.slice(edge);
+        inViewport.removeClass('unrender');
+      }
+    });
+
 });
