@@ -218,6 +218,18 @@ a.medium {
     text-decoration: none;
 }
 
+.leaderboard {
+  height: 40px;
+}
+
+.leaderboard td {
+  text-align: right;
+}
+
+.leaderboard td:nth-child(2) {
+  min-width: 20px;
+}
+
 h1 {
     font-size: 3rem;
     padding: 20px;
