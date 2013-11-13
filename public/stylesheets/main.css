@@ -28,19 +28,7 @@ article, aside, details, figcaption, figure,
 footer, header, hgroup, menu, nav, section {
     display: block;
 }
-body {
-    line-height: 1;
-    background-color: #ccc;
-    background-image: linear-gradient(30deg, #aaa 12%, transparent 12.5%, transparent 87%, #aaa 87.5%, #aaa),
-    linear-gradient(150deg, #aaa 12%, transparent 12.5%, transparent 87%, #aaa 87.5%, #aaa),
-    linear-gradient(30deg, #aaa 12%, transparent 12.5%, transparent 87%, #aaa 87.5%, #aaa),
-    linear-gradient(150deg, #aaa 12%, transparent 12.5%, transparent 87%, #aaa 87.5%, #aaa),
-    linear-gradient(60deg, #888 25%, transparent 25.5%, transparent 75%, #888 75%, #888),
-    linear-gradient(60deg, #888 25%, transparent 25.5%, transparent 75%, #888 75%, #888);
-    background-size: 80px 140px;
-    background-position: 0 0, 0 0, 40px 70px, 40px 70px, 0 0, 40px 70px;
-    min-height: 100%;
-}
+
 ol, ul {
     list-style: none;
 }
@@ -55,6 +43,37 @@ q:before, q:after {
 table {
     border-collapse: collapse;
     border-spacing: 0;
+}
+
+body {
+    line-height: 1;
+    background-color: #ccc;
+    background-image: linear-gradient(30deg, #aaa 12%, transparent 12.5%, transparent 87%, #aaa 87.5%, #aaa),
+    linear-gradient(150deg, #aaa 12%, transparent 12.5%, transparent 87%, #aaa 87.5%, #aaa),
+    linear-gradient(30deg, #aaa 12%, transparent 12.5%, transparent 87%, #aaa 87.5%, #aaa),
+    linear-gradient(150deg, #aaa 12%, transparent 12.5%, transparent 87%, #aaa 87.5%, #aaa),
+    linear-gradient(60deg, #888 25%, transparent 25.5%, transparent 75%, #888 75%, #888),
+    linear-gradient(60deg, #888 25%, transparent 25.5%, transparent 75%, #888 75%, #888);
+    background-size: 80px 140px;
+    background-position: 0 0, 0 0, 40px 70px, 40px 70px, 0 0, 40px 70px;
+    min-height: 100%;
+}
+
+body.info {
+    background-color: #eee;
+    background-image: none;
+    padding-top: 50px;
+}
+
+.info .item {
+    background-color: #fff;
+    box-shadow: #ccc 1px 1px 4px;
+    float: left;
+    height: 310px;
+    margin: 5px;
+    padding: 10px;
+    position: relative;
+    width: 275px;
 }
 
 @font-face {
@@ -86,20 +105,30 @@ body > img {
 }
 
 .infobox a {
-    color: #34a4b8;
-    padding: 0 5px;
+    color: #f65694;
     text-decoration: none;
     text-shadow: #fff 1px 1px 0;
 }
 
 .infobox a:hover {
-    background-color: #fff;
+    background-color: #eee;
+}
+
+a.big {
+    font-size: 3rem;
+    line-height: 3.8rem;
+}
+
+a.medium {
+    font-size: 2rem;
+    line-height: 2.5rem;
 }
 
 .infobox ul, .infobox p, .infobox h1, .infobox h2 {
+    border: 0;
     display: block;
     line-height: 1.3rem;
-    padding: 0 20px;
+    padding: 0 10px;
 }
 
 .infobox ul {
@@ -118,13 +147,25 @@ body > img {
     margin-top: 30px;
 }
 
+.infobox a.do {
+    color: #398bce;
+}
+
+.infobox p {
+    margin-bottom: 10px;
+}
+
 .infobox p, .infobox li {
-    font-size: 1.2rem;
-    line-height: 1.4rem;
+    font-size: 1.3rem;
+    line-height: 1.6rem;
 }
 
 .infobox li {
     margin: 15px 0;
+}
+
+.info .infobox h1, .info .infobox h2 {
+    margin: 0;
 }
 
 #wrapper {
@@ -142,18 +183,17 @@ body > img {
     right: 0;
     text-align: center;
     top: 0;
-    width: 45px;
+    width: 100%;
     z-index: 2;
 }
 
-#logo{
-    float: right;
+#logo {
+    float: left;
     text-indent: -9999px;
-    display: block;
-
-    height: 45px;
-    width: 45px;
-
+    display: inline-block;
+    height: 40px;
+    margin: 0 10px;
+    width: 40px;
     background: url('../images/meatspace.svg') center no-repeat;
     background-size: auto 100%;
 
@@ -168,10 +208,9 @@ body > img {
 
 #unmute {
     color: #111;
-    clear: both;
     display: inline-block;
     font-family: 'latin_modern_mono10_regular', sans-serif;
-    font-size: 0.8rem;
+    font-size: 1.1rem;
     float: right;
     margin-top: 5px;
     outline: hidden;

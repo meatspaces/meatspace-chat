@@ -10,39 +10,52 @@ html
     if analytics
       != '<script>(function(i,s,o,g,r,a,m){i["GoogleAnalyticsObject"]=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,"script","//www.google-analytics.com/analytics.js","ga");ga("create", "' + analytics + '", "' + analyticsHost + '");ga("send", "pageview");</script>'
 
-  body
+  body.info
     #wrapper
+      .header
+        a#logo(href='/', target='_blank', title='Back to chat!') Back to chat!
       .infobox
-        .infobox-wrapper
+        .item
           h1 Welcome to Meatspace Chat!
 
-          p Here are some links to help you around this crazy place:
+          ul
+            li
+              a(href='http://digitalocean.com', class='do medium') Powered by Digital Ocean! THEY ARE THE BEST.
 
-          h2 For the Hackers
+        .item
+          h2 For the Contributors
           ul
             li
               p Sending a fix to the repo? (No new features please)
               p
                 a(href='http://github.com/meatspaces/meatspace-chat') Github Repository
+
+        .item
+          h2 For the Hackers
+          ul
             li
               p New features/ideas/hacks that use the web version of the chat?
               p
                 a(href='http://github.com/meatspaces/meatspace-chat-hackers') Add it here!
+
+        .item
+          h2 For the API Developers
+          ul
             li
               p Want to do a third-party client/bot/whatever using the API?
-              p If granted, you'll be given an apiKey and instructions on what to do. Then you will first be given access on the staging server.
               p
                 a(href='https://github.com/meatspaces/meatspace-chat#native-apps-iosandroid') More info here
-
+        .item
           h2 For the Consumers
           ul
             li
-              a(href='http://www.zazzle.com/meatspaceshop') Meatspace Shop
+              a(href='http://www.zazzle.com/meatspaceshop', class='big') Meatspace Shop
 
+        .item
           h2 For the Credits
           ul
             li
-              a(href='https://twitter.com/ednapiranha') Creatorbro
+              a(href='https://twitter.com/ednapiranha', class='big') Creatorbro
             li
-              a(href='https://github.com/meatspaces/meatspace-chat/graphs/contributors') Contributorbros
+              a(href='https://github.com/meatspaces/meatspace-chat/graphs/contributors', class='medium') Contributorbros
 
