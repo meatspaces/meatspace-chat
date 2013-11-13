@@ -13,6 +13,8 @@ define(['jquery', 'linkify', './base/gumhelper', './base/videoShooter', 'fingerp
   var footer = $('#footer');
   var muteBtn = $('.mute');
   var userId = $('#userid');
+  var viewers = $('.viewers');
+  var cams = $('.cams');
   var fp = $('#fp');
   var svg = $(null);
   var isPosting = false;
@@ -168,10 +170,19 @@ define(['jquery', 'linkify', './base/gumhelper', './base/videoShooter', 'fingerp
 
       videoShooter = new VideoShooter(videoElement);
       addChatForm.click();
+
+      socket.emit('cams');
     });
   } else {
     disableVideoMode();
   }
+
+  socket.on('viewers', function (data) {
+    viewers.text(data);
+  });
+  socket.on('cams', function (data) {
+    cams.text(data);
+  });
 
   socket.on('message', function (data) {
     debug("Incoming chat key='%s'", data.chat.key);

@@ -40,6 +40,8 @@
     "nodemon": "*",
     "bower": ">= 1.2.7",
     "grunt-contrib-watch": "~0.5.3",
-    "jsdom": "~0.8.8"
+    "jsdom": "~0.8.8",
+    "redis": "~0.9.0",
+    "hiredis": "~0.1.15"
   }
 }

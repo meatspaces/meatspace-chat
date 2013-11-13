@@ -6,6 +6,11 @@ module.exports = function (app, nconf, io) {
   var nativeClients = require('../clients.json');
   var blacklist = require('../blacklist.json');
   var level = require('level');
+  var redis = require('redis');
+
+  var client = redis.createClient();
+  client.del('viewers');
+  client.del('cams');
 
   var logger = level(nconf.get('logger'), {
     createIfMissing: true,
@@ -141,9 +146,34 @@ module.exports = function (app, nconf, io) {
   });
 
   io.sockets.on('connection', function (socket) {
+    var client = redis.createClient();
+
+    var broadcastViewers = function () {
+      client.zcard('viewers', function (err, data) {
+        io.sockets.emit('viewers', data);
+      });
+    };
+
+    var broadcastCams = function() {
+      client.zcard('cams', function (err, data) {
+        io.sockets.emit('cams', data);
+      });
+    };
+
+    client.zadd('viewers', 1, socket.id, broadcastViewers);
+    broadcastCams();
+
+    socket.on('disconnect', function() {
+      client.zrem('viewers', 1, socket.id, broadcastViewers);
+      client.zrem('cams', 1, socket.id, broadcastCams);
+    });
+
+    socket.on('cams', function() {
+      client.zadd('cams', 1, socket.id, broadcastCams);
+    });
+
     socket.on('message', function (data) {
       if (nativeClients.indexOf(data.apiKey) > -1) {
-
         addChat(data.message, data.picture, data.fingerprint, data.fingerprint, function (err) {
           if (err) {
             console.log('error posting ', err.toString());
