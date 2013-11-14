@@ -76,7 +76,7 @@ module.exports = function (app, nconf, io) {
 
   var addChat = function (message, picture, fingerprint, userId, next) {
     if (!blacklisted(fingerprint, userId)) {
-      publico.addChat(message.slice(0, 150), {
+      publico.addChat(message.slice(0, 250), {
         ttl: 600000,
         media: picture,
         fingerprint: userId
