@@ -39,11 +39,20 @@ module.exports = function (app, nconf, io) {
   });
 
   app.get('/get/chats', function (req, res) {
-    publico.getChats(false, function (err, c) {
+    publico.getChats(true, function (err, c) {
       if (err) {
         res.status(400);
         res.json({ error: err.toString() });
       } else {
+
+        var sorted = [];
+
+        c.chats.forEach(function (chat) {
+          sorted.unshift(chat);
+        });
+
+        c.chats = sorted;
+
         res.json({ chats: c });
 
         io.sockets.on('connection', function (socket) {

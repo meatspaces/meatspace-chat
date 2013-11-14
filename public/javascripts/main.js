@@ -195,7 +195,6 @@ define(['jquery', 'linkify', './base/gumhelper', './base/videoShooter', 'fingerp
     localStorage.clear();
   });
 
-  // allow multiple lines of input with carriage return mapped to shift+enter
   addChatForm.on('keydown', function (ev) {
     // Enter was pressed without shift key
     if (ev.keyCode === 13 && !ev.shiftKey) {
@@ -206,7 +205,6 @@ define(['jquery', 'linkify', './base/gumhelper', './base/videoShooter', 'fingerp
     ev.preventDefault();
 
     var self = $(ev.target);
-
 
     if (!isPosting) {
       if (!canSend) {
