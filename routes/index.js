@@ -47,11 +47,13 @@ module.exports = function (app, nconf, io) {
 
         var sorted = [];
 
-        c.chats.forEach(function (chat) {
-          sorted.unshift(chat);
-        });
+        if (c.chats) {
+          c.chats.forEach(function (chat) {
+            sorted.unshift(chat);
+          });
 
-        c.chats = sorted;
+          c.chats = sorted;
+        }
 
         res.json({ chats: c });
 
