@@ -196,8 +196,7 @@ define(['jquery', 'linkify', './base/gumhelper', './base/videoShooter', 'fingerp
   });
 
   addChatForm.on('keydown', function (ev) {
-    // Enter was pressed without shift key
-    if (ev.keyCode === 13 && !ev.shiftKey) {
+    if (ev.keyCode === 13) {
       ev.preventDefault();
       addChatForm.submit();
     }

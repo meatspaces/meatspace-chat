@@ -45,18 +45,13 @@ table {
     border-spacing: 0;
 }
 
+html, body {
+    height: 100%;
+    position: relative;
+}
+
 body {
-    line-height: 1;
     background-color: #ccc;
-    background-image: linear-gradient(30deg, #aaa 12%, transparent 12.5%, transparent 87%, #aaa 87.5%, #aaa),
-    linear-gradient(150deg, #aaa 12%, transparent 12.5%, transparent 87%, #aaa 87.5%, #aaa),
-    linear-gradient(30deg, #aaa 12%, transparent 12.5%, transparent 87%, #aaa 87.5%, #aaa),
-    linear-gradient(150deg, #aaa 12%, transparent 12.5%, transparent 87%, #aaa 87.5%, #aaa),
-    linear-gradient(60deg, #888 25%, transparent 25.5%, transparent 75%, #888 75%, #888),
-    linear-gradient(60deg, #888 25%, transparent 25.5%, transparent 75%, #888 75%, #888);
-    background-size: 80px 140px;
-    background-position: 0 0, 0 0, 40px 70px, 40px 70px, 0 0, 40px 70px;
-    min-height: 100%;
 }
 
 body.info {
@@ -74,13 +69,6 @@ body.info {
     padding: 10px;
     position: relative;
     width: 275px;
-}
-
-@font-face {
-    font-family: 'latin_modern_mono10_regular';
-    src: url('../fonts/lmmono10-regular-webfont.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
 }
 
 html, body {
@@ -169,16 +157,15 @@ a.medium {
 }
 
 #wrapper {
-    font-family: 'latin_modern_mono10_regular', sans-serif;
+    font-family: Arial;
     margin: 0 auto;
     padding: 3px;
     position: relative;
 }
 
 .header {
-    background-color: rgba(255, 255, 255, 0.6);
+    background-color: rgba(255, 255, 255, 0.7);
     border-bottom-left-radius: 5px;
-    padding: 5px;
     position: fixed;
     right: 0;
     text-align: center;
@@ -191,12 +178,12 @@ a.medium {
     float: left;
     text-indent: -9999px;
     display: inline-block;
-    height: 40px;
+    height: 35px;
     margin: 0 10px;
-    width: 40px;
+    width: 35px;
     background: url('../images/meatspace.svg') center no-repeat;
     background-size: auto 100%;
-
+    margin: 5px;
     -webkit-transition: -webkit-transform .5s;
     transition: transform .5s;
 }
@@ -207,15 +194,20 @@ a.medium {
 }
 
 #unmute {
-    color: #111;
+    color: #888;
     display: inline-block;
-    font-family: 'latin_modern_mono10_regular', sans-serif;
+    font-family: Arial;
     font-size: 1.1rem;
     float: right;
-    margin-top: 5px;
+    line-height: 1.8rem;
     outline: hidden;
-    padding: 5px 2px 0 2px;
+    padding: 8px 5px;
     text-decoration: none;
+}
+
+#unmute:hover {
+    background-color: #111;
+    color: #eee;
 }
 
 h1 {
@@ -224,16 +216,15 @@ h1 {
 }
 
 .input {
-    border-radius: 5px;
     background-color: rgba(255, 255, 255, 0.85);
     border: 1px solid #eee;
     color: #164352;
-    font-family: 'latin_modern_mono10_regular', sans-serif;
+    font-family: Arial;
     font-size: 1.1rem;
     margin-left: 10px;
     outline: none;
     padding: 5px;
-    width: 75%;
+    width: 85%;
     height: 1.5rem;
     resize: none;
 }
@@ -242,21 +233,20 @@ h1 {
     float: left;
     position: relative;
     width: 100%;
-    margin-top: 40px;
+    margin-top: 43px;
     padding-bottom: 78px;
 }
+
 .chats.lean {
     padding-bottom: 0px;
 }
 
 .chats li {
-    border-top: 1px solid rgba(255, 255, 255, 0.085);
-    border-radius: 5px;
-    background-color: rgba(255, 255, 255, 0.85);
+    background-color: rgba(255, 255, 255, 0.75);
     clear: both;
     float: left;
     margin-bottom: 1px;
-    max-height: 250px;
+    max-height: 255px;
     width: 100%;
     overflow-y: auto;
     position: relative;
@@ -264,40 +254,41 @@ h1 {
 }
 
 .chats li:nth-child(odd) {
-    background-color: rgba(225, 225, 225, 0.85);
+    background-color: rgba(255, 255, 255, 0.95);
 }
 
 .chats li img {
-    border-radius: 5px;
     display: block;
     float: left;
-    min-width: 128px;
-    min-height: 96px;
-    width: 20%;
+    width: 135px;
 }
 
 .chats li p {
     color: #777;
     float: left;
-    font-size: 1.7rem;
-    line-height: 1.9rem;
+    font-size: 1.2rem;
+    line-height: 1.6rem;
     min-width: 182px;
     overflow: hidden;
-    padding: 5px 10px;
-    text-shadow: #f1f1f1 -1px 1px 0;
-    width: 60%;
+    padding: 5px 10px 10px 10px;
+    width: 65%;
 }
 
 .chats li .mute {
-    background-color: #ccc !important;
-    bottom: 0;
+    background-color: transparent;
+    bottom: 0px;
     border: 0;
-    border-bottom-right-radius: 5px;
+    color: #888;
     display: block;
-    font-size: 0.9rem;
-    padding: 3px 5px;
+    font-size: 0.8rem;
+    padding: 3px 6px;
     position: absolute;
-    right: 0;
+    right: 0px;
+}
+
+.chats li .mute:hover {
+    background-color: #111;
+    color: #eee;
 }
 
 .chats li p span {
@@ -341,17 +332,18 @@ ul li.on {
     background-color: rgba(255, 255, 255, 0.9);
     bottom: 0;
     color: #111;
-    font-size: 2rem;
-    height: 55px;
+    font-size: 1.8rem;
+    height: 65px;
     left: 0;
     line-height: 2rem;
+    padding-top: 10px;
     position: absolute;
     right: 0;
     text-align: center;
 }
 
 #footer {
-    font-family: 'latin_modern_mono10_regular', sans-serif;
+    font-family: Arial;
     position: fixed;
     right: 0;
     bottom: 0;
@@ -368,8 +360,8 @@ ul li.on {
     width: 128px;
     height: 96px;
     position: absolute;
-    bottom:0;
-    left:0;
+    bottom: 0;
+    left: 0;
 }
 
 #footer svg.progress.visible {
@@ -395,12 +387,12 @@ ul li.on {
     }
 
     .input {
-        width: 57%;
+        width: 75%;
     }
 
     .chats li p {
-        font-size: 1.3rem;
-        line-height: 1.3rem;
+        font-size: 1.1rem;
+        line-height: 1.5rem;
         min-width: 0;
         width: auto;
         float: none;
@@ -419,8 +411,8 @@ ul li.on {
     }
 
     .chats li p {
-        font-size: 1.2rem;
-        line-height: 1.2rem;
+        font-size: 1.1rem;
+        line-height: 1.5rem;
         min-width: 0;
         width: auto;
         float: none;
