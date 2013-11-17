@@ -29,6 +29,10 @@ module.exports = function (app, nconf, io) {
     res.render('info');
   });
 
+  app.get('/art', function (req, res) {
+    res.render('art');
+  });
+
   app.get('/', function (req, res) {
     var currDate = Date.now();
     logger.put('landing-page!' + currDate, {

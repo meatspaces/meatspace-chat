@@ -1,61 +1,49 @@
-!!! 5
-html
-  head
-    title Meatspace chat: your 2 seconds of fame.
-    meta(content='width=device-width, height=device-height, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0', name='viewport')
-    meta(content='yes', name='apple-mobile-web-app-capable')
-    meta(content='chrome=1', http-equiv='X-UA-Compatible')
-    link(rel='shortcut icon', href='/images/favicon.png')
-    link(rel='stylesheet', href='/stylesheets/main.css')
-    if analytics
-      != '<script>(function(i,s,o,g,r,a,m){i["GoogleAnalyticsObject"]=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,"script","//www.google-analytics.com/analytics.js","ga");ga("create", "' + analytics + '", "' + analyticsHost + '");ga("send", "pageview");</script>'
+extend default_layout
 
-  body.info
-    #wrapper
-      .header
-        a#logo(href='/', target='_blank', title='Back to chat!') Back to chat!
-      .infobox
-        .item
-          h1 Welcome to Meatspace Chat!
+block content
+  .infobox
+    .item
+      h1 Welcome to Meatspace Chat!
 
-          ul
-            li
-              a(href='http://digitalocean.com', class='do medium') Powered by Digital Ocean! THEY ARE THE BEST.
+      ul
+        li
+          a(href='http://digitalocean.com', class='do medium') Powered by Digital Ocean! THEY ARE THE BEST.
 
-        .item
-          h2 For the Contributors
-          ul
-            li
-              p Sending a fix to the repo? (No new features please)
-              p
-                a(href='http://github.com/meatspaces/meatspace-chat') Github Repository
+    .item
+      h2 For the Contributors
+      ul
+        li
+          p Sending a fix to the repo? (No new features please)
+          p
+            a(href='http://github.com/meatspaces/meatspace-chat') Github Repository
 
-        .item
-          h2 For the Hackers
-          ul
-            li
-              p New features/ideas/hacks that use the web version of the chat?
-              p
-                a(href='http://github.com/meatspaces/meatspace-chat-hackers') Add it here!
+    .item
+      h2 For the Hackers
+      ul
+        li
+          p New features/ideas/hacks that use the web version of the chat?
+          p
+            a(href='http://github.com/meatspaces/meatspace-chat-hackers') Add it here!
 
-        .item
-          h2 For the API Developers
-          ul
-            li
-              p Want to do a third-party client/bot/whatever using the API?
-              p
-                a(href='https://github.com/meatspaces/meatspace-chat#native-apps-iosandroid') More info here
-        .item
-          h2 For the Consumers
-          ul
-            li
-              a(href='http://www.zazzle.com/meatspaceshop', class='big') Meatspace Shop
+    .item
+      h2 For the API Developers
+      ul
+        li
+          p Want to do a third-party client/bot/whatever using the API?
+          p
+            a(href='https://github.com/meatspaces/meatspace-chat#native-apps-iosandroid') More info here
+    .item
+      h2 For the Consumers
+      ul
+        li
+          a(href='http://www.zazzle.com/meatspaceshop', class='big') Meatspace Shop
 
-        .item
-          h2 For the Credits
-          ul
-            li
-              a(href='https://twitter.com/ednapiranha', class='big') Creatorbro
-            li
-              a(href='https://github.com/meatspaces/meatspace-chat/graphs/contributors', class='medium') Contributorbros
-
+    .item
+      h2 For the Credits
+      ul
+        li
+          a(href='https://twitter.com/ednapiranha', class='big') Creatorbro
+        li
+          a(href='https://github.com/meatspaces/meatspace-chat/graphs/contributors', class='medium') Contributorbros
+        li
+          a(href='/art', class='medium') Weekly artists
