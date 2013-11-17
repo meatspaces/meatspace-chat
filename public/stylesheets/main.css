@@ -262,7 +262,7 @@ h1 {
     background-color: rgba(255, 255, 255, 0.85);
     clear: both;
     float: left;
-    margin-bottom: 1px;
+    margin-bottom: 2px;
     max-height: 255px;
     width: 100%;
     overflow-y: auto;
