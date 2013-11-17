@@ -52,6 +52,7 @@ html, body {
 
 body {
     background-color: #ccc;
+    background: url('/images/background.jpg');
 }
 
 body.info {
@@ -69,6 +70,22 @@ body.info {
     padding: 10px;
     position: relative;
     width: 275px;
+}
+
+.artist-wrapper {
+    font-size: 1.2rem;
+    padding: 20px;
+}
+
+.artist-wrapper a {
+    color: #f65694;
+    display: inline-block;
+    text-decoration: none;
+}
+
+.artist-wrapper a.artist {
+    font-size: 1.8rem;
+    margin-right: 15px;
 }
 
 html, body {
@@ -164,7 +181,7 @@ a.medium {
 }
 
 .header {
-    background-color: rgba(255, 255, 255, 0.7);
+    background-color: rgba(255, 255, 255, 0.8);
     border-bottom-left-radius: 5px;
     position: fixed;
     right: 0;
@@ -194,7 +211,7 @@ a.medium {
 }
 
 #unmute {
-    color: #888;
+    color: #555;
     display: inline-block;
     font-family: Arial;
     font-size: 1.1rem;
@@ -242,7 +259,7 @@ h1 {
 }
 
 .chats li {
-    background-color: rgba(255, 255, 255, 0.75);
+    background-color: rgba(255, 255, 255, 0.85);
     clear: both;
     float: left;
     margin-bottom: 1px;
@@ -264,7 +281,7 @@ h1 {
 }
 
 .chats li p {
-    color: #777;
+    color: #555;
     float: left;
     font-size: 1.2rem;
     line-height: 1.6rem;
@@ -420,12 +437,5 @@ ul li.on {
 
     .input {
         width: 155px;
-    }
-}
-
-/* breakpoint depends on .chats li max-height */
-@media only screen and (min-width: 1225px) {
-    .chats li img {
-        width: 245px;
     }
 }
