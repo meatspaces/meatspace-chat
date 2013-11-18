@@ -5,7 +5,6 @@ module.exports = function(app, configurations, express) {
   var maxAge = 24 * 60 * 60 * 1000 * 28;
   var nativeClients = require('./clients.json');
   var csrf = express.csrf();
-  var hood = require('hood');
 
   nconf.argv().env().file({ file: 'local.json' });
 
@@ -39,15 +38,6 @@ module.exports = function(app, configurations, express) {
       }
     }));
     app.use(clientBypassCSRF);
-    app.use(hood.csp({
-      policy: {
-        'default-src': ['self', 'unsafe-inline'],
-        'img-src': ['self', 'data:', 'https://www.google-analytics.com', 'unsafe-inline'],
-        'connect-src': ['self', 'ws:', 'wss:'],
-        'media-src': ['self', 'mediastream:'],
-        'script-src': ['self', 'http://www.google-analytics.com', 'https://www.google-analytics.com', 'unsafe-inline']
-      }
-    }));
     app.use(function (req, res, next) {
       res.locals.session = req.session;
       if (!req.body.apiKey) {
