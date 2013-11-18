@@ -156,16 +156,8 @@ define(['jquery', 'linkify', './base/gumhelper', './base/videoShooter', 'fingerp
     gumHelper.startVideoStreaming(function errorCb() {
       disableVideoMode();
     }, function successCallback(stream, videoElement, width, height) {
-      videoElement.width = width / 5;
-      videoElement.height = height / 5;
       footer.prepend(videoElement);
       videoElement.play();
-
-      // set offset to video width if it isn't already set
-      if (addChatForm.css('left') === '0px') {
-        addChatForm.css('left', width / 5);
-      }
-
       videoShooter = new VideoShooter(videoElement);
       addChatForm.click();
     });

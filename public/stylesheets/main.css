@@ -251,7 +251,7 @@ h1 {
     position: relative;
     width: 100%;
     margin-top: 43px;
-    padding-bottom: 78px;
+    padding-bottom: 83px;
 }
 
 .chats.lean {
@@ -331,7 +331,7 @@ ul li.on {
 }
 
 .message-content {
-    bottom: 0;
+    bottom: 14px;
     height: 50px;
     left: 0;
     position: absolute;
@@ -365,20 +365,23 @@ ul li.on {
     right: 0;
     bottom: 0;
     left: 0;
+    padding: 0 0 2px 3px;
 }
 
 #footer video {
     float: left;
+    width: 135px;
+    height: 101px;
 }
 
 #footer svg.progress {
     z-index: 99;
     opacity: 0;
-    width: 128px;
-    height: 96px;
+    width: 135px;
+    height: 101px;
     position: absolute;
-    bottom: 0;
-    left: 0;
+    bottom: 2px;
+    left: 3px;
 }
 
 #footer svg.progress.visible {
@@ -436,6 +439,6 @@ ul li.on {
     }
 
     .input {
-        width: 155px;
+        width: 145px;
     }
 }
