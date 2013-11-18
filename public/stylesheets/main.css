@@ -52,8 +52,7 @@ html, body {
 
 body {
     background-color: #ccc;
-    background: url('/images/background.jpg') no-repeat 50% 50%;
-    background-size: cover;
+    background: url('/images/background.jpg');
 }
 
 body.info {
@@ -260,7 +259,7 @@ h1 {
 }
 
 .chats li {
-    background-color: rgba(255, 255, 255, 0.85);
+    background-color: rgba(255, 255, 255, 0.8);
     clear: both;
     float: left;
     margin-bottom: 2px;
@@ -272,7 +271,7 @@ h1 {
 }
 
 .chats li:nth-child(odd) {
-    background-color: rgba(255, 255, 255, 0.95);
+    background-color: rgba(255, 255, 255, 0.7);
 }
 
 .chats li img {
