@@ -52,7 +52,8 @@ html, body {
 
 body {
     background-color: #ccc;
-    background: url('/images/background.jpg');
+    background: url('/images/background.jpg') no-repeat 50% 50%;
+    background-size: cover;
 }
 
 body.info {
