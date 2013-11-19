@@ -17,7 +17,12 @@ html
     #wrapper
       .header
         a#logo(href='/info', target='_blank', title='Info!') Info!
-        a#unmute(href='javascript:;') Unmute
+        #menu-toggle ≡
+          ul.menu
+            li
+              a#unmute(href='javascript:;') Unmute
+            li
+              a#artwork(href='javascript:;') Toggle Artwork
 
       .chats
         ul

@@ -13,6 +13,8 @@ define(['jquery', 'linkify', './base/gumhelper', './base/videoShooter', 'fingerp
   var footer = $('#footer');
   var muteBtn = $('.mute');
   var userId = $('#userid');
+  var menu = $('#menu-toggle .menu');
+  var artwork = localStorage.getItem('artwork') || false;
   var fp = $('#fp');
   var svg = $(null);
   var isPosting = false;
@@ -184,6 +186,38 @@ define(['jquery', 'linkify', './base/gumhelper', './base/videoShooter', 'fingerp
       localStorage.setItem('muted', JSON.stringify(mutedArr));
       self.text('muted!');
     }
+  });
+
+  menu.toggle(function () {
+    $(this).addClass('on');
+  }, function () {
+    $(this).removeClass('on');
+  });
+
+  var checkArtStatus = function () {
+    if (artwork) {
+      body.addClass('art');
+    } else {
+      body.removeClass('art');
+    }
+  };
+
+  checkArtStatus();
+
+  menu.find('#artwork').click(function () {
+    if (artwork) {
+      localStorage.removeItem('artwork');
+      artwork = false;
+    } else {
+      localStorage.setItem('artwork', true);
+      artwork = true;
+    }
+
+    checkArtStatus();
+  });
+
+  menu.parent().click(function () {
+    menu.toggle();
   });
 
   body.on('click', '#unmute', function (ev) {

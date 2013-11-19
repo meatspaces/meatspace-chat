@@ -51,8 +51,11 @@ html, body {
 }
 
 body {
-    background-color: #ccc;
-    background: url('/images/background.jpg');
+    background-color: #eee;
+}
+
+body.art {
+    background: url('/images/art.jpg');
 }
 
 body.info {
@@ -95,6 +98,39 @@ html, body {
 
 body > img {
     display: none;
+}
+
+#menu-toggle {
+    cursor: pointer;
+    font-size: 2.6rem;
+    float: right;
+    margin-right: 5px;
+    position: relative;
+    text-align: right;
+}
+
+#menu-toggle li a {
+    color: #111;
+    display: block;
+    font-size: 1.2rem;
+    margin-bottom: 1px;
+    padding: 5px 10px;
+    text-decoration: none;
+}
+
+#menu-toggle li a:hover {
+    background-color: #111;
+    color: #eee;
+}
+
+.menu {
+    background-color: #fff;
+    border-bottom: 1px solide #111;
+    border-left: 1px solide #111;
+    position: absolute;
+    right: -5px;
+    width: 150px;
+    z-index: 3;
 }
 
 .infobox {
@@ -176,13 +212,11 @@ a.medium {
 #wrapper {
     font-family: Arial;
     margin: 0 auto;
-    padding: 3px;
     position: relative;
 }
 
 .header {
     background-color: rgba(255, 255, 255, 0.8);
-    border-bottom-left-radius: 5px;
     position: fixed;
     right: 0;
     text-align: center;
@@ -210,23 +244,6 @@ a.medium {
     transform: rotate(20deg);
 }
 
-#unmute {
-    color: #555;
-    display: inline-block;
-    font-family: Arial;
-    font-size: 1.1rem;
-    float: right;
-    line-height: 1.8rem;
-    outline: hidden;
-    padding: 8px 5px;
-    text-decoration: none;
-}
-
-#unmute:hover {
-    background-color: #111;
-    color: #eee;
-}
-
 h1 {
     font-size: 3rem;
     padding: 20px;
@@ -250,7 +267,7 @@ h1 {
     float: left;
     position: relative;
     width: 100%;
-    margin-top: 43px;
+    margin-top: 48px;
     padding-bottom: 83px;
 }
 
@@ -259,19 +276,16 @@ h1 {
 }
 
 .chats li {
-    background-color: rgba(255, 255, 255, 0.8);
+    background-color: rgba(255, 255, 255, 0.85);
+    border-bottom: 1px solid #eee;
     clear: both;
     float: left;
-    margin-bottom: 2px;
+    margin-top: 1px;
     max-height: 255px;
     width: 100%;
     overflow-y: auto;
     position: relative;
     white-space: pre-wrap;
-}
-
-.chats li:nth-child(odd) {
-    background-color: rgba(255, 255, 255, 0.7);
 }
 
 .chats li img {
@@ -281,13 +295,14 @@ h1 {
 }
 
 .chats li p {
-    color: #555;
+    color: #333;
     float: left;
     font-size: 1.2rem;
     line-height: 1.6rem;
     min-width: 182px;
     overflow: hidden;
     padding: 5px 10px 10px 10px;
+    text-shadow: #fff 1px 1px 0;
     width: 65%;
 }
 
