@@ -342,7 +342,7 @@ ul li.on {
     position: absolute;
     right: 0;
     bottom: 0;
-    left: 0;
+    left: 135px;
 }
 
 #add-chat-blocker {
