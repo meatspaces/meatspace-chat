@@ -140,12 +140,14 @@ define(['jquery', 'linkify', './base/gumhelper', './base/videoShooter', 'fingerp
   });
 
   $.get('/get/chats', function (data) {
-    debug("Rec'd %s chats from server", data.chats.chats.length);
-    data.chats.chats.forEach(function (chat) {
-      renderChat({
-        chat: chat
+    if (data.chats.chats) {
+      debug("Rec'd %s chats from server", data.chats.chats.length);
+      data.chats.chats.forEach(function (chat) {
+        renderChat({
+          chat: chat
+        });
       });
-    });
+    }
   });
 
   if (navigator.getMedia) {
@@ -155,7 +157,9 @@ define(['jquery', 'linkify', './base/gumhelper', './base/videoShooter', 'fingerp
 
     gumHelper.startVideoStreaming(function errorCb() {
       disableVideoMode();
-    }, function successCallback(stream, videoElement, width, height) {
+    }, function successCallback(stream, videoElement) {
+      videoElement.width = 135;
+      videoElement.height = 101;
       footer.prepend(videoElement);
       videoElement.play();
       videoShooter = new VideoShooter(videoElement);
