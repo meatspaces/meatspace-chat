@@ -55,7 +55,8 @@ body {
 }
 
 body.art {
-    background: url('/images/art.jpg');
+    background: url('/images/art.gif') no-repeat 50% 50%;
+    background-size: cover;
 }
 
 body.info {
