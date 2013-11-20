@@ -234,6 +234,7 @@ define(['jquery', 'linkify', './base/gumhelper', './base/videoShooter', 'fingerp
     ev.preventDefault();
 
     var self = $(ev.target);
+    addChat.prop('readonly', true);
 
     if (!isPosting) {
       if (!canSend) {
@@ -264,6 +265,7 @@ define(['jquery', 'linkify', './base/gumhelper', './base/videoShooter', 'fingerp
           }).error(function (data) {
             alert(data.responseJSON.error);
           }).always(function (data) {
+            addChat.prop('readonly', false);
             picField.val('');
             addChat.val('');
             isPosting = false;
