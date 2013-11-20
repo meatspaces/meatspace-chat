@@ -56,6 +56,7 @@ body {
 
 body.art {
     background: url('/images/art.gif') no-repeat 50% 50%;
+    background-attachment: fixed;
     background-size: cover;
 }
 
