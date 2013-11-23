@@ -272,7 +272,8 @@ h1 {
     padding: 0 100px 0 171px;
     border: none;
     outline: none;
-    height: 1.7rem;
+    height: 1.85rem;
+    line-height: 1.75rem;
     resize: none;
     position: absolute;
     bottom: 0;
