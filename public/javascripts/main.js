@@ -239,6 +239,7 @@ define(['jquery', 'linkify', './base/gumhelper', './base/videoShooter', 'fingerp
     if (!isPosting) {
       if (!canSend) {
         alert('please wait a wee bit...');
+        addChat.prop('readonly', false);
       }
 
       if (canSend) {

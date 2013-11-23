@@ -279,6 +279,10 @@ h1 {
     left: 0;
 }
 
+input::-webkit-input-placeholder {
+    color: #fff;
+}
+
 .input:focus { color: #fff; }
 
 .chats {
@@ -416,7 +420,6 @@ ul li.on {
     margin: 0;
     border: none;
     outline: none;
-    height: 1.7rem;
     position: fixed;
     bottom: 0;
     left: 0;
@@ -494,7 +497,7 @@ ul li.on {
         left: -150px;
         line-height: 3.6rem;
     }
-    
+
     .chats li .mute {
       display: block;
       bottom: 0;
