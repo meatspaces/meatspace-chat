@@ -287,9 +287,8 @@ define(['jquery', 'linkify', './base/gumhelper', './base/videoShooter', 'fingerp
   });
 
   $(document).on('keydown', function (event) {
-    if (!event.metaKey) {
+    if (!event.metaKey && event.target !== addChat[0]) {
       addChat.focus();
-      addChat.val(addChat.val() + String.fromCharCode(event.which));
     }
   });
 });
