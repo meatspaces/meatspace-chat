@@ -306,8 +306,7 @@ input::-webkit-input-placeholder {
     max-height: 200px;
     min-height: 102px;
     width: 100%;
-    overflow-x: hidden;
-    overflow-y: auto;
+    overflow: hidden;
     position: relative;
     white-space: pre-wrap;
 }
@@ -341,8 +340,8 @@ input::-webkit-input-placeholder {
 
 .chats li p {
     color: #000;
-    font-size: 1.5rem;
-    line-height: 1.65rem;
+    font-size: 1.35rem;
+    line-height: 1.5rem;
     min-width: 182px;
     overflow: hidden;
     padding: 14px 56px 18px 171px;
