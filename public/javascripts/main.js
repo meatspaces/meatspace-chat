@@ -105,7 +105,7 @@ define(['jquery', 'linkify', './base/gumhelper', './base/videoShooter', 'fingerp
           if (follow) {
             var children = chatList.children();
             if (children.length > CHAT_LIMIT) {
-              children.first().waypoint('destroy').remove();
+              children.first().remove().waypoint('destroy');
             }
 
             li.scrollIntoView();
