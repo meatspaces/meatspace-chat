@@ -267,9 +267,10 @@ h1 {
     font-family: "Helvetica Neue", "Helvetica", "Arial", sans-serif;
     font-size: 1.5rem;
     font-weight: 300;
-    width: 70%;
+    width: 90%;
     box-sizing: border-box;
-    padding: 0 100px 0 171px;
+    margin-left: 171px;
+    padding: 0 100px 0 0;
     border: none;
     outline: none;
     height: 1.85rem;
@@ -302,24 +303,28 @@ input::-webkit-input-placeholder {
     background-color: rgba(255, 255, 255, 0.85);
     clear: both;
     float: left;
+    max-height: 200px;
     min-height: 102px;
     width: 100%;
-    overflow: hidden;
+    overflow-x: hidden;
+    overflow-y: auto;
     position: relative;
     white-space: pre-wrap;
 }
 
-.chats li:first-of-type { padding-top: 18px; }
+.chats li:first-of-type {
+    padding-top: 18px;
+}
 
 .chats li:after {
-  display: block;
-  position: absolute;
-  width: 100%;
-  height: 1px;
-  background: #f181ad;
-  content: "";
-  bottom: 0;
-  left: 171px;
+    display: block;
+    position: absolute;
+    width: 100%;
+    height: 1px;
+    background: #f181ad;
+    content: "";
+    bottom: 0;
+    left: 171px;
 }
 
 .chats li img {
@@ -400,15 +405,6 @@ ul li.on {
     right: 0;
 }
 
-/*
-#add-chat-form {
-    position: absolute;
-    right: 0;
-    bottom: 0;
-    left: 135px;
-}
-*/
-
 #add-chat-blocker {
     color: rgba(255, 255, 255, .67);
     background-color: #999;
@@ -473,6 +469,12 @@ ul li.on {
     width: 50px;
     color: transparent;
     min-width: 0;
+}
+
+@media only screen and (max-width: 780px) {
+    .input {
+        width: 80%;
+    }
 }
 
 @media only screen and (max-width: 480px) {
