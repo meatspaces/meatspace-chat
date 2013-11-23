@@ -532,5 +532,7 @@ ul li.on {
 
     .input {
         width: 145px;
+        padding-right: 0px;
+        font-size: .85rem;
     }
 }
