@@ -269,7 +269,7 @@ h1 {
     font-weight: 300;
     width: 70%;
     box-sizing: border-box;
-    padding: 16px 100px 0 171px;
+    padding: 0 100px 0 171px;
     border: none;
     outline: none;
     height: 1.7rem;
@@ -297,12 +297,14 @@ h1 {
     background-color: rgba(255, 255, 255, 0.85);
     clear: both;
     float: left;
-    min-height: 119px;
+    min-height: 102px;
     width: 100%;
     overflow: hidden;
     position: relative;
     white-space: pre-wrap;
 }
+
+.chats li:first-of-type { padding-top: 18px; }
 
 .chats li:after {
   display: block;
@@ -318,9 +320,13 @@ h1 {
 .chats li img {
     display: block;
     position: absolute;
-    top: 18px;
+    top: 0;
     left: 18px;
     width: 135px;
+}
+
+.chats li:first-of-type img {
+  top: 18px;
 }
 
 .chats li p {
@@ -331,7 +337,6 @@ h1 {
     overflow: hidden;
     padding: 14px 56px 18px 171px;
     font-weight: 300;
-    font-style: italic;
 }
 
 .chats li .mute {
@@ -436,6 +441,7 @@ ul li.on {
     bottom: 0;
     left: 18px;
     z-index: 10;
+    border-top: 1px solid rgba(255, 255, 255, 0.85);
 }
 
 #footer svg.progress {
