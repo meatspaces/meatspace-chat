@@ -285,4 +285,11 @@ define(['jquery', 'linkify', './base/gumhelper', './base/videoShooter', 'fingerp
       }
     }
   });
+
+  $(document).on('keydown', function (event) {
+    if (!event.metaKey) {
+      addChat.focus();
+      addChat.val(addChat.val() + String.fromCharCode(event.which));
+    }
+  });
 });
