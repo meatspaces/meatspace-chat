@@ -17,6 +17,35 @@ module.exports = function (app, nconf, io) {
     limit: 20
   });
 
+  var getSortedChats = function (done){
+    publico.getChats(true, function (err, c) {
+      if (err) {
+        done(err);
+      } else {
+
+        var sorted = [];
+
+        try {
+          if (c.chats) {
+            c.chats.forEach(function (chat) {
+              sorted.unshift(chat);
+            });
+
+            c.chats = sorted;
+          }
+        } catch (e) {
+          console.log(e);
+        }
+
+        done(null, c);
+      }
+    });
+  };
+
+  var emitChat = function (socket, chat) {
+    socket.emit('message', { chat: chat });
+  };
+
   var blacklisted = function (fingerprint, userid) {
     if (blacklist.indexOf(fingerprint) > -1 || blacklist.indexOf(userid) > -1) {
       return true;
@@ -42,38 +71,10 @@ module.exports = function (app, nconf, io) {
     res.render('index');
   });
 
+  // NOTE: This is now a deprecated API method -- All chats go out through web sockets
   app.get('/get/chats', function (req, res) {
-    publico.getChats(true, function (err, c) {
-      if (err) {
-        res.status(400);
-        res.json({ error: err.toString() });
-      } else {
-
-        var sorted = [];
-
-        try {
-          if (c.chats) {
-            c.chats.forEach(function (chat) {
-              sorted.unshift(chat);
-            });
-
-            c.chats = sorted;
-          }
-        } catch (e) {
-          console.log(e);
-        }
-
-        res.json({ chats: c });
-
-        io.sockets.on('connection', function (socket) {
-          socket.on('recent', function (data) {
-            if (nativeClients.indexOf(data.apiKey) > -1) {
-              res.json({ chats: c });
-            }
-          });
-        });
-      }
-    });
+    res.status(410);
+    res.json({ error: 'This method is now deprecated. All chat messages, including initial ones, are now emitted through web socket messages.' });
   });
 
   app.get('/ip', function (req, res) {
@@ -93,19 +94,7 @@ module.exports = function (app, nconf, io) {
           next(err);
         } else {
           try {
-            io.sockets.emit('message', {
-              chat: {
-                key: c.key,
-                value: {
-                  fingerprint: userId,
-                  created: c.created,
-                  media: c.media,
-                  ttl: c.ttl,
-                  message: c.message
-                }
-              }
-            });
-
+            emitChat(io.sockets, { key: c.key, value: c });
             next(null, 'sent!');
           } catch (err) {
             next(new Error('Could not emit message'));
@@ -156,6 +145,16 @@ module.exports = function (app, nconf, io) {
   });
 
   io.sockets.on('connection', function (socket) {
+
+    // Fire out an initial burst of images to the connected client, assuming there are any available
+    getSortedChats(function (err, results) {
+      if(results.chats && results.chats.length > 0) {
+        results.chats.forEach(function (chat) {
+          emitChat(socket, chat);
+        });
+      }
+    });
+
     socket.on('message', function (data) {
       if (nativeClients.indexOf(data.apiKey) > -1) {
         var ip = '0.0.0.0';
