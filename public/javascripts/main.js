@@ -1,4 +1,4 @@
-define(['jquery', 'linkify', './base/gumhelper', './base/videoShooter', 'fingerprint', 'md5'],
+define(['jquery', 'linkify', './base/gumhelper', './base/videoShooter', 'fingerprint', 'md5', 'waypoints'],
   function ($, linkify, gumHelper, VideoShooter, Fingerprint, md5) {
   'use strict';
 
@@ -38,6 +38,22 @@ define(['jquery', 'linkify', './base/gumhelper', './base/videoShooter', 'fingerp
     if (window.liveDebug) {
       console.log.apply(console, arguments);
     }
+  };
+
+  var setupWaypoints = function (rawLi) {
+    var li = $(rawLi);
+    li.waypoint(function (direction) {
+      li.toggleClass('out-of-view', direction === 'down');
+    }, {
+      offset: function () {
+        return -li.height();
+      }
+    });
+    li.waypoint(function (direction) {
+      li.toggleClass('out-of-view', direction === 'up');
+    }, {
+      offset: '100%'
+    });
   };
 
   var renderChat = function (c) {
@@ -81,6 +97,7 @@ define(['jquery', 'linkify', './base/gumhelper', './base/videoShooter', 'fingerp
           var follow = bottom < size + 50;
 
           chatList.append(li);
+          setupWaypoints(li);
           debug('Appended chat %s', c.chat.key);
 
           // if scrolled to bottom of window then scroll the new thing into view
@@ -88,7 +105,7 @@ define(['jquery', 'linkify', './base/gumhelper', './base/videoShooter', 'fingerp
           if (follow) {
             var children = chatList.children();
             if (children.length > CHAT_LIMIT) {
-              children.first().remove();
+              children.first().waypoint('destroy').remove();
             }
 
             li.scrollIntoView();
