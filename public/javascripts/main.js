@@ -141,17 +141,6 @@ define(['jquery', 'linkify', './base/gumhelper', './base/videoShooter', 'fingerp
     userId.val(md5(fingerprint + data.ip));
   });
 
-  $.get('/get/chats', function (data) {
-    if (data.chats.chats) {
-      debug("Rec'd %s chats from server", data.chats.chats.length);
-      data.chats.chats.forEach(function (chat) {
-        renderChat({
-          chat: chat
-        });
-      });
-    }
-  });
-
   if (navigator.getMedia) {
     svg = $('<svg class="progress" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 128 64" preserveAspectRatio="xMidYMid" hidden><path d="M0,0 " id="arc" fill="none" stroke="rgba(226,38,97,0.8)" /></svg>');
 
