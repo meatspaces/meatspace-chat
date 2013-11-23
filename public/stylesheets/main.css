@@ -235,7 +235,7 @@ a.medium {
     top: 0;
     width: 100%;
     height: 50px;
-    z-index: 2;
+    z-index: 6;
 }
 
 #logo {
@@ -279,6 +279,7 @@ h1 {
     position: absolute;
     bottom: 0;
     left: 0;
+    z-index: 5;
 }
 
 input::-webkit-input-placeholder {
@@ -303,7 +304,6 @@ input::-webkit-input-placeholder {
     background-color: rgba(255, 255, 255, 0.85);
     clear: both;
     float: left;
-    max-height: 200px;
     min-height: 102px;
     width: 100%;
     overflow: hidden;
@@ -324,6 +324,7 @@ input::-webkit-input-placeholder {
     content: "";
     bottom: 0;
     left: 171px;
+    z-index: 4;
 }
 
 .chats li img {
@@ -480,7 +481,7 @@ ul li.on {
     }
 }
 
-@media only screen and (max-width: 480px) {
+@media only screen and (max-width: 568px) {
     #logo:hover {
       text-indent: -9999px;
     }
@@ -508,6 +509,9 @@ ul li.on {
       display: block;
       bottom: 0;
       margin-bottom: 0;
+      padding-top: 5px;
+      padding-bottom: 5px;
+      font-size: .7rem;
     }
 }
 
@@ -522,7 +526,8 @@ ul li.on {
         min-width: 0;
         width: auto;
         float: none;
-        padding-right: 8px;
+        padding-right: 12px;
+        padding-bottom: 20px;
     }
 
     .input {
