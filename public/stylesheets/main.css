@@ -338,6 +338,10 @@ input::-webkit-input-placeholder {
   top: 18px;
 }
 
+.chats .out-of-view img {
+    display: none;
+}
+
 .chats li p {
     color: #000;
     font-size: 1.35rem;
