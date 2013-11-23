@@ -104,34 +104,43 @@ body > img {
 
 #menu-toggle {
     cursor: pointer;
-    font-size: 2.6rem;
+    font-size: 2rem;
+    font-weight: 300;
+    color: #e22661;
     float: right;
-    margin-right: 15px;
+    margin-top: 5px;
+    margin-right: 16px;
     position: relative;
     text-align: right;
 }
 
 #menu-toggle li a {
-    color: #111;
+    color: #fff;
     display: block;
     font-size: 1.2rem;
-    margin-bottom: 1px;
-    padding: 5px 10px;
+    padding: 8px 18px 9px;
     text-decoration: none;
+    background-color: #f181ad;
+    border-bottom: 1px solid rgba(255, 255, 255, .25);
 }
 
 #menu-toggle li a:hover {
-    background-color: #111;
+    background-color: #e22661;;
     color: #eee;
 }
 
+#menu-toggle li:last-of-type a {
+    border-bottom: none;
+}
+
 .menu {
-    background-color: #fff;
+    background-color: #e22661;
     border-bottom: 1px solide #111;
     border-left: 1px solide #111;
     position: absolute;
-    right: -5px;
-    width: 150px;
+    top: 45px;
+    right: -16px;
+    width: 192px;
     z-index: 3;
 }
 
@@ -212,18 +221,20 @@ a.medium {
 }
 
 #wrapper {
-    font-family: Arial;
     margin: 0 auto;
     position: relative;
+    font-family: "Helvetica Neue", "Helvetica", "Arial", sans-serif;
 }
 
 .header {
-    background-color: rgba(255, 255, 255, 0.8);
+    background-color: #fff;
+    border-bottom: 1px solid #f181ad;
     position: fixed;
     right: 0;
     text-align: center;
     top: 0;
     width: 100%;
+    height: 50px;
     z-index: 2;
 }
 
@@ -232,11 +243,10 @@ a.medium {
     text-indent: -9999px;
     display: inline-block;
     height: 35px;
-    margin: 0 10px;
     width: 35px;
     background: url('../images/meatspace.svg') center no-repeat;
     background-size: auto 100%;
-    margin: 5px;
+    margin: 5px 14px;
     -webkit-transition: -webkit-transform .5s;
     transition: transform .5s;
 }
@@ -252,25 +262,31 @@ h1 {
 }
 
 .input {
-    background-color: rgba(255, 255, 255, 0.85);
-    border: 1px solid #eee;
-    color: #164352;
-    font-family: Arial;
-    font-size: 1.1rem;
-    margin-left: 10px;
+    color: #fff;
+    background: none;
+    font-family: "Helvetica Neue", "Helvetica", "Arial", sans-serif;
+    font-size: 1.5rem;
+    font-weight: 300;
+    width: 70%;
+    box-sizing: border-box;
+    padding: 16px 100px 0 171px;
+    border: none;
     outline: none;
-    padding: 5px;
-    width: 85%;
-    height: 1.5rem;
+    height: 1.7rem;
     resize: none;
+    position: absolute;
+    bottom: 0;
+    left: 0;
 }
+
+.input:focus { color: #fff; }
 
 .chats {
     float: left;
     position: relative;
     width: 100%;
-    margin-top: 48px;
-    padding-bottom: 83px;
+    margin-top: 51px;
+    padding-bottom: 99px;
 }
 
 .chats.lean {
@@ -279,49 +295,68 @@ h1 {
 
 .chats li {
     background-color: rgba(255, 255, 255, 0.85);
-    border-bottom: 1px solid #eee;
     clear: both;
     float: left;
-    margin-top: 1px;
-    max-height: 255px;
+    min-height: 119px;
     width: 100%;
-    overflow-y: auto;
+    overflow: hidden;
     position: relative;
     white-space: pre-wrap;
 }
 
+.chats li:after {
+  display: block;
+  position: absolute;
+  width: 100%;
+  height: 1px;
+  background: #f181ad;
+  content: "";
+  bottom: 0;
+  left: 171px;
+}
+
 .chats li img {
     display: block;
-    float: left;
+    position: absolute;
+    top: 18px;
+    left: 18px;
     width: 135px;
 }
 
 .chats li p {
-    color: #333;
-    float: left;
-    font-size: 1.2rem;
-    line-height: 1.6rem;
+    color: #000;
+    font-size: 1.5rem;
+    line-height: 1.65rem;
     min-width: 182px;
     overflow: hidden;
-    padding: 5px 10px 10px 10px;
-    text-shadow: #fff 1px 1px 0;
-    width: 65%;
+    padding: 14px 56px 18px 171px;
+    font-weight: 300;
+    font-style: italic;
 }
 
 .chats li .mute {
-    background-color: transparent;
-    bottom: 0px;
+    font-family: "Helvetica Neue", "Helvetica", "Arial", sans-serif;
+    background-color: #f181ad;
     border: 0;
-    color: #888;
-    display: block;
+    color: #fff;
+    display: none;
     font-size: 0.8rem;
-    padding: 3px 6px;
+    font-weight: 300;
+    margin: 0;
+    padding: 8px 18px 9px;
     position: absolute;
-    right: 0px;
+    right: 0;
+    bottom: 0;
+    cursor: pointer;
+    text-transform: uppercase;
+}
+
+.chats li:hover .mute {
+    display: block;
 }
 
 .chats li .mute:hover {
-    background-color: #111;
+    background-color: #e22661;
     color: #eee;
 }
 
@@ -355,25 +390,31 @@ ul li.on {
     right: 0;
 }
 
+/*
 #add-chat-form {
     position: absolute;
     right: 0;
     bottom: 0;
     left: 135px;
 }
+*/
 
 #add-chat-blocker {
-    background-color: rgba(255, 255, 255, 0.9);
+    color: rgba(255, 255, 255, .67);
+    background-color: #999;
+    font-family: "Helvetica Neue", "Helvetica", "Arial", sans-serif;
+    font-size: 1.5rem;
+    font-weight: 300;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 9px 18px 15px 171px;
+    margin: 0;
+    border: none;
+    outline: none;
+    height: 1.7rem;
+    position: fixed;
     bottom: 0;
-    color: #111;
-    font-size: 1.8rem;
-    height: 65px;
-    left: 10px;
-    line-height: 2rem;
-    padding-top: 10px;
-    position: absolute;
-    right: 0;
-    text-align: center;
+    left: 0;
 }
 
 #footer {
@@ -382,13 +423,19 @@ ul li.on {
     right: 0;
     bottom: 0;
     left: 0;
-    padding: 0 0 2px 0;
+    width: 100%;
+    height: 51px;
+    padding: 0;
+    background-color: #f181ad;
 }
 
 #footer video {
-    float: left;
+    position: absolute;
     width: 135px;
     height: 101px;
+    bottom: 0;
+    left: 18px;
+    z-index: 10;
 }
 
 #footer svg.progress {
@@ -397,8 +444,8 @@ ul li.on {
     width: 135px;
     height: 101px;
     position: absolute;
-    bottom: 2px;
-    left: 3px;
+    bottom: 0;
+    left: 18px;
 }
 
 #footer svg.progress.visible {
@@ -429,7 +476,8 @@ ul li.on {
 
     .chats li p {
         font-size: 1.1rem;
-        line-height: 1.5rem;
+        line-height: 1.4rem;
+        padding-right: 8px;
         min-width: 0;
         width: auto;
         float: none;
@@ -440,6 +488,12 @@ ul li.on {
         left: -150px;
         line-height: 3.6rem;
     }
+    
+    .chats li .mute {
+      display: block;
+      bottom: 0;
+      margin-bottom: 0;
+    }
 }
 
 @media only screen and (max-width: 320px) {
@@ -448,11 +502,12 @@ ul li.on {
     }
 
     .chats li p {
-        font-size: 1.1rem;
-        line-height: 1.5rem;
+        font-size: .85rem;
+        line-height: 1rem;
         min-width: 0;
         width: auto;
         float: none;
+        padding-right: 8px;
     }
 
     .input {
