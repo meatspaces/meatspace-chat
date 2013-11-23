@@ -273,8 +273,8 @@ h1 {
     padding: 0 100px 0 0;
     border: none;
     outline: none;
-    height: 1.85rem;
-    line-height: 1.75rem;
+    height: 50px;
+    line-height: 1;
     resize: none;
     position: absolute;
     bottom: 0;
@@ -324,7 +324,6 @@ input::-webkit-input-placeholder {
     content: "";
     bottom: 0;
     left: 171px;
-    z-index: 4;
 }
 
 .chats li img {
@@ -402,11 +401,6 @@ ul li.on {
 }
 
 .message-content {
-    bottom: 14px;
-    height: 50px;
-    left: 0;
-    position: absolute;
-    right: 0;
 }
 
 #add-chat-blocker {
@@ -416,14 +410,14 @@ ul li.on {
     font-size: 1.5rem;
     font-weight: 300;
     width: 100%;
-    box-sizing: border-box;
-    padding: 9px 18px 15px 171px;
+    padding: 10px 18px 14px 171px;
+    height: 27px;
     margin: 0;
     border: none;
-    outline: none;
     position: fixed;
     bottom: 0;
     left: 0;
+    z-index: 9;
 }
 
 #footer {
@@ -486,33 +480,46 @@ ul li.on {
       text-indent: -9999px;
     }
 
-    .input {
-        width: 75%;
+    .chats li:after {
+        left: 153px;
     }
 
     .chats li p {
         font-size: 1.1rem;
         line-height: 1.4rem;
         padding-right: 8px;
+        padding-left: 153px;
+        padding-top: 8px;
         min-width: 0;
         width: auto;
         float: none;
     }
 
+    .chats li .mute {
+        display: block;
+        bottom: 0;
+        margin-bottom: 0;
+        padding: 5px 5px 5px 7px;
+        font-size: .7rem;
+        color: #f181ad;
+        background: none;
+    }
+    
+    .chats li img,
+    #footer video,
+    #footer svg.progress {
+        left: 0;
+    }
+    
+    .input {
+        left: -18px;
+        width: 50%;
+    }
+    
     #add-chat-blocker {
-        font-size: 1.5rem;
-        left: -150px;
-        line-height: 3.6rem;
+        left: -18px;
     }
 
-    .chats li .mute {
-      display: block;
-      bottom: 0;
-      margin-bottom: 0;
-      padding-top: 5px;
-      padding-bottom: 5px;
-      font-size: .7rem;
-    }
 }
 
 @media only screen and (max-width: 320px) {
