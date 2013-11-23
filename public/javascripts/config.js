@@ -6,7 +6,8 @@ requirejs.config({
     'GifWriter': 'lib/animated-gif/src/omggif',
     'fingerprint': 'lib/fingerprint/fingerprint',
     'linkify': 'linkify',
-    'md5': 'lib/js-md5/js/md5'
+    'md5': 'lib/js-md5/js/md5',
+    'waypoints': 'lib/jquery-waypoints/waypoints'
   },
   shim: {
     'jquery': {
