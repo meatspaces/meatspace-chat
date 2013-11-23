@@ -461,6 +461,10 @@ ul li.on {
     opacity: 1;
 }
 
+#counter {
+    float: right;
+}
+
 .end {
     float: left;
     height: 20px;

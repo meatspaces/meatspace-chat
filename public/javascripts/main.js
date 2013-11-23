@@ -7,6 +7,7 @@ define(['jquery', 'linkify', './base/gumhelper', './base/videoShooter', 'fingerp
   var addChatForm = $('#add-chat-form');
   var addChatBlocker = $('#add-chat-blocker');
   var addChat = $('#add-chat');
+  var charCounter = $('#counter');
   var picField = $('#picture');
   var chatList = $('.chats ul');
   var chatsContainer = $('.chats');
@@ -246,7 +247,9 @@ define(['jquery', 'linkify', './base/gumhelper', './base/videoShooter', 'fingerp
     if (ev.keyCode === 13) {
       ev.preventDefault();
       addChatForm.submit();
-    }
+    } 
+  }).on('keyup', function (ev) {
+    charCounter.text(150 - addChat.val().length);
   }).on('submit', function (ev) {
     ev.preventDefault();
 
@@ -286,6 +289,7 @@ define(['jquery', 'linkify', './base/gumhelper', './base/videoShooter', 'fingerp
             addChat.prop('readonly', false);
             picField.val('');
             addChat.val('');
+            charCounter.text(150);
             isPosting = false;
             addChatBlocker.addClass('hidden');
             body.find('> img').remove();
