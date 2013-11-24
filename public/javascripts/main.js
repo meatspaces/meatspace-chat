@@ -11,6 +11,7 @@ define(['jquery', 'linkify', './base/gumhelper', './base/videoShooter', 'fingerp
   var chatList = $('.chats ul');
   var chatsContainer = $('.chats');
   var footer = $('#footer');
+  var charCounter = $('#counter');
   var muteBtn = $('.mute');
   var userId = $('#userid');
   var menu = $('#menu-toggle .menu');
@@ -29,6 +30,7 @@ define(['jquery', 'linkify', './base/gumhelper', './base/videoShooter', 'fingerp
   }
 
   var CHAT_LIMIT = 25;
+  var CHAR_LIMIT = 250;
 
   var isMuted = function (fingerprint) {
     return mutedArr.indexOf(fingerprint) !== -1;
@@ -236,6 +238,8 @@ define(['jquery', 'linkify', './base/gumhelper', './base/videoShooter', 'fingerp
       ev.preventDefault();
       addChatForm.submit();
     }
+  }).on('keyup', function (ev) {
+    charCounter.text(CHAR_LIMIT - addChat.val().length);
   }).on('submit', function (ev) {
     ev.preventDefault();
 
@@ -275,6 +279,7 @@ define(['jquery', 'linkify', './base/gumhelper', './base/videoShooter', 'fingerp
             addChat.prop('readonly', false);
             picField.val('');
             addChat.val('');
+            charCounter.text(CHAR_LIMIT);
             isPosting = false;
             addChatBlocker.addClass('hidden');
             body.find('> img').remove();
