@@ -51,7 +51,11 @@ html, body {
 }
 
 body {
-    background-color: #eee;
+    background-color: #ca5b5b;
+}
+
+::selection {
+    background-color: #e91f1f;
 }
 
 body.art {
@@ -350,6 +354,8 @@ input::-webkit-input-placeholder {
     overflow: hidden;
     padding: 14px 56px 18px 171px;
     font-weight: 300;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .chats li .mute {
@@ -439,7 +445,6 @@ ul li.on {
     bottom: 0;
     left: 18px;
     z-index: 10;
-    border-top: 1px solid rgba(255, 255, 255, 0.85);
 }
 
 #footer svg.progress {
@@ -513,7 +518,8 @@ ul li.on {
     
     .input {
         left: -18px;
-        width: 50%;
+        width: 60%;
+        padding-right: 0;
     }
     
     #add-chat-blocker {
