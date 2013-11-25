@@ -54,6 +54,11 @@ body {
     background-color: #eee;
 }
 
+::selection {
+    background-color: #e91f1f;
+    color: #fff;
+}
+
 body.art {
     background: url('/images/art.gif') no-repeat 50% 50%;
     background-attachment: fixed;
