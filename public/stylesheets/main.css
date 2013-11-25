@@ -350,6 +350,8 @@ input::-webkit-input-placeholder {
     overflow: hidden;
     padding: 14px 56px 18px 171px;
     font-weight: 300;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .chats li .mute {
