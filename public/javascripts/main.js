@@ -292,8 +292,13 @@ define(['jquery', 'linkify', './base/gumhelper', './base/videoShooter', 'fingerp
   });
 
   $(document).on('keydown', function (event) {
-    if (!event.metaKey && event.target !== addChat[0]) {
+    if (!hasModifiersPressed(event) && event.target !== addChat[0]) {
       addChat.focus();
     }
   });
+
+  function hasModifiersPressed(event) {
+    // modifiers exclude shift since it's often used in normal typing
+    return (event.altKey || event.ctrlKey || event.metaKey);
+  }
 });
