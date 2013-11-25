@@ -270,7 +270,7 @@ h1 {
 }
 
 .input {
-    width: 90%;
+    width: 80%;
     box-sizing: border-box;
     margin-left: 171px;
     padding: 0 100px 0 0;
@@ -411,9 +411,6 @@ ul li.on {
     display: none;
 }
 
-.message-content {
-}
-
 #add-chat-blocker {
     color: rgba(255, 255, 255, .67);
     background-color: #999;
@@ -480,9 +477,31 @@ ul li.on {
     min-width: 0;
 }
 
-@media only screen and (max-width: 780px) {
+.input {
+    background-color: rgba(1, 1, 1, 0.4);
+}
+
+@media only screen and (max-width: 1150px) {
     .input {
-        width: 80%;
+        width: 75%;
+    }
+}
+
+@media only screen and (max-width: 945px) {
+    .input {
+        width: 70%;
+    }
+}
+
+@media only screen and (max-width: 785px) {
+    .input {
+        width: 65%;
+    }
+}
+
+@media only screen and (max-width: 655px) {
+    .input {
+        width: 60%;
     }
 }
 
@@ -515,22 +534,34 @@ ul li.on {
         color: #f181ad;
         background: none;
     }
-    
+
     .chats li img,
     #footer video,
     #footer svg.progress {
         left: 0;
     }
-    
+
     .input {
         left: -18px;
         width: 50%;
     }
-    
+
     #add-chat-blocker {
         left: -18px;
     }
 
+}
+
+@media only screen and (max-width: 460px) {
+    #counter {
+        display: none;
+    }
+
+    .input {
+        width: 205px;
+        padding-right: 0px;
+        font-size: .85rem;
+    }
 }
 
 @media only screen and (max-width: 320px) {
@@ -550,13 +581,5 @@ ul li.on {
 
     .input {
         width: 145px;
-        padding-right: 0px;
-        font-size: .85rem;
-    }
-
-    #counter {
-        padding-top: 0px;
-        padding-right: 0px;
-        font-size: .85rem;
     }
 }
