@@ -65,7 +65,7 @@ module.exports = function (app, nconf, io) {
   app.get('/', function (req, res) {
     var currDate = Date.now();
     logger.put('landing-page!' + currDate, {
-      ip: req.connection.remoteAddress,
+      ip: req.ip,
       created: currDate
     });
     res.render('index');
@@ -79,7 +79,7 @@ module.exports = function (app, nconf, io) {
 
   app.get('/ip', function (req, res) {
     res.json({
-      ip: req.connection.remoteAddress
+      ip: req.ip
     });
   });
 
@@ -115,18 +115,18 @@ module.exports = function (app, nconf, io) {
   };
 
   app.post('/add/chat', function (req, res, next) {
-    var userId = crypto.createHash('md5').update(req.body.fingerprint + req.connection.remoteAddress).digest('hex');
+    var userId = crypto.createHash('md5').update(req.body.fingerprint + req.ip).digest('hex');
 
     if (req.body.picture) {
       if (userId && userId === req.body.userid) {
-        addChat(req.body.message, req.body.picture, req.body.fingerprint, userId, req.connection.remoteAddress, function (err, status) {
+        addChat(req.body.message, req.body.picture, req.body.fingerprint, userId, req.ip, function (err, status) {
           if (err) {
             res.status(400);
             res.json({ error: err.toString() });
           } else {
             var currDate = Date.now();
             logger.put('web!' + currDate, {
-              ip: req.connection.remoteAddress,
+              ip: req.ip,
               fingerprint: userId,
               created: currDate
             });
