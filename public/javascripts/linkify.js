@@ -41,6 +41,18 @@ define([], function() {
   ];
 
   var linkables = {
+    email: {
+      pattern: /[\w.+-]+@[\w.-]+\.[a-z.]{2,6}/mgi,
+      transformer: function (match) {
+        var email = match[0];
+
+        if (!email) {
+          return null;
+        }
+
+        return template('mailto:' + match[0], match[0]);
+      }
+    },
     url: {
       ipv4: /^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/,
       pattern: /(https?:\/\/)?((?:\.?[-\w]){1,256})(\.\w{1,10})(?::[0-9]{1,5})?(?:\.?\/(?:[^\s.,?:;!]|[.,?:;!](?!\s|$)){0,2048})?/gim,
