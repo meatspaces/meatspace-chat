@@ -42,7 +42,9 @@ valid = {
     'x.it/onmouseover=alert(null);//\nx.it/onmouseover=alert(null);//',
     'test.com/onmouseover=alert(1)// est.com/onmouseover=alert(1)//',
     // Don't encode the same portion of text twice
-    'test.com/@test'
+    'test.com/@test',
+    //email
+    'email+advancedtricky@example.com'
   ],
 
   expects: [
@@ -81,7 +83,8 @@ valid = {
     '<a href="http://test.com/&quot;&gt;&lt/a&gt;&ltscript&gt;alert(document.cookie);&lt/script&gt;&lta" target="_blank">test.com/"&gt;&lt/a&gt;&ltscript&gt;alert(document.cookie);&lt/script&gt;&lta</a> href="<a href="http://example.com" target="_blank">http://example.com</a>',
     '<a href="http://x.it/onmouseover=alert(null);//" target="_blank">x.it/onmouseover=alert(null);//</a>\n<a href="http://x.it/onmouseover=alert(null);//" target="_blank">x.it/onmouseover=alert(null);//</a>',
     '<a href="http://test.com/onmouseover=alert(1)//" target="_blank">test.com/onmouseover=alert(1)//</a> <a href="http://est.com/onmouseover=alert(1)//" target="_blank">est.com/onmouseover=alert(1)//</a>',
-    '<a href="http://test.com/@test" target="_blank">test.com/@test</a>'
+    '<a href="http://test.com/@test" target="_blank">test.com/@test</a>',
+    '<a href="mailto:email+advancedtricky@example.com" target="_blank">email+advancedtricky@example.com</a>'
   ]
 };
 
@@ -124,7 +127,8 @@ inline = {
     'An inline twitter handle, like @twitter, is replaced inline',
     'An inline subreddit, like /r/puppies, is replaced inline',
     'All linkables, ie. example.com, @twitter, and /r/puppies are replaced inline',
-    'Hey Edna is doing an AMA over on /r/iama, check it out http://www.reddit.com/r/IAmA/comments/1phhx1/we_are_mozilla_ask_us_anything'
+    'Hey Edna is doing an AMA over on /r/iama, check it out http://www.reddit.com/r/IAmA/comments/1phhx1/we_are_mozilla_ask_us_anything',
+    'this is my email: yo+yo@gmail.com'
   ],
   expects: [
     'An inline link, like <a href="http://example.com" target="_blank">example.com</a>, is replaced inline',
@@ -132,7 +136,8 @@ inline = {
     'An inline twitter handle, like <a href="https://twitter.com/twitter" target="_blank">@twitter</a>, is replaced inline',
     'An inline subreddit, like <a href="http://www.reddit.com/r/puppies" target="_blank">/r/puppies</a>, is replaced inline',
     'All linkables, ie. <a href="http://example.com" target="_blank">example.com</a>, <a href="https://twitter.com/twitter" target="_blank">@twitter</a>, and <a href="http://www.reddit.com/r/puppies" target="_blank">/r/puppies</a> are replaced inline',
-    'Hey Edna is doing an AMA over on <a href="http://www.reddit.com/r/iama" target="_blank">/r/iama</a>, check it out <a href="http://www.reddit.com/r/IAmA/comments/1phhx1/we_are_mozilla_ask_us_anything" target="_blank">http://www.reddit.com/r/IAmA/comments/1phhx1/we_are_mozilla_ask_us_anything</a>'
+    'Hey Edna is doing an AMA over on <a href="http://www.reddit.com/r/iama" target="_blank">/r/iama</a>, check it out <a href="http://www.reddit.com/r/IAmA/comments/1phhx1/we_are_mozilla_ask_us_anything" target="_blank">http://www.reddit.com/r/IAmA/comments/1phhx1/we_are_mozilla_ask_us_anything</a>',
+    'this is my email: <a href="mailto:yo+yo@gmail.com" target="_blank">yo+yo@gmail.com</a>'
   ]
 };
 
