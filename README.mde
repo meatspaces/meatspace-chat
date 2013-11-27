@@ -1,4 +1,5 @@
 # Meatspace Chat
+[![Build Status](https://travis-ci.org/meatspaces/meatspace-chat.png)](https://travis-ci.org/meatspaces/meatspace-chat)
 
 ## Setting up
     > cp local.json-dist local.json
