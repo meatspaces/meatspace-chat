@@ -3,7 +3,6 @@
 ## Setting up
     > cp local.json-dist local.json
     > cp clients.json-dist clients.json
-    > cp blacklist.json-dist blacklist.json
     > npm install
     > npm -g install nodemon
     > bower install
