@@ -1,6 +1,9 @@
 define(['jquery', 'linkify', './base/gumhelper', './base/videoShooter', 'fingerprint', 'md5', 'waypoints'],
-  function ($, linkify, gumHelper, VideoShooter, Fingerprint, md5) {
+function ($, linkify, gumHelper, VideoShooter, Fingerprint, md5) {
   'use strict';
+
+  navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia ||
+    navigator.mozGetUserMedia || navigator.msGetUserMedia;
 
   var html = $('html');
   var body = $('body');
@@ -160,7 +163,7 @@ define(['jquery', 'linkify', './base/gumhelper', './base/videoShooter', 'fingerp
     userId.val(md5(fingerprint + data.ip));
   });
 
-  if (navigator.getMedia) {
+  if (navigator.getUserMedia) {
     svg = $('<svg class="progress" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 128 64" preserveAspectRatio="xMidYMid" hidden><path d="M0,0 " id="arc" fill="none" stroke="rgba(226,38,97,0.8)" /></svg>');
 
     footer.prepend(svg);
