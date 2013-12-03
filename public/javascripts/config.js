@@ -5,7 +5,7 @@ requirejs.config({
     'Animated_GIF': 'lib/animated-gif/src/Animated_GIF',
     'GifWriter': 'lib/animated-gif/src/omggif',
     'fingerprint': 'lib/fingerprint/fingerprint',
-    'linkify': 'linkify',
+    'transform': 'transform',
     'md5': 'lib/js-md5/js/md5',
     'waypoints': 'lib/jquery-waypoints/waypoints'
   },

@@ -124,7 +124,7 @@ define([], function() {
     return '<a href="' + href + '" target="_blank">' + text + '</a>';
   }
 
-  function linkify(text) {
+  function transform(text) {
     var matches = [];
     var index = 0;
     var fragments = [];
@@ -165,5 +165,5 @@ define([], function() {
     return fragments.join('');
   }
 
-  return linkify;
+  return transform;
 });
