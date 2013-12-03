@@ -6,20 +6,24 @@ html
     meta(content='yes', name='apple-mobile-web-app-capable')
     meta(content='chrome=1', http-equiv='X-UA-Compatible')
     link(rel='shortcut icon', href='/images/favicon.png')
-    link(rel='stylesheet', href='/stylesheets/main.css')
+    if debug
+      link(rel='stylesheet', href='/stylesheets/main.css')
+    else
+      link(rel='stylesheet', href='/stylesheets/main-min.css')
     if analytics
       != '<script>(function(i,s,o,g,r,a,m){i["GoogleAnalyticsObject"]=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,"script","//www.google-analytics.com/analytics.js","ga");ga("create", "' + analytics + '", "' + analyticsHost + '");ga("send", "pageview");</script>'
 
   body(data-authenticated='#{!!session.email}')
     #wrapper
-      ul.header
-        li
-          a#logo(href='http://github.com/meatspaces/meatspace-chat', target='_blank', title='Github') Github
-        li
-          span created by
-          a(href='http://twitter.com/ednapiranha', target='_blank') ednapiranha
-          span and
-          a(href='http://twitter.com/supersole', target='_blank') supersole
+      .header
+        a#logo(href='/info', target='_blank', title='Info!') Info!
+        #menu-toggle ≡
+          ul.menu
+            li
+              a#unmute(href='javascript:;') Unmute
+            li
+              a#artwork(href='javascript:;') Toggle Artwork
+
       .chats
         ul
         .end
@@ -27,6 +31,7 @@ html
       block content
 
     script(src='/socket.io/socket.io.js')
-    script(src='/javascripts/require.js', data-main='/javascripts/config')
-    script(src='/javascripts/lib/emojify.js', type='text/javascript')
-    link(rel='stylesheet', href='/stylesheets/emojify.css')
+    if debug
+      script(src='/javascripts/lib/requirejs/require.js', data-main='/javascripts/config')
+    else
+      script(src='/javascripts/build/meatspace-chat.js')

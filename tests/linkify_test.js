@@ -1,10 +1,4 @@
-var requirejs = require('requirejs');
-
-requirejs.config({
-  nodeRequire: require
-});
-
-var linkify = requirejs('../public/javascripts/linkify');
+var linkify = require('../public/javascripts/linkify');
 var tests = {};
 var valid, invalid, inline;
 
@@ -39,7 +33,16 @@ valid = {
     '@a @b @c',
     '/r/puppies',
     '1.1.1.1',
-    'http://1.1.1.1'
+    'http://1.1.1.1',
+    'http://meat.spaces should be treated like a link',
+    'test.com/"/onmouseover="alert(document.cookie)',
+    // Stuff is escaped before it gets to linkify via the .textContent API
+    'test.com/"&gt;&lt/a&gt;&ltscript&gt;alert(document.cookie);&lt/script&gt;&lta href="http://example.com',
+    // XSS #96
+    'x.it/onmouseover=alert(null);//\nx.it/onmouseover=alert(null);//',
+    'test.com/onmouseover=alert(1)// est.com/onmouseover=alert(1)//',
+    // Don't encode the same portion of text twice
+    'test.com/@test'
   ],
 
   expects: [
@@ -72,7 +75,13 @@ valid = {
     '<a href="https://twitter.com/c" target="_blank">@c</a>',
     '<a href="http://www.reddit.com/r/puppies" target="_blank">/r/puppies</a>',
     '<a href="http://1.1.1.1" target="_blank">1.1.1.1</a>',
-    '<a href="http://1.1.1.1" target="_blank">http://1.1.1.1</a>'
+    '<a href="http://1.1.1.1" target="_blank">http://1.1.1.1</a>',
+    '<a href="http://meat.spaces" target="_blank">http://meat.spaces</a> should be treated like a link',
+    '<a href="http://test.com/&quot;/onmouseover=&quot;alert(document.cookie)" target="_blank">test.com/"/onmouseover="alert(document.cookie)</a>',
+    '<a href="http://test.com/&quot;&gt;&lt/a&gt;&ltscript&gt;alert(document.cookie);&lt/script&gt;&lta" target="_blank">test.com/"&gt;&lt/a&gt;&ltscript&gt;alert(document.cookie);&lt/script&gt;&lta</a> href="<a href="http://example.com" target="_blank">http://example.com</a>',
+    '<a href="http://x.it/onmouseover=alert(null);//" target="_blank">x.it/onmouseover=alert(null);//</a>\n<a href="http://x.it/onmouseover=alert(null);//" target="_blank">x.it/onmouseover=alert(null);//</a>',
+    '<a href="http://test.com/onmouseover=alert(1)//" target="_blank">test.com/onmouseover=alert(1)//</a> <a href="http://est.com/onmouseover=alert(1)//" target="_blank">est.com/onmouseover=alert(1)//</a>',
+    '<a href="http://test.com/@test" target="_blank">test.com/@test</a>'
   ]
 };
 
@@ -88,13 +97,15 @@ invalid = {
     '7.0.3',
     'a.0.3',
     'a.b.c',
-    'what happens when it\'s inline? 1.1.1 like that?'
+    'what happens when it\'s inline? 1.1.1 like that?',
+    'meat.spaces is not a link'
   ],
   expects: [
     '7.0.3',
     'a.0.3',
     'a.b.c',
-    'what happens when it\'s inline? 1.1.1 like that?'
+    'what happens when it\'s inline? 1.1.1 like that?',
+    'meat.spaces is not a link'
   ]
 };
 
@@ -112,14 +123,16 @@ inline = {
     'An inline link, like http://example.com, is replaced inline',
     'An inline twitter handle, like @twitter, is replaced inline',
     'An inline subreddit, like /r/puppies, is replaced inline',
-    'All linkables, ie. example.com, @twitter, and /r/puppies are replaced inline'
+    'All linkables, ie. example.com, @twitter, and /r/puppies are replaced inline',
+    'Hey Edna is doing an AMA over on /r/iama, check it out http://www.reddit.com/r/IAmA/comments/1phhx1/we_are_mozilla_ask_us_anything'
   ],
   expects: [
     'An inline link, like <a href="http://example.com" target="_blank">example.com</a>, is replaced inline',
     'An inline link, like <a href="http://example.com" target="_blank">http://example.com</a>, is replaced inline',
     'An inline twitter handle, like <a href="https://twitter.com/twitter" target="_blank">@twitter</a>, is replaced inline',
     'An inline subreddit, like <a href="http://www.reddit.com/r/puppies" target="_blank">/r/puppies</a>, is replaced inline',
-    'All linkables, ie. <a href="http://example.com" target="_blank">example.com</a>, <a href="https://twitter.com/twitter" target="_blank">@twitter</a>, and <a href="http://www.reddit.com/r/puppies" target="_blank">/r/puppies</a> are replaced inline'
+    'All linkables, ie. <a href="http://example.com" target="_blank">example.com</a>, <a href="https://twitter.com/twitter" target="_blank">@twitter</a>, and <a href="http://www.reddit.com/r/puppies" target="_blank">/r/puppies</a> are replaced inline',
+    'Hey Edna is doing an AMA over on <a href="http://www.reddit.com/r/iama" target="_blank">/r/iama</a>, check it out <a href="http://www.reddit.com/r/IAmA/comments/1phhx1/we_are_mozilla_ask_us_anything" target="_blank">http://www.reddit.com/r/IAmA/comments/1phhx1/we_are_mozilla_ask_us_anything</a>'
   ]
 };
 
@@ -130,6 +143,4 @@ inline.values.forEach(function(value, i) {
   };
 });
 
-
 module.exports = tests;
-
