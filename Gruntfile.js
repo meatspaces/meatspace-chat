@@ -9,7 +9,7 @@ module.exports = function(grunt) {
         separator: ';'
       },
       dist: {
-        src: [JS_FILE_PATH + 'require.js', JS_FILE_PATH + 'build/optimized.js'],
+        src: [JS_FILE_PATH + 'lib/requirejs/require.js', JS_FILE_PATH + 'build/optimized.js'],
         dest: JS_FILE_PATH + 'build/<%= pkg.name %>.js'
       }
     },
@@ -26,7 +26,7 @@ module.exports = function(grunt) {
     cssmin: {
       compress: {
         files: {
-          'public/stylesheets/main-min.css': ['public/stylesheets/main.css']
+          'public/stylesheets/main-min.css': ['public/stylesheets/main.css', 'public/stylesheets/emojify.css']
         }
       }
     },
@@ -39,13 +39,27 @@ module.exports = function(grunt) {
         'routes/**/*.js',
         'test/**/*.js',
         // Ignore these, they are someone else's problem
-        '!public/javascripts/require.js',
         '!public/javascripts/base/*.js',
         '!public/javascripts/build/*.js',
         '!public/javascripts/lib/**/*.js'
       ],
       options: {
         jshintrc: '.jshintrc'
+      }
+    },
+    watch: {
+      scripts: {
+        files: [
+          'tests/**/*.js',
+          'public/**/*.js',
+          'routes/**/*.js',
+          'test/**/*.js',
+          // Ignore these, they are someone else's problem
+          '!public/javascripts/base/*.js',
+          '!public/javascripts/build/*.js',
+          '!public/javascripts/lib/**/*.js'
+        ],
+        tasks: ['jshint', 'nodeunit']
       }
     }
   });
@@ -55,6 +69,8 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-contrib-nodeunit');
   grunt.loadNpmTasks('grunt-contrib-requirejs');
+  grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.registerTask('build', ['cssmin', 'requirejs', 'concat']);
   grunt.registerTask('default', ['jshint', 'build', 'nodeunit']);
+  grunt.registerTask('travis', ['jshint', 'nodeunit']);
 };
