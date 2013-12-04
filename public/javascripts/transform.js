@@ -109,6 +109,17 @@ define([], function() {
     }
   };
 
+  var slasheables = {
+    slashme: {
+      pattern: /^\/me(\s.+)?$/,
+      transformer: function(match) {
+        var message = match[1] || '';
+
+        return '<em><b>* slashmebro</b>' + (message) + '</em>';
+      }
+    }
+  };
+
   var types = Object.keys(linkables);
 
   function sanitize(str) {
@@ -124,12 +135,26 @@ define([], function() {
     return '<a href="' + href + '" target="_blank">' + text + '</a>';
   }
 
+  function each(obj, fn) {
+    return Object.keys(obj).forEach(fn);
+  }
+
   function transform(text) {
     var matches = [];
     var index = 0;
     var fragments = [];
 
-    types.forEach(function (type) {
+    each(slasheables, function (type) {
+      var pattern = slasheables[type].pattern;
+      var transformer = slasheables[type].transformer;
+      var match;
+
+      if(match = pattern.exec(text)) {
+        text = transformer(match);
+      }
+    });
+
+    each(linkables, function (type) {
       var pattern = linkables[type].pattern;
       var transformer = linkables[type].transformer;
       var match, replace;

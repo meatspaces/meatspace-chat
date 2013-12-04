@@ -143,4 +143,35 @@ inline.values.forEach(function(value, i) {
   };
 });
 
+slasheables = {
+  values: [
+    '/me',
+    '/me waves',
+    '/me feels whimsy!',
+    '/me a twitter: @example',
+    '/me a link: example.com',
+    '/mee',
+    '/me  double space',
+    '/me /me'
+  ],
+  expects: [
+    '<em><b>* slashmebro</b></em>',
+    '<em><b>* slashmebro</b> waves</em>',
+    '<em><b>* slashmebro</b> feels whimsy!</em>',
+    '<em><b>* slashmebro</b> a twitter: <a href="https://twitter.com/example" target="_blank">@example</a></em>',
+    '<em><b>* slashmebro</b> a link: <a href="http://example.com" target="_blank">example.com</a></em>',
+    '/mee',
+    '<em><b>* slashmebro</b>  double space</em>',
+    '<em><b>* slashmebro</b> /me</em>'
+  ]
+};
+
+slasheables.values.forEach(function(value, i) {
+  tests[value] = function(test) {
+    test.equal(transform(value), slasheables.expects[i]);
+    test.done();
+  };
+})
+
+
 module.exports = tests;
