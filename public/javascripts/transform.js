@@ -112,7 +112,7 @@ define([], function() {
   var slashables = {
     slashme: {
       pattern: /^\/me(\s.+)?$/,
-      transformer: function(match) {
+      transformer: function (match) {
         var message = match[1] || '';
 
         return '<em><b>* slashmebro</b>' + (message) + '</em>';
@@ -149,7 +149,7 @@ define([], function() {
       var transformer = slashables[type].transformer;
       var match;
 
-      if(match = pattern.exec(text)) {
+      if (match = pattern.exec(text)) {
         text = transformer(match);
       }
     });
