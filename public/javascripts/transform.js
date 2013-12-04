@@ -109,7 +109,7 @@ define([], function() {
     }
   };
 
-  var slasheables = {
+  var slashables = {
     slashme: {
       pattern: /^\/me(\s.+)?$/,
       transformer: function(match) {
@@ -144,9 +144,9 @@ define([], function() {
     var index = 0;
     var fragments = [];
 
-    each(slasheables, function (type) {
-      var pattern = slasheables[type].pattern;
-      var transformer = slasheables[type].transformer;
+    each(slashables, function (type) {
+      var pattern = slashables[type].pattern;
+      var transformer = slashables[type].transformer;
       var match;
 
       if(match = pattern.exec(text)) {

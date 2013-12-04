@@ -143,7 +143,7 @@ inline.values.forEach(function(value, i) {
   };
 });
 
-slasheables = {
+slashables = {
   values: [
     '/me',
     '/me waves',
@@ -166,9 +166,9 @@ slasheables = {
   ]
 };
 
-slasheables.values.forEach(function(value, i) {
+slashables.values.forEach(function(value, i) {
   tests[value] = function(test) {
-    test.equal(transform(value), slasheables.expects[i]);
+    test.equal(transform(value), slashables.expects[i]);
     test.done();
   };
 })
