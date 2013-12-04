@@ -394,11 +394,11 @@ input::-webkit-input-placeholder {
     font-size: 0.8rem;
 }
 
-.chats li p em {
+.chats li em {
     color: #70b4e4;
 }
 
-.chats li p b {
+.chats li b {
     font-weight: 500;
 }
 
