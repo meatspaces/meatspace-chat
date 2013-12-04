@@ -1,4 +1,4 @@
-var linkify = require('../public/javascripts/linkify');
+var linkify = require('../public/javascripts/transform');
 var tests = {};
 var valid, invalid, inline;
 
