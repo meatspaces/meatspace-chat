@@ -51,6 +51,7 @@ module.exports = function(app, configurations, express) {
         res.locals.debug = false;
       }
       res.locals.analytics = nconf.get('analytics');
+      res.locals.appId = nconf.get('appId');
       res.locals.analyticsHost = nconf.get('analyticsHost');
       next();
     });
