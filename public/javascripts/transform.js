@@ -111,11 +111,11 @@ define([], function() {
 
   var slashables = {
     slashme: {
-      pattern: /^\/me(\s.+)?$/,
+      pattern: /^\s*\/me(\s.+)?$/,
       transformer: function (match) {
         var message = match[1] || '';
 
-        return '<em><b>* slashmebro</b>' + (message) + '</em>';
+        return '<em><b>*</b>' + (message) + '</em>';
       }
     }
   };
