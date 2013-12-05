@@ -152,7 +152,8 @@ slashables = {
     '/me a link: example.com',
     '/mee',
     '/me  double space',
-    '/me /me'
+    '/me /me',
+    ' /me with a space'
   ],
   expects: [
     '<em><b>*</b></em>',
@@ -162,7 +163,8 @@ slashables = {
     '<em><b>*</b> a link: <a href="http://example.com" target="_blank">example.com</a></em>',
     '/mee',
     '<em><b>*</b>  double space</em>',
-    '<em><b>*</b> /me</em>'
+    '<em><b>*</b> /me</em>',
+    '<em><b>*</b> with a space</em>'
   ]
 };
 
