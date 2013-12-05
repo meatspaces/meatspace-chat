@@ -51,9 +51,11 @@ module.exports = function(app, configurations, express) {
         res.locals.debug = false;
       }
       res.locals.analytics = nconf.get('analytics');
+      res.locals.appId = nconf.get('appId');
       res.locals.analyticsHost = nconf.get('analyticsHost');
       next();
     });
+    app.enable('trust proxy');
     app.locals.pretty = true;
     app.use(app.router);
     app.use(function (req, res, next) {

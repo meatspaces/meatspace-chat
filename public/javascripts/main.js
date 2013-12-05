@@ -1,5 +1,5 @@
-define(['jquery', 'linkify', './base/gumhelper', './base/videoShooter', 'fingerprint', 'md5', 'waypoints'],
-  function ($, linkify, gumHelper, VideoShooter, Fingerprint, md5) {
+define(['jquery', 'transform', './base/gumhelper', './base/videoShooter', 'fingerprint', 'md5', 'waypoints'],
+  function ($, transform, gumHelper, VideoShooter, Fingerprint, md5) {
   'use strict';
 
   var html = $('html');
@@ -90,7 +90,7 @@ define(['jquery', 'linkify', './base/gumhelper', './base/videoShooter', 'fingerp
 
           var message = document.createElement('p');
           message.textContent = c.chat.value.message;
-          message.innerHTML = linkify(message.innerHTML);
+          message.innerHTML = transform(message.innerHTML);
           li.appendChild(message);
 
           var size = addChat.is(":visible") ? addChat[0].getBoundingClientRect().bottom : $(window).innerHeight();

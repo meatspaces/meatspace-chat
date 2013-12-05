@@ -4,7 +4,6 @@ module.exports = function (app, nconf, io) {
   var crypto = require('crypto');
   var Publico = require('meatspace-publico');
   var nativeClients = require('../clients.json');
-  var blacklist = require('../blacklist.json');
   var level = require('level');
 
   var logger = level(nconf.get('logger'), {
@@ -46,14 +45,6 @@ module.exports = function (app, nconf, io) {
     socket.emit('message', { chat: chat });
   };
 
-  var blacklisted = function (fingerprint, userid) {
-    if (blacklist.indexOf(fingerprint) > -1 || blacklist.indexOf(userid) > -1) {
-      return true;
-    }
-
-    return false;
-  };
-
   app.get('/info', function (req, res) {
     res.render('info');
   });
@@ -65,7 +56,7 @@ module.exports = function (app, nconf, io) {
   app.get('/', function (req, res) {
     var currDate = Date.now();
     logger.put('landing-page!' + currDate, {
-      ip: req.connection.remoteAddress,
+      ip: req.ip,
       created: currDate
     });
     res.render('index');
@@ -79,54 +70,43 @@ module.exports = function (app, nconf, io) {
 
   app.get('/ip', function (req, res) {
     res.json({
-      ip: req.connection.remoteAddress
+      ip: req.ip
     });
   });
 
   var addChat = function (message, picture, fingerprint, userId, ip, next) {
-    if (!blacklisted(fingerprint, userId)) {
-      publico.addChat(message.slice(0, 250), {
-        ttl: 600000,
-        media: picture,
-        fingerprint: userId
-      }, function (err, c) {
-        if (err) {
-          next(err);
-        } else {
-          try {
-            emitChat(io.sockets, { key: c.key, value: c });
-            next(null, 'sent!');
-          } catch (err) {
-            next(new Error('Could not emit message'));
-          }
+    publico.addChat(message.slice(0, 250), {
+      ttl: 600000,
+      media: picture,
+      fingerprint: userId
+    }, function (err, c) {
+      if (err) {
+        next(err);
+      } else {
+        try {
+          emitChat(io.sockets, { key: c.key, value: c });
+          next(null, 'sent!');
+        } catch (err) {
+          next(new Error('Could not emit message'));
         }
-      });
-    } else {
-
-      var currDate = Date.now();
-      logger.put('blacklisted!' + currDate, {
-        ip: ip,
-        fingerprint: userId,
-        created: currDate
-      });
-
-      next(new Error('access denied'));
-    }
+      }
+    });
   };
 
   app.post('/add/chat', function (req, res, next) {
-    var userId = crypto.createHash('md5').update(req.body.fingerprint + req.connection.remoteAddress).digest('hex');
+    var ip = req.ip || '0.0.0.0';
+    var userId = crypto.createHash('md5').update(req.body.fingerprint + ip).digest('hex');
 
     if (req.body.picture) {
-      if (userId && userId === req.body.userid) {
-        addChat(req.body.message, req.body.picture, req.body.fingerprint, userId, req.connection.remoteAddress, function (err, status) {
+      if ((userId && userId === req.body.userid) || req.body.apiKey) {
+        addChat(req.body.message, req.body.picture, req.body.fingerprint, userId, ip, function (err, status) {
           if (err) {
             res.status(400);
             res.json({ error: err.toString() });
           } else {
             var currDate = Date.now();
             logger.put('web!' + currDate, {
-              ip: req.connection.remoteAddress,
+              ip: ip,
               fingerprint: userId,
               created: currDate
             });

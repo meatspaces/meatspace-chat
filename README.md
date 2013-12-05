@@ -1,14 +1,14 @@
 # Meatspace Chat
+[![Build Status](https://travis-ci.org/meatspaces/meatspace-chat.png)](https://travis-ci.org/meatspaces/meatspace-chat)
 
 ## Setting up
-    > cp local.json-dist local.json
-    > cp clients.json-dist clients.json
-    > cp blacklist.json-dist blacklist.json
-    > npm install
-    > npm -g install nodemon
-    > bower install
-    > npm run-script grunt build
-    > npm start
+    cp local.json-dist local.json
+    cp clients.json-dist clients.json
+    npm install
+    npm -g install nodemon
+    bower install
+    npm run-script grunt build
+    npm start
 
 ## Mute feature
 

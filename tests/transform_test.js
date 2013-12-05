@@ -1,4 +1,4 @@
-var linkify = require('../public/javascripts/linkify');
+var transform = require('../public/javascripts/transform');
 var tests = {};
 var valid, invalid, inline;
 
@@ -36,7 +36,7 @@ valid = {
     'http://1.1.1.1',
     'http://meat.spaces should be treated like a link',
     'test.com/"/onmouseover="alert(document.cookie)',
-    // Stuff is escaped before it gets to linkify via the .textContent API
+    // Stuff is escaped before it gets to transform via the .textContent API
     'test.com/"&gt;&lt/a&gt;&ltscript&gt;alert(document.cookie);&lt/script&gt;&lta href="http://example.com',
     // XSS #96
     'x.it/onmouseover=alert(null);//\nx.it/onmouseover=alert(null);//',
@@ -90,7 +90,7 @@ valid = {
 
 valid.values.forEach(function(value, i) {
   tests[value] = function(test) {
-    test.ok(linkify(value).indexOf(valid.expects[i]) !== -1);
+    test.ok(transform(value).indexOf(valid.expects[i]) !== -1);
     test.done();
   };
 });
@@ -114,7 +114,7 @@ invalid = {
 
 invalid.values.forEach(function(value, i) {
   tests[value] = function(test) {
-    test.equal(linkify(value), invalid.expects[i]);
+    test.equal(transform(value), invalid.expects[i]);
     test.done();
   };
 });
@@ -143,9 +143,42 @@ inline = {
 
 inline.values.forEach(function(value, i) {
   tests[value] = function(test) {
-    test.equal(linkify(value), inline.expects[i]);
+    test.equal(transform(value), inline.expects[i]);
     test.done();
   };
 });
+
+slashables = {
+  values: [
+    '/me',
+    '/me waves',
+    '/me feels whimsy!',
+    '/me a twitter: @example',
+    '/me a link: example.com',
+    '/mee',
+    '/me  double space',
+    '/me /me',
+    ' /me with a space'
+  ],
+  expects: [
+    '<em><b>*</b></em>',
+    '<em><b>*</b> waves</em>',
+    '<em><b>*</b> feels whimsy!</em>',
+    '<em><b>*</b> a twitter: <a href="https://twitter.com/example" target="_blank">@example</a></em>',
+    '<em><b>*</b> a link: <a href="http://example.com" target="_blank">example.com</a></em>',
+    '/mee',
+    '<em><b>*</b>  double space</em>',
+    '<em><b>*</b> /me</em>',
+    '<em><b>*</b> with a space</em>'
+  ]
+};
+
+slashables.values.forEach(function(value, i) {
+  tests[value] = function(test) {
+    test.equal(transform(value), slashables.expects[i]);
+    test.done();
+  };
+})
+
 
 module.exports = tests;

@@ -121,6 +121,17 @@ define([], function() {
     }
   };
 
+  var slashables = {
+    slashme: {
+      pattern: /^\s*\/me(\s.+)?$/,
+      transformer: function (match) {
+        var message = match[1] || '';
+
+        return '<em><b>*</b>' + (message) + '</em>';
+      }
+    }
+  };
+
   var types = Object.keys(linkables);
 
   function sanitize(str) {
@@ -136,12 +147,26 @@ define([], function() {
     return '<a href="' + href + '" target="_blank">' + text + '</a>';
   }
 
-  function linkify(text) {
+  function each(obj, fn) {
+    return Object.keys(obj).forEach(fn);
+  }
+
+  function transform(text) {
     var matches = [];
     var index = 0;
     var fragments = [];
 
-    types.forEach(function (type) {
+    each(slashables, function (type) {
+      var pattern = slashables[type].pattern;
+      var transformer = slashables[type].transformer;
+      var match;
+
+      if (match = pattern.exec(text)) {
+        text = transformer(match);
+      }
+    });
+
+    each(linkables, function (type) {
       var pattern = linkables[type].pattern;
       var transformer = linkables[type].transformer;
       var match, replace;
@@ -177,5 +202,5 @@ define([], function() {
     return fragments.join('');
   }
 
-  return linkify;
+  return transform;
 });
