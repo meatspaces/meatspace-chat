@@ -155,14 +155,14 @@ slashables = {
     '/me /me'
   ],
   expects: [
-    '<em><b>* slashmebro</b></em>',
-    '<em><b>* slashmebro</b> waves</em>',
-    '<em><b>* slashmebro</b> feels whimsy!</em>',
-    '<em><b>* slashmebro</b> a twitter: <a href="https://twitter.com/example" target="_blank">@example</a></em>',
-    '<em><b>* slashmebro</b> a link: <a href="http://example.com" target="_blank">example.com</a></em>',
+    '<em><b>*</b></em>',
+    '<em><b>*</b> waves</em>',
+    '<em><b>*</b> feels whimsy!</em>',
+    '<em><b>*</b> a twitter: <a href="https://twitter.com/example" target="_blank">@example</a></em>',
+    '<em><b>*</b> a link: <a href="http://example.com" target="_blank">example.com</a></em>',
     '/mee',
-    '<em><b>* slashmebro</b>  double space</em>',
-    '<em><b>* slashmebro</b> /me</em>'
+    '<em><b>*</b>  double space</em>',
+    '<em><b>*</b> /me</em>'
   ]
 };
 

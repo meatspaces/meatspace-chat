@@ -395,7 +395,7 @@ input::-webkit-input-placeholder {
 }
 
 .chats li em {
-    color: #70b4e4;
+    font-style: italic;
 }
 
 .chats li b {
