@@ -7,5 +7,6 @@
     "session_cookie": "session",
     "analytics": "your google analytics value",
     "analyticsHost": "your domain without the protocol (e.g. someurl.com)",
-    "logger": "./logger"
+    "logger": "./logger",
+    "appId": ""
 }
