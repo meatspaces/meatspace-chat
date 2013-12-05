@@ -2,8 +2,7 @@ requirejs.config({
   deps: ['main'],
   paths: {
     'jquery': 'lib/jquery/jquery',
-    'Animated_GIF': 'lib/animated-gif/src/Animated_GIF',
-    'GifWriter': 'lib/animated-gif/src/omggif',
+    'Animated_GIF': 'lib/animated-gif/dist/Animated_GIF.min',
     'fingerprint': 'lib/fingerprint/fingerprint',
     'transform': 'transform',
     'md5': 'lib/js-md5/js/md5',
@@ -13,7 +12,6 @@ requirejs.config({
     'jquery': {
       exports: 'jQuery'
     },
-    'Animated_GIF': ['GifWriter'],
     'fingerprint': {
       exports: 'Fingerprint'
     }
