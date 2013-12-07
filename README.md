@@ -10,6 +10,23 @@
     npm run-script grunt build
     npm start
 
+# Messages
+
+A meatspace message is a nested dictionary in the form
+ 
+  {'chat': 
+     {'value': 
+        {'media': 
+          'data:image/gif;base64,<base64 data>', 
+          'message': '<witicism here>', 
+          'ttl': 600000, 
+          'created': <time-string>, 
+          'fingerprint': '<32-byte hex>'
+        } 
+     },
+     'key': '<unique message key>'
+  }
+
 ## Mute feature
 
 If you mute a user then you won't see any new posts from them at that machine and IP. There is an unmute button below the meatcube logo on the page.
