@@ -22,7 +22,8 @@ module.exports = function(app, configurations, express) {
     app.set('views', __dirname + '/views');
     app.set('view engine', 'jade');
     app.set('view options', { layout: false });
-    app.use(express.bodyParser());
+    app.use(express.json());
+    app.use(express.urlencoded());
     app.use(express.methodOverride());
     if (!process.env.NODE_ENV) {
       app.use(express.logger('dev'));
