@@ -42,6 +42,12 @@ define(['jquery', 'transform', './base/gumhelper', './base/videoShooter', 'finge
     }
   };
 
+  var blockImageSave = function() {
+    body.on('contextmenu', 'img.chat-image', function(e){
+      return false;
+    });
+  };
+
   var setupWaypoints = function (rawLi) {
     var li = $(rawLi);
     li.waypoint(function (direction) {
@@ -69,6 +75,7 @@ define(['jquery', 'transform', './base/gumhelper', './base/videoShooter', 'finge
 
     if (!isMuted(renderFP)) {
       var img = new Image();
+      img.className = 'chat-image';
       img.onload = function () {
         // Don't want duplicates and don't want muted messages
         if (body.find('li[data-key="' + c.chat.key + '"]').length === 0 &&
@@ -290,6 +297,8 @@ define(['jquery', 'transform', './base/gumhelper', './base/videoShooter', 'finge
       }
     }
   });
+  
+  blockImageSave();
 
   $(document).on('keydown', function (event) {
     if (!hasModifiersPressed(event) && event.target !== addChat[0]) {
