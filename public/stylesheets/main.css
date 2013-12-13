@@ -389,6 +389,23 @@ input::-webkit-input-placeholder {
     color: #eee;
 }
 
+.chats li .timestamp {
+    font-family: "Helvetica Neue", "Helvetica", "Arial", sans-serif;
+    border: 0;
+    color: #666;
+    display: block;
+    font-size: 0.8rem;
+    font-weight: 300;
+    position: absolute;
+    right: 0;
+    top: 0;
+    padding: 8px;
+}
+
+.chats li:first-of-type .timestamp {
+    top: 18px;
+}
+
 .chats li p span {
     color: #70b4e4;
     font-size: 0.8rem;
