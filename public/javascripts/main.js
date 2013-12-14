@@ -1,5 +1,5 @@
-define(['jquery', 'transform', './base/gumhelper', './base/videoShooter', 'fingerprint', 'md5', 'waypoints'],
-  function ($, transform, gumHelper, VideoShooter, Fingerprint, md5) {
+define(['jquery', 'transform', './base/gumhelper', './base/videoShooter', 'fingerprint', 'md5', 'moment', 'waypoints'],
+  function ($, transform, gumHelper, VideoShooter, Fingerprint, md5, moment) {
   'use strict';
 
   var html = $('html');
@@ -58,24 +58,6 @@ define(['jquery', 'transform', './base/gumhelper', './base/videoShooter', 'finge
     });
   };
 
-  var padToTwoDigits = function (number) {
-    return number < 10 ? '0' + number : '' + number;
-  };
-
-  var getTimeString = function (date) {
-    var hours = date.getHours();
-    var minutes = date.getMinutes();
-    var isAM = true;
-    if (hours > 12) {
-      hours = hours - 12;
-      isAM = false;
-    } else if (hours === 12) {
-      isAM = false;
-    }
-
-    return padToTwoDigits(hours) + ':' + padToTwoDigits(minutes) + ' ' + (isAM ? 'AM' : 'PM');
-  };
-
   var renderChat = function (c) {
     debug("Rendering chat: key='%s' fingerprint='%s' message='%s' created='%s' imageMd5='%s'",
       c.chat.key,
@@ -111,10 +93,10 @@ define(['jquery', 'transform', './base/gumhelper', './base/videoShooter', 'finge
           message.innerHTML = transform(message.innerHTML);
           li.appendChild(message);
 
-          var createdDate = new Date(c.chat.value.created);
+          var createdDate = moment(new Date(c.chat.value.created));
           var timestamp = document.createElement('time');
           timestamp.setAttribute('datetime', createdDate.toISOString());
-          timestamp.textContent = getTimeString(createdDate);
+          timestamp.textContent = createdDate.format('LT');
           timestamp.className = 'timestamp';
           li.appendChild(timestamp);
 
