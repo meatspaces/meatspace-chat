@@ -21,21 +21,9 @@ module.exports = function (app, nconf, io) {
       if (err) {
         done(err);
       } else {
-
-        var sorted = [];
-
-        try {
-          if (c.chats) {
-            c.chats.forEach(function (chat) {
-              sorted.unshift(chat);
-            });
-
-            c.chats = sorted;
-          }
-        } catch (e) {
-          console.log(e);
+        if (c.chats && c.chats.length > 0) {
+          c.chats.reverse();
         }
-
         done(null, c);
       }
     });
