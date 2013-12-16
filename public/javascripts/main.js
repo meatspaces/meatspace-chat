@@ -12,7 +12,6 @@ define(['jquery', 'transform', './base/gumhelper', './base/videoShooter', 'finge
   var chatsContainer = $('.chats');
   var footer = $('#footer');
   var charCounter = $('#counter');
-  var muteBtn = $('.mute');
   var userId = $('#userid');
   var menu = $('#menu-toggle .menu');
   var artwork = localStorage.getItem('artwork') || false;
