@@ -202,12 +202,6 @@ define(['jquery', 'transform', './base/gumhelper', './base/videoShooter', 'finge
     }
   });
 
-  menu.toggle(function () {
-    $(this).addClass('on');
-  }, function () {
-    $(this).removeClass('on');
-  });
-
   var checkArtStatus = function () {
     if (artwork) {
       body.addClass('art');
