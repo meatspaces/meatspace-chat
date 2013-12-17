@@ -134,6 +134,7 @@ body > img {
 }
 
 .menu {
+    display: none;
     background-color: #e22661;
     border-bottom: 1px solide #111;
     border-left: 1px solide #111;
