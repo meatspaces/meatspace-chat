@@ -17,6 +17,7 @@ define(['jquery', 'transform', './base/gumhelper', './base/videoShooter', 'finge
   var artwork = localStorage.getItem('artwork') || false;
   var fp = $('#fp');
   var svg = $(null);
+  var chatData = $('#chat-data');
   var isPosting = false;
   var canSend = true;
   var fingerprint = new Fingerprint({ canvas: true }).get();
@@ -56,6 +57,14 @@ define(['jquery', 'transform', './base/gumhelper', './base/videoShooter', 'finge
       offset: '100%'
     });
   };
+
+  if (chatData.length > 0) {
+    var data = JSON.parse(chatData.html());
+    data.forEach(function(message) {
+      renderChat({ chat: message });
+    });
+    chatData.remove();
+  }
 
   var renderChat = function (c) {
     debug("Rendering chat: key='%s' fingerprint='%s' message='%s' created='%s' imageMd5='%s'",

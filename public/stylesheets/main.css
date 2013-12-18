@@ -503,6 +503,10 @@ ul li.on {
     min-width: 0;
 }
 
+.bootstrap-data {
+  display: none;
+}
+
 @media only screen and (max-width: 1150px) {
     .input {
         width: 75%;
