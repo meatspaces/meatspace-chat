@@ -8,6 +8,7 @@
     "js-md5": "1.0.1",
     "animated-gif": "sole/Animated_GIF#1cfb9afc999bdcfc51526fcaa0cd60fdc5d58f4c",
     "requirejs": "2.1.5",
-    "momentjs": "~2.4.0"
+    "momentjs": "~2.4.0",
+    "favico.js": "~0.3.3"
   }
 }

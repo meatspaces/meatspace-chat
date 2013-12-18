@@ -1,5 +1,5 @@
-define(['jquery', 'transform', './base/gumhelper', './base/videoShooter', 'fingerprint', 'md5', 'moment', 'waypoints'],
-  function ($, transform, gumHelper, VideoShooter, Fingerprint, md5, moment) {
+define(['jquery', 'transform', './base/gumhelper', './base/videoShooter', 'fingerprint', 'md5', 'moment', 'favico', 'waypoints'],
+  function ($, transform, gumHelper, VideoShooter, Fingerprint, md5, moment, Favico) {
   'use strict';
 
   var html = $('html');
@@ -30,6 +30,42 @@ define(['jquery', 'transform', './base/gumhelper', './base/videoShooter', 'finge
 
   var CHAT_LIMIT = 25;
   var CHAR_LIMIT = 250;
+
+  // set up tab notifications for unread messages
+  var favicon = new Favico({
+    animation: 'none',
+    position: 'up'
+  });
+
+  var pageHidden = 'hidden';
+  var pageVisibilityChange = 'visibilitychange';
+
+  if (typeof document.hidden === 'undefined') {
+    ['webkit', 'moz', 'ms'].some(function (prefix) {
+      var prop = prefix + 'Hidden';
+      if (typeof document[prop] !== 'undefined') {
+        pageHidden = prop;
+        pageVisibilityChange = prefix + 'visibilitychange';
+        return true;
+      }
+    });
+  }
+
+  var unreadMessages = 0;
+
+  var handleVisibilityChange = function () {
+    if (!document[pageHidden]) {
+      unreadMessages = 0;
+      favicon.badge(0);
+    }
+  };
+
+  var updateNotificationCount = function () {
+    if (document[pageHidden]) {
+      unreadMessages += 1;
+      favicon.badge(unreadMessages);
+    }
+  };
 
   var isMuted = function (fingerprint) {
     return mutedArr.indexOf(fingerprint) !== -1;
@@ -187,6 +223,7 @@ define(['jquery', 'transform', './base/gumhelper', './base/videoShooter', 'finge
 
   socket.on('message', function (data) {
     debug("Incoming chat key='%s'", data.chat.key);
+    updateNotificationCount();
     renderChat(data);
   });
 
@@ -307,4 +344,6 @@ define(['jquery', 'transform', './base/gumhelper', './base/videoShooter', 'finge
     // modifiers exclude shift since it's often used in normal typing
     return (event.altKey || event.ctrlKey || event.metaKey);
   }
+
+  $(document).on(pageVisibilityChange, handleVisibilityChange);
 });
