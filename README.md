@@ -15,14 +15,16 @@
 You can listen to the socket to receive incoming messages or use long polling at either https://chat.meatspac.es or http://chat-staging.meatspac.es.
 
 A meatspace chat message is a nested dictionary in the form
- 
-    {chat: 
-        {value: 
-            {media: 
-                data:image/gif;base64,<base64 data>, 
-                message: '<message; may be empty>, 
-                ttl: 600000, 
-                created: <time-string>, 
+
+    {
+        chat:
+        {
+            value:
+            {
+                media: data:image/gif;base64,<base64 data>,
+                message: '<message; may be empty>,
+                ttl: 600000,
+                created: <time-string>,
                 fingerprint: <32-byte hex>
             }
         },
@@ -44,10 +46,10 @@ If you are doing native or non-web calls to the API, you will first need a valid
 Push a new message through a socket request and provide the following data:
 
     {
-      apiKey: <apiKey>,
-      message: <text message; can be empty>,
-      picture: data:image/gif;base64,<a base64 blob of the gif data>,
-      fingerprint: <a unique identifier for the user posting from the client, preferably md5-hashed>
+        apiKey: <apiKey>,
+        message: <text message; can be empty>,
+        picture: data:image/gif;base64,<a base64 blob of the gif data>,
+        fingerprint: <a unique identifier for the user posting from the client, preferably md5-hashed>
     }
 
 
