@@ -1,6 +1,9 @@
 extend layout
 
 block content
+  if chats && chats.length > 0
+    - var dataString = JSON.stringify(chats);
+    #chat-data.bootstrap-data= dataString
   form(method='post', id='add-chat-form')
     input(type='hidden', name='picture', id='picture')
     .message-content

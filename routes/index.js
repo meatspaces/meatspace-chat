@@ -42,12 +42,19 @@ module.exports = function (app, nconf, io) {
   });
 
   app.get('/', function (req, res) {
-    var currDate = Date.now();
-    logger.put('landing-page!' + currDate, {
-      ip: req.ip,
-      created: currDate
+    // Fire out an initial burst of images to the connected client, assuming there are any available
+    getSortedChats(function (err, results) {
+      var currDate = Date.now();
+      logger.put('landing-page!' + currDate, {
+        ip: req.ip,
+        created: currDate
+      });
+      if (err) {
+        res.render('index');
+      } else {
+        res.render('index', { chats: results.chats });
+      }
     });
-    res.render('index');
   });
 
   // NOTE: This is now a deprecated API method -- All chats go out through web sockets
@@ -113,16 +120,6 @@ module.exports = function (app, nconf, io) {
   });
 
   io.sockets.on('connection', function (socket) {
-
-    // Fire out an initial burst of images to the connected client, assuming there are any available
-    getSortedChats(function (err, results) {
-      if(results.chats && results.chats.length > 0) {
-        results.chats.forEach(function (chat) {
-          emitChat(socket, chat);
-        });
-      }
-    });
-
     socket.on('message', function (data) {
       if (nativeClients.indexOf(data.apiKey) > -1) {
         var ip = '0.0.0.0';
