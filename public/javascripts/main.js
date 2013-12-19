@@ -68,7 +68,7 @@ define(['jquery', 'transform', './base/gumhelper', './base/videoShooter', 'finge
 
     if (!isMuted(renderFP)) {
       var img = new Image();
-      img.onload = function () {
+      var onComplete = function () {
         // Don't want duplicates and don't want muted messages
         if (body.find('li[data-key="' + c.chat.key + '"]').length === 0 &&
             !isMuted(renderFP)) {
@@ -120,6 +120,9 @@ define(['jquery', 'transform', './base/gumhelper', './base/videoShooter', 'finge
           }
         }
       };
+
+      img.onload = onComplete;
+      img.onerror = onComplete;
       img.src = c.chat.value.media;
     }
   };
