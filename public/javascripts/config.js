@@ -8,7 +8,8 @@ requirejs.config({
     'md5': 'lib/js-md5/js/md5',
     'waypoints': 'lib/jquery-waypoints/waypoints',
     'moment': 'lib/momentjs/moment',
-    'favico': 'lib/favico.js/favico'
+    'favico': 'lib/favico.js/favico',
+    'gumhelper': 'lib/gumhelper/gumhelper'
   },
   shim: {
     'jquery': {
