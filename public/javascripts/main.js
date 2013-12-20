@@ -34,7 +34,7 @@ define(['jquery', 'transform', './base/gumhelper', './base/videoShooter', 'finge
   // set up tab notifications for unread messages
   var favicon = new Favico({
     animation: 'none',
-    position: 'up'
+    position: 'up left'
   });
 
   var pageHidden = 'hidden';
