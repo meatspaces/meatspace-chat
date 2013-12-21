@@ -1,4 +1,4 @@
-define(['jquery', 'transform', './base/gumhelper', './base/videoShooter', 'fingerprint', 'md5', 'moment', 'favico', 'waypoints'],
+define(['jquery', 'transform', 'gumhelper', './base/videoShooter', 'fingerprint', 'md5', 'moment', 'favico', 'waypoints'],
   function ($, transform, gumHelper, VideoShooter, Fingerprint, md5, moment, Favico) {
   'use strict';
 
@@ -210,15 +210,17 @@ define(['jquery', 'transform', './base/gumhelper', './base/videoShooter', 'finge
 
     footer.prepend(svg);
 
-    gumHelper.startVideoStreaming(function errorCb() {
-      disableVideoMode();
-    }, function successCallback(stream, videoElement) {
-      videoElement.width = 135;
-      videoElement.height = 101;
-      footer.prepend(videoElement);
-      videoElement.play();
-      videoShooter = new VideoShooter(videoElement);
-      addChatForm.click();
+    gumHelper.startVideoStreaming(function callback(err, stream, videoElement) {
+      if (err) {
+        disableVideoMode();
+      } else {
+        videoElement.width = 135;
+        videoElement.height = 101;
+        footer.prepend(videoElement);
+        videoElement.play();
+        videoShooter = new VideoShooter(videoElement);
+        addChatForm.click();
+      }
     });
   } else {
     disableVideoMode();
