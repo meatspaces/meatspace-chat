@@ -91,11 +91,6 @@ body > img {
     transform: rotate(20deg);
 }
 
-h1 {
-    font-size: 3rem;
-    padding: 20px;
-}
-
 .input, #counter {
     color: #fff;
     background: none;
