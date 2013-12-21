@@ -96,11 +96,6 @@ body.info {
     margin-right: 15px;
 }
 
-html, body {
-    height: 100%;
-    position: relative;
-}
-
 body > img {
     display: none;
 }
@@ -259,11 +254,6 @@ a.medium {
 #logo:hover {
     -webkit-transform: rotate(20deg);
     transform: rotate(20deg);
-}
-
-h1 {
-    font-size: 3rem;
-    padding: 20px;
 }
 
 .input, #counter {
@@ -499,12 +489,6 @@ ul li.on {
     height: 20px;
     position: relative;
     width: 1px;
-}
-
-.chats li img.emojify {
-    width: 50px;
-    color: transparent;
-    min-width: 0;
 }
 
 @media only screen and (max-width: 1150px) {
