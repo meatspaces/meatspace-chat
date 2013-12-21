@@ -527,7 +527,6 @@ ul li.on {
     .chats li p {
         font-size: 1.1rem;
         line-height: 1.4rem;
-        padding-right: 8px;
         padding-left: 153px;
         padding-top: 8px;
         min-width: 0;
@@ -587,6 +586,13 @@ ul li.on {
         float: none;
         padding-right: 12px;
         padding-bottom: 20px;
+    }
+
+    .chats li .timestamp {
+      font-size: 0.7rem;
+      bottom: 0;
+      right: 35px;
+      padding-bottom: 5px;
     }
 
     .input {
