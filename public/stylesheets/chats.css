@@ -1,0 +1,173 @@
+.chats {
+    float: left;
+    position: relative;
+    width: 100%;
+    margin-top: 51px;
+    padding-bottom: 99px;
+}
+
+.chats.lean {
+    padding-bottom: 0px;
+}
+
+.chats li {
+    background-color: rgba(255, 255, 255, 0.85);
+    clear: both;
+    float: left;
+    min-height: 102px;
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+    white-space: pre-wrap;
+}
+
+.chats li:first-of-type {
+    padding-top: 18px;
+}
+
+.chats li:after {
+    display: block;
+    position: absolute;
+    width: 100%;
+    height: 1px;
+    background: #f181ad;
+    content: "";
+    bottom: 0;
+    left: 171px;
+}
+
+.chats li img {
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 18px;
+    width: 135px;
+}
+
+.chats li:first-of-type img {
+  top: 18px;
+}
+
+.chats .out-of-view img {
+    display: none;
+}
+
+.chats li p {
+    color: #000;
+    font-size: 1.35rem;
+    line-height: 1.5rem;
+    min-width: 182px;
+    overflow: hidden;
+    padding: 14px 56px 18px 171px;
+    font-weight: 300;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.chats li .mute {
+    font-family: "Helvetica Neue", "Helvetica", "Arial", sans-serif;
+    background-color: #f181ad;
+    border: 0;
+    color: #fff;
+    display: none;
+    font-size: 0.8rem;
+    font-weight: 300;
+    margin: 0;
+    padding: 8px 18px 9px;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    cursor: pointer;
+    text-transform: uppercase;
+}
+
+.chats li:hover .mute {
+    display: block;
+}
+
+.chats li .mute:hover {
+    background-color: #e22661;
+    color: #eee;
+}
+
+.chats li .timestamp {
+    font-family: "Helvetica Neue", "Helvetica", "Arial", sans-serif;
+    border: 0;
+    color: #666;
+    display: block;
+    font-size: 0.8rem;
+    font-weight: 300;
+    position: absolute;
+    right: 0;
+    top: 0;
+    padding: 8px;
+}
+
+.chats li:first-of-type .timestamp {
+    top: 18px;
+}
+
+.chats li p span {
+    color: #70b4e4;
+    font-size: 0.8rem;
+}
+
+.chats li em {
+    font-style: italic;
+}
+
+.chats li b {
+    font-weight: 500;
+}
+
+.chats li p a {
+    color: #34a4b8;
+    text-decoration: none;
+}
+
+.chats li p a:hover {
+    background-color: #fff;
+}
+
+@media only screen and (max-width: 568px) {
+    .chats li:after {
+        left: 153px;
+    }
+
+    .chats li p {
+        font-size: 1.1rem;
+        line-height: 1.4rem;
+        padding-right: 8px;
+        padding-left: 153px;
+        padding-top: 8px;
+        min-width: 0;
+        width: auto;
+        float: none;
+    }
+
+    .chats li .mute {
+        display: block;
+        bottom: 0;
+        margin-bottom: 0;
+        padding: 5px 5px 5px 7px;
+        font-size: .7rem;
+        color: #f181ad;
+        background: none;
+    }
+
+    .chats li img {
+        left: 0;
+    }
+}
+
+@media only screen and (max-width: 320px) {
+    .chats li p {
+        font-size: .85rem;
+        line-height: 1rem;
+        min-width: 0;
+        width: auto;
+        float: none;
+        padding-right: 12px;
+        padding-bottom: 20px;
+    }
+}

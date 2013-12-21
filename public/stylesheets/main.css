@@ -1,55 +1,3 @@
-/* http://meyerweb.com/eric/tools/css/reset/
-   v2.0 | 20110126
-   License: none (public domain)
-*/
-
-html, body, div, span, applet, object, iframe,
-h1, h2, h3, h4, h5, h6, p, blockquote, pre,
-a, abbr, acronym, address, big, cite, code,
-del, dfn, em, img, ins, kbd, q, s, samp,
-small, strike, strong, sub, sup, tt, var,
-b, u, i, center,
-dl, dt, dd, ol, ul, li,
-fieldset, form, label, legend,
-table, caption, tbody, tfoot, thead, tr, th, td,
-article, aside, canvas, details, embed,
-figure, figcaption, footer, header, hgroup,
-menu, nav, output, ruby, section, summary,
-time, mark, audio, video {
-    margin: 0;
-    padding: 0;
-    border: 0;
-    font-size: 100%;
-    font: inherit;
-    vertical-align: baseline;
-}
-/* HTML5 display-role reset for older browsers */
-article, aside, details, figcaption, figure,
-footer, header, hgroup, menu, nav, section {
-    display: block;
-}
-
-ol, ul {
-    list-style: none;
-}
-blockquote, q {
-    quotes: none;
-}
-blockquote:before, blockquote:after,
-q:before, q:after {
-    content: '';
-    content: none;
-}
-table {
-    border-collapse: collapse;
-    border-spacing: 0;
-}
-
-html, body {
-    height: 100%;
-    position: relative;
-}
-
 body {
     background-color: #eee;
 }
@@ -60,169 +8,8 @@ body.art {
     background-size: cover;
 }
 
-body.info {
-    background-color: #eee;
-    background-image: none;
-    padding-top: 50px;
-}
-
-.info .item {
-    background-color: #fff;
-    box-shadow: #ccc 1px 1px 4px;
-    box-sizing: border-box;
-    display: inline-block;
-    height: 330px;
-    margin: 5px;
-    padding: 10px;
-    position: relative;
-    text-align: start;
-    vertical-align: top;
-    width: 295px;
-}
-
-.artist-wrapper {
-    font-size: 1.2rem;
-    padding: 20px;
-}
-
-.artist-wrapper a {
-    color: #f65694;
-    display: inline-block;
-    text-decoration: none;
-}
-
-.artist-wrapper a.artist {
-    font-size: 1.8rem;
-    margin-right: 15px;
-}
-
-html, body {
-    height: 100%;
-    position: relative;
-}
-
 body > img {
     display: none;
-}
-
-#menu-toggle {
-    cursor: pointer;
-    font-size: 2rem;
-    font-weight: 300;
-    color: #e22661;
-    float: right;
-    margin-top: 5px;
-    margin-right: 16px;
-    position: relative;
-    text-align: right;
-}
-
-#menu-toggle li a {
-    color: #fff;
-    display: block;
-    font-size: 1.2rem;
-    padding: 8px 18px 9px;
-    text-decoration: none;
-    background-color: #f181ad;
-    border-bottom: 1px solid rgba(255, 255, 255, .25);
-}
-
-#menu-toggle li a:hover {
-    background-color: #e22661;;
-    color: #eee;
-}
-
-#menu-toggle li:last-of-type a {
-    border-bottom: none;
-}
-
-.menu {
-    display: none;
-    background-color: #e22661;
-    border-bottom: 1px solide #111;
-    border-left: 1px solide #111;
-    position: absolute;
-    top: 45px;
-    right: -16px;
-    width: 192px;
-    z-index: 3;
-}
-
-.infobox {
-    background-color: rgba(255, 255, 255, 0.75);
-    margin: 0 auto;
-    max-width: 960px;
-    min-width: 280px;
-    width: 100%;
-    text-align: center;
-}
-
-.infobox-wrapper {
-    padding: 20px;
-}
-
-.infobox a {
-    color: #f65694;
-    text-decoration: none;
-    text-shadow: #fff 1px 1px 0;
-}
-
-.infobox a:hover {
-    background-color: #eee;
-}
-
-a.big {
-    font-size: 3rem;
-    line-height: 3.8rem;
-}
-
-a.medium {
-    font-size: 2rem;
-    line-height: 2.5rem;
-}
-
-.infobox ul, .infobox p, .infobox h1, .infobox h2 {
-    border: 0;
-    display: block;
-    line-height: 1.3rem;
-    padding: 0 10px;
-}
-
-.infobox ul {
-    padding: 0 10px;
-}
-
-.infobox h1 {
-    font-size: 2.4rem;
-    line-height: 2.5rem;
-    margin-bottom: 20px;
-}
-
-.infobox h2 {
-    font-size: 2rem;
-    line-height: 2.2rem;
-    margin-top: 30px;
-}
-
-.infobox a.do {
-    color: #398bce;
-}
-
-.infobox p {
-    margin-bottom: 10px;
-}
-
-.infobox p, .infobox li {
-    font-size: 1.3rem;
-    line-height: 1.6rem;
-}
-
-.infobox li {
-    margin: 15px 0;
-}
-
-.info .infobox h1, .info .infobox h2 {
-    margin: 0;
 }
 
 #wrapper {
@@ -261,11 +48,6 @@ a.medium {
     transform: rotate(20deg);
 }
 
-h1 {
-    font-size: 3rem;
-    padding: 20px;
-}
-
 .input, #counter {
     color: #fff;
     background: none;
@@ -301,137 +83,6 @@ input::-webkit-input-placeholder {
 }
 
 .input:focus { color: #fff; }
-
-.chats {
-    float: left;
-    position: relative;
-    width: 100%;
-    margin-top: 51px;
-    padding-bottom: 99px;
-}
-
-.chats.lean {
-    padding-bottom: 0px;
-}
-
-.chats li {
-    background-color: rgba(255, 255, 255, 0.85);
-    clear: both;
-    float: left;
-    min-height: 102px;
-    width: 100%;
-    overflow: hidden;
-    position: relative;
-    white-space: pre-wrap;
-}
-
-.chats li:first-of-type {
-    padding-top: 18px;
-}
-
-.chats li:after {
-    display: block;
-    position: absolute;
-    width: 100%;
-    height: 1px;
-    background: #f181ad;
-    content: "";
-    bottom: 0;
-    left: 171px;
-}
-
-.chats li img {
-    display: block;
-    position: absolute;
-    top: 0;
-    left: 18px;
-    width: 135px;
-}
-
-.chats li:first-of-type img {
-  top: 18px;
-}
-
-.chats .out-of-view img {
-    display: none;
-}
-
-.chats li p {
-    color: #000;
-    font-size: 1.35rem;
-    line-height: 1.5rem;
-    min-width: 182px;
-    overflow: hidden;
-    padding: 14px 56px 18px 171px;
-    font-weight: 300;
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
-
-.chats li .mute {
-    font-family: "Helvetica Neue", "Helvetica", "Arial", sans-serif;
-    background-color: #f181ad;
-    border: 0;
-    color: #fff;
-    display: none;
-    font-size: 0.8rem;
-    font-weight: 300;
-    margin: 0;
-    padding: 8px 18px 9px;
-    position: absolute;
-    right: 0;
-    bottom: 0;
-    cursor: pointer;
-    text-transform: uppercase;
-}
-
-.chats li:hover .mute {
-    display: block;
-}
-
-.chats li .mute:hover {
-    background-color: #e22661;
-    color: #eee;
-}
-
-.chats li .timestamp {
-    font-family: "Helvetica Neue", "Helvetica", "Arial", sans-serif;
-    border: 0;
-    color: #666;
-    display: block;
-    font-size: 0.8rem;
-    font-weight: 300;
-    position: absolute;
-    right: 0;
-    top: 0;
-    padding: 8px;
-}
-
-.chats li:first-of-type .timestamp {
-    top: 18px;
-}
-
-.chats li p span {
-    color: #70b4e4;
-    font-size: 0.8rem;
-}
-
-.chats li em {
-    font-style: italic;
-}
-
-.chats li b {
-    font-weight: 500;
-}
-
-.chats li p a {
-    color: #34a4b8;
-    text-decoration: none;
-}
-
-.chats li p a:hover {
-    background-color: #fff;
-}
 
 ul li.on {
     background-color: #adf6ff;
@@ -501,12 +152,6 @@ ul li.on {
     width: 1px;
 }
 
-.chats li img.emojify {
-    width: 50px;
-    color: transparent;
-    min-width: 0;
-}
-
 @media only screen and (max-width: 1150px) {
     .input {
         width: 75%;
@@ -536,32 +181,6 @@ ul li.on {
       text-indent: -9999px;
     }
 
-    .chats li:after {
-        left: 153px;
-    }
-
-    .chats li p {
-        font-size: 1.1rem;
-        line-height: 1.4rem;
-        padding-right: 8px;
-        padding-left: 153px;
-        padding-top: 8px;
-        min-width: 0;
-        width: auto;
-        float: none;
-    }
-
-    .chats li .mute {
-        display: block;
-        bottom: 0;
-        margin-bottom: 0;
-        padding: 5px 5px 5px 7px;
-        font-size: .7rem;
-        color: #f181ad;
-        background: none;
-    }
-
-    .chats li img,
     #footer video,
     #footer svg.progress {
         left: 0;
@@ -591,20 +210,6 @@ ul li.on {
 }
 
 @media only screen and (max-width: 320px) {
-    .infobox-wrapper {
-        padding: 5px;
-    }
-
-    .chats li p {
-        font-size: .85rem;
-        line-height: 1rem;
-        min-width: 0;
-        width: auto;
-        float: none;
-        padding-right: 12px;
-        padding-bottom: 20px;
-    }
-
     .input {
         width: 145px;
     }

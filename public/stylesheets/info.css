@@ -1,0 +1,102 @@
+.info {
+    background-color: #eee;
+    background-image: none;
+    padding-top: 50px;
+}
+
+.info .item {
+    background-color: #fff;
+    box-shadow: #ccc 1px 1px 4px;
+    box-sizing: border-box;
+    display: inline-block;
+    height: 330px;
+    margin: 5px;
+    padding: 10px;
+    position: relative;
+    text-align: start;
+    vertical-align: top;
+    width: 295px;
+}
+
+.infobox {
+    background-color: rgba(255, 255, 255, 0.75);
+    margin: 0 auto;
+    max-width: 960px;
+    min-width: 280px;
+    width: 100%;
+    text-align: center;
+}
+
+.infobox-wrapper {
+    padding: 20px;
+}
+
+.infobox a {
+    color: #f65694;
+    text-decoration: none;
+    text-shadow: #fff 1px 1px 0;
+}
+
+.infobox a:hover {
+    background-color: #eee;
+}
+
+a.big {
+    font-size: 3rem;
+    line-height: 3.8rem;
+}
+
+a.medium {
+    font-size: 2rem;
+    line-height: 2.5rem;
+}
+
+.infobox ul, .infobox p, .infobox h1, .infobox h2 {
+    border: 0;
+    display: block;
+    line-height: 1.3rem;
+    padding: 0 10px;
+}
+
+.infobox ul {
+    padding: 0 10px;
+}
+
+.infobox h1 {
+    font-size: 2.4rem;
+    line-height: 2.5rem;
+    margin-bottom: 20px;
+}
+
+.infobox h2 {
+    font-size: 2rem;
+    line-height: 2.2rem;
+    margin-top: 30px;
+}
+
+.infobox a.do {
+    color: #398bce;
+}
+
+.infobox p {
+    margin-bottom: 10px;
+}
+
+.infobox p, .infobox li {
+    font-size: 1.3rem;
+    line-height: 1.6rem;
+}
+
+.infobox li {
+    margin: 15px 0;
+}
+
+.info .infobox h1, .info .infobox h2 {
+    margin: 0;
+}
+
+@media only screean and (max-width: 320px) {
+    .infobox-wrapper {
+        padding: 5px;
+    }
+}
