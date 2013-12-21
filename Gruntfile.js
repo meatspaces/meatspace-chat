@@ -26,7 +26,9 @@ module.exports = function(grunt) {
     cssmin: {
       compress: {
         files: {
-          'public/stylesheets/main-min.css': ['public/stylesheets/main.css', 'public/stylesheets/art.css']
+          'public/stylesheets/main-min.css': ['public/stylesheets/reset.css',
+                                              'public/stylesheets/main.css',
+                                              'public/stylesheets/art.css']
         }
       }
     },
