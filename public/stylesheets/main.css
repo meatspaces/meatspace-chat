@@ -69,12 +69,15 @@ body.info {
 .info .item {
     background-color: #fff;
     box-shadow: #ccc 1px 1px 4px;
-    float: left;
-    height: 310px;
+    box-sizing: border-box;
+    display: inline-block;
+    height: 330px;
     margin: 5px;
     padding: 10px;
     position: relative;
-    width: 275px;
+    text-align: start;
+    vertical-align: top;
+    width: 295px;
 }
 
 .artist-wrapper {
@@ -151,6 +154,7 @@ body > img {
     max-width: 960px;
     min-width: 280px;
     width: 100%;
+    text-align: center;
 }
 
 .infobox-wrapper {
