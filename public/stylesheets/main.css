@@ -81,11 +81,6 @@ body.info {
 }
 
 
-html, body {
-    height: 100%;
-    position: relative;
-}
-
 body > img {
     display: none;
 }
