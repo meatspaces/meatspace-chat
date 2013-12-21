@@ -326,12 +326,6 @@ ul li.on {
     width: 1px;
 }
 
-.chats li img.emojify {
-    width: 50px;
-    color: transparent;
-    min-width: 0;
-}
-
 @media only screen and (max-width: 1150px) {
     .input {
         width: 75%;
