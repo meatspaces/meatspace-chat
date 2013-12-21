@@ -28,6 +28,7 @@ module.exports = function(grunt) {
         files: {
           'public/stylesheets/main-min.css': ['public/stylesheets/reset.css',
                                               'public/stylesheets/main.css',
+                                              'public/stylesheets/menu.css',
                                               'public/stylesheets/info.css',
                                               'public/stylesheets/art.css']
         }

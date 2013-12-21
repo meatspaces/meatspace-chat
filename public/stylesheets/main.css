@@ -12,49 +12,6 @@ body > img {
     display: none;
 }
 
-#menu-toggle {
-    cursor: pointer;
-    font-size: 2rem;
-    font-weight: 300;
-    color: #e22661;
-    float: right;
-    margin-top: 5px;
-    margin-right: 16px;
-    position: relative;
-    text-align: right;
-}
-
-#menu-toggle li a {
-    color: #fff;
-    display: block;
-    font-size: 1.2rem;
-    padding: 8px 18px 9px;
-    text-decoration: none;
-    background-color: #f181ad;
-    border-bottom: 1px solid rgba(255, 255, 255, .25);
-}
-
-#menu-toggle li a:hover {
-    background-color: #e22661;;
-    color: #eee;
-}
-
-#menu-toggle li:last-of-type a {
-    border-bottom: none;
-}
-
-.menu {
-    display: none;
-    background-color: #e22661;
-    border-bottom: 1px solide #111;
-    border-left: 1px solide #111;
-    position: absolute;
-    top: 45px;
-    right: -16px;
-    width: 192px;
-    z-index: 3;
-}
-
 #wrapper {
     margin: 0 auto;
     position: relative;
