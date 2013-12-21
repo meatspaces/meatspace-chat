@@ -29,6 +29,7 @@ module.exports = function(grunt) {
           'public/stylesheets/main-min.css': ['public/stylesheets/reset.css',
                                               'public/stylesheets/main.css',
                                               'public/stylesheets/menu.css',
+                                              'public/stylesheets/chats.css',
                                               'public/stylesheets/info.css',
                                               'public/stylesheets/art.css']
         }
