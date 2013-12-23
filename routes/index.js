@@ -6,11 +6,6 @@ module.exports = function (app, nconf, io) {
   var nativeClients = require('../clients.json');
   var level = require('level');
 
-  var logger = level(nconf.get('logger'), {
-    createIfMissing: true,
-    valueEncoding: 'json'
-  });
-
   var publico = new Publico('none', {
     db: './db',
     limit: 20
@@ -42,11 +37,6 @@ module.exports = function (app, nconf, io) {
   });
 
   app.get('/', function (req, res) {
-    var currDate = Date.now();
-    logger.put('landing-page!' + currDate, {
-      ip: req.ip,
-      created: currDate
-    });
     res.render('index');
   });
 
@@ -92,13 +82,6 @@ module.exports = function (app, nconf, io) {
             res.status(400);
             res.json({ error: err.toString() });
           } else {
-            var currDate = Date.now();
-            logger.put('web!' + currDate, {
-              ip: ip,
-              fingerprint: userId,
-              created: currDate
-            });
-
             res.json({ status: status });
           }
         });
@@ -117,9 +100,19 @@ module.exports = function (app, nconf, io) {
     // Fire out an initial burst of images to the connected client, assuming there are any available
     getSortedChats(function (err, results) {
       if(results.chats && results.chats.length > 0) {
-        results.chats.forEach(function (chat) {
-          emitChat(socket, chat);
-        });
+        try {
+          results.chats.forEach(function (chat) {
+            emitChat(socket, chat);
+          });
+        } catch (e) {
+          if (typeof results.chats.forEach !== 'function') {
+            console.log('chats is type of ', typeof results.chats, ' and somehow has length ', results.chats.length);
+
+            if (typeof results.chats === 'string') {
+              console.log('results.chats appears to be a string');
+            }
+          }
+        }
       }
     });
 
@@ -130,13 +123,6 @@ module.exports = function (app, nconf, io) {
         addChat(data.message, data.picture, data.fingerprint, data.fingerprint, ip, function (err) {
           if (err) {
             console.log('error posting ', err.toString());
-          } else {
-            var currDate = Date.now();
-            logger.put('api!' + currDate, {
-              ip: ip,
-              fingerprint: data.fingerprint,
-              created: currDate
-            });
           }
         });
       } else {
