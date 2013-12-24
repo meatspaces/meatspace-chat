@@ -590,6 +590,7 @@ ul li.on {
 
     .chats li .timestamp {
       font-size: 0.7rem;
+      top: auto;
       bottom: 0;
       right: 35px;
       padding-bottom: 5px;
