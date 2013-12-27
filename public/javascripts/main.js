@@ -117,6 +117,8 @@ define(['jquery', 'transform', 'gumhelper', './base/videoShooter', 'fingerprint'
 
           // This is likely your own fingerprint so you don't mute yourself. Unless you're weird.
           if (userId.val() !== renderFP) {
+            updateNotificationCount();
+
             var btn = document.createElement('button');
             btn.textContent = 'mute';
             btn.className = 'mute';
@@ -228,7 +230,6 @@ define(['jquery', 'transform', 'gumhelper', './base/videoShooter', 'fingerprint'
 
   socket.on('message', function (data) {
     debug("Incoming chat key='%s'", data.chat.key);
-    updateNotificationCount();
     renderChat(data);
   });
 
