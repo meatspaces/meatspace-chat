@@ -1,6 +1,12 @@
 # Meatspace Chat
 [![Build Status](https://travis-ci.org/meatspaces/meatspace-chat.png)](https://travis-ci.org/meatspaces/meatspace-chat)
 
+## Before you send a pull request
+
+Note that we are not taking any new features or changes - if you feel like something is that important to the chat, please contact [jen@meatspac.es](mailto:jen@meatspac.es) or [ednapiranha](http://twitter.com/ednapiranha) before sending something that might be rejected.
+
+If you want to create a browser add-on or plugin feel free to do so and follow the API instructions below. Then send us a pull request with your link at [https://github.com/meatspaces/meatspace-chat-hackers](https://github.com/meatspaces/meatspace-chat-hackers).
+
 ## Setting up
     cp local.json-dist local.json
     cp clients.json-dist clients.json
