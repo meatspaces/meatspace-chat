@@ -274,6 +274,7 @@ define(['jquery', 'transform', 'gumhelper', './base/videoShooter', 'fingerprint'
   body.on('click', '#unmute', function (ev) {
     debug('clearing mutes');
     localStorage.clear();
+    mutedArr = [];
   });
 
   addChatForm.on('keydown', function (ev) {
