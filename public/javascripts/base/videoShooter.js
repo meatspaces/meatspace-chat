@@ -31,15 +31,20 @@ define(['Animated_GIF'], function (Animated_GIF) {
           setTimeout(captureFrame, interval * 1000); // timeouts are in milliseconds
         } else {
           ag.getBase64GIF(function(image) {
+            
+            // Ensure workers are freed-so we avoid bug #103 https://github.com/meatspaces/meatspace-chat/issues/103
+            ag.destroy();
+
             var img = document.createElement('img');
             img.src = image;
             document.body.appendChild(img);
             callback(image);
+
           });
         }
       }
     };
-  };
+  }
 
   return VideoShooter;
 });
