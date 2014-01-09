@@ -150,8 +150,16 @@ define(['jquery', 'transform', 'gumhelper', './base/videoShooter', 'fingerprint'
           // otherwise, you are reading the history... allow user to scroll up.
           if (follow) {
             var children = chatList.children();
-            for (var i = 0, length = children.length; length > CHAT_LIMIT; length --, i ++) {
+            var toRemove = children.length - CHAT_LIMIT;
+            for (var i = 0; i < toRemove; i ++) {
               children.eq(i).remove().waypoint('destroy');
+            }
+
+            if (toRemove > 1) {
+              // if we've removed more than one chat, then the vertical height of the chats has
+              // changed (since we've only added one chat). Refresh waypoints to make gifs appear
+              // properly
+              $.waypoints('refresh');
             }
 
             li.scrollIntoView();
@@ -247,6 +255,7 @@ define(['jquery', 'transform', 'gumhelper', './base/videoShooter', 'fingerprint'
         return $(this).data('fingerprint') === fp;
       });
       userMessages.remove().waypoint('destroy');
+      $.waypoints('refresh');
     }
   });
 
