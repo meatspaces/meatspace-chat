@@ -241,7 +241,12 @@ define(['jquery', 'transform', 'gumhelper', './base/videoShooter', 'fingerprint'
       debug('Muting %s', fp);
       mutedArr.push(fp);
       localStorage.setItem('muted', JSON.stringify(mutedArr));
-      self.text('muted!');
+      var userMessages = $('.chats li[data-action="chat-message"]').filter(function() {
+        // using filter because we have no guarantee of fingerprint formatting, and if we tried to
+        // use an attribute selector, it could be XSS'd to some extent
+        return $(this).data('fingerprint') === fp;
+      });
+      userMessages.remove().waypoint('destroy');
     }
   });
 
