@@ -150,8 +150,8 @@ define(['jquery', 'transform', 'gumhelper', './base/videoShooter', 'fingerprint'
           // otherwise, you are reading the history... allow user to scroll up.
           if (follow) {
             var children = chatList.children();
-            if (children.length > CHAT_LIMIT) {
-              children.first().remove().waypoint('destroy');
+            for (var i = 0, length = children.length; length > CHAT_LIMIT; length --, i ++) {
+              children.eq(i).remove().waypoint('destroy');
             }
 
             li.scrollIntoView();
