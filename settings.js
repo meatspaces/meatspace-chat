@@ -1,6 +1,5 @@
 // Module dependencies.
 module.exports = function(app, configurations, express) {
-  var clientSessions = require('client-sessions');
   var nconf = require('nconf');
   var maxAge = 24 * 60 * 60 * 1000 * 28;
   var nativeClients = require('./clients.json');
@@ -29,15 +28,8 @@ module.exports = function(app, configurations, express) {
       app.use(express.logger('dev'));
     }
     app.use(express.static(__dirname + '/public'));
-    app.use(clientSessions({
-      cookieName: nconf.get('session_cookie'),
-      secret: nconf.get('session_secret'),
-      duration: maxAge, // 4 weeks
-      cookie: {
-        httpOnly: true,
-        maxAge: maxAge
-      }
-    }));
+    app.use(express.cookieParser());
+    app.use(express.session({ secret: nconf.get('session_secret') }));
     app.use(clientBypassCSRF);
     app.use(function (req, res, next) {
       res.locals.session = req.session;
