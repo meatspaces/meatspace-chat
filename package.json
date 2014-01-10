@@ -16,7 +16,6 @@
     "start": "nodemon app.js"
   },
   "dependencies": {
-    "client-sessions": ">= 0.3.1",
     "connect": ">= 2.7.6",
     "express": ">= 3.2.0",
     "jade": ">= 0.29.0",
@@ -25,17 +24,16 @@
     "gravatar": "1.0.6",
     "socket.io": ">= 0.9.16",
     "crypto": "0.0.3",
-    "level": ">= 0.10.0",
-    "hood": ">= 0.1.0"
+    "level": ">= 0.10.0"
   },
   "devDependencies": {
-    "grunt": ">= 0.4.x",
+    "grunt": "~0.4.2",
     "grunt-contrib-concat": "~0.3.0",
-    "grunt-contrib-uglify": ">= 0.1.2",
-    "grunt-contrib-requirejs": ">= 0.4.0",
-    "grunt-contrib-cssmin": ">= 0.4.1",
-    "grunt-contrib-nodeunit": ">= 0.2.2",
-    "grunt-contrib-jshint": "~0.7.0",
+    "grunt-contrib-uglify": "~0.2.7",
+    "grunt-contrib-requirejs": "0.4.1",
+    "grunt-contrib-cssmin": "~0.7.0",
+    "grunt-contrib-nodeunit": "~0.2.2",
+    "grunt-contrib-jshint": "~0.7.2",
     "amdefine": "~0.1.0",
     "nodemon": "*",
     "bower": ">= 1.2.7",

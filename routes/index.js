@@ -37,7 +37,6 @@ module.exports = function (app, nconf, io) {
   });
 
   app.get('/', function (req, res) {
-    req.session.lang = req.query.lang || 'en';
     res.render('index');
   });
 
