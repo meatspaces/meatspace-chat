@@ -66,6 +66,17 @@ body.info {
     padding-top: 50px;
 }
 
+.language {
+    float: left;
+    padding-top: 12px;
+    width: 100px;
+}
+
+.language a {
+    color: #e22661;
+    text-decoration: none;
+}
+
 .info .item {
     background-color: #fff;
     box-shadow: #ccc 1px 1px 4px;

@@ -19,6 +19,11 @@ html
     #wrapper
       .header
         a#logo(href='/info', target='_blank', title='Info!') Info!
+        .language
+          if session.lang == 'fr'
+            a(href='https://chat.meatspac.es/?lang=en') English
+          else
+            a(href='http://fr.meatspac.es/?lang=fr') en français
         #menu-toggle ≡
           ul.menu
             li
