@@ -14,7 +14,6 @@ define(['jquery', 'transform', 'gumhelper', './base/videoShooter', 'fingerprint'
   var charCounter = $('#counter');
   var userId = $('#userid');
   var menu = $('#menu-toggle .menu');
-  var artwork = localStorage.getItem('artwork') || false;
   var fp = $('#fp');
   var svg = $(null);
   var isPosting = false;
@@ -257,28 +256,6 @@ define(['jquery', 'transform', 'gumhelper', './base/videoShooter', 'fingerprint'
       userMessages.remove().waypoint('destroy');
       $.waypoints('refresh');
     }
-  });
-
-  var checkArtStatus = function () {
-    if (artwork) {
-      body.addClass('art');
-    } else {
-      body.removeClass('art');
-    }
-  };
-
-  checkArtStatus();
-
-  menu.find('#artwork').click(function () {
-    if (artwork) {
-      localStorage.removeItem('artwork');
-      artwork = false;
-    } else {
-      localStorage.setItem('artwork', true);
-      artwork = true;
-    }
-
-    checkArtStatus();
   });
 
   menu.parent().click(function () {
