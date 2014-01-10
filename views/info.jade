@@ -3,43 +3,43 @@ extend default_layout
 block content
   .infobox
     .item
-      h1 Welcome to Meatspace Chat!
+      h1= t('welcome')
 
       ul
         li
-          a(href='http://digitalocean.com', class='do medium') Powered by Digital Ocean! THEY ARE THE BEST.
+          a(href='http://digitalocean.com', class='do medium')= t('poweredByDO') 
 
     .item
-      h2 For the Contributors
+      h2= t('forContributors')
       ul
         li
-          p Sending a fix to the repo? (No new features please)
+          p= t('contributorCopy')
           p
-            a(href='http://github.com/meatspaces/meatspace-chat') Github Repository
+            a(href='http://github.com/meatspaces/meatspace-chat')= t('githubRepo')
 
     .item
-      h2 For the Hackers
+      h2= t('forHackers')
       ul
         li
-          p New features/ideas/hacks that use the web version of the chat?
+          p= t('hackerCopy')
           p
-            a(href='http://github.com/meatspaces/meatspace-chat-hackers') Add it here!
+            a(href='http://github.com/meatspaces/meatspace-chat-hackers')= t('addItHere')
 
     .item
-      h2 For the API Developers
+      h2= t('forAPIDevs')
       ul
         li
-          p Want to do a third-party client/bot/whatever using the API?
+          p= t('devsCopy')
           p
-            a(href='https://github.com/meatspaces/meatspace-chat#native-apps-iosandroid-or-non-web-clients') More info here
+            a(href='https://github.com/meatspaces/meatspace-chat#native-apps-iosandroid-or-non-web-clients')= t('moreInfoHere')
     .item
-      h2 For the Consumers
+      h2= t('forConsumers')
       ul
         li
-          a(href='http://www.zazzle.com/meatspaceshop', class='big') Meatspace Shop
+          a(href='http://www.zazzle.com/meatspaceshop', class='big')= t('meatspaceShop')
 
     .item
-      h2 For the Credits
+      h2= t('forCredits')
       ul
         li
           a(href='https://twitter.com/ednapiranha', class='big') Creatorbro
