@@ -576,6 +576,11 @@ ul li.on {
         padding-right: 0px;
         font-size: .85rem;
     }
+
+    #add-chat-blocker {
+        font-size: .85rem;
+        line-height: 2rem;
+    }
 }
 
 @media only screen and (max-width: 320px) {
