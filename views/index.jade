@@ -4,10 +4,10 @@ block content
   form(method='post', id='add-chat-form')
     input(type='hidden', name='picture', id='picture')
     .message-content
-      input(name='message', id='add-chat', class='input', maxlength='250', autocomplete='off', placeholder='Send a public message')
+      input(name='message', id='add-chat', class='input', maxlength='250', autocomplete='off', placeholder=t('messagePrompt'))
       input(type='hidden', name='_csrf', value='#{csrf}')
       input(type='hidden', name='fingerprint', id='fp')
       input(type='hidden', name='userid', id='userid')
       #add-chat-blocker.hidden
-        span Sending, please wait!
+        span= t('pleaseWait') 
   #counter 250

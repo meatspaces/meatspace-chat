@@ -1,7 +1,7 @@
 doctype html
 html
   head
-    title Meatspace chat: your 2 seconds of fame.
+    title= t('pageTitle') 
     meta(content='width=device-width, height=device-height, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0', name='viewport')
     meta(content='yes', name='apple-mobile-web-app-capable')
     meta(content='chrome=1', http-equiv='X-UA-Compatible')
@@ -15,5 +15,5 @@ html
   body.info
     #wrapper
       .header
-        a#logo(href='/', target='_blank', title='Back to chat!') Back to chat!
+        a#logo(href='/', target='_blank', title=t('backToChat'))= t('backToChat')
       block content
