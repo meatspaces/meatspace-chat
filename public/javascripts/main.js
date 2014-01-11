@@ -318,7 +318,6 @@ define(['jquery', 'transform', 'gumhelper', './base/videoShooter', 'fingerprint'
             charCounter.text(CHAR_LIMIT);
             isPosting = false;
             addChatBlocker.addClass('hidden');
-            body.find('> img').remove();
           });
         }, 10, 0.2, function (captureProgress) {
           progressCircleTo(captureProgress);
