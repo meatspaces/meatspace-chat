@@ -1,6 +1,6 @@
 'use strict';
 
-module.exports = function (app, nconf, io) {
+module.exports = function (app, nconf, io, zio, topic_in, topic_out) {
   var crypto = require('crypto');
   var Publico = require('meatspace-publico');
   var nativeClients = require('../clients.json');
@@ -24,7 +24,9 @@ module.exports = function (app, nconf, io) {
     });
   };
 
-  var emitChat = function (socket, chat) {
+  var emitChat = function (socket, chat, zio, topic_out) {
+    var statmsg = topic_out.concat(JSON.stringify({fingerprint: chat.value.fingerprint}));
+    zio.send(statmsg);
     socket.emit('message', { chat: chat });
   };
 
@@ -62,7 +64,10 @@ module.exports = function (app, nconf, io) {
         next(err);
       } else {
         try {
-          emitChat(io.sockets, { key: c.key, value: c });
+          var payload = JSON.stringify({fingerprint: fingerprint});
+          var statmsg = topic_in.concat(payload);
+          zio.send(statmsg);
+          emitChat(io.sockets, { key: c.key, value: c }, zio, topic_out);
           next(null, 'sent!');
         } catch (err) {
           next(new Error('Could not emit message'));
@@ -102,7 +107,7 @@ module.exports = function (app, nconf, io) {
       if(results.chats && results.chats.length > 0) {
         try {
           results.chats.forEach(function (chat) {
-            emitChat(socket, chat);
+            emitChat(socket, chat, zio, topic_out);
           });
         } catch (e) {
           if (typeof results.chats.forEach !== 'function') {
