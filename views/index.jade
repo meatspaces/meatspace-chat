@@ -2,7 +2,6 @@ extend layout
 
 block content
   form(method='post', id='add-chat-form')
-    input(type='hidden', name='picture', id='picture')
     .message-content
       input(name='message', id='add-chat', class='input', maxlength='250', autocomplete='off', placeholder=t('messagePrompt'))
       input(type='hidden', name='_csrf', value='#{csrf}')

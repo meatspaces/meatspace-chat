@@ -7,7 +7,6 @@ define(['jquery', 'transform', 'gumhelper', './base/videoShooter', 'fingerprint'
   var addChatForm = $('#add-chat-form');
   var addChatBlocker = $('#add-chat-blocker');
   var addChat = $('#add-chat');
-  var picField = $('#picture');
   var chatList = $('.chats ul');
   var chatsContainer = $('.chats');
   var footer = $('#footer');
@@ -302,18 +301,17 @@ define(['jquery', 'transform', 'gumhelper', './base/videoShooter', 'fingerprint'
         svg.attr('class', 'progress visible');
 
         getScreenshot(function (pictureData) {
-          picField.val(pictureData);
+          var submissionData = $.extend(formValues(self.find('.message-content input')), { picture: pictureData });
 
           svg.attr('class', 'progress');
 
           debug('Sending chat');
-          $.post('/add/chat', self.serialize(), function () {
+          $.post('/add/chat', submissionData, function () {
 
           }).error(function (data) {
             alert(data.responseJSON.error);
           }).always(function (data) {
             addChat.prop('readonly', false);
-            picField.val('');
             addChat.val('');
             charCounter.text(CHAR_LIMIT);
             isPosting = false;
@@ -331,6 +329,13 @@ define(['jquery', 'transform', 'gumhelper', './base/videoShooter', 'fingerprint'
       addChat.focus();
     }
   });
+
+  function formValues(elements) {
+    return elements.toArray().reduce(function (o, input) {
+      o[$(input).attr('name')] = $(input).val();
+      return o;
+    }, {});
+  }
 
   function hasModifiersPressed(event) {
     // modifiers exclude shift since it's often used in normal typing
