@@ -18,6 +18,7 @@ define(['jquery', 'transform', 'gumhelper', './base/videoShooter', 'fingerprint'
   var svg = $(null);
   var isPosting = false;
   var canSend = true;
+  var muteText = body.data('mute');
   var fingerprint = new Fingerprint({ canvas: true }).get();
   var mutedArr = JSON.parse(localStorage.getItem('muted')) || [];
   var socket = io.connect(location.protocol + '//' + location.hostname +
@@ -119,7 +120,7 @@ define(['jquery', 'transform', 'gumhelper', './base/videoShooter', 'fingerprint'
             updateNotificationCount();
 
             var btn = document.createElement('button');
-            btn.textContent = 'mute';
+            btn.textContent = muteText;
             btn.className = 'mute';
             li.appendChild(btn);
           }
