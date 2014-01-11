@@ -5,5 +5,8 @@
     "analytics": "your google analytics value",
     "analyticsHost": "your domain without the protocol (e.g. someurl.com)",
     "logger": "./logger",
-    "appId": ""
+    "appId": "",
+    "meatcounter_addr" : "ipc:///tmp/meatcounter.ipc",
+    "meatcounter_inc_topic" : "meatspace.incoming",
+    "meatcounter_out_topic" : "meatspace.outgoing"
 }
