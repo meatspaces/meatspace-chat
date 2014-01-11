@@ -320,10 +320,6 @@ input::-webkit-input-placeholder {
     white-space: pre-wrap;
 }
 
-.chats li:first-of-type {
-    padding-top: 18px;
-}
-
 .chats li:after {
     display: block;
     position: absolute;
@@ -341,10 +337,6 @@ input::-webkit-input-placeholder {
     top: 0;
     left: 18px;
     width: 135px;
-}
-
-.chats li:first-of-type img {
-  top: 18px;
 }
 
 .chats .out-of-view img {
@@ -400,10 +392,6 @@ input::-webkit-input-placeholder {
     right: 0;
     top: 0;
     padding: 8px;
-}
-
-.chats li:first-of-type .timestamp {
-    top: 18px;
 }
 
 .chats li p span {
