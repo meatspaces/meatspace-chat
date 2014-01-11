@@ -25,7 +25,7 @@ module.exports = function (app, nconf, io, zio, topic_in, topic_out) {
   };
 
   var emitChat = function (socket, chat, zio, topic_out) {
-    var statmsg = topic_out.concat(JSON.stringify({fingerprint: chat.value.fingerprint}));
+    var statmsg = topic_out.concat(JSON.stringify({ fingerprint: chat.value.fingerprint }));
     zio.send(statmsg);
     socket.emit('message', { chat: chat });
   };
@@ -64,7 +64,7 @@ module.exports = function (app, nconf, io, zio, topic_in, topic_out) {
         next(err);
       } else {
         try {
-          var payload = JSON.stringify({fingerprint: fingerprint});
+          var payload = JSON.stringify({ fingerprint: fingerprint });
           var statmsg = topic_in.concat(payload);
           zio.send(statmsg);
           emitChat(io.sockets, { key: c.key, value: c }, zio, topic_out);
