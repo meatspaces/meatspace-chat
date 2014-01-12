@@ -20,7 +20,7 @@ module.exports = function(app, configurations, express) {
 
   i18n.init({
     lng: nconf.get('locale'), // undefined detects user browser settings
-    supportedLngs: ['en', 'fr', 'es'],
+    supportedLngs: ['en', 'fr', 'es', 'ru'],
     fallbackLng: 'en',
     useCookie: false,
     resGetPath: 'locales/__lng__.json'
