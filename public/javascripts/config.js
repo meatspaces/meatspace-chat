@@ -4,7 +4,6 @@ requirejs.config({
     'jquery': 'lib/jquery/jquery',
     'Animated_GIF': 'lib/animated-gif/dist/Animated_GIF.min',
     'fingerprint': 'lib/fingerprint/fingerprint',
-    'transform': 'transform',
     'md5': 'lib/js-md5/js/md5',
     'waypoints': 'lib/jquery-waypoints/waypoints',
     'moment': 'lib/momentjs/moment',

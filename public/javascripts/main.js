@@ -1,4 +1,4 @@
-define(['jquery', 'transform', 'gumhelper', './base/videoShooter', 'fingerprint', 'md5', 'moment', 'favico', 'waypoints'],
+define(['jquery', './base/transform', 'gumhelper', './base/videoShooter', 'fingerprint', 'md5', 'moment', 'favico', 'waypoints'],
   function ($, transform, gumHelper, VideoShooter, Fingerprint, md5, moment, Favico) {
   'use strict';
 
