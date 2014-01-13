@@ -25,7 +25,7 @@ module.exports = function (app, nconf, io, zio, topic_in, topic_out) {
   };
 
   var emitChat = function (socket, chat, zio, topic_out) {
-    var statmsg = JSON.stringify({ epoch_ms: (new Date).getTime(), fingerprint: chat.value.fingerprint });
+    var statmsg = JSON.stringify({ epoch_ms: (new Date()).getTime(), fingerprint: chat.value.fingerprint });
     zio.send([topic_out, statmsg]);
     socket.emit('message', { chat: chat });
   };
