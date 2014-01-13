@@ -14,8 +14,7 @@ nconf.argv().env().file({ file: 'local.json' });
 // to endpoints
 var meatcounter_addrs = nconf.get('meatcounter_addrs');
 var zio = zmq.socket('pub');
-for (var i=0; i<meatcounter_addrs.length; i++) {
-  console.log(meatcounter_addrs[i]);
+for (var i = 0; i < meatcounter_addrs.length; i ++) {
   zio.connect(meatcounter_addrs[i]);
 }
 
