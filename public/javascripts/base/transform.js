@@ -1,5 +1,6 @@
-var define = typeof define !== 'function' ?
-              require('amdefine')(module) : define;
+if (!define) {
+  var define = require('amdefine')(module);
+}
 
 define([], function() {
 

@@ -1,4 +1,4 @@
-var transform = require('../public/javascripts/transform');
+var transform = require('../public/javascripts/base/transform');
 var tests = {};
 var valid, invalid, inline;
 
