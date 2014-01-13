@@ -64,7 +64,7 @@ module.exports = function (app, nconf, io, zio, topic_in, topic_out) {
         next(err);
       } else {
         try {
-          var statmsg = JSON.stringify( { epoch_ms: (new Date).getTime(), fingerprint: fingerprint } );
+          var statmsg = JSON.stringify( { epoch_ms: Date.now(), fingerprint: fingerprint } );
           zio.send([topic_in, statmsg]);
           emitChat(io.sockets, { key: c.key, value: c }, zio, topic_out);
           next(null, 'sent!');
