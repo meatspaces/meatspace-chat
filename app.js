@@ -10,10 +10,14 @@ var settings = require('./settings')(app, configurations, express);
 
 nconf.argv().env().file({ file: 'local.json' });
 
-// set up meatcounter publisher
-var meatcounter_addr = nconf.get('meatcounter_addr');
+// set up meatcounter publisher and connect
+// to endpoints
+var meatcounter_addrs = nconf.get('meatcounter_addrs');
 var zio = zmq.socket('pub');
-zio.connect(meatcounter_addr);
+for (var i=0; i<meatcounter_addrs.length; i++) {
+  console.log(meatcounter_addrs[i]);
+  zio.connect(meatcounter_addrs[i]);
+}
 
 var topic_in = nconf.get('meatcounter_inc_topic');
 var topic_out = nconf.get('meatcounter_out_topic');
