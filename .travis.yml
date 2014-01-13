@@ -1,7 +1,7 @@
 language: node_js
 node_js:
   - 0.10
+services: zeromq
 before_script:
-  - apt-get install libzmq3-dev
   - npm install -g grunt-cli
   - bower install
