@@ -1,6 +1,16 @@
 language: node_js
 node_js:
   - 0.10
+language: c
+
 before_script:
+  - git clone git://github.com/zeromq/zeromq3-x.git
+  - cd zeromq3-x
+  - ./autogen.sh
+  - ./configure && make
+  - sudo make install
+  - sudo ldconfig
+  - cd ..
   - npm install -g grunt-cli
   - bower install
+
