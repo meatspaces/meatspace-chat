@@ -10,6 +10,6 @@
     "gumhelper": "sole/gumhelper",
     "requirejs": "2.1.5",
     "momentjs": "~2.4.0",
-    "favico.js": "~0.3.4"
+    "favico.js": "ca5e30446b304177a0ee25914e9899801b67b59b"
   }
 }
