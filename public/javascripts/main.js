@@ -2,6 +2,10 @@ define(['jquery', './base/transform', 'gumhelper', './base/videoShooter', 'finge
   function ($, transform, gumHelper, VideoShooter, Fingerprint, md5, moment, Favico) {
   'use strict';
 
+  if (/liveDebug/.test(window.location.search)) {
+    window.liveDebug = true;
+  }
+
   var html = $('html');
   var body = $('body');
   var addChatForm = $('#add-chat-form');
@@ -23,10 +27,6 @@ define(['jquery', './base/transform', 'gumhelper', './base/videoShooter', 'finge
   var socket = io.connect(location.protocol + '//' + location.hostname +
     (location.port ? ':' + location.port : ''));
   var videoShooter;
-  if (/liveDebug/.test(window.location.search)) {
-    window.liveDebug = true;
-  }
-
   var CHAT_LIMIT = 25;
   var CHAR_LIMIT = 250;
 
