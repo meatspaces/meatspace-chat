@@ -108,6 +108,18 @@ define([], function() {
         return template('https://twitter.com/' + handle, match[0]);
       }
     },
+    hashtag: {
+      pattern: /#(\w+)/g,
+      transformer: function (match) {
+        var tag = match[1];
+
+        if (!tag) {
+          return null;
+        }
+
+        return template('https://twitter.com/search?q=%23' + tag + '&src=hash', match[0]);
+      }
+    },
     reddit: {
       pattern: /(\B|\s)(\/r\/(\w+))/g,
       transformer: function (match) {
