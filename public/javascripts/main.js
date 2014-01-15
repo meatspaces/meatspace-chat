@@ -150,8 +150,11 @@ define(['jquery', './base/transform', 'gumhelper', './base/videoShooter', 'finge
           if (follow) {
             var children = chatList.children();
             var toRemove = children.length - CHAT_LIMIT;
+            var dyingNode;
             for (var i = 0; i < toRemove; i ++) {
-              children.eq(i).remove().waypoint('destroy');
+              dyingNode = children.eq(i);
+              dyingNode.waypoint('destroy');
+              dyingNode.remove();
             }
 
             if (toRemove > 1) {
