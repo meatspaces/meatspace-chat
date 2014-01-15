@@ -44,7 +44,9 @@ valid = {
     // Don't encode the same portion of text twice
     'test.com/@test',
     //email
-    'email+advancedtricky@example.com'
+    'email+advancedtricky@example.com',
+    'http://example.com/#fragment',
+    '#fragment'
   ],
 
   expects: [
@@ -84,7 +86,9 @@ valid = {
     '<a href="http://x.it/onmouseover=alert(null);//" target="_blank">x.it/onmouseover=alert(null);//</a>\n<a href="http://x.it/onmouseover=alert(null);//" target="_blank">x.it/onmouseover=alert(null);//</a>',
     '<a href="http://test.com/onmouseover=alert(1)//" target="_blank">test.com/onmouseover=alert(1)//</a> <a href="http://est.com/onmouseover=alert(1)//" target="_blank">est.com/onmouseover=alert(1)//</a>',
     '<a href="http://test.com/@test" target="_blank">test.com/@test</a>',
-    '<a href="mailto:email+advancedtricky@example.com" target="_blank">email+advancedtricky@example.com</a>'
+    '<a href="mailto:email+advancedtricky@example.com" target="_blank">email+advancedtricky@example.com</a>',
+    '<a href="http://example.com/#fragment" target="_blank">http://example.com/#fragment</a>',
+    '<a href="https://twitter.com/search?q=%23fragment&src=hash" target="_blank">#fragment</a>'
   ]
 };
 
