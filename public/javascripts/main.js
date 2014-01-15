@@ -256,7 +256,9 @@ define(['jquery', './base/transform', 'gumhelper', './base/videoShooter', 'finge
         // use an attribute selector, it could be XSS'd to some extent
         return $(this).data('fingerprint') === fp;
       });
-      userMessages.remove().waypoint('destroy');
+      userMessages.waypoint('destroy');
+      userMessages.remove();
+
       $.waypoints('refresh');
     }
   });
