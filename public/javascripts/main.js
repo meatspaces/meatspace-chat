@@ -337,7 +337,7 @@ define(['jquery', './base/transform', 'gumhelper', './base/videoShooter', 'finge
 
   function formValues(elements) {
     return elements.toArray().reduce(function (o, input) {
-      o[$(input).attr('name')] = $(input).val();
+      o[input.name] = input.value;
       return o;
     }, {});
   }
