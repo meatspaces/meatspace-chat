@@ -22,5 +22,8 @@
   "forCredits": "For the Credits",
   "info!": "Info!",
   "unmute": "Unmute",
-  "mute": "Mute"
+  "mute": "Mute",
+  "termsAndConditions": "Please read and accept the Terms and Conditions before continuing with Meatspace chat.",
+  "iAccept": "I accept",
+  "iDoNotAccept": "I do not accept"
 }

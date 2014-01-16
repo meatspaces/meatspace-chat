@@ -60,6 +60,72 @@ body.info {
     padding-top: 50px;
 }
 
+#terms {
+    background-color: rgba(255, 255, 255, 0.8);
+    bottom: 10px;
+    color: #555;
+    display: none;
+    font-family: "Helvetica Neue", "Helvetica", "Arial", sans-serif;
+    font-size: 1.5rem;
+    left: 10px;
+    padding: 30px;
+    position: absolute;
+    right: 10px;
+    text-align: center;
+    top: 60px;
+    z-index: 3;
+}
+
+#terms.on {
+    display: block;
+}
+
+#terms p {
+    margin: 20px auto;
+    max-width: 500px;
+    min-width: 250px;
+}
+
+#terms a {
+    color: #e22661;
+    text-decoration: none;
+}
+
+#terms a:first-child {
+    float: left;
+}
+
+#terms a:last-child {
+    float: right;
+}
+
+#terms a:hover {
+    text-decoration: underline;
+}
+
+.terms {
+    background-color: #fff;
+    margin: 0 auto;
+    max-width: 800px;
+    min-width: 260px;
+    padding: 10px 30px;
+}
+
+.terms h1 {
+    font-size: 2rem;
+    margin-bottom: 10px;
+}
+
+.terms h2 {
+    font-size: 1.5rem;
+    margin: 15px 0 10px 0;
+}
+
+.terms p {
+    font-size: 0.9rem;
+    margin-bottom: 5px;
+}
+
 .language {
     float: left;
     padding-top: 12px;
