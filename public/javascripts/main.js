@@ -38,7 +38,7 @@ define(['jquery', './base/transform', 'gumhelper', './base/videoShooter', 'finge
   var isPosting = false;
   var canSend = true;
   var muteText = body.data('mute');
-  var mutedArr = JSON.parse(localStorage.getItem('muted')) || [];
+  var mutes = JSON.parse(localStorage.getItem('muted')) || [];
   var favicon = new Favico({
     animation: 'none',
     position: 'up left'
@@ -75,7 +75,7 @@ define(['jquery', './base/transform', 'gumhelper', './base/videoShooter', 'finge
   };
 
   var isMuted = function (fingerprint) {
-    return mutedArr.indexOf(fingerprint) !== -1;
+    return mutes.indexOf(fingerprint) !== -1;
   };
 
   var debug = function () {
@@ -254,7 +254,7 @@ define(['jquery', './base/transform', 'gumhelper', './base/videoShooter', 'finge
     if (ev.target.id === 'unmute') {
       debug('clearing mutes');
       localStorage.clear();
-      mutedArr = [];
+      mutes = [];
     }
 
     if (ev.target.id === 'tnc-accept') {
@@ -274,8 +274,8 @@ define(['jquery', './base/transform', 'gumhelper', './base/videoShooter', 'finge
 
     if (!isMuted(fingerprint)) {
       debug('Muting %s', fingerprint);
-      mutedArr.push(fingerprint);
-      localStorage.setItem('muted', JSON.stringify(mutedArr));
+      mutes.push(fingerprint);
+      localStorage.setItem('muted', JSON.stringify(mutes));
       messages = chat.list.children().filter(function() {
         // using filter because we have no guarantee of fingerprint formatting, and if we tried to
         // use an attribute selector, it could be XSS'd to some extent
