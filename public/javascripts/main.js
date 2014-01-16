@@ -77,16 +77,15 @@ define(['jquery', './base/transform', 'gumhelper', './base/videoShooter', 'finge
     }
   };
 
-  var setWaypoint = function (rawLi) {
-    var li = $(rawLi);
+  var setWaypoint = function (node) {
+    var li = $(node);
     li.waypoint(function (direction) {
       li.toggleClass('out-of-view', direction === 'down');
     }, {
       offset: function () {
         return -li.height();
       }
-    });
-    li.waypoint(function (direction) {
+    }).waypoint(function (direction) {
       li.toggleClass('out-of-view', direction === 'up');
     }, {
       offset: '100%'
