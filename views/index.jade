@@ -5,8 +5,6 @@ block content
     .message-content
       input(name='message', id='add-chat', class='input', maxlength='250', autocomplete='off', placeholder=t('messagePrompt'))
       input(type='hidden', name='_csrf', value='#{csrf}')
-      input(type='hidden', name='fingerprint', id='fp')
-      input(type='hidden', name='userid', id='userid')
       #add-chat-blocker.hidden
         span= t('pleaseWait')
   #counter 250
