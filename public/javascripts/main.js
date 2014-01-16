@@ -8,6 +8,7 @@ define(['jquery', './base/transform', 'gumhelper', './base/videoShooter', 'finge
 
   var html = $('html');
   var body = $('body');
+  var termsSplash = $('#terms');
   var addChatForm = $('#add-chat-form');
   var addChatBlocker = $('#add-chat-blocker');
   var addChat = $('#add-chat');
@@ -329,8 +330,13 @@ define(['jquery', './base/transform', 'gumhelper', './base/videoShooter', 'finge
     }
   });
 
-  $(document).on('keydown', function (event) {
-    if (!hasModifiersPressed(event) && event.target !== addChat[0]) {
+  termsSplash.on('click', function (ev) {
+    localStorage.setItem('terms', true);
+    termsSplash.removeClass('on');
+  });
+
+  $(document).on('keydown', function (ev) {
+    if (!hasModifiersPressed(ev) && ev.target !== addChat[0]) {
       addChat.focus();
     }
   });
@@ -344,8 +350,14 @@ define(['jquery', './base/transform', 'gumhelper', './base/videoShooter', 'finge
     }, {});
   }
 
-  function hasModifiersPressed(event) {
+  function hasModifiersPressed(ev) {
     // modifiers exclude shift since it's often used in normal typing
-    return (event.altKey || event.ctrlKey || event.metaKey);
+    return (ev.altKey || ev.ctrlKey || ev.metaKey);
+  }
+
+  var termsAndConditions = localStorage.getItem('terms');
+
+  if (!termsAndConditions) {
+    termsSplash.addClass('on');
   }
 });

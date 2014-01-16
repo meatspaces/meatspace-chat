@@ -22,5 +22,8 @@
   "poweredByDO": "Herbergé par Digital Ocean! ILS SONT LES MEILLEURS.",
   "contributorCopy": "Envoyer une correction de bug vers le dépôt ? Pas de nouvelles fonctionnalités s'il vous plaît.",
   "githubRepo": "GitHub Dépôt",
-  "devsCopy": "Voulez-vous créer quelque chose avec l'API?"
+  "devsCopy": "Voulez-vous créer quelque chose avec l'API?",
+  "termsAndConditions": "Please read and accept the Terms and Conditions before continuing with Meatspace chat.",
+  "iAccept": "I accept",
+  "iDoNotAccept": "I do not accept"
 }
