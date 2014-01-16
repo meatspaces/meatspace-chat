@@ -43,8 +43,10 @@ define(['jquery', './base/transform', 'gumhelper', './base/videoShooter', 'finge
     animation: 'none',
     position: 'up left'
   });
-  var socket = io.connect(location.protocol + '//' + location.hostname +
-    (location.port ? ':' + location.port : ''));
+  var socket = io.connect(
+    location.protocol + '//' + location.hostname +
+    (location.port ? ':' + location.port : '')
+  );
   var unreadMessages = 0;
   var pageHidden = 'hidden';
   var pageVisibilityChange = 'visibilitychange';
@@ -142,7 +144,9 @@ define(['jquery', './base/transform', 'gumhelper', './base/videoShooter', 'finge
           time.className = 'timestamp';
           li.appendChild(time);
 
-          var size = composer.message.is(":visible") ? composer.message[0].getBoundingClientRect().bottom : $(window).innerHeight();
+          var size = composer.message.is(":visible") ?
+            composer.message[0].getBoundingClientRect().bottom :
+            $(window).innerHeight();
 
           var last = chat.list[0].lastChild;
           var bottom = last ? last.getBoundingClientRect().bottom : 0;
