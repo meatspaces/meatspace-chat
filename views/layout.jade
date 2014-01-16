@@ -19,8 +19,8 @@ html
     #wrapper
       .header
         a#logo(href='/info', target='_blank', title=t('info!'))= t('info!')
-        #menu-toggle ≡
-          ul.menu
+        #menu-button ≡
+          ul(id='menu-list')
             li
               a#unmute(href='javascript:;')= t('unmute')
             li
@@ -30,8 +30,8 @@ html
             li
               a(href='https://es.meatspac.es') en español
 
-      .chats
-        ul
+      #chat-container
+        ul(id='chat-list')
         .end
     #footer
       block content

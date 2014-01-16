@@ -5,43 +5,46 @@ define(['jquery', './base/transform', 'gumhelper', './base/videoShooter', 'finge
   if (/liveDebug/.test(window.location.search)) {
     window.liveDebug = true;
   }
-
-  var html = $('html');
-  var body = $('body');
-  var addChat = $('#add-chat');
-  var addChatBlocker = $('#add-chat-blocker');
-  var addChatForm = $('#add-chat-form');
-  var inputs = addChatForm.find('input');
-  var chatList = $('.chats ul');
-  var chatsContainer = $('.chats');
-  var footer = $('#footer');
-  var charCounter = $('#counter');
-  var menu = $('#menu-toggle .menu');
-  var svg = $(null);
-  var terms = $('#terms');
-
-  var isPosting = false;
-  var canSend = true;
-  var muteText = body.data('mute');
-  var mutedArr = JSON.parse(localStorage.getItem('muted')) || [];
-  var socket = io.connect(location.protocol + '//' + location.hostname +
-    (location.port ? ':' + location.port : ''));
   var videoShooter;
-
-  var auth = {
-    userid: null,
-    fingerprint: new Fingerprint({ canvas: true }).get()
-  };
 
   var CHAT_LIMIT = 25;
   var CHAR_LIMIT = 250;
 
-  // set up tab notifications for unread messages
+  var chat = {
+    container: $('#chat-container'),
+    list: $('#chat-list')
+  };
+
+  var composer = {
+    blocker: $('#composer-blocker'),
+    form: $('#composer-form'),
+    message: $('#composer-message'),
+    inputs: $('#composer-form input').toArray()
+  };
+  var menu = {
+    button: $('#menu-button'),
+    list: $('#menu-list')
+  };
+  var html = $('html');
+  var body = $('body');
+  var counter = $('#counter');
+  var footer = $('#footer');
+  var svg = $(null);
+  var terms = $('#terms');
+  var isPosting = false;
+  var canSend = true;
+  var muteText = body.data('mute');
+  var mutedArr = JSON.parse(localStorage.getItem('muted')) || [];
   var favicon = new Favico({
     animation: 'none',
     position: 'up left'
   });
-
+  var socket = io.connect(location.protocol + '//' + location.hostname +
+    (location.port ? ':' + location.port : ''));
+  var auth = {
+    userid: null,
+    fingerprint: new Fingerprint({ canvas: true }).get()
+  };
   var pageHidden = 'hidden';
   var pageVisibilityChange = 'visibilitychange';
 
@@ -97,25 +100,26 @@ define(['jquery', './base/transform', 'gumhelper', './base/videoShooter', 'finge
     });
   };
 
-  var renderChat = function (c) {
+  var render = function (incoming) {
+
     debug("Rendering chat: key='%s' fingerprint='%s' message='%s' created='%s' imageMd5='%s'",
-      c.chat.key,
-      c.chat.value.fingerprint,
-      c.chat.value.message,
-      c.chat.value.created,
-      md5(c.chat.value.media));
-    var fingerprint = c.chat.value.fingerprint;
+      incoming.key,
+      incoming.value.fingerprint,
+      incoming.value.message,
+      incoming.value.created,
+      md5(incoming.value.media));
+    var fingerprint = incoming.value.fingerprint;
 
     if (!isMuted(fingerprint)) {
       var img = new Image();
       var onComplete = function () {
         // Don't want duplicates and don't want muted messages
-        if (body.find('li[data-key="' + c.chat.key + '"]').length === 0 &&
+        if (body.find('li[data-key="' + incoming.key + '"]').length === 0 &&
             !isMuted(fingerprint)) {
 
           var li = document.createElement('li');
-          li.dataset.action = 'chat-message';
-          li.dataset.key = c.chat.key;
+          li.dataset.action = 'incoming-message';
+          li.dataset.key = incoming.key;
           li.dataset.fingerprint = fingerprint;
           li.appendChild(img);
 
@@ -123,37 +127,39 @@ define(['jquery', './base/transform', 'gumhelper', './base/videoShooter', 'finge
           if (auth.userid !== fingerprint) {
             updateNotificationCount();
 
-            var btn = document.createElement('button');
-            btn.textContent = muteText;
-            btn.className = 'mute';
-            li.appendChild(btn);
+            var button = document.createElement('button');
+            button.textContent = muteText;
+            button.className = 'mute';
+            li.appendChild(button);
           }
 
           var message = document.createElement('p');
-          message.textContent = c.chat.value.message;
+          message.textContent = incoming.value.message;
           message.innerHTML = transform(message.innerHTML);
           li.appendChild(message);
 
-          var createdDate = moment(new Date(c.chat.value.created));
+          var createdDate = moment(new Date(incoming.value.created));
           var timestamp = document.createElement('time');
           timestamp.setAttribute('datetime', createdDate.toISOString());
           timestamp.textContent = createdDate.format('LT');
           timestamp.className = 'timestamp';
           li.appendChild(timestamp);
 
-          var size = addChat.is(":visible") ? addChat[0].getBoundingClientRect().bottom : $(window).innerHeight();
-          var last = chatList[0].lastChild;
+          var size = composer.message.is(":visible") ? composer.message[0].getBoundingClientRect().bottom : $(window).innerHeight();
+
+          var last = chat.list[0].lastChild;
           var bottom = last ? last.getBoundingClientRect().bottom : 0;
           var follow = bottom < size + 50;
 
-          chatList.append(li);
+          chat.list.append(li);
           setWaypoint(li);
-          debug('Appended chat %s', c.chat.key);
+
+          debug('Appended incoming %s', incoming.key);
 
           // if scrolled to bottom of window then scroll the new thing into view
           // otherwise, you are reading the history... allow user to scroll up.
           if (follow) {
-            var children = chatList.children();
+            var children = chat.list.children();
             var toRemove = children.length - CHAT_LIMIT;
             var dyingNode;
             for (var i = 0; i < toRemove; i ++) {
@@ -163,9 +169,9 @@ define(['jquery', './base/transform', 'gumhelper', './base/videoShooter', 'finge
             }
 
             if (toRemove > 1) {
-              // if we've removed more than one chat, then the vertical height of the chats has
-              // changed (since we've only added one chat). Refresh waypoints to make gifs appear
-              // properly
+              // if we've removed more than one message, then the vertical
+              // height of the chats has changed (since we've only added
+              // one chat). Refresh waypoints to make gifs appear properly
               $.waypoints('refresh');
             }
 
@@ -176,7 +182,7 @@ define(['jquery', './base/transform', 'gumhelper', './base/videoShooter', 'finge
 
       img.onload = onComplete;
       img.onerror = onComplete;
-      img.src = c.chat.value.media;
+      img.src = incoming.value.media;
     }
   };
 
@@ -190,9 +196,9 @@ define(['jquery', './base/transform', 'gumhelper', './base/videoShooter', 'finge
   };
 
   var disableVideoMode = function () {
-    addChatForm.hide();
+    composer.form.hide();
     footer.hide();
-    chatsContainer.addClass('lean');
+    chat.container.addClass('lean');
   };
 
   var progressCircleTo = function (progressRatio) {
@@ -235,19 +241,38 @@ define(['jquery', './base/transform', 'gumhelper', './base/videoShooter', 'finge
         footer.prepend(videoElement);
         videoElement.play();
         videoShooter = new VideoShooter(videoElement);
-        addChatForm.click();
+        composer.form.click();
       }
     });
   } else {
     disableVideoMode();
   }
 
-  socket.on('message', function (data) {
-    debug("Incoming chat key='%s'", data.chat.key);
-    renderChat(data);
+  if (localStorage.getItem('terms') === null) {
+    terms.addClass('on');
+  }
+
+  body.on('click', '#unmute, #tnc-accept', function (ev) {
+    console.log( ev );
+
+    if (ev.target.id === 'unmute') {
+      debug('clearing mutes');
+      localStorage.clear();
+      mutedArr = [];
+    }
+
+    if (ev.target.id === 'tnc-accept') {
+      debug('accepting terms');
+      localStorage.setItem('terms', true);
+      terms.removeClass('on');
+    }
+  }).on('keydown', function (ev) {
+    if (!hasModifiersPressed(ev) && ev.target !== composer.message[0]) {
+      composer.message.focus();
+    }
   });
 
-  body.on('click', '.mute', function (ev) {
+  chat.list.on('click', '.mute', function (ev) {
     var fingerprint = $(this).parent('[data-fingerprint]').data('fingerprint');
     var messages;
 
@@ -267,47 +292,27 @@ define(['jquery', './base/transform', 'gumhelper', './base/videoShooter', 'finge
     }
   });
 
-  menu.parent().click(function () {
-    menu.toggle();
-  });
-
-  body.on('click', '#unmute, #tnc-accept', function (ev) {
-    console.log( ev );
-
-    if (ev.target.id === 'unmute') {
-      debug('clearing mutes');
-      localStorage.clear();
-      mutedArr = [];
-    }
-
-    if (ev.target.id === 'tnc-accept') {
-      debug('accepting terms');
-      localStorage.setItem('terms', true);
-      terms.removeClass('on');
-    }
-  });
-
-  addChatForm.on('keydown', function (ev) {
+  composer.form.on('keydown', function (ev) {
     if (ev.keyCode === 13) {
       ev.preventDefault();
-      addChatForm.submit();
+      composer.form.submit();
     }
   }).on('keyup', function (ev) {
-    charCounter.text(CHAR_LIMIT - addChat.val().length);
+    counter.text(CHAR_LIMIT - composer.message.val().length);
   }).on('submit', function (ev) {
     ev.preventDefault();
 
-    addChat.prop('readonly', true);
+    composer.message.prop('readonly', true);
 
     if (!isPosting) {
       if (!canSend) {
         alert('please wait a wee bit...');
-        addChat.prop('readonly', false);
+        composer.message.prop('readonly', false);
       }
 
       if (canSend) {
         canSend = false;
-        addChatBlocker.removeClass('hidden');
+        composer.blocker.removeClass('hidden');
         isPosting = true;
 
         setTimeout(function () {
@@ -319,7 +324,7 @@ define(['jquery', './base/transform', 'gumhelper', './base/videoShooter', 'finge
         svg.attr('class', 'progress visible');
 
         getScreenshot(function (picture) {
-          var submission = inputs.toArray().reduce(function(data, input) {
+          var submission = composer.inputs.reduce(function(data, input) {
             return (data[input.name] = input.value, data);
           }, { picture: picture });
 
@@ -327,15 +332,15 @@ define(['jquery', './base/transform', 'gumhelper', './base/videoShooter', 'finge
 
           debug('Sending chat');
           $.post('/add/chat', $.extend(submission, auth), function () {
-
+            // nothing to see here?
           }).error(function (data) {
             alert(data.responseJSON.error);
           }).always(function (data) {
-            addChat.prop('readonly', false);
-            addChat.val('');
-            charCounter.text(CHAR_LIMIT);
+            composer.message.prop('readonly', false);
+            composer.message.val('');
+            composer.blocker.addClass('hidden');
+            counter.text(CHAR_LIMIT);
             isPosting = false;
-            addChatBlocker.addClass('hidden');
           });
         }, 10, 0.2, function (captureProgress) {
           progressCircleTo(captureProgress);
@@ -344,20 +349,19 @@ define(['jquery', './base/transform', 'gumhelper', './base/videoShooter', 'finge
     }
   });
 
-  $(document).on('keydown', function (ev) {
-    if (!hasModifiersPressed(ev) && ev.target !== addChat[0]) {
-      addChat.focus();
-    }
+  menu.button.on('click', function (ev) {
+    menu.list.toggle();
+  });
+
+  socket.on('message', function (data) {
+    debug("Incoming chat key='%s'", data.chat.key);
+    render(data.chat);
   });
 
   $(document).on(pageVisibilityChange, handleVisibilityChange);
 
   function hasModifiersPressed(ev) {
     // modifiers exclude shift since it's often used in normal typing
-    return (ev.altKey || ev.ctrlKey || ev.metaKey);
-  }
-
-  if (localStorage.getItem('terms') === null) {
-    terms.addClass('on');
+    return ev.altKey || ev.ctrlKey || ev.metaKey;
   }
 });

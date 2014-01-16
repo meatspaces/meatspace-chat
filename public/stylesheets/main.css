@@ -171,7 +171,7 @@ body > img {
     display: none;
 }
 
-#menu-toggle {
+#menu-button {
     cursor: pointer;
     font-size: 2rem;
     font-weight: 300;
@@ -183,7 +183,7 @@ body > img {
     text-align: right;
 }
 
-#menu-toggle li a {
+#menu-button li a {
     color: #fff;
     display: block;
     font-size: 1.2rem;
@@ -193,16 +193,16 @@ body > img {
     border-bottom: 1px solid rgba(255, 255, 255, .25);
 }
 
-#menu-toggle li a:hover {
+#menu-button li a:hover {
     background-color: #e22661;;
     color: #eee;
 }
 
-#menu-toggle li:last-of-type a {
+#menu-button li:last-of-type a {
     border-bottom: none;
 }
 
-.menu {
+#menu-list {
     display: none;
     background-color: #e22661;
     border-bottom: 1px solide #111;
@@ -363,7 +363,7 @@ input::-webkit-input-placeholder {
 
 .input:focus { color: #fff; }
 
-.chats {
+#chat-container {
     float: left;
     position: relative;
     width: 100%;
@@ -371,11 +371,11 @@ input::-webkit-input-placeholder {
     padding-bottom: 99px;
 }
 
-.chats.lean {
+#chat-container.lean {
     padding-bottom: 0px;
 }
 
-.chats li {
+#chat-container li {
     background-color: rgba(255, 255, 255, 0.85);
     clear: both;
     float: left;
@@ -386,7 +386,7 @@ input::-webkit-input-placeholder {
     white-space: pre-wrap;
 }
 
-.chats li:after {
+#chat-container li:after {
     display: block;
     position: absolute;
     width: 100%;
@@ -397,7 +397,7 @@ input::-webkit-input-placeholder {
     left: 171px;
 }
 
-.chats li img {
+#chat-container li img {
     display: block;
     position: absolute;
     top: 0;
@@ -405,11 +405,11 @@ input::-webkit-input-placeholder {
     width: 135px;
 }
 
-.chats .out-of-view img {
+#chat-container .out-of-view img {
     display: none;
 }
 
-.chats li p {
+#chat-container li p {
     color: #000;
     font-size: 1.35rem;
     line-height: 1.5rem;
@@ -421,7 +421,7 @@ input::-webkit-input-placeholder {
     text-overflow: ellipsis;
 }
 
-.chats li .mute {
+#chat-container li .mute {
     font-family: "Helvetica Neue", "Helvetica", "Arial", sans-serif;
     background-color: #f181ad;
     border: 0;
@@ -438,16 +438,16 @@ input::-webkit-input-placeholder {
     text-transform: uppercase;
 }
 
-.chats li:hover .mute {
+#chat-container li:hover .mute {
     display: block;
 }
 
-.chats li .mute:hover {
+#chat-container li .mute:hover {
     background-color: #e22661;
     color: #eee;
 }
 
-.chats li .timestamp {
+#chat-container li .timestamp {
     font-family: "Helvetica Neue", "Helvetica", "Arial", sans-serif;
     border: 0;
     color: #666;
@@ -460,25 +460,25 @@ input::-webkit-input-placeholder {
     padding: 8px;
 }
 
-.chats li p span {
+#chat-container li p span {
     color: #70b4e4;
     font-size: 0.8rem;
 }
 
-.chats li em {
+#chat-container li em {
     font-style: italic;
 }
 
-.chats li b {
+#chat-container li b {
     font-weight: 500;
 }
 
-.chats li p a {
+#chat-container li p a {
     color: #34a4b8;
     text-decoration: none;
 }
 
-.chats li p a:hover {
+#chat-container li p a:hover {
     background-color: #fff;
 }
 
@@ -490,7 +490,7 @@ ul li.on {
     display: none;
 }
 
-#add-chat-blocker {
+#composer-blocker {
     color: rgba(255, 255, 255, .67);
     background-color: #999;
     font-family: "Helvetica Neue", "Helvetica", "Arial", sans-serif;
@@ -579,11 +579,11 @@ ul li.on {
       text-indent: -9999px;
     }
 
-    .chats li:after {
+    #chat-container li:after {
         left: 153px;
     }
 
-    .chats li p {
+    #chat-container li p {
         font-size: 1.1rem;
         line-height: 1.4rem;
         padding-left: 153px;
@@ -593,7 +593,7 @@ ul li.on {
         float: none;
     }
 
-    .chats li .mute {
+    #chat-container li .mute {
         display: block;
         bottom: 0;
         margin-bottom: 0;
@@ -603,7 +603,7 @@ ul li.on {
         background: none;
     }
 
-    .chats li img,
+    #chat-container li img,
     #footer video,
     #footer svg.progress {
         left: 0;
@@ -614,7 +614,7 @@ ul li.on {
         width: 50%;
     }
 
-    #add-chat-blocker {
+    #composer-blocker {
         left: -18px;
     }
 
@@ -631,7 +631,7 @@ ul li.on {
         font-size: .85rem;
     }
 
-    #add-chat-blocker {
+    #composer-blocker {
         font-size: .85rem;
         line-height: 2rem;
     }
@@ -642,7 +642,7 @@ ul li.on {
         padding: 5px;
     }
 
-    .chats li p {
+    #chat-container li p {
         font-size: .85rem;
         line-height: 1rem;
         min-width: 0;
@@ -652,7 +652,7 @@ ul li.on {
         padding-bottom: 20px;
     }
 
-    .chats li .timestamp {
+    #chat-container li .timestamp {
       font-size: 0.7rem;
       top: auto;
       bottom: 0;
