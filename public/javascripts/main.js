@@ -280,9 +280,9 @@ define(['jquery', './base/transform', 'gumhelper', './base/videoShooter', 'finge
       mutes.push(fingerprint);
       localStorage.setItem('muted', JSON.stringify(mutes));
       messages = chat.list.children().filter(function() {
-        // using filter because we have no guarantee of fingerprint formatting, and if we tried to
-        // use an attribute selector, it could be XSS'd to some extent
-        return $(this).data('fingerprint') === fingerprint;
+        // using filter because we have no guarantee of fingerprint
+        // formatting, and therefore cannot trust a string attribute selector.
+        return this.dataset.fingerprint === fingerprint;
       });
       messages.waypoint('destroy');
       messages.remove();
