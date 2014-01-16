@@ -8,7 +8,6 @@ define(['jquery', './base/transform', 'gumhelper', './base/videoShooter', 'finge
 
   var html = $('html');
   var body = $('body');
-  var termsSplash = $('#terms');
   var addChat = $('#add-chat');
   var addChatBlocker = $('#add-chat-blocker');
   var addChatForm = $('#add-chat-form');
@@ -19,6 +18,8 @@ define(['jquery', './base/transform', 'gumhelper', './base/videoShooter', 'finge
   var charCounter = $('#counter');
   var menu = $('#menu-toggle .menu');
   var svg = $(null);
+  var terms = $('#terms');
+
   var isPosting = false;
   var canSend = true;
   var muteText = body.data('mute');
@@ -273,13 +274,13 @@ define(['jquery', './base/transform', 'gumhelper', './base/videoShooter', 'finge
   body.on('click', '#unmute, #tnc-accept', function (ev) {
     console.log( ev );
 
-    if (ev.target.id === '#unmute') {
+    if (ev.target.id === 'unmute') {
       debug('clearing mutes');
       localStorage.clear();
       mutedArr = [];
     }
 
-    if (ev.target.id === '#tnc-accept') {
+    if (ev.target.id === 'tnc-accept') {
       debug('accepting terms');
       localStorage.setItem('terms', true);
       terms.removeClass('on');
@@ -356,9 +357,7 @@ define(['jquery', './base/transform', 'gumhelper', './base/videoShooter', 'finge
     return (ev.altKey || ev.ctrlKey || ev.metaKey);
   }
 
-  var termsAndConditions = localStorage.getItem('terms');
-
-  if (!termsAndConditions) {
-    termsSplash.addClass('on');
+  if (localStorage.getItem('terms') === null) {
+    terms.addClass('on');
   }
 });
