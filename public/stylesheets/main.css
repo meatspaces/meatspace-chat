@@ -91,11 +91,11 @@ body.info {
     text-decoration: none;
 }
 
-#terms a:first-child {
+#terms a.agree:first-child {
     float: left;
 }
 
-#terms a:last-child {
+#terms a.agree:last-child {
     float: right;
 }
 

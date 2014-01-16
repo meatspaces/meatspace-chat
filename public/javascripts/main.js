@@ -330,7 +330,7 @@ define(['jquery', './base/transform', 'gumhelper', './base/videoShooter', 'finge
     }
   });
 
-  termsSplash.on('click', function (ev) {
+  body.on('click', '#tnc-accept', function (ev) {
     localStorage.setItem('terms', true);
     termsSplash.removeClass('on');
   });

@@ -25,5 +25,6 @@
   "mute": "Silenciar",
   "termsAndConditions": "Please read and accept the Terms and Conditions before continuing with Meatspace chat.",
   "iAccept": "I accept",
-  "iDoNotAccept": "I do not accept"
+  "iDoNotAccept": "I do not accept",
+  "termsLink": "Terms and Conditions"
 }
