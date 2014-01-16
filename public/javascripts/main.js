@@ -267,10 +267,20 @@ define(['jquery', './base/transform', 'gumhelper', './base/videoShooter', 'finge
     menu.toggle();
   });
 
-  body.on('click', '#unmute', function (ev) {
-    debug('clearing mutes');
-    localStorage.clear();
-    mutedArr = [];
+  body.on('click', '#unmute, #tnc-accept', function (ev) {
+    console.log( ev );
+
+    if (ev.target.id === '#unmute') {
+      debug('clearing mutes');
+      localStorage.clear();
+      mutedArr = [];
+    }
+
+    if (ev.target.id === '#tnc-accept') {
+      debug('accepting terms');
+      localStorage.setItem('terms', true);
+      terms.removeClass('on');
+    }
   });
 
   addChatForm.on('keydown', function (ev) {
@@ -327,11 +337,6 @@ define(['jquery', './base/transform', 'gumhelper', './base/videoShooter', 'finge
         });
       }
     }
-  });
-
-  body.on('click', '#tnc-accept', function (ev) {
-    localStorage.setItem('terms', true);
-    termsSplash.removeClass('on');
   });
 
   $(document).on('keydown', function (ev) {
