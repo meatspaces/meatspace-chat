@@ -9,25 +9,29 @@ define(['jquery', './base/transform', 'gumhelper', './base/videoShooter', 'finge
   var html = $('html');
   var body = $('body');
   var termsSplash = $('#terms');
-  var addChatForm = $('#add-chat-form');
-  var addChatBlocker = $('#add-chat-blocker');
   var addChat = $('#add-chat');
+  var addChatBlocker = $('#add-chat-blocker');
+  var addChatForm = $('#add-chat-form');
+  var inputs = addChatForm.find('input');
   var chatList = $('.chats ul');
   var chatsContainer = $('.chats');
   var footer = $('#footer');
   var charCounter = $('#counter');
-  var userId = $('#userid');
   var menu = $('#menu-toggle .menu');
-  var fp = $('#fp');
   var svg = $(null);
   var isPosting = false;
   var canSend = true;
   var muteText = body.data('mute');
-  var fingerprint = new Fingerprint({ canvas: true }).get();
   var mutedArr = JSON.parse(localStorage.getItem('muted')) || [];
   var socket = io.connect(location.protocol + '//' + location.hostname +
     (location.port ? ':' + location.port : ''));
   var videoShooter;
+
+  var auth = {
+    userid: null,
+    fingerprint: new Fingerprint({ canvas: true }).get()
+  };
+
   var CHAT_LIMIT = 25;
   var CHAR_LIMIT = 250;
 
@@ -99,23 +103,23 @@ define(['jquery', './base/transform', 'gumhelper', './base/videoShooter', 'finge
       c.chat.value.message,
       c.chat.value.created,
       md5(c.chat.value.media));
-    var renderFP = c.chat.value.fingerprint;
+    var fingerprint = c.chat.value.fingerprint;
 
-    if (!isMuted(renderFP)) {
+    if (!isMuted(fingerprint)) {
       var img = new Image();
       var onComplete = function () {
         // Don't want duplicates and don't want muted messages
         if (body.find('li[data-key="' + c.chat.key + '"]').length === 0 &&
-            !isMuted(renderFP)) {
+            !isMuted(fingerprint)) {
 
           var li = document.createElement('li');
           li.dataset.action = 'chat-message';
           li.dataset.key = c.chat.key;
-          li.dataset.fingerprint = renderFP;
+          li.dataset.fingerprint = fingerprint;
           li.appendChild(img);
 
           // This is likely your own fingerprint so you don't mute yourself. Unless you're weird.
-          if (userId.val() !== renderFP) {
+          if (auth.userid !== fingerprint) {
             updateNotificationCount();
 
             var btn = document.createElement('button');
@@ -213,8 +217,7 @@ define(['jquery', './base/transform', 'gumhelper', './base/videoShooter', 'finge
   };
 
   $.get('/ip', function (data) {
-    fp.val(fingerprint);
-    userId.val(md5(fingerprint + data.ip));
+    auth.userid = md5(auth.fingerprint + data.ip);
   });
 
   if (navigator.getMedia) {
@@ -244,20 +247,20 @@ define(['jquery', './base/transform', 'gumhelper', './base/videoShooter', 'finge
   });
 
   body.on('click', '.mute', function (ev) {
-    var self = $(this);
-    var fp = self.parent('[data-fingerprint]').data('fingerprint');
+    var fingerprint = $(this).parent('[data-fingerprint]').data('fingerprint');
+    var messages;
 
-    if (!isMuted(fp)) {
-      debug('Muting %s', fp);
-      mutedArr.push(fp);
+    if (!isMuted(fingerprint)) {
+      debug('Muting %s', fingerprint);
+      mutedArr.push(fingerprint);
       localStorage.setItem('muted', JSON.stringify(mutedArr));
-      var userMessages = $('.chats li[data-action="chat-message"]').filter(function() {
+      messages = $('.chats li[data-action="chat-message"]').filter(function() {
         // using filter because we have no guarantee of fingerprint formatting, and if we tried to
         // use an attribute selector, it could be XSS'd to some extent
-        return $(this).data('fingerprint') === fp;
+        return $(this).data('fingerprint') === fingerprint;
       });
-      userMessages.waypoint('destroy');
-      userMessages.remove();
+      messages.waypoint('destroy');
+      messages.remove();
 
       $.waypoints('refresh');
     }
@@ -293,7 +296,6 @@ define(['jquery', './base/transform', 'gumhelper', './base/videoShooter', 'finge
   }).on('submit', function (ev) {
     ev.preventDefault();
 
-    var self = $(ev.target);
     addChat.prop('readonly', true);
 
     if (!isPosting) {
@@ -315,13 +317,15 @@ define(['jquery', './base/transform', 'gumhelper', './base/videoShooter', 'finge
 
         svg.attr('class', 'progress visible');
 
-        getScreenshot(function (pictureData) {
-          var submissionData = $.extend(formValues(self.find('.message-content input')), { picture: pictureData });
+        getScreenshot(function (picture) {
+          var submission = inputs.toArray().reduce(function(data, input) {
+            return (data[input.name] = input.value, data);
+          }, { picture: picture });
 
           svg.attr('class', 'progress');
 
           debug('Sending chat');
-          $.post('/add/chat', submissionData, function () {
+          $.post('/add/chat', $.extend(submission, auth), function () {
 
           }).error(function (data) {
             alert(data.responseJSON.error);
@@ -346,13 +350,6 @@ define(['jquery', './base/transform', 'gumhelper', './base/videoShooter', 'finge
   });
 
   $(document).on(pageVisibilityChange, handleVisibilityChange);
-
-  function formValues(elements) {
-    return elements.toArray().reduce(function (o, input) {
-      o[input.name] = input.value;
-      return o;
-    }, {});
-  }
 
   function hasModifiersPressed(ev) {
     // modifiers exclude shift since it's often used in normal typing
