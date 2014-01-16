@@ -15,5 +15,7 @@ block terms
   #terms
     p= t('termsAndConditions')
     p
-      a(href='javascript:;', id='tnc-accept')= t('iAccept')
-      a(href='http://www.nyan.cat')= t('iDoNotAccept')
+      a(href='/terms')= t('termsLink')
+    p
+      a(href='javascript:;', class='agree', id='tnc-accept')= t('iAccept')
+      a(href='http://www.nyan.cat', class='agree')= t('iDoNotAccept')
