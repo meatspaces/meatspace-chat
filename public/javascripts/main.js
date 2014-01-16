@@ -108,6 +108,7 @@ define(['jquery', './base/transform', 'gumhelper', './base/videoShooter', 'finge
       incoming.value.message,
       incoming.value.created,
       md5(incoming.value.media));
+
     var fingerprint = incoming.value.fingerprint;
 
     if (!isMuted(fingerprint)) {
@@ -253,8 +254,6 @@ define(['jquery', './base/transform', 'gumhelper', './base/videoShooter', 'finge
   }
 
   body.on('click', '#unmute, #tnc-accept', function (ev) {
-    console.log( ev );
-
     if (ev.target.id === 'unmute') {
       debug('clearing mutes');
       localStorage.clear();
@@ -354,7 +353,6 @@ define(['jquery', './base/transform', 'gumhelper', './base/videoShooter', 'finge
   });
 
   socket.on('message', function (data) {
-    debug("Incoming chat key='%s'", data.chat.key);
     render(data.chat);
   });
 
