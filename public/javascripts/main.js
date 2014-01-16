@@ -116,7 +116,6 @@ define(['jquery', './base/transform', 'gumhelper', './base/videoShooter', 'finge
             !isMuted(fingerprint)) {
 
           var li = document.createElement('li');
-          li.dataset.action = 'incoming-message';
           li.dataset.key = incoming.key;
           li.dataset.fingerprint = fingerprint;
           li.appendChild(img);
@@ -277,7 +276,7 @@ define(['jquery', './base/transform', 'gumhelper', './base/videoShooter', 'finge
       debug('Muting %s', fingerprint);
       mutedArr.push(fingerprint);
       localStorage.setItem('muted', JSON.stringify(mutedArr));
-      messages = $('.chats li[data-action="chat-message"]').filter(function() {
+      messages = chat.list.children().filter(function() {
         // using filter because we have no guarantee of fingerprint formatting, and if we tried to
         // use an attribute selector, it could be XSS'd to some extent
         return $(this).data('fingerprint') === fingerprint;
