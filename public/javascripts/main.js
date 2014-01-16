@@ -77,7 +77,7 @@ define(['jquery', './base/transform', 'gumhelper', './base/videoShooter', 'finge
     }
   };
 
-  var setupWaypoints = function (rawLi) {
+  var setWaypoint = function (rawLi) {
     var li = $(rawLi);
     li.waypoint(function (direction) {
       li.toggleClass('out-of-view', direction === 'down');
@@ -143,7 +143,7 @@ define(['jquery', './base/transform', 'gumhelper', './base/videoShooter', 'finge
           var follow = bottom < size + 50;
 
           chatList.append(li);
-          setupWaypoints(li);
+          setWaypoint(li);
           debug('Appended chat %s', c.chat.key);
 
           // if scrolled to bottom of window then scroll the new thing into view
