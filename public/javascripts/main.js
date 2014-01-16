@@ -5,16 +5,20 @@ define(['jquery', './base/transform', 'gumhelper', './base/videoShooter', 'finge
   if (/liveDebug/.test(window.location.search)) {
     window.liveDebug = true;
   }
+
   var videoShooter;
 
   var CHAT_LIMIT = 25;
   var CHAR_LIMIT = 250;
 
+  var auth = {
+    userid: null,
+    fingerprint: new Fingerprint({ canvas: true }).get()
+  };
   var chat = {
     container: $('#chat-container'),
     list: $('#chat-list')
   };
-
   var composer = {
     blocker: $('#composer-blocker'),
     form: $('#composer-form'),
@@ -41,10 +45,7 @@ define(['jquery', './base/transform', 'gumhelper', './base/videoShooter', 'finge
   });
   var socket = io.connect(location.protocol + '//' + location.hostname +
     (location.port ? ':' + location.port : ''));
-  var auth = {
-    userid: null,
-    fingerprint: new Fingerprint({ canvas: true }).get()
-  };
+  var unreadMessages = 0;
   var pageHidden = 'hidden';
   var pageVisibilityChange = 'visibilitychange';
 
@@ -58,8 +59,6 @@ define(['jquery', './base/transform', 'gumhelper', './base/videoShooter', 'finge
       }
     });
   }
-
-  var unreadMessages = 0;
 
   var handleVisibilityChange = function () {
     if (!document[pageHidden]) {
@@ -101,7 +100,6 @@ define(['jquery', './base/transform', 'gumhelper', './base/videoShooter', 'finge
   };
 
   var render = function (incoming) {
-
     debug("Rendering chat: key='%s' fingerprint='%s' message='%s' created='%s' imageMd5='%s'",
       incoming.key,
       incoming.value.fingerprint,
@@ -138,12 +136,12 @@ define(['jquery', './base/transform', 'gumhelper', './base/videoShooter', 'finge
           message.innerHTML = transform(message.innerHTML);
           li.appendChild(message);
 
-          var createdDate = moment(new Date(incoming.value.created));
-          var timestamp = document.createElement('time');
-          timestamp.setAttribute('datetime', createdDate.toISOString());
-          timestamp.textContent = createdDate.format('LT');
-          timestamp.className = 'timestamp';
-          li.appendChild(timestamp);
+          var created = moment(new Date(incoming.value.created));
+          var time = document.createElement('time');
+          time.setAttribute('datetime', created.toISOString());
+          time.textContent = created.format('LT');
+          time.className = 'timestamp';
+          li.appendChild(time);
 
           var size = composer.message.is(":visible") ? composer.message[0].getBoundingClientRect().bottom : $(window).innerHeight();
 
@@ -180,8 +178,7 @@ define(['jquery', './base/transform', 'gumhelper', './base/videoShooter', 'finge
         }
       };
 
-      img.onload = onComplete;
-      img.onerror = onComplete;
+      img.onload = img.onerror = onComplete;
       img.src = incoming.value.media;
     }
   };
