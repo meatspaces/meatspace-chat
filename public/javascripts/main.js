@@ -163,12 +163,9 @@ define(['jquery', './base/transform', 'gumhelper', './base/videoShooter', 'finge
           if (follow) {
             var children = chat.list.children();
             var toRemove = children.length - CHAT_LIMIT;
-            var dyingNode;
-            for (var i = 0; i < toRemove; i ++) {
-              dyingNode = children.eq(i);
-              dyingNode.waypoint('destroy');
-              dyingNode.remove();
-            }
+
+            toRemove = toRemove < 0 ? 0 : toRemove;
+            children.slice(0, toRemove).waypoint('destroy').remove();
 
             if (toRemove > 1) {
               // if we've removed more than one message, then the vertical
@@ -284,8 +281,7 @@ define(['jquery', './base/transform', 'gumhelper', './base/videoShooter', 'finge
         // formatting, and therefore cannot trust a string attribute selector.
         return this.dataset.fingerprint === fingerprint;
       });
-      messages.waypoint('destroy');
-      messages.remove();
+      messages.waypoint('destroy').remove();
 
       $.waypoints('refresh');
     }
