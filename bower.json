@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "dependencies": {
     "jquery": "2.0.0",
-    "jquery-waypoints": "2.0.3",
+    "jquery-waypoints": "2.0.4",
     "fingerprint": "0.5.0",
     "js-md5": "1.0.1",
     "animated-gif": "sole/Animated_GIF#38c7e30965578591de0f9dbbc87829f9259fd289",
