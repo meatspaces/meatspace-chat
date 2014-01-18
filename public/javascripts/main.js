@@ -184,6 +184,7 @@ define(['jquery', './base/transform', 'gumhelper', './base/videoShooter', 'finge
 
       img.onload = img.onerror = onComplete;
       img.src = incoming.value.media;
+      img.title = fingerprint;
     }
   };
 
