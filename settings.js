@@ -9,9 +9,15 @@ module.exports = function(app, configurations, express) {
   nconf.argv().env().file({ file: 'local.json' });
 
   // Configuration
+  var checkApiKey = function (req, res, next) {
+    if (req.body.apiKey && nativeClients.indexOf(req.body.apiKey) > -1) {
+      req.isApiUser = true;
+    }
+    next();
+  };
 
   var clientBypassCSRF = function (req, res, next) {
-    if (req.body.apiKey && nativeClients.indexOf(req.body.apiKey) > -1) {
+    if (req.isApiUser) {
       next();
     } else {
       csrf(req, res, next);
@@ -40,6 +46,7 @@ module.exports = function(app, configurations, express) {
     app.use(express.static(__dirname + '/public'));
     app.use(express.cookieParser());
     app.use(express.session({ secret: nconf.get('session_secret') }));
+    app.use(checkApiKey);
     app.use(clientBypassCSRF);
     app.use(function (req, res, next) {
       res.locals.session = req.session;

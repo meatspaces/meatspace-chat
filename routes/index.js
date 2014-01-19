@@ -84,7 +84,7 @@ module.exports = function (app, nconf, io, zio, topic_in, topic_out) {
     var userId = crypto.createHash('md5').update(req.body.fingerprint + ip).digest('hex');
 
     if (req.body.picture) {
-      if ((userId && userId === req.body.userid) || req.body.apiKey) {
+      if ((userId && userId === req.body.userid) || req.isApiUser) {
         addChat(req.body.message, req.body.picture, req.body.fingerprint, userId, ip, function (err, status) {
           if (err) {
             res.status(400);
