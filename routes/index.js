@@ -80,6 +80,13 @@ module.exports = function (app, nconf, io, zio, topic_in, topic_out) {
   };
 
   app.post('/add/chat', function (req, res, next) {
+    if (!req.isApiUser && req.body.fingerprint && req.body.fingerprint.length > 10) {
+      // client is sending a fingerprint that's longer than we would ever receive from fingerprintjs
+      // which means they're likely trying to generate MD5 collisions with other clients
+      res.status(403);
+      res.json({ error: 'invalid fingerprint' });
+    }
+
     var ip = req.ip || '0.0.0.0';
     var userId = crypto.createHash('md5').update(req.body.fingerprint + ip).digest('hex');
 
