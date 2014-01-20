@@ -7,7 +7,7 @@
     "fingerprint": "0.5.0",
     "js-md5": "1.0.1",
     "animated-gif": "sole/Animated_GIF#38c7e30965578591de0f9dbbc87829f9259fd289",
-    "gumhelper": "sole/gumhelper",
+    "gumhelper": "sole/gumhelper#596ddfb555039a400b8287fc5ac01f0b2aebf6fa",
     "requirejs": "2.1.5",
     "momentjs": "~2.4.0",
     "favico.js": "ca5e30446b304177a0ee25914e9899801b67b59b"
