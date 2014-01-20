@@ -79,6 +79,10 @@ module.exports = function (app, nconf, io, zio, topic_in, topic_out) {
     });
   };
 
+  var getUserId = function(fingerprint, ip) {
+    return crypto.createHash('md5').update(fingerprint + ip).digest('hex');
+  };
+
   app.post('/add/chat', function (req, res, next) {
     if (!req.isApiUser && req.body.fingerprint && req.body.fingerprint.length > 10) {
       // client is sending a fingerprint that's longer than we would ever receive from fingerprintjs
@@ -88,11 +92,11 @@ module.exports = function (app, nconf, io, zio, topic_in, topic_out) {
       return;
     }
 
-    var ip = req.ip || '0.0.0.0';
-    var userId = crypto.createHash('md5').update(req.body.fingerprint + ip).digest('hex');
+    var ip = req.ip;
+    var userId = getUserId(req.body.fingerprint, ip);
 
     if (req.body.picture) {
-      if ((userId && userId === req.body.userid) || req.isApiUser) {
+      if ((userId === req.body.userid) || req.isApiUser) {
         addChat(req.body.message, req.body.picture, req.body.fingerprint, userId, ip, function (err, status) {
           if (err) {
             res.status(400);
@@ -112,6 +116,10 @@ module.exports = function (app, nconf, io, zio, topic_in, topic_out) {
   });
 
   io.sockets.on('connection', function (socket) {
+    var ip = socket.handshake.address.address;
+    if (socket.handshake.headers['x-forwarded-for']) {
+      ip = socket.handshake.headers['x-forwarded-for'].split(/ *, */)[0];
+    }
 
     // Fire out an initial burst of images to the connected client, assuming there are any available
     getSortedChats(function (err, results) {
@@ -134,9 +142,8 @@ module.exports = function (app, nconf, io, zio, topic_in, topic_out) {
 
     socket.on('message', function (data) {
       if (nativeClients.indexOf(data.apiKey) > -1) {
-        var ip = '0.0.0.0';
-
-        addChat(data.message, data.picture, data.fingerprint, data.fingerprint, ip, function (err) {
+        var userId = getUserId(data.fingerprint, ip);
+        addChat(data.message, data.picture, data.fingerprint, userId, ip, function (err) {
           if (err) {
             console.log('error posting ', err.toString());
           }
