@@ -85,6 +85,7 @@ module.exports = function (app, nconf, io, zio, topic_in, topic_out) {
       // which means they're likely trying to generate MD5 collisions with other clients
       res.status(403);
       res.json({ error: 'invalid fingerprint' });
+      return;
     }
 
     var ip = req.ip || '0.0.0.0';
