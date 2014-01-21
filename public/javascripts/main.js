@@ -222,7 +222,7 @@ define(['jquery', './base/transform', 'gumhelper', './base/videoShooter', 'finge
     circle.attr('d', d).attr('stroke-width', thickness);
   };
 
-  $.get('/ip', function (data) {
+  $.get('/ip?t=' + Date.now(), function (data) {
     auth.userid = md5(auth.fingerprint + data.ip);
   });
 
