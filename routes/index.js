@@ -123,7 +123,7 @@ module.exports = function (app, nconf, io, zio, topic_in, topic_out) {
 
     // Fire out an initial burst of images to the connected client, assuming there are any available
     getSortedChats(function (err, results) {
-      if(results.chats && results.chats.length > 0) {
+      if (results.chats && results.chats.length > 0) {
         try {
           results.chats.forEach(function (chat) {
             emitChat(socket, chat, zio, topic_out);
