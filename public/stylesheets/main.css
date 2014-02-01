@@ -315,7 +315,7 @@ a.medium {
     display: inline-block;
     height: 35px;
     width: 35px;
-    background: url('../images/meatspace.svg') center no-repeat;
+    background: url('../images/meatspace.png') center no-repeat;
     background-size: auto 100%;
     margin: 5px 14px;
     -webkit-transition: -webkit-transform .5s;
@@ -662,5 +662,12 @@ ul li.on {
 
     .input {
         width: 145px;
+    }
+}
+
+@media screen and (-webkit-min-device-pixel-ratio: 2), screen and (min--moz-device-pixel-ratio: 2), (min-resolution: 2dppx) {
+    #logo {
+        background: url('/images/icon-72.png') no-repeat;
+        background-size: auto 35px;
     }
 }
