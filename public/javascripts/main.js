@@ -254,7 +254,7 @@ define(['jquery', './base/transform', 'gumhelper', './base/videoShooter', 'finge
   body.on('click', '#unmute, #tnc-accept', function (ev) {
     if (ev.target.id === 'unmute') {
       debug('clearing mutes');
-      localStorage.clear();
+      localStorage.removeItem('muted');
       mutes = [];
     }
 
