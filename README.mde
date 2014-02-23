@@ -33,9 +33,10 @@ A meatspace chat message is a nested dictionary in the form
                 ttl: 600000,
                 created: <time-string>,
                 fingerprint: <32-byte hex>
-            }
-        },
-        key: <unique message key>
+            },
+
+            key: <unique message key>
+        }
     }
 
 ## Mute feature
