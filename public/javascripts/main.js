@@ -247,6 +247,7 @@ define(['jquery', './base/transform', 'gumhelper', './base/videoShooter', 'finge
       if (err) {
         disableVideoMode();
       } else {
+        console.log('current width/height ', videoWidth, videoHeight);
         videoElement.width = videoWidth;
         videoElement.height = videoHeight;
         footer.prepend(videoElement);
