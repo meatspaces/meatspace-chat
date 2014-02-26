@@ -50,6 +50,8 @@ define(['jquery', './base/transform', 'gumhelper', './base/videoShooter', 'finge
   var unreadMessages = 0;
   var pageHidden = 'hidden';
   var pageVisibilityChange = 'visibilitychange';
+  var videoWidth = 135;
+  var videoHeight = 101;
 
   if (typeof document.hidden === 'undefined') {
     ['webkit', 'moz', 'ms'].some(function (prefix) {
@@ -226,6 +228,18 @@ define(['jquery', './base/transform', 'gumhelper', './base/videoShooter', 'finge
     auth.userid = md5(auth.fingerprint + data.ip);
   });
 
+  if (window.ondeviceorientation) {
+    window.ondeviceorientation = function () {
+      if (window.matchMedia('(orientation: landscape)').matches) {
+        videoWidth = 101;
+        videoHeight = 135;
+      } else {
+        videoWidth = 135;
+        videoHeight = 101;
+      }
+    };
+  }
+
   if (navigator.getMedia) {
     svg = $('<svg class="progress" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 128 64" preserveAspectRatio="xMidYMid" hidden><path d="M0,0 " id="arc" fill="none" stroke="rgba(226,38,97,0.8)" /></svg>');
 
@@ -235,8 +249,8 @@ define(['jquery', './base/transform', 'gumhelper', './base/videoShooter', 'finge
       if (err) {
         disableVideoMode();
       } else {
-        videoElement.width = 135;
-        videoElement.height = 101;
+        videoElement.width = videoWidth;
+        videoElement.height = videoHeight;
         footer.prepend(videoElement);
         videoElement.play();
         videoShooter = new VideoShooter(videoElement);
