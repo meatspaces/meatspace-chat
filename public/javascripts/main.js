@@ -231,9 +231,11 @@ define(['jquery', './base/transform', 'gumhelper', './base/videoShooter', 'finge
   if (window.matchMedia('(orientation: landscape)').matches) {
     videoWidth = 135;
     videoHeight = 101;
+    console.log('landscape mode')
   } else {
     videoWidth = 101;
     videoHeight = 135;
+    console.log('portrait mode')
   }
 
   if (navigator.getMedia) {

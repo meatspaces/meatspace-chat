@@ -27,11 +27,11 @@ define(['Animated_GIF'], function (Animated_GIF) {
         // Call back with an r value indicating how far along we are in capture
         progressCallback((numFrames - pendingFrames) / numFrames);
 
-        if(pendingFrames > 0) {
+        if (pendingFrames > 0) {
           setTimeout(captureFrame, interval * 1000); // timeouts are in milliseconds
         } else {
           ag.getBase64GIF(function(image) {
-            
+
             // Ensure workers are freed-so we avoid bug #103 https://github.com/meatspaces/meatspace-chat/issues/103
             ag.destroy();
 
