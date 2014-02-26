@@ -8,6 +8,7 @@ define(['Animated_GIF'], function (Animated_GIF) {
 
     canvas.width = videoElement.width;
     canvas.height = videoElement.height;
+    console.log('videoshooter width/height ', videoElement.width, videoElement.height);
 
     this.getShot = function (callback, numFrames, interval, progressCallback) {
       numFrames = numFrames !== undefined ? numFrames : 3;
