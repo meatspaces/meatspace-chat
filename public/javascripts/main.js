@@ -238,17 +238,16 @@ define(['jquery', './base/transform', 'gumhelper', './base/videoShooter', 'finge
         var finalWidth = 135;
         var finalHeight = 101;
 
-        // for Firefox on Android because I don't know.
+        // for Firefox on Android in portrait mode because I don't know.
         if (window.matchMedia && window.matchMedia('(max-width: 460px)').matches &&
-            navigator.userAgent.match(/Android/i) && navigator.userAgent.match(/Firefox/i)) {
-          videoHeight = videoHeight / 5;
-          videoWidth = videoWidth / 5;
+            navigator.userAgent.match(/Android/i) && navigator.userAgent.match(/Firefox/i) &&
+            videoWidth < videoHeight) {
 
-          finalWidth = 135;
-          finalHeight = finalWidth * videoHeight / videoWidth;
+            videoHeight = videoHeight / 5;
+            videoWidth = videoWidth / 5;
 
-          if (videoWidth > videoHeight) {
-            finalHeight = finalWidth * videoWidth / videoHeight;
+            finalWidth = 135;
+            finalHeight = finalWidth * videoHeight / videoWidth;
           }
         }
 
