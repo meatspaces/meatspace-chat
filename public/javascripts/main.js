@@ -237,14 +237,20 @@ define(['jquery', './base/transform', 'gumhelper', './base/videoShooter', 'finge
       if (err) {
         disableVideoMode();
       } else {
-        videoHeight = videoHeight / 5;
-        videoWidth = videoWidth / 5;
-
         var finalWidth = 135;
-        var finalHeight = finalWidth * videoHeight / videoWidth;
+        var finalHeight = 101;
 
-        if (videoWidth > videoHeight) {
-          finalHeight = finalWidth * videoWidth / videoHeight;
+        // for mobile devices
+        if (window.matchMedia && window.matchMedia('(min-width: 460px)').matches) {
+          videoHeight = videoHeight / 5;
+          videoWidth = videoWidth / 5;
+
+          finalWidth = 135;
+          finalHeight = finalWidth * videoHeight / videoWidth;
+
+          if (videoWidth > videoHeight) {
+            finalHeight = finalWidth * videoWidth / videoHeight;
+          }
         }
 
         videoElement.width = finalWidth;
