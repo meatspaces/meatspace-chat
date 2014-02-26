@@ -243,7 +243,7 @@ define(['jquery', './base/transform', 'gumhelper', './base/videoShooter', 'finge
 
     footer.prepend(svg);
 
-    gumHelper.startVideoStreaming(function callback(err, stream, videoElement) {
+    gumHelper.startVideoStreaming(function callback(err, stream, videoElement, videoWidth, videoHeight) {
       if (err) {
         disableVideoMode();
       } else {
