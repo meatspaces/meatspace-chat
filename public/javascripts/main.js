@@ -242,7 +242,7 @@ define(['jquery', './base/transform', 'gumhelper', './base/videoShooter', 'finge
         if (window.matchMedia && window.matchMedia('(orientation: portrait)').matches &&
             navigator.userAgent.match(/Android/i)) {
 
-            finalWidth = 135;
+            finalWidth = 205;
             finalHeight = finalWidth * videoHeight / videoWidth;
         }
 
