@@ -228,16 +228,6 @@ define(['jquery', './base/transform', 'gumhelper', './base/videoShooter', 'finge
     auth.userid = md5(auth.fingerprint + data.ip);
   });
 
-  if (window.matchMedia('(orientation: landscape)').matches) {
-    videoWidth = 135;
-    videoHeight = 101;
-    console.log('landscape mode');
-  } else {
-    videoWidth = 101;
-    videoHeight = 135;
-    console.log('portrait mode');
-  }
-
   if (navigator.getMedia) {
     svg = $('<svg class="progress" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 128 64" preserveAspectRatio="xMidYMid" hidden><path d="M0,0 " id="arc" fill="none" stroke="rgba(226,38,97,0.8)" /></svg>');
 
@@ -247,6 +237,14 @@ define(['jquery', './base/transform', 'gumhelper', './base/videoShooter', 'finge
       if (err) {
         disableVideoMode();
       } else {
+        if (videoWidth > videoHeight) {
+          videoWidth = videoWidth / 5;
+          videoHeight = videoHeight / 5;
+        } else {
+          videoWidth = videoHeight / 5;
+          videoHeight = videoWidth / 5;
+        }
+
         console.log('current width/height ', videoWidth, videoHeight);
         videoElement.width = videoWidth;
         videoElement.height = videoHeight;
