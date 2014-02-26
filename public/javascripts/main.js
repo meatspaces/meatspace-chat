@@ -244,7 +244,7 @@ define(['jquery', './base/transform', 'gumhelper', './base/videoShooter', 'finge
         var finalHeight = finalWidth * videoHeight / videoWidth;
 
         if (videoWidth > videoHeight) {
-          finalHeight = finalWdith * videoWidth / videoHeight;
+          finalHeight = finalWidth * videoWidth / videoHeight;
         }
 
         videoElement.width = finalWidth;
