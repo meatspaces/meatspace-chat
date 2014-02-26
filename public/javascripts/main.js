@@ -237,14 +237,19 @@ define(['jquery', './base/transform', 'gumhelper', './base/videoShooter', 'finge
       if (err) {
         disableVideoMode();
       } else {
-        var finalWidth = 135;
-        var finalHeight;
+        videoHeight = videoHeight / 5;
+        videoWidth = videoWidth / 5;
 
-        finalHeight = finalWidth * (videoHeight / 5) / (videoWidth / 5);
+        var finalWidth = 135;
+        var finalHeight = finalWidth * videoHeight / videoWidth;
+
+        if (videoWidth > videoHeight) {
+          finalHeight = finalWdith * videoWidth / videoHeight;
+        }
+
         videoElement.width = finalWidth;
         videoElement.height = finalHeight;
 
-        console.log('current width/height ', videoElement.width, videoElement.height);
         footer.prepend(videoElement);
         videoElement.play();
         videoShooter = new VideoShooter(videoElement);
