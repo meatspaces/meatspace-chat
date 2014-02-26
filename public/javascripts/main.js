@@ -239,7 +239,7 @@ define(['jquery', './base/transform', 'gumhelper', './base/videoShooter', 'finge
         var finalHeight = 101;
 
         // for Firefox on Android in portrait mode because I don't know.
-        if (window.matchMedia && window.matchMedia('(max-width: 460px)').matches &&
+        if (window.matchMedia && window.matchMedia('(orientation: portrait)').matches &&
             navigator.userAgent.match(/Android/i) && navigator.userAgent.match(/Firefox/i) &&
             videoWidth < videoHeight) {
 
