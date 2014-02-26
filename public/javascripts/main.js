@@ -235,8 +235,17 @@ define(['jquery', './base/transform', 'gumhelper', './base/videoShooter', 'finge
       if (err) {
         disableVideoMode();
       } else {
-        videoElement.width = 135;
-        videoElement.height = 101;
+        var finalWidth = 135;
+        var finalHeight = 101;
+
+        // for Android in portrait mode
+        if (window.matchMedia && window.matchMedia('(orientation: portrait)').matches &&
+            navigator.userAgent.match(/Android/i)) {
+            finalHeight = finalWidth * videoHeight / videoWidth;
+        }
+
+        videoElement.width = finalWidth;
+        videoElement.height = finalHeight;
 
         footer.prepend(videoElement);
         videoElement.play();
