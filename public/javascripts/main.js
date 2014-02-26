@@ -228,16 +228,12 @@ define(['jquery', './base/transform', 'gumhelper', './base/videoShooter', 'finge
     auth.userid = md5(auth.fingerprint + data.ip);
   });
 
-  if (window.ondeviceorientation) {
-    window.ondeviceorientation = function () {
-      if (window.matchMedia('(orientation: landscape)').matches) {
-        videoWidth = 101;
-        videoHeight = 135;
-      } else {
-        videoWidth = 135;
-        videoHeight = 101;
-      }
-    };
+  if (window.matchMedia('(orientation: landscape)').matches) {
+    videoWidth = 135;
+    videoHeight = 101;
+  } else {
+    videoWidth = 101;
+    videoHeight = 135;
   }
 
   if (navigator.getMedia) {
