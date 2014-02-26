@@ -50,8 +50,6 @@ define(['jquery', './base/transform', 'gumhelper', './base/videoShooter', 'finge
   var unreadMessages = 0;
   var pageHidden = 'hidden';
   var pageVisibilityChange = 'visibilitychange';
-  var videoWidth = 135;
-  var videoHeight = 101;
 
   if (typeof document.hidden === 'undefined') {
     ['webkit', 'moz', 'ms'].some(function (prefix) {
@@ -241,7 +239,7 @@ define(['jquery', './base/transform', 'gumhelper', './base/videoShooter', 'finge
         var finalHeight = 101;
 
         // for mobile devices
-        if (window.matchMedia && window.matchMedia('(min-width: 460px)').matches) {
+        if (window.matchMedia && window.matchMedia('(max-width: 460px)').matches) {
           videoHeight = videoHeight / 5;
           videoWidth = videoWidth / 5;
 
