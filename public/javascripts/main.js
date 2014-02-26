@@ -238,8 +238,9 @@ define(['jquery', './base/transform', 'gumhelper', './base/videoShooter', 'finge
         var finalWidth = 135;
         var finalHeight = 101;
 
-        // for mobile devices
-        if (window.matchMedia && window.matchMedia('(max-width: 460px)').matches) {
+        // for Firefox on Android because I don't know.
+        if (window.matchMedia && window.matchMedia('(max-width: 460px)').matches &&
+            navigator.userAgent.match(/Android/i) && navigator.userAgent.match(/Firefox/i)) {
           videoHeight = videoHeight / 5;
           videoWidth = videoWidth / 5;
 
