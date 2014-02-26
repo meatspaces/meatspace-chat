@@ -241,7 +241,8 @@ define(['jquery', './base/transform', 'gumhelper', './base/videoShooter', 'finge
         // for Android in portrait mode
         if (window.matchMedia && window.matchMedia('(orientation: portrait)').matches &&
             navigator.userAgent.match(/Android/i)) {
-            finalHeight = finalWidth * videoHeight / videoWidth;
+          finalWidth = 101;
+          finalHeight = finalWidth * videoHeight / videoWidth;
         }
 
         videoElement.width = finalWidth;
