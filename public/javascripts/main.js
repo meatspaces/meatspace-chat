@@ -248,7 +248,6 @@ define(['jquery', './base/transform', 'gumhelper', './base/videoShooter', 'finge
 
             finalWidth = 135;
             finalHeight = finalWidth * videoHeight / videoWidth;
-          }
         }
 
         videoElement.width = finalWidth;
