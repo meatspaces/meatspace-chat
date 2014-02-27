@@ -12,7 +12,7 @@ define([], function() {
   };
 
   var KNOWN_TLDS = [
-    'aero', 'asia', 'bike', 'biz', 'cat', 'com', 'coop', 'info',
+    'aero', 'asia', 'bike', 'biz', 'camera', 'cat', 'com', 'coop', 'info',
     'int', 'jobs', 'mobi', 'museum', 'name', 'net', 'org', 'post', 'pro',
     'tel', 'travel', 'xxx', 'edu', 'gov', 'mil', 'nyc', 'ac',
     'ad', 'ae', 'af', 'ag', 'ai', 'al', 'am', 'an', 'ao', 'aq', 'ar',
