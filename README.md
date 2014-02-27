@@ -18,6 +18,18 @@ If you want to create a browser add-on or plugin feel free to do so and follow t
     npm run-script grunt build
     npm start
 
+## Create a Twitter Application for Meatspace
+
+Sign in with your Twitter account to https://dev.twitter.com and create a new application.
+
+Fill in the details for your local setup like so:
+
+![Twitter settings](http://cl.ly/U9t7/Create_an_application___Twitter_Application_Management.png)
+
+Save your settings then go back and edit the settings again. Check off the 'Allow this application to be used to Sign in with Twitter' and save.
+
+Open your browser at http://127.0.0.1:3000
+
 # Messages
 
 You can listen to the socket to receive incoming messages or use long polling at either https://chat.meatspac.es or http://chat-staging.meatspac.es.

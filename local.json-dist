@@ -1,6 +1,7 @@
 {
-    "domain": "http://localhost",
+    "domain": "http://127.0.0.1",
     "port": 3000,
+    "authPort": 3000,
     "session_secret": "secret",
     "analytics": "your google analytics value",
     "analyticsHost": "your domain without the protocol (e.g. someurl.com)",
@@ -8,5 +9,7 @@
     "appId": "",
     "meatcounter_addrs" : ["ipc:///tmp/meatcounter.ipc", "tcp://127.0.0.1:9999"],
     "meatcounter_inc_topic" : "meatspace.incoming",
-    "meatcounter_out_topic" : "meatspace.outgoing"
+    "meatcounter_out_topic" : "meatspace.outgoing",
+    "twitter_key": "",
+    "twitter_secret": ""
 }

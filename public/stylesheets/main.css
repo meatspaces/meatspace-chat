@@ -171,6 +171,22 @@ body > img {
     display: none;
 }
 
+#authenticate {
+    color: #f65694;
+    display: block;
+    font-size: 2rem;
+    margin: 20px;
+    text-align: center;
+    text-decoration: none;
+}
+
+.auth {
+    color: #f65694;
+    display: inline-block;
+    font-size: 0.8rem;
+    margin-top: 15px;
+}
+
 #menu-button {
     cursor: pointer;
     font-size: 2rem;
