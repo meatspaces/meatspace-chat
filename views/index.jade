@@ -1,6 +1,7 @@
 extend layout
 
 block content
+  div#videoHolder
   form(method='post', id='composer-form')
     .message-content
       input(name='message', id='composer-message', class='input', maxlength='250', autocomplete='off', placeholder=t('messagePrompt'))

@@ -531,14 +531,20 @@ ul li.on {
     background-color: #f181ad;
 }
 
-#footer video {
-    position: absolute;
+#videoHolder {
+  position: absolute;
+  width: 135px;
+  height: 101px;
+  bottom: 0;
+  left: 18px;
+  z-index: 10;
+  border-top: 1px solid rgba(255, 255, 255, 0.85);
+  background-color: #000000;
+}
+
+#videoHolder video {
     width: 135px;
     height: 101px;
-    bottom: 0;
-    left: 18px;
-    z-index: 10;
-    border-top: 1px solid rgba(255, 255, 255, 0.85);
 }
 
 #footer svg.progress {
@@ -612,7 +618,7 @@ ul li.on {
     }
 
     #chat-container li img,
-    #footer video,
+    #videoHolder,
     #footer svg.progress {
         left: 0;
     }
