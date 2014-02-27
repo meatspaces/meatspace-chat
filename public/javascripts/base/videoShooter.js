@@ -7,13 +7,14 @@ define(['Animated_GIF'], function (Animated_GIF) {
       interval = interval !== undefined ? interval : 0.1; // In seconds
 
       var pendingFrames = numFrames;
-      var ag = new Animated_GIF({ workerPath: 'javascripts/lib/animated-gif/dist/Animated_GIF.worker.min.js' });
+      var ag = new Animated_GIF({
+        workerPath: 'javascripts/lib/animated-gif/dist/Animated_GIF.worker.min.js'
+      });
       ag.setSize(videoElement.width, videoElement.height);
       ag.setDelay(interval);
 
-      captureFrame();
 
-      function captureFrame() {
+      var captureFrame = function() {
         ag.addFrame(videoElement);
         pendingFrames--;
 
@@ -24,15 +25,15 @@ define(['Animated_GIF'], function (Animated_GIF) {
           setTimeout(captureFrame, interval * 1000); // timeouts are in milliseconds
         } else {
           ag.getBase64GIF(function(image) {
-
-            // Ensure workers are freed-so we avoid bug #103 https://github.com/meatspaces/meatspace-chat/issues/103
+            // Ensure workers are freed-so we avoid bug #103
+            // https://github.com/meatspaces/meatspace-chat/issues/103
             ag.destroy();
-
             callback(image);
-
           });
         }
-      }
+      };
+
+      captureFrame();
     };
   }
 
