@@ -23,7 +23,8 @@ define(['jquery', './base/transform', 'gumhelper', './base/videoShooter', 'finge
     blocker: $('#composer-blocker'),
     form: $('#composer-form'),
     message: $('#composer-message'),
-    inputs: $('#composer-form input').toArray()
+    inputs: $('#composer-form input').toArray(),
+    videoHolder: $('#videoHolder')
   };
   var menu = {
     button: $('#menu-button'),
@@ -235,21 +236,17 @@ define(['jquery', './base/transform', 'gumhelper', './base/videoShooter', 'finge
       if (err) {
         disableVideoMode();
       } else {
-        var finalWidth = 135;
-        var finalHeight = 101;
+        var gifWidth = 135;
+        var gifHeight = 101;
+        var videoDimens = VideoShooter.getDimensions(videoWidth, videoHeight, gifWidth, gifHeight);
 
-        // for Android in portrait mode
-        if (window.matchMedia && window.matchMedia('(orientation: portrait)').matches &&
-            navigator.userAgent.match(/Android/i)) {
-          finalHeight = finalWidth * videoHeight / videoWidth;
-        }
+        console.log('gUM returned video with dimens ' + videoWidth + 'x' + videoHeight);
+        console.log('chose dimens ' + videoDimens.width + 'x' + videoDimens.height);
+        videoElement.width = videoDimens.width;
+        videoElement.height = videoDimens.height;
 
-        videoElement.width = finalWidth;
-        videoElement.height = finalHeight;
-
-        footer.prepend(videoElement);
-        videoElement.play();
-        videoShooter = new VideoShooter(videoElement);
+        composer.videoHolder.prepend(videoElement);
+        videoShooter = new VideoShooter(videoElement, gifWidth, gifHeight);
         composer.form.click();
       }
     });
