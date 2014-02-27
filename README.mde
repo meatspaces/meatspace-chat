@@ -11,6 +11,7 @@ If you want to create a browser add-on or plugin feel free to do so and follow t
     brew install zeromq
     cp local.json-dist local.json
     cp clients.json-dist clients.json
+    cp whitelist.json-dist whitelist.json
     npm install
     npm -g install nodemon
     bower install
@@ -41,7 +42,7 @@ A meatspace chat message is a nested dictionary in the form
 
 ## Mute feature
 
-If you mute a user then you won't see any new posts from them at that machine and IP. There is an unmute button below the meatcube logo on the page.
+If you mute a user then you won't see any new posts from them at that machine and IP. There is an unmute button in the menu in the top right corner.
 
 ## Native apps (iOS/Android) or Non-web clients
 
