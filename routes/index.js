@@ -1,9 +1,10 @@
 'use strict';
 
-module.exports = function (app, nconf, io, zio, topic_in, topic_out) {
+module.exports = function (app, nconf, io, zio, topic_in, topic_out, passport) {
   var crypto = require('crypto');
   var Publico = require('meatspace-publico');
   var nativeClients = require('../clients.json');
+  var whitelist = require('../whitelist.json');
   var level = require('level');
 
   var publico = new Publico('none', {
@@ -30,12 +31,32 @@ module.exports = function (app, nconf, io, zio, topic_in, topic_out) {
     socket.emit('message', { chat: chat });
   };
 
-  app.get('/info', function (req, res) {
-    res.render('info');
+  app.get('/auth/twitter', passport.authenticate('twitter'), function (req, res) { });
+
+  app.get('/auth/twitter/callback', passport.authenticate('twitter',
+    { failureRedirect: '/' }), function (req, res) {
+
+    if (whitelist.indexOf(req.session.passport.user.id) === -1) {
+      res.redirect('/logout');
+    } else {
+      req.session.userId = req.session.passport.user.id;
+      req.session.authenticated = true;
+      res.redirect('/');
+    }
   });
 
-  app.get('/art', function (req, res) {
-    res.render('art');
+  app.get('/logout', function (req, res) {
+    req.session.destroy();
+    req.logout();
+    res.redirect('/');
+  });
+
+  app.get('/admin', function (req, res) {
+    res.render('admin');
+  });
+
+  app.get('/info', function (req, res) {
+    res.render('info');
   });
 
   app.get('/', function (req, res) {

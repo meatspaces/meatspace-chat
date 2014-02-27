@@ -6,9 +6,36 @@ var configurations = module.exports;
 var app = express();
 var server = require('http').createServer(app);
 var nconf = require('nconf');
+var passport = require('passport');
+var TwitterStrategy = require('passport-twitter').Strategy;
 var settings = require('./settings')(app, configurations, express);
 
 nconf.argv().env().file({ file: 'local.json' });
+
+/* Passport OAuth setup */
+passport.serializeUser(function (user, done) {
+  done(null, user);
+});
+
+passport.deserializeUser(function (obj, done) {
+  done(null, obj);
+});
+
+passport.use(new TwitterStrategy({
+    consumerKey: nconf.get('twitter_key'),
+    consumerSecret: nconf.get('twitter_secret'),
+    callbackURL: nconf.get('domain') + ':' + nconf.get('authPort') + '/auth/twitter/callback'
+  },
+  function (accessToken, refreshToken, profile, done) {
+    process.nextTick(function (err) {
+      if (!profile.access_token) {
+        profile.access_token = accessToken;
+      }
+
+      return done(err, profile);
+    });
+  }
+));
 
 // set up meatcounter publisher and connect
 // to endpoints
@@ -31,6 +58,6 @@ io.configure(function () {
 });
 
 // routes
-require('./routes')(app, nconf, io, zio, topic_in, topic_out);
+require('./routes')(app, nconf, io, zio, topic_in, topic_out, passport);
 
 server.listen(process.env.PORT || nconf.get('port'));
