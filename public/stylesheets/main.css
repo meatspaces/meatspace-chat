@@ -439,11 +439,11 @@ input::-webkit-input-placeholder {
 
 #chat-container li .mute {
     font-family: "Helvetica Neue", "Helvetica", "Arial", sans-serif;
-    background-color: #f181ad;
+    background: none;
     border: 0;
-    color: #fff;
-    display: none;
-    font-size: 0.8rem;
+    color: #f181ad;
+    display: block;
+    font-size: 0.7rem;
     font-weight: 300;
     margin: 0;
     padding: 8px 18px 9px;
@@ -452,10 +452,6 @@ input::-webkit-input-placeholder {
     bottom: 0;
     cursor: pointer;
     text-transform: uppercase;
-}
-
-#chat-container li:hover .mute {
-    display: block;
 }
 
 #chat-container li .mute:hover {
@@ -610,13 +606,9 @@ ul li.on {
     }
 
     #chat-container li .mute {
-        display: block;
         bottom: 0;
         margin-bottom: 0;
         padding: 5px 5px 5px 7px;
-        font-size: .7rem;
-        color: #f181ad;
-        background: none;
     }
 
     #chat-container li img,
