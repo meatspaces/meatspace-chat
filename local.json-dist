@@ -11,5 +11,6 @@
     "meatcounter_inc_topic" : "meatspace.incoming",
     "meatcounter_out_topic" : "meatspace.outgoing",
     "twitter_key": "",
-    "twitter_secret": ""
+    "twitter_secret": "",
+    "redis_db": 1
 }
