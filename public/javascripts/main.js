@@ -328,12 +328,7 @@ define(['jquery', './base/transform', 'gumhelper', './base/videoShooter', 'finge
     }
   });
 
-  composer.form.on('keydown', function (ev) {
-    if (ev.keyCode === 13) {
-      ev.preventDefault();
-      composer.form.submit();
-    }
-  }).on('keyup', function (ev) {
+  composer.form.on('keyup', function (ev) {
     counter.text(CHAR_LIMIT - composer.message.val().length);
   }).on('submit', function (ev) {
     ev.preventDefault();
