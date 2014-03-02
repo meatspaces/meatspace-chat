@@ -232,24 +232,38 @@ define(['jquery', './base/transform', 'gumhelper', './base/videoShooter', 'finge
 
     footer.prepend(svg);
 
-    gumHelper.startVideoStreaming(function callback(err, stream, videoElement, videoWidth, videoHeight) {
-      if (err) {
-        disableVideoMode();
-      } else {
+    var startStreaming = function () {
+      gumHelper.startVideoStreaming(function (err, stream, videoElement, videoWidth, videoHeight) {
+        if (err) {
+          disableVideoMode();
+          return;
+        }
+
         var gifWidth = 135;
         var gifHeight = 101;
-        var videoDimens = VideoShooter.getDimensions(videoWidth, videoHeight, gifWidth, gifHeight);
+        var cropDimens =
+          VideoShooter.getCropDimensions(videoWidth, videoHeight, gifWidth, gifHeight);
 
-        console.log('gUM returned video with dimens ' + videoWidth + 'x' + videoHeight);
-        console.log('chose dimens ' + videoDimens.width + 'x' + videoDimens.height);
-        videoElement.width = videoDimens.width;
-        videoElement.height = videoDimens.height;
+        videoElement.width = gifWidth + cropDimens.width;
+        videoElement.height = gifHeight + cropDimens.height;
+
+        $(videoElement).css({
+          position: 'absolute',
+          width: gifWidth + cropDimens.width + 'px',
+          height: gifHeight + cropDimens.height + 'px',
+          left: -Math.floor(cropDimens.width / 2) + 'px',
+          top: -Math.floor(cropDimens.height / 2) + 'px'
+        });
 
         composer.videoHolder.prepend(videoElement);
-        videoShooter = new VideoShooter(videoElement, gifWidth, gifHeight);
+        videoShooter = new VideoShooter(videoElement, gifWidth, gifHeight, videoWidth, videoHeight,
+          cropDimens);
         composer.form.click();
-      }
-    });
+      });
+    };
+
+    startStreaming();
+
   } else {
     disableVideoMode();
   }

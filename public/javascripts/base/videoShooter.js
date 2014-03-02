@@ -1,54 +1,34 @@
 define(['Animated_GIF'], function (Animated_GIF) {
   'use strict';
 
-  function VideoShooter (videoElement, desiredWidth, desiredHeight) {
+  function VideoShooter (videoElement, gifWidth, gifHeight, videoWidth, videoHeight, crop) {
     this.getShot = function (callback, numFrames, interval, progressCallback) {
       numFrames = numFrames !== undefined ? numFrames : 3;
       interval = interval !== undefined ? interval : 0.1; // In seconds
 
       var canvas = document.createElement('canvas');
-      canvas.width = desiredWidth;
-      canvas.height = desiredHeight;
+      canvas.width = gifWidth;
+      canvas.height = gifHeight;
       var context = canvas.getContext('2d');
-      context.fillStyle = 'rgb(0,0,0)';
 
       var pendingFrames = numFrames;
       var ag = new Animated_GIF({
         workerPath: 'javascripts/lib/animated-gif/dist/Animated_GIF.worker.min.js'
       });
-      ag.setSize(desiredWidth, desiredHeight);
+      ag.setSize(gifWidth, gifHeight);
       ag.setDelay(interval);
 
-      var desiredRatio = desiredWidth / desiredHeight;
-      var videoRatio = videoElement.width / videoElement.height;
-      var isLetterboxed = false;
-      var scaledWidth;
-      var scaledHeight;
-      if (desiredWidth === videoElement.width && desiredHeight === videoElement.height) {
-        scaledWidth = desiredWidth;
-        scaledHeight = desiredHeight;
-      } else if (Math.abs(videoRatio - desiredRatio) < 0.1) {
-        scaledWidth = desiredWidth;
-        scaledHeight = desiredHeight;
-      } else {
-        isLetterboxed = true;
-        var scaleFactor = videoElement.width > videoElement.height ?
-          (desiredWidth / videoElement.width) : (desiredHeight / videoElement.height);
-        scaledWidth = Math.round(videoElement.width * scaleFactor);
-        scaledHeight = Math.round(videoElement.height * scaleFactor);
-      }
+      var sourceX = Math.floor(crop.scaledWidth / 2);
+      var sourceWidth = videoWidth - crop.scaledWidth;
+      var sourceY = Math.floor(crop.scaledHeight / 2);
+      var sourceHeight = videoHeight - crop.scaledHeight;
 
       var captureFrame = function() {
-        if (isLetterboxed) {
-          context.fillRect(0, 0, desiredWidth, desiredHeight);
-        }
-
         context.drawImage(videoElement,
-          Math.abs(desiredWidth - videoElement.width) / 2,
-          Math.abs(desiredHeight - videoElement.height) / 2,
-          scaledWidth, scaledHeight);
+          sourceX, sourceY, sourceWidth, sourceHeight,
+          0, 0, gifWidth, gifHeight);
 
-        ag.addFrameImageData(context.getImageData(0, 0, desiredWidth, desiredHeight));
+        ag.addFrameImageData(context.getImageData(0, 0, gifWidth, gifHeight));
         pendingFrames--;
 
         // Call back with an r value indicating how far along we are in capture
@@ -70,14 +50,14 @@ define(['Animated_GIF'], function (Animated_GIF) {
     };
   }
 
-  VideoShooter.getDimensions = function (actualWidth, actualHeight, desiredWidth, desiredHeight) {
-    var result = { width: desiredWidth, height: desiredHeight };
-    if (actualWidth > actualHeight) {
-      result.height =
-        Math.min(desiredHeight, Math.round(desiredWidth * actualHeight / actualWidth));
+  VideoShooter.getCropDimensions = function (width, height, gifWidth, gifHeight) {
+    var result = { width: 0, height: 0, scaledWidth: 0, scaledHeight: 0 };
+    if (width > height) {
+      result.width = Math.round(width * (gifHeight / height)) - gifWidth;
+      result.scaledWidth = Math.round(result.width * (height / gifHeight));
     } else {
-      result.width =
-        Math.min(desiredWidth, Math.round(desiredHeight * actualWidth / actualHeight));
+      result.height = Math.round(height * (gifWidth / width)) - gifHeight;
+      result.scaledHeight = Math.round(result.height * (width / gifWidth));
     }
 
     return result;
