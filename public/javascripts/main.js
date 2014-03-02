@@ -264,6 +264,11 @@ define(['jquery', './base/transform', 'gumhelper', './base/videoShooter', 'finge
 
     startStreaming();
 
+    $(window).on('orientationchange', function() {
+      gumHelper.stopVideoStreaming();
+      composer.videoHolder.empty();
+      startStreaming();
+    });
   } else {
     disableVideoMode();
   }
