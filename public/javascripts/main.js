@@ -280,6 +280,17 @@ define(['jquery', './base/transform', 'gumhelper', './base/videoShooter', 'finge
     terms.addClass('on');
   }
 
+  var isFocusingKey = function (ev) {
+    return !(
+      // don't block modifiers, excluding shift since it's often used in normal typing
+      ev.altKey || ev.ctrlKey || ev.metaKey ||
+      // don't block arrow keys
+      (ev.which >= 37 && ev.which <= 40) ||
+      // don't block page up/page down
+      ev.which === 33 || ev.which === 34
+    );
+  };
+
   body.on('click', '#unmute, #tnc-accept', function (ev) {
     if (ev.target.id === 'unmute') {
       debug('clearing mutes');
@@ -293,7 +304,7 @@ define(['jquery', './base/transform', 'gumhelper', './base/videoShooter', 'finge
       terms.removeClass('on');
     }
   }).on('keydown', function (ev) {
-    if (!hasModifiersPressed(ev) && ev.target !== composer.message[0]) {
+    if (isFocusingKey(ev) && ev.target !== composer.message[0]) {
       composer.message.focus();
     }
   });
@@ -383,9 +394,4 @@ define(['jquery', './base/transform', 'gumhelper', './base/videoShooter', 'finge
   });
 
   $(document).on(pageVisibilityChange, handleVisibilityChange);
-
-  function hasModifiersPressed(ev) {
-    // modifiers exclude shift since it's often used in normal typing
-    return ev.altKey || ev.ctrlKey || ev.metaKey;
-  }
 });
