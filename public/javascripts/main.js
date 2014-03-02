@@ -256,6 +256,9 @@ define(['jquery', './base/transform', 'gumhelper', './base/videoShooter', 'finge
         });
 
         composer.videoHolder.prepend(videoElement);
+        // Firefox doesn't seem to obey autoplay if the element is not in the DOM when the content
+        // is loaded, so we must manually trigger play after adding it, or the video will be frozen
+        videoElement.play();
         videoShooter = new VideoShooter(videoElement, gifWidth, gifHeight, videoWidth, videoHeight,
           cropDimens);
         composer.form.click();
