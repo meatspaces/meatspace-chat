@@ -17,7 +17,7 @@ define([], function() {
     'enterprises', 'equipment', 'estate', 'eus', 'gallery', 'graphics', 'guru',
     'holdings', 'info', 'int', 'jobs', 'kitchen', 'land', 'lighting', 'mobi',
     'museum', 'name', 'net', 'org', 'photography', 'photos', 'plumbing', 'post',
-    'pro', 'singles', 'technology', 'tel', 'tips', 'today', 'travel',
+    'pro', 'sexy', 'singles', 'technology', 'tel', 'tips', 'today', 'travel',
     'ventures', 'voyage', 'xxx', 'edu', 'gov', 'mil', 'nyc', 'ac', 'ad', 'ae',
     'af', 'ag', 'ai', 'al', 'am', 'an', 'ao', 'aq', 'ar', 'as', 'at', 'au',
     'aw', 'ax', 'az', 'ba', 'bb', 'bd', 'be', 'bf', 'bg', 'bh', 'bi', 'bj',
