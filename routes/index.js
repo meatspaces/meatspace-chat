@@ -5,6 +5,7 @@ module.exports = function (app, nconf, io, zio, topic_in, topic_out, passport) {
   var Publico = require('meatspace-publico');
   var nativeClients = require('../clients.json');
   var whitelist = require('../whitelist.json');
+  var local = require('../local.json');
   var level = require('level');
 
   var publico = new Publico('none', {
@@ -81,7 +82,7 @@ module.exports = function (app, nconf, io, zio, topic_in, topic_out, passport) {
 
   var addChat = function (message, picture, fingerprint, userId, ip, next) {
     publico.addChat(message.slice(0, 250), {
-      ttl: 600000,
+      ttl: (local.ttl || 600000),
       media: picture,
       fingerprint: userId
     }, function (err, c) {
