@@ -2,6 +2,7 @@
     "domain": "http://127.0.0.1",
     "port": 3000,
     "authPort": 3000,
+    "ttl": 600000,
     "session_secret": "secret",
     "analytics": "your google analytics value",
     "analyticsHost": "your domain without the protocol (e.g. someurl.com)",
