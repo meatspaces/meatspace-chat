@@ -46,7 +46,10 @@ valid = {
     //email
     'email+advancedtricky@example.com',
     'http://example.com/#fragment',
-    '#fragment'
+    '#fragment',
+    '*holla at*',
+    '_italicize! Woo_',
+    '*Bold stuff* and _italicized things_'
   ],
 
   expects: [
@@ -88,7 +91,10 @@ valid = {
     '<a href="http://test.com/@test" target="_blank">test.com/@test</a>',
     '<a href="mailto:email+advancedtricky@example.com" target="_blank">email+advancedtricky@example.com</a>',
     '<a href="http://example.com/#fragment" target="_blank">http://example.com/#fragment</a>',
-    '<a href="https://twitter.com/search?q=%23fragment&src=hash" target="_blank">#fragment</a>'
+    '<a href="https://twitter.com/search?q=%23fragment&src=hash" target="_blank">#fragment</a>',
+    '<b style=\'font-weight: 700;\'>holla at</b>',
+    '<em>italicize! Woo</em>',
+    '<b style=\'font-weight: 700;\'>Bold stuff</b> and <em>italicized things</em>'
   ]
 };
 
@@ -105,14 +111,18 @@ invalid = {
     'a.0.3',
     'a.b.c',
     'what happens when it\'s inline? 1.1.1 like that?',
-    'meat.spaces is not a link'
+    'meat.spaces is not a link',
+    'foo *this is not bold',
+    'bar _this is not italicized'
   ],
   expects: [
     '7.0.3',
     'a.0.3',
     'a.b.c',
     'what happens when it\'s inline? 1.1.1 like that?',
-    'meat.spaces is not a link'
+    'meat.spaces is not a link',
+    '*this is not bold',
+    '_this is not italicized'
   ]
 };
 

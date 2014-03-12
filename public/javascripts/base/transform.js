@@ -110,6 +110,18 @@ define([], function() {
         return template('https://twitter.com/' + handle, match[0]);
       }
     },
+    italicize: {
+      pattern: /_(.+?)_/g,
+      transformer: function (match) {
+        return "<em>" + match[1] + "</em>";
+      }
+    },
+    bold: {
+      pattern: /\*(.+?)\*/g,
+      transformer: function (match) {
+        return "<b style='font-weight: 700;'>" + match[1] + "</b>";
+      }
+    },
     hashtag: {
       pattern: /#(\w+)/g,
       transformer: function (match) {
