@@ -152,39 +152,4 @@ inline.values.forEach(function(value, i) {
   };
 });
 
-slashables = {
-  values: [
-    '/me',
-    '/me waves',
-    '/me feels whimsy!',
-    '/me a twitter: @example',
-    '/me a link: example.com',
-    '/me trailing slash link: example.com/',
-    '/mee',
-    '/me  double space',
-    '/me /me',
-    ' /me with a space'
-  ],
-  expects: [
-    '<em><b>*</b></em>',
-    '<em><b>*</b> waves</em>',
-    '<em><b>*</b> feels whimsy!</em>',
-    '<em><b>*</b> a twitter: <a href="https://twitter.com/example" target="_blank">@example</a></em>',
-    '<em><b>*</b> a link: <a href="http://example.com" target="_blank">example.com</a></em>',
-    '<em><b>*</b> trailing slash link: <a href="http://example.com/" target="_blank">example.com/</a></em>',
-    '/mee',
-    '<em><b>*</b>  double space</em>',
-    '<em><b>*</b> /me</em>',
-    '<em><b>*</b> with a space</em>'
-  ]
-};
-
-slashables.values.forEach(function(value, i) {
-  tests[value] = function(test) {
-    test.equal(transform(value), slashables.expects[i]);
-    test.done();
-  };
-})
-
-
 module.exports = tests;
