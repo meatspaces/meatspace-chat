@@ -13,7 +13,7 @@ define([], function() {
 
   var KNOWN_TLDS = [
     'aero', 'asia', 'bike', 'biz', 'camera', 'cat', 'clothing', 'club', 'com',
-    'construction', 'contractors', 'coop', 'diamonds', 'directory',
+    'construction', 'contractors', 'coop', 'diamonds', 'directory', 'domains',
     'enterprises', 'equipment', 'estate', 'eus', 'gallery', 'graphics', 'guru',
     'holdings', 'info', 'int', 'jobs', 'kitchen', 'land', 'lighting', 'mobi',
     'museum', 'name', 'net', 'org', 'photography', 'photos', 'plumbing', 'post',
