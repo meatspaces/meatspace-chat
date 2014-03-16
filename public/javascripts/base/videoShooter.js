@@ -24,19 +24,22 @@ define(['Animated_GIF'], function (Animated_GIF) {
       var sourceHeight = videoHeight - crop.scaledHeight;
 
       var captureFrame = function() {
+        var framesLeft = pendingFrames - 1;
+        if (framesLeft > 0) {
+          setTimeout(captureFrame, interval * 1000); // timeouts are in milliseconds
+        }
+
         context.drawImage(videoElement,
           sourceX, sourceY, sourceWidth, sourceHeight,
           0, 0, gifWidth, gifHeight);
 
         ag.addFrameImageData(context.getImageData(0, 0, gifWidth, gifHeight));
-        pendingFrames--;
+        pendingFrames = framesLeft;
 
         // Call back with an r value indicating how far along we are in capture
         progressCallback((numFrames - pendingFrames) / numFrames);
 
-        if (pendingFrames > 0) {
-          setTimeout(captureFrame, interval * 1000); // timeouts are in milliseconds
-        } else {
+        if (!pendingFrames) {
           ag.getBase64GIF(function(image) {
             // Ensure workers are freed-so we avoid bug #103
             // https://github.com/meatspaces/meatspace-chat/issues/103
