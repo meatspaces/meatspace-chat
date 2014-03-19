@@ -77,7 +77,7 @@ define([], function() {
           // Match the list of known TLDs.
           // * Previously invalidated only tld with length 1
           // but that was too lenient.
-          if (!scheme && KNOWN_TLDS.indexOf(tld) === -1) {
+          if (!scheme && KNOWN_TLDS.indexOf(tld.toLowerCase()) === -1) {
             return candidate;
           }
         }
