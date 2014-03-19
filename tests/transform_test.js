@@ -132,6 +132,7 @@ inline = {
     'An inline subreddit, like /r/puppies, is replaced inline',
     'All linkables, ie. example.com, @twitter, and /r/puppies are replaced inline',
     'Hey Edna is doing an AMA over on /r/iama, check it out http://www.reddit.com/r/IAmA/comments/1phhx1/we_are_mozilla_ask_us_anything',
+    'SHOUTING ABOUT DOMAINS.COM',
     'this is my email: yo+yo@gmail.com'
   ],
   expects: [
@@ -141,6 +142,7 @@ inline = {
     'An inline subreddit, like <a href="http://www.reddit.com/r/puppies" target="_blank">/r/puppies</a>, is replaced inline',
     'All linkables, ie. <a href="http://example.com" target="_blank">example.com</a>, <a href="https://twitter.com/twitter" target="_blank">@twitter</a>, and <a href="http://www.reddit.com/r/puppies" target="_blank">/r/puppies</a> are replaced inline',
     'Hey Edna is doing an AMA over on <a href="http://www.reddit.com/r/iama" target="_blank">/r/iama</a>, check it out <a href="http://www.reddit.com/r/IAmA/comments/1phhx1/we_are_mozilla_ask_us_anything" target="_blank">http://www.reddit.com/r/IAmA/comments/1phhx1/we_are_mozilla_ask_us_anything</a>',
+    'SHOUTING ABOUT <a href="http://DOMAINS.COM" target="_blank">DOMAINS.COM</a>',
     'this is my email: <a href="mailto:yo+yo@gmail.com" target="_blank">yo+yo@gmail.com</a>'
   ]
 };
