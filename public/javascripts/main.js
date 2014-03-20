@@ -312,7 +312,7 @@ define(['jquery', './base/transform', 'gumhelper', './base/videoShooter', 'finge
     );
   };
 
-  body.on('click', '#unmute, #tnc-accept, #browser-warning-accept', function (ev) {
+  body.on('click', '#unmute, #tnc-accept, #browser-warning-accept, #switch-camera', function (ev) {
     if (ev.target.id === 'unmute') {
       debug('clearing mutes');
       localStorage.removeItem('muted');
@@ -331,6 +331,13 @@ define(['jquery', './base/transform', 'gumhelper', './base/videoShooter', 'finge
     if (ev.target.id === 'browser-warning-accept') {
       debug('acknowledging lack of rtc');
       browserWarning.removeClass('on');
+    }
+
+    if (ev.target.id === 'switch-camera') {
+      debug('switching camera');
+      gumHelper.stopVideoStreaming();
+      composer.videoHolder.empty();
+      startStreaming();
     }
   }).on('keydown', function (ev) {
     if (isFocusingKey(ev) && ev.target !== composer.message[0]) {
