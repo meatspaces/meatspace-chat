@@ -119,6 +119,10 @@ define(['jquery', './base/transform', 'gumhelper', './base/videoShooter', 'finge
         if (body.find('li[data-key="' + incoming.key + '"]').length === 0 &&
             !isMuted(fingerprint)) {
 
+          if (window.ga) {
+            window.ga('send', 'event', 'message', 'receive');
+          }
+
           var li = document.createElement('li');
           li.dataset.key = incoming.key;
           li.dataset.fingerprint = fingerprint;
@@ -363,7 +367,9 @@ define(['jquery', './base/transform', 'gumhelper', './base/videoShooter', 'finge
 
           debug('Sending chat');
           $.post('/add/chat', $.extend(submission, auth), function () {
-            // nothing to see here?
+            if (window.ga) {
+              window.ga('send', 'event', 'message', 'send');
+            }
           }).error(function (data) {
             alert(data.responseJSON.error);
           }).always(function (data) {
