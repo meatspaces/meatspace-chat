@@ -9,6 +9,10 @@ module.exports = function (app, nconf, io, zio, topic_in, topic_out, passport, i
   var redis = require('redis');
   var client = redis.createClient();
 
+  var getUserId = function(fingerprint, ip) {
+    return crypto.createHash('md5').update(fingerprint + ip).digest('hex');
+  };
+
   var publico = new Publico('none', {
     db: './db',
     limit: 20
@@ -27,18 +31,20 @@ module.exports = function (app, nconf, io, zio, topic_in, topic_out, passport, i
     });
   };
 
-  var emitChat = function (socket, chat, zio, topic_out, ip) {
-    client.get('ban:' + ip, function (err, result) {
+  var emitChat = function (socket, chat, zio, topic_out) {
+    var fingerprint = chat.value.fingerprint;
+
+    client.get('ban:' + fingerprint, function (err, result) {
       if (!err) {
         if (result > 2) {
-          console.log('banned! ', ip);
+          console.log('banned! ', fingerprint);
           chat.value.banned = true;
         }
       }
 
       var statmsg = JSON.stringify({
         epoch_ms: Date.now(),
-        fingerprint: chat.value.fingerprint
+        fingerprint: fingerprint
       });
 
       zio.send([topic_out, statmsg]);
@@ -80,8 +86,7 @@ module.exports = function (app, nconf, io, zio, topic_in, topic_out, passport, i
   });
 
   app.post('/hellban', isLoggedIn, function (req, res) {
-    var ip = req.ip;
-    var ban = 'ban:' + ip;
+    var ban = 'ban:' + req.body.fingerprint;
 
     client.incr(ban);
     client.expire(ban, nconf.get('ban_ttl'));
@@ -122,17 +127,13 @@ module.exports = function (app, nconf, io, zio, topic_in, topic_out, passport, i
           });
 
           zio.send([topic_in, statmsg]);
-          emitChat(io.sockets, { key: c.key, value: c }, zio, topic_out, ip);
+          emitChat(io.sockets, { key: c.key, value: c }, zio, topic_out);
           next(null, 'sent!');
         } catch (err) {
           next(new Error('Could not emit message'));
         }
       }
     });
-  };
-
-  var getUserId = function(fingerprint, ip) {
-    return crypto.createHash('md5').update(fingerprint + ip).digest('hex');
   };
 
   app.post('/add/chat', function (req, res, next) {
@@ -154,6 +155,7 @@ module.exports = function (app, nconf, io, zio, topic_in, topic_out, passport, i
             res.status(400);
             res.json({ error: err.toString() });
           } else {
+            client.set('fingerprint:' + req.body.fingerprint, userId);
             res.json({ status: status });
           }
         });
@@ -178,7 +180,7 @@ module.exports = function (app, nconf, io, zio, topic_in, topic_out, passport, i
       if (results.chats && results.chats.length > 0) {
         try {
           results.chats.forEach(function (chat) {
-            emitChat(socket, chat, zio, topic_out, ip);
+            emitChat(socket, chat, zio, topic_out);
           });
         } catch (e) {
           if (typeof results.chats.forEach !== 'function') {
