@@ -81,9 +81,9 @@ define(['jquery', './base/transform', 'gumhelper', './base/videoShooter', 'finge
 
   var isMuted = function (fingerprint, incoming) {
     var mutedItem = mutes.indexOf(fingerprint) !== -1;
-    var bannedItem = incoming.value.banned && auth.fingerprint !== fingerprint;
+    var bannedItem = incoming.value.banned && auth.userid !== fingerprint;
 
-    return (mutedItem && bannedItem);
+    return !!(mutedItem || bannedItem);
   };
 
   var debug = function () {
@@ -348,8 +348,6 @@ define(['jquery', './base/transform', 'gumhelper', './base/videoShooter', 'finge
     $.post('/hellban', {
       fingerprint: $(this).parent().data('fingerprint'),
       _csrf: composer.form.find('input[name="_csrf"]').val()
-    }, function (data) {
-      console.log('banned');
     });
   });
 
