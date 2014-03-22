@@ -13,5 +13,6 @@
     "meatcounter_out_topic" : "meatspace.outgoing",
     "twitter_key": "",
     "twitter_secret": "",
-    "redis_db": 1
+    "redis_db": 1,
+    "ban_ttl": 60000
 }

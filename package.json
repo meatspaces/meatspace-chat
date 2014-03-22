@@ -29,7 +29,8 @@
     "zmq": "~2.5.1",
     "passport": "~0.1.17",
     "passport-twitter": "~1.0.2",
-    "connect-redis": "~1.4.6"
+    "connect-redis": "~1.4.6",
+    "redis": "~0.10.1"
   },
   "devDependencies": {
     "grunt": "~0.4.2",
