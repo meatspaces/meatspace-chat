@@ -1,11 +1,13 @@
 'use strict';
 
-module.exports = function (app, nconf, io, zio, topic_in, topic_out, passport) {
+module.exports = function (app, nconf, io, zio, topic_in, topic_out, passport, isLoggedIn) {
   var crypto = require('crypto');
   var Publico = require('meatspace-publico');
   var nativeClients = require('../clients.json');
   var whitelist = require('../whitelist.json');
   var level = require('level');
+  var redis = require('redis');
+  var client = redis.createClient();
 
   var publico = new Publico('none', {
     db: './db',
@@ -25,9 +27,22 @@ module.exports = function (app, nconf, io, zio, topic_in, topic_out, passport) {
     });
   };
 
-  var emitChat = function (socket, chat, zio, topic_out) {
-    var statmsg = JSON.stringify({ epoch_ms: Date.now(), fingerprint: chat.value.fingerprint });
+  var emitChat = function (socket, chat, zio, topic_out, ip) {
+    client.get('ban:' + ip, function (err, result) {
+      if (!err && result) {
+        if (result > 2) {
+          chat.value.banned = true;
+        }
+      }
+    });
+
+    var statmsg = JSON.stringify({
+      epoch_ms: Date.now(),
+      fingerprint: chat.value.fingerprint
+    });
+
     zio.send([topic_out, statmsg]);
+
     socket.emit('message', { chat: chat });
   };
 
@@ -63,15 +78,26 @@ module.exports = function (app, nconf, io, zio, topic_in, topic_out, passport) {
     res.render('index');
   });
 
+  app.post('/hellban', isLoggedIn, function (req, res) {
+    var ip = req.ip;
+    var ban = 'ban:' + ip;
+
+    client.incr(ban);
+    client.expire(ban, nconf.get('ban_ttl'));
+  });
+
   // NOTE: This is now a deprecated API method -- All chats go out through web sockets
   app.get('/get/chats', function (req, res) {
     res.status(410);
-    res.json({ error: 'This method is now deprecated. All chat messages, including initial ones, are now emitted through web socket messages.' });
+    res.json({
+      error: 'This method is now deprecated. All chat messages, including initial ones, are now emitted through web socket messages.'
+    });
   });
 
   app.get('/ip', function (req, res) {
     res.json({
-      ip: req.ip
+      ip: req.ip,
+      admin: req.session.authenticated || false
     });
   });
 
@@ -89,11 +115,16 @@ module.exports = function (app, nconf, io, zio, topic_in, topic_out, passport) {
         next(err);
       } else {
         try {
-          var statmsg = JSON.stringify( { epoch_ms: Date.now(), fingerprint: fingerprint } );
+          var statmsg = JSON.stringify({
+            epoch_ms: Date.now(),
+            fingerprint: fingerprint
+          });
+
           zio.send([topic_in, statmsg]);
-          emitChat(io.sockets, { key: c.key, value: c }, zio, topic_out);
+          emitChat(io.sockets, { key: c.key, value: c }, zio, topic_out, ip);
           next(null, 'sent!');
         } catch (err) {
+          console.log(err)
           next(new Error('Could not emit message'));
         }
       }
@@ -147,7 +178,7 @@ module.exports = function (app, nconf, io, zio, topic_in, topic_out, passport) {
       if (results.chats && results.chats.length > 0) {
         try {
           results.chats.forEach(function (chat) {
-            emitChat(socket, chat, zio, topic_out);
+            emitChat(socket, chat, zio, topic_out, ip);
           });
         } catch (e) {
           if (typeof results.chats.forEach !== 'function') {

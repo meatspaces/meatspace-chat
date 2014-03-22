@@ -437,7 +437,7 @@ input::-webkit-input-placeholder {
     text-overflow: ellipsis;
 }
 
-#chat-container li .mute {
+#chat-container li .mute, #chat-container li .ban {
     font-family: "Helvetica Neue", "Helvetica", "Arial", sans-serif;
     background: none;
     border: 0;
@@ -454,7 +454,11 @@ input::-webkit-input-placeholder {
     text-transform: uppercase;
 }
 
-#chat-container li .mute:hover {
+#chat-container li .ban {
+    bottom: 30px;
+}
+
+#chat-container li .mute:hover, #chat-container li .ban:hover {
     background-color: #e22661;
     color: #eee;
 }
