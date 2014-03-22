@@ -29,21 +29,22 @@ module.exports = function (app, nconf, io, zio, topic_in, topic_out, passport, i
 
   var emitChat = function (socket, chat, zio, topic_out, ip) {
     client.get('ban:' + ip, function (err, result) {
-      if (!err && result) {
+      if (!err) {
         if (result > 2) {
+          console.log('banned! ', ip);
           chat.value.banned = true;
         }
       }
+
+      var statmsg = JSON.stringify({
+        epoch_ms: Date.now(),
+        fingerprint: chat.value.fingerprint
+      });
+
+      zio.send([topic_out, statmsg]);
+
+      socket.emit('message', { chat: chat });
     });
-
-    var statmsg = JSON.stringify({
-      epoch_ms: Date.now(),
-      fingerprint: chat.value.fingerprint
-    });
-
-    zio.send([topic_out, statmsg]);
-
-    socket.emit('message', { chat: chat });
   };
 
   app.get('/auth/twitter', passport.authenticate('twitter'), function (req, res) { });

@@ -83,7 +83,7 @@ define(['jquery', './base/transform', 'gumhelper', './base/videoShooter', 'finge
     var mutedItem = mutes.indexOf(fingerprint) !== -1;
     var bannedItem = incoming.value.banned && auth.fingerprint !== fingerprint;
 
-    return !!(mutedItem && bannedItem);
+    return (mutedItem || bannedItem);
   };
 
   var debug = function () {
