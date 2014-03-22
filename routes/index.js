@@ -124,7 +124,6 @@ module.exports = function (app, nconf, io, zio, topic_in, topic_out, passport, i
           emitChat(io.sockets, { key: c.key, value: c }, zio, topic_out, ip);
           next(null, 'sent!');
         } catch (err) {
-          console.log(err)
           next(new Error('Could not emit message'));
         }
       }

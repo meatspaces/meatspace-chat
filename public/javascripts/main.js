@@ -239,7 +239,6 @@ define(['jquery', './base/transform', 'gumhelper', './base/videoShooter', 'finge
   $.get('/ip?t=' + Date.now(), function (data) {
     auth.userid = md5(auth.fingerprint + data.ip);
     auth.admin = data.admin;
-    console.log('user  *** ', auth)
   });
 
   if (navigator.getMedia) {
