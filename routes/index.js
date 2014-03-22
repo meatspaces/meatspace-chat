@@ -34,7 +34,7 @@ module.exports = function (app, nconf, io, zio, topic_in, topic_out, passport, i
   var emitChat = function (socket, chat, zio, topic_out) {
     var fingerprint = chat.value.fingerprint;
 
-    client.get('ban:' + fingerprint, function (err, result) {
+    client.scard('bans:' + fingerprint, function (err, result) {
       if (!err) {
         if (result > 2) {
           console.log('banned! ', fingerprint);
@@ -86,10 +86,12 @@ module.exports = function (app, nconf, io, zio, topic_in, topic_out, passport, i
   });
 
   app.post('/hellban', isLoggedIn, function (req, res) {
-    var ban = 'ban:' + req.body.fingerprint;
+    var ban = 'bans:' + req.body.fingerprint;
+    var adminId = req.session.passport.user.id;
 
-    client.incr(ban);
+    client.sadd(ban, adminId);
     client.expire(ban, nconf.get('ban_ttl'));
+    res.json({});
   });
 
   // NOTE: This is now a deprecated API method -- All chats go out through web sockets
