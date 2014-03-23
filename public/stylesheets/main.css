@@ -48,6 +48,8 @@ table {
 html, body {
     height: 100%;
     position: relative;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
 }
 
 body {
