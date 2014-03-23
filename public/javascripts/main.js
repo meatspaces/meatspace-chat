@@ -81,7 +81,7 @@ define(['jquery', './base/transform', 'gumhelper', './base/videoShooter', 'finge
 
   var isMuted = function (fingerprint, incoming) {
     var mutedItem = mutes.indexOf(fingerprint) !== -1;
-    var bannedItem = incoming.value.banned && auth.userid !== fingerprint;
+    var bannedItem = incoming && incoming.value.banned && auth.userid !== fingerprint;
 
     return !!(mutedItem || bannedItem);
   };
@@ -329,7 +329,7 @@ define(['jquery', './base/transform', 'gumhelper', './base/videoShooter', 'finge
     var fingerprint = $(this).parent('[data-fingerprint]').data('fingerprint');
     var messages;
 
-    if (!isMuted(fingerprint)) {
+    if (!isMuted(fingerprint, false)) {
       debug('Muting %s', fingerprint);
       mutes.push(fingerprint);
       localStorage.setItem('muted', JSON.stringify(mutes));
