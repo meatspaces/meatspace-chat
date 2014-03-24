@@ -185,8 +185,8 @@ body > img {
 .auth {
     color: #f65694;
     display: inline-block;
-    font-size: 0.8rem;
-    margin-top: 15px;
+    font-size: 1.2rem;
+    line-height: 51px;
 }
 
 #menu-button {
