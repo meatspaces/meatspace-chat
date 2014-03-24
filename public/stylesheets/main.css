@@ -48,6 +48,8 @@ table {
 html, body {
     height: 100%;
     position: relative;
+    font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+    font-weight: 300;
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
 }
@@ -67,7 +69,6 @@ body.info {
     bottom: 10px;
     color: #555;
     display: none;
-    font-family: "Helvetica Neue", "Helvetica", "Arial", sans-serif;
     font-size: 1.5rem;
     left: 10px;
     padding: 30px;
@@ -192,7 +193,6 @@ body > img {
 #menu-button {
     cursor: pointer;
     font-size: 2rem;
-    font-weight: 300;
     color: #e22661;
     float: right;
     margin-top: 5px;
@@ -312,7 +312,6 @@ a.medium {
 #wrapper {
     margin: 0 auto;
     position: relative;
-    font-family: "Helvetica Neue", "Helvetica", "Arial", sans-serif;
 }
 
 .header {
@@ -348,9 +347,7 @@ a.medium {
 .input, #counter {
     color: #fff;
     background: none;
-    font-family: "Helvetica Neue", "Helvetica", "Arial", sans-serif;
     font-size: 1.5rem;
-    font-weight: 300;
 }
 
 .input {
@@ -434,19 +431,16 @@ input::-webkit-input-placeholder {
     min-width: 182px;
     overflow: hidden;
     padding: 14px 70px 18px 171px;
-    font-weight: 300;
     overflow: hidden;
     text-overflow: ellipsis;
 }
 
 #chat-container li .mute, #chat-container li .ban {
-    font-family: "Helvetica Neue", "Helvetica", "Arial", sans-serif;
     background: none;
     border: 0;
     color: #f181ad;
     display: block;
     font-size: 0.7rem;
-    font-weight: 300;
     margin: 0;
     padding: 8px 18px 9px;
     position: absolute;
@@ -466,12 +460,10 @@ input::-webkit-input-placeholder {
 }
 
 #chat-container li .timestamp {
-    font-family: "Helvetica Neue", "Helvetica", "Arial", sans-serif;
     border: 0;
     color: #666;
     display: block;
     font-size: 0.8rem;
-    font-weight: 300;
     position: absolute;
     right: 0;
     top: 0;
@@ -511,9 +503,7 @@ ul li.on {
 #composer-blocker {
     color: rgba(255, 255, 255, .67);
     background-color: #999;
-    font-family: "Helvetica Neue", "Helvetica", "Arial", sans-serif;
     font-size: 1.5rem;
-    font-weight: 300;
     width: 100%;
     padding: 10px 18px 14px 171px;
     height: 27px;
