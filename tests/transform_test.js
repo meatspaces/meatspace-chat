@@ -19,6 +19,7 @@ valid = {
     'This is a link... example.org, take a look!',
     '(This is a link... example.org)',
     '(example.org/)',
+    '(example.org)',
     'Link: chat.meatspac.es/channel?',
     'Link: chat.meatspac.es/channel:',
     'Link: chat.meatspac.es/channel;',
@@ -66,6 +67,7 @@ valid = {
     '<a href="http://example.org" target="_blank">example.org</a>',
     '<a href="http://example.org" target="_blank">example.org</a>',
     '(<a href="http://example.org/" target="_blank">example.org/</a>)',
+    '(<a href="http://example.org" target="_blank">example.org</a>)',
     '<a href="http://chat.meatspac.es/channel" target="_blank">chat.meatspac.es/channel</a>',
     '<a href="http://chat.meatspac.es/channel" target="_blank">chat.meatspac.es/channel</a>',
     '<a href="http://chat.meatspac.es/channel" target="_blank">chat.meatspac.es/channel</a>',
@@ -97,6 +99,10 @@ valid = {
 valid.values.forEach(function(value, i) {
   tests[value] = function(test) {
     test.ok(transform(value).indexOf(valid.expects[i]) !== -1);
+
+    if (!(transform(value).indexOf(valid.expects[i]) !== -1)) {
+      console.log( "failure: \n%s \n%s", transform(value), valid.expects[i] );
+    }
     test.done();
   };
 });

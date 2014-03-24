@@ -62,10 +62,12 @@ define([], function() {
       transformer: function (match) {
         var href = '';
         var text = '';
+        var rendered = '';
         var candidate = match[0];
         var scheme = match[1];
         var domain = match[2];
         var tld = match[3].slice(1);
+        var isParenthetical = false;
 
         // Look at the value that was matched as a TLD, if it's
         // a number, then this might be an IP address.
@@ -86,22 +88,27 @@ define([], function() {
           href += 'http://';
         }
 
-        var addParen = false;
         if (candidate.indexOf('(') === -1 && candidate.slice(-1) === ')') {
+          // Removes the closing parenthesis before
+          // sanitization and transformation
           candidate = candidate.slice(0, -1);
-          addParen = true;
+          // Set flag to ensure parenthesis is restored.
+          isParenthetical = true;
         }
 
         href += candidate;
         text += candidate;
 
         href = sanitize(href);
+        rendered = template(href, text);
 
-        var result = template(href, text);
-        if (addParen) {
-          result += ')';
+        // Restore closing parenthesis to post-tranformation
+        // message fragments.
+        if (isParenthetical) {
+          rendered += ')';
         }
-        return result;
+
+        return rendered;
       }
     },
     twitter: {
