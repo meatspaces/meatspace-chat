@@ -86,8 +86,10 @@ define([], function() {
           href += 'http://';
         }
 
+        var addParen = false;
         if (candidate.indexOf('(') === -1 && candidate.slice(-1) === ')') {
           candidate = candidate.slice(0, -1);
+          addParen = true;
         }
 
         href += candidate;
@@ -95,7 +97,11 @@ define([], function() {
 
         href = sanitize(href);
 
-        return template(href, text);
+        var result = template(href, text);
+        if (addParen) {
+          result += ')';
+        }
+        return result;
       }
     },
     twitter: {
