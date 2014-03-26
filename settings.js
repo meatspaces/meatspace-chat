@@ -76,6 +76,11 @@ module.exports = function(app, configurations, express) {
     app.use(i18n.handle);
     app.enable('trust proxy');
     app.locals.pretty = true;
+    app.use(function (req, res, next) {
+      // prevent framing by other sites
+      res.set('X-Frame-Options', 'SAMEORIGIN');
+      next();
+    });
     app.use(app.router);
     app.use(function (req, res, next) {
       res.status(404);
