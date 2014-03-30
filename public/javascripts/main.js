@@ -251,7 +251,11 @@ define(['jquery', './base/transform', 'gumhelper', './base/videoShooter', 'finge
     var startStreaming = function () {
       gumHelper.startVideoStreaming(function (err, stream, videoElement, videoWidth, videoHeight) {
         if (err) {
-          disableVideoMode();
+          if (window.confirm('Access to your camera seems to be blocked. Retry?')) {
+            window.setTimeout(startStreaming, 500);
+          } else {
+            disableVideoMode();
+          }
           return;
         }
 
