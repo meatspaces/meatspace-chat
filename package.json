@@ -16,7 +16,7 @@
     "start": "nodemon app.js"
   },
   "dependencies": {
-    "connect": "~2.7.6",
+    "connect": "~2.14.3",
     "express": "~3.2.0",
     "jade": "~0.29.0",
     "nconf": "~0.6.7",
