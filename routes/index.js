@@ -149,10 +149,16 @@ module.exports = function (app, nconf, io, zio, topic_in, topic_out, passport, i
 
     var ip = req.ip;
     var userId = getUserId(req.body.fingerprint, ip);
+    var picture = req.body.picture;
 
-    if (req.body.picture) {
+    if (picture) {
+      if (picture.indexOf('data:image/') !== 0) {
+        next(new Error('Invalid image type'));
+        return;
+      }
+      
       if ((userId === req.body.userid) || req.isApiUser) {
-        addChat(req.body.message, req.body.picture, userId, ip, function (err, status) {
+        addChat(req.body.message, picture, userId, ip, function (err, status) {
           if (err) {
             res.status(400);
             res.json({ error: err.toString() });
