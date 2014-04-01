@@ -153,7 +153,8 @@ module.exports = function (app, nconf, io, zio, topic_in, topic_out, passport, i
 
     if (picture) {
       if (picture.indexOf('data:image/') !== 0) {
-        next(new Error('Invalid image type'));
+        res.status(400);
+        res.json({ error: 'Invalid image type' });
         return;
       }
       
