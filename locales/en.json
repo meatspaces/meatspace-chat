@@ -27,5 +27,8 @@
   "termsAndConditions": "Please read and accept the Terms and Conditions before continuing with Meatspace chat.",
   "iAccept": "I accept",
   "iDoNotAccept": "I do not accept",
-  "termsLink": "Terms and Conditions"
+  "termsLink": "Terms and Conditions",
+  "browserWarningString": "Your browser is not letting you have the full Meatspace experience!",
+  "browserWarningSubtext": "You will be able to see other peoples chats, but unable to post your own. Consider trying one of the browsers below, or continue on and just watch!",
+  "okay": "Okay"
 }
