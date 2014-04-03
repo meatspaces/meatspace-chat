@@ -323,7 +323,7 @@ define(['jquery', './base/transform', 'gumhelper', './base/videoShooter', 'finge
       debug('accepting terms');
       localStorage.setItem('terms', true);
       terms.removeClass('on');
-      if(navigator.getMedia === undefined) {
+      if (navigator.getMedia === undefined) {
         browserWarning.addClass('on');
       }
     }
