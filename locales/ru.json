@@ -27,5 +27,8 @@
   "termsAndConditions": "Please read and accept the Terms and Conditions before continuing with Meatspace chat.",
   "iAccept": "I accept",
   "iDoNotAccept": "I do not accept",
-  "termsLink": "Terms and Conditions"
+  "termsLink": "Terms and Conditions",
+  "browserWarningString": "Ваш браузер не поддерживает полный опыт Meatspace!",
+  "browserWarningSubtext": "Вы сможете увидеть чужие чаты, но не можете писать. Попробуйте один из браузеров в низу, или продолжайте просто смотреть!",
+  "okay": "Окай"
 }

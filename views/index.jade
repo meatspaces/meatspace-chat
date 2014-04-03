@@ -18,3 +18,13 @@ block terms
     p
       a(href='javascript:;', class='agree', id='tnc-accept')= t('iAccept')
       a(href='http://www.nyan.cat', class='agree')= t('iDoNotAccept')
+
+block browserWarning
+  #browserWarning
+    p= t('browserWarningString')
+    p.subtext= t('browserWarningSubtext')
+    p
+      a(href='http://www.mozilla.org/en-US/firefox/new/', class='browser firefox')= ''
+      a(href='https://www.google.com/intl/en/chrome/browser/', class='browser chrome')= ''
+    p
+      a(href='javascript:;', id='browserWarning-accept')= t('okay')

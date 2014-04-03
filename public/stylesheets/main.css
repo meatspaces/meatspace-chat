@@ -85,17 +85,17 @@ body.info {
     z-index: 3;
 }
 
-#terms.on {
+#terms.on, #browserWarning.on {
     display: block;
 }
 
-#terms p {
+#terms p, #browserWarning p {
     margin: 20px auto;
     max-width: 500px;
     min-width: 250px;
 }
 
-#terms a {
+#terms a, #browserWarning a {
     color: #e22661;
     text-decoration: none;
 }
@@ -108,8 +108,41 @@ body.info {
     float: right;
 }
 
-#terms a:hover {
+#terms a:hover, #browserWarning a:hover {
     text-decoration: underline;
+}
+
+#browserWarning {
+  background-color: rgba(255, 255, 255, 0.95);
+  font-size: 1.5rem;
+  display: none;
+  border: 1px solid #e22661;
+  padding: 20px;
+  position: fixed;
+  top: 60px;
+  left: 20%;
+  right: 20%;
+  text-align: center;
+  min-width: 300px;
+}
+
+#browserWarning p.subtext{
+  font-size: 1.1rem;
+}
+
+#browserWarning a.browser {
+  width: 64px;
+  height: 64px;
+  display: inline-block;
+}
+
+#browserWarning a.firefox {
+  background: url('../images/firefox-64.png') center no-repeat;
+}
+
+#browserWarning a.chrome {
+  margin-left: 10px;
+  background: url('../images/chrome-64.png') center no-repeat;
 }
 
 .terms {
@@ -218,7 +251,7 @@ body > img {
 }
 
 #menu-button li a:hover {
-    background-color: #e22661;;
+    background-color: #e22661;
     color: #eee;
 }
 
@@ -587,6 +620,11 @@ ul li.on {
     .input {
         width: 65%;
     }
+    #browserWarning {
+      left: 5%;
+      right: 5%;
+      min-width: 0px;
+    }
 }
 
 @media only screen and (max-width: 655px) {
@@ -634,7 +672,6 @@ ul li.on {
     #composer-blocker {
         left: -18px;
     }
-
 }
 
 @media only screen and (max-width: 460px) {
