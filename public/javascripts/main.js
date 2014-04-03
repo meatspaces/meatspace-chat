@@ -37,7 +37,7 @@ define(['jquery', './base/transform', 'gumhelper', './base/videoShooter', 'finge
   var footer = $('#footer');
   var svg = $(null);
   var terms = $('#terms');
-  var browserWarning = $('#browserWarning');
+  var browserWarning = $('#browser-warning');
   var isPosting = false;
   var canSend = true;
   var muteText = body.data('mute');
@@ -312,7 +312,7 @@ define(['jquery', './base/transform', 'gumhelper', './base/videoShooter', 'finge
     );
   };
 
-  body.on('click', '#unmute, #tnc-accept, #browserWarning-accept', function (ev) {
+  body.on('click', '#unmute, #tnc-accept, #browser-warning-accept', function (ev) {
     if (ev.target.id === 'unmute') {
       debug('clearing mutes');
       localStorage.removeItem('muted');
@@ -323,12 +323,12 @@ define(['jquery', './base/transform', 'gumhelper', './base/videoShooter', 'finge
       debug('accepting terms');
       localStorage.setItem('terms', true);
       terms.removeClass('on');
-      if(!navigator.webkitGetUserMedia) {
+      if(navigator.getMedia === undefined) {
         browserWarning.addClass('on');
       }
     }
 
-    if (ev.target.id === 'browserWarning-accept') {
+    if (ev.target.id === 'browser-warning-accept') {
       debug('acknowledging lack of rtc');
       browserWarning.removeClass('on');
     }

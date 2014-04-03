@@ -85,17 +85,17 @@ body.info {
     z-index: 3;
 }
 
-#terms.on, #browserWarning.on {
+#terms.on, #browser-warning.on {
     display: block;
 }
 
-#terms p, #browserWarning p {
+#terms p, #browser-warning p {
     margin: 20px auto;
     max-width: 500px;
     min-width: 250px;
 }
 
-#terms a, #browserWarning a {
+#terms a, #browser-warning a {
     color: #e22661;
     text-decoration: none;
 }
@@ -108,11 +108,11 @@ body.info {
     float: right;
 }
 
-#terms a:hover, #browserWarning a:hover {
+#terms a:hover, #browser-warning a:hover {
     text-decoration: underline;
 }
 
-#browserWarning {
+#browser-warning {
   background-color: rgba(255, 255, 255, 0.95);
   font-size: 1.5rem;
   display: none;
@@ -126,21 +126,21 @@ body.info {
   min-width: 300px;
 }
 
-#browserWarning p.subtext{
+#browser-warning p.subtext{
   font-size: 1.1rem;
 }
 
-#browserWarning a.browser {
+#browser-warning a.browser {
   width: 64px;
   height: 64px;
   display: inline-block;
 }
 
-#browserWarning a.firefox {
+#browser-warning a.firefox {
   background: url('../images/firefox-64.png') center no-repeat;
 }
 
-#browserWarning a.chrome {
+#browser-warning a.chrome {
   margin-left: 10px;
   background: url('../images/chrome-64.png') center no-repeat;
 }
@@ -620,7 +620,7 @@ ul li.on {
     .input {
         width: 65%;
     }
-    #browserWarning {
+    #browser-warning {
       left: 5%;
       right: 5%;
       min-width: 0px;
