@@ -453,6 +453,7 @@ input::-webkit-input-placeholder {
 }
 
 #chat-container li img {
+    transform: scale(-1, 1);
     display: block;
     position: absolute;
     top: 0;
@@ -579,6 +580,7 @@ ul li.on {
 }
 
 #videoHolder video {
+    transform: scale(-1, 1);
     width: 135px;
     height: 101px;
 }
