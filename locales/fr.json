@@ -30,5 +30,6 @@
   "termsLink": "Terms and Conditions",
   "browserWarningString": "Votre navigateur ne vous permet pas de profiter correctement de Meatspace !",
   "browserWarningSubtext": "Vous pourrez voir ce que disent les autres mais vous ne pourrez pas participer. Veuillez essayer l'un des autres navigateurs ci-dessous, ou continuez à profiter du spectacle.",
-  "okay": "Ok"
+  "okay": "Ok",
+  "switchCamera": "Changer la caméra"
 }
