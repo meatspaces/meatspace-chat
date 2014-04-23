@@ -157,7 +157,7 @@ module.exports = function (app, nconf, io, zio, topic_in, topic_out, passport, i
         res.json({ error: 'Invalid image type' });
         return;
       }
-      
+
       if ((userId === req.body.userid) || req.isApiUser) {
         addChat(req.body.message, picture, userId, ip, function (err, status) {
           if (err) {
@@ -170,7 +170,7 @@ module.exports = function (app, nconf, io, zio, topic_in, topic_out, passport, i
         });
       } else {
         res.status(403);
-        res.json({ error: 'invalid fingerprint' });
+        res.json({ error: 'invalid fingerprint - try refreshing' });
       }
     } else {
       res.status(400);
