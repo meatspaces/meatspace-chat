@@ -12,7 +12,6 @@ define(['jquery', './base/transform', 'gumhelper', './base/videoShooter', 'finge
   var CHAR_LIMIT = 250;
 
   var auth = {
-    userid: null,
     fingerprint: new Fingerprint({ canvas: true }).get(),
     admin: false
   };
@@ -54,6 +53,13 @@ define(['jquery', './base/transform', 'gumhelper', './base/videoShooter', 'finge
   var unreadMessages = 0;
   var pageHidden = 'hidden';
   var pageVisibilityChange = 'visibilitychange';
+  var localFingerprints = JSON.parse(localStorage.getItem('localFingerprints')) || [];
+
+  window.addEventListener('storage', function() {
+    // in case someone has two tabs open, if they modify localStorage from another window, reload it
+    mutes = JSON.parse(localStorage.getItem('muted')) || [];
+    localFingerprints = JSON.parse(localStorage.getItem('localFingerprints')) || [];
+  });
 
   if (typeof document.hidden === 'undefined') {
     ['webkit', 'moz', 'ms'].some(function (prefix) {
@@ -80,9 +86,23 @@ define(['jquery', './base/transform', 'gumhelper', './base/videoShooter', 'finge
     }
   };
 
+  var isLocalFingerprint = function(fingerprint) {
+    return localFingerprints.indexOf(fingerprint) > -1;
+  };
+
+  var addLocalFingerprint = function(fingerprint) {
+    if (isLocalFingerprint(fingerprint)) {
+      return;
+    }
+
+    localFingerprints.unshift(fingerprint);
+    localFingerprints = localFingerprints.slice(0, 20);
+    localStorage.setItem('localFingerprints', JSON.stringify(localFingerprints));
+  };
+
   var isMuted = function (fingerprint, incoming) {
     var mutedItem = mutes.indexOf(fingerprint) !== -1;
-    var bannedItem = incoming && incoming.value.banned && auth.userid !== fingerprint;
+    var bannedItem = incoming && incoming.value.banned && !isLocalFingerprint(fingerprint);
 
     return !!(mutedItem || bannedItem);
   };
@@ -134,7 +154,7 @@ define(['jquery', './base/transform', 'gumhelper', './base/videoShooter', 'finge
           li.appendChild(img);
 
           // This is likely your own fingerprint so you don't mute yourself. Unless you're weird.
-          if (auth.userid !== fingerprint) {
+          if (!isLocalFingerprint(fingerprint)) {
             updateNotificationCount();
 
             var button = document.createElement('button');
@@ -240,7 +260,6 @@ define(['jquery', './base/transform', 'gumhelper', './base/videoShooter', 'finge
   };
 
   $.get('/ip?t=' + Date.now(), function (data) {
-    auth.userid = md5(auth.fingerprint + data.ip);
     auth.admin = data.admin;
   });
 
@@ -405,8 +424,14 @@ define(['jquery', './base/transform', 'gumhelper', './base/videoShooter', 'finge
             if (window.ga) {
               window.ga('send', 'event', 'message', 'send');
             }
-          }).error(function (data) {
-            alert(data.responseJSON.error);
+          }).done(function (data) {
+            if (data.fingerprint) {
+              addLocalFingerprint(data.fingerprint);
+            }
+          }).fail(function (data) {
+            if (data.error) {
+              alert(data.error);
+            }
           }).always(function (data) {
             composer.message.prop('readonly', false);
             composer.message.val('');

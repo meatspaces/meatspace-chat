@@ -158,20 +158,15 @@ module.exports = function (app, nconf, io, zio, topic_in, topic_out, passport, i
         return;
       }
 
-      if ((userId === req.body.userid) || req.isApiUser) {
-        addChat(req.body.message, picture, userId, ip, function (err, status) {
-          if (err) {
-            res.status(400);
-            res.json({ error: err.toString() });
-          } else {
-            client.set('fingerprint:' + req.body.fingerprint, userId);
-            res.json({ status: status });
-          }
-        });
-      } else {
-        res.status(403);
-        res.json({ error: 'invalid fingerprint - try refreshing' });
-      }
+      addChat(req.body.message, picture, userId, ip, function (err, status) {
+        if (err) {
+          res.status(400);
+          res.json({ error: err.toString() });
+        } else {
+          client.set('fingerprint:' + req.body.fingerprint, userId);
+          res.json({ status: status, fingerprint: userId });
+        }
+      });
     } else {
       res.status(400);
       res.json({ error: 'you need webrtc' });
