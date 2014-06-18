@@ -55,7 +55,7 @@ define(['jquery', './base/transform', 'gumhelper', './base/videoShooter', 'finge
   var pageVisibilityChange = 'visibilitychange';
   var localFingerprints = JSON.parse(localStorage.getItem('localFingerprints')) || [];
 
-  window.addEventListener('storage', function() {
+  window.addEventListener('storage', function () {
     // in case someone has two tabs open, if they modify localStorage from another window, reload it
     mutes = JSON.parse(localStorage.getItem('muted')) || [];
     localFingerprints = JSON.parse(localStorage.getItem('localFingerprints')) || [];
@@ -86,11 +86,11 @@ define(['jquery', './base/transform', 'gumhelper', './base/videoShooter', 'finge
     }
   };
 
-  var isLocalFingerprint = function(fingerprint) {
+  var isLocalFingerprint = function (fingerprint) {
     return localFingerprints.indexOf(fingerprint) > -1;
   };
 
-  var addLocalFingerprint = function(fingerprint) {
+  var addLocalFingerprint = function (fingerprint) {
     if (isLocalFingerprint(fingerprint)) {
       return;
     }
