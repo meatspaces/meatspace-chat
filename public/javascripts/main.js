@@ -429,8 +429,10 @@ define(['jquery', './base/transform', 'gumhelper', './base/videoShooter', 'finge
               addLocalFingerprint(data.fingerprint);
             }
           }).fail(function (data) {
-            if (data.error) {
-              alert(data.error);
+            if (data.responseJSON.error) {
+              alert(data.responseJSON.error);
+            } else {
+              alert('error, try again later...')
             }
           }).always(function (data) {
             composer.message.prop('readonly', false);
