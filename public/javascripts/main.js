@@ -23,7 +23,7 @@ define(['jquery', './base/transform', 'gumhelper', './base/videoShooter', 'finge
     blocker: $('#composer-blocker'),
     form: $('#composer-form'),
     message: $('#composer-message'),
-    inputs: $('#composer-form input').toArray(),
+    inputs: $('#composer-form input, #composer-message').toArray(),
     videoHolder: $('#videoHolder')
   };
   var menu = {
@@ -386,6 +386,13 @@ define(['jquery', './base/transform', 'gumhelper', './base/videoShooter', 'finge
     });
   });
 
+  composer.message.on('keypress', function (ev) {
+    if (ev.which === 13 /* enter */) {
+      composer.form.submit();
+      return false;
+    }
+  });
+
   composer.form.on('keyup', function (ev) {
     counter.text(CHAR_LIMIT - composer.message.val().length);
   }).on('submit', function (ev) {
@@ -429,7 +436,7 @@ define(['jquery', './base/transform', 'gumhelper', './base/videoShooter', 'finge
               addLocalFingerprint(data.fingerprint);
             }
           }).fail(function (data) {
-            if (data.responseJSON.error) {
+            if (data.responseJSON && data.responseJSON.error) {
               alert(data.responseJSON.error);
             } else {
               alert('error, try again later...')
