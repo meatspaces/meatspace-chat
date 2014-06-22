@@ -439,7 +439,7 @@ define(['jquery', './base/transform', 'gumhelper', './base/videoShooter', 'finge
             if (data.responseJSON && data.responseJSON.error) {
               alert(data.responseJSON.error);
             } else {
-              alert('error, try again later...')
+              alert('error, try again later...');
             }
           }).always(function (data) {
             composer.message.prop('readonly', false);
