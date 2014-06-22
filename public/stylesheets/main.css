@@ -399,8 +399,10 @@ a.medium {
     font-weight: 300;
     outline: none;
     height: 50px;
-    line-height: 1;
+    line-height: 50px;
     resize: none;
+    white-space: nowrap;
+    overflow: hidden;
     position: absolute;
     bottom: 0;
     left: 0;
@@ -413,7 +415,7 @@ a.medium {
     float:right;
 }
 
-input::-webkit-input-placeholder {
+.input::-webkit-input-placeholder {
     color: #fff;
 }
 

@@ -4,7 +4,7 @@ block content
   div#videoHolder
   form(method='post', id='composer-form')
     .message-content
-      input(name='message', id='composer-message', class='input', maxlength='250', autocomplete='off', placeholder=t('messagePrompt'))
+      textarea(name='message', id='composer-message', class='input', maxlength='250', autocomplete='off', placeholder=t('messagePrompt'))
       input(type='hidden', name='_csrf', value='#{csrf}')
       #composer-blocker.hidden
         span= t('pleaseWait')
