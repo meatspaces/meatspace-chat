@@ -50,14 +50,14 @@ table {
 html, body {
     height: 100%;
     position: relative;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    text-rendering: optimizeLegibility;
 }
 
 body, .input, #composer-blocker {
     font-family: "Helvetica Neue", "Helvetica", "Arial", sans-serif;
     font-weight: 300;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
 }
 
 body {
