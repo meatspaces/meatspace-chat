@@ -424,7 +424,7 @@ define(['jquery', './base/transform', 'gumhelper', './base/videoShooter', 'finge
             return (data[input.name] = input.value, data);
           }, { picture: picture });
 
-          submission.message = submission.message.replace(/[\n\r\t]/g,'');
+          submission.message = submission.message.replace(/[\n\r\t]/g, '');
 
           svg.attr('class', 'progress');
 
