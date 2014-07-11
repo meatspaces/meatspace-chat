@@ -157,7 +157,7 @@ module.exports = function (app, nconf, io, zio, topic_in, topic_out, passport, i
         res.json({ error: 'Invalid image type' });
         return;
       }
-      req.body.message = req.body.message.replace(/[\r\n\t]/g,'');
+      req.body.message = req.body.message.replace(/[\r\n\t]/g, '');
 
       addChat(req.body.message, picture, userId, ip, function (err, status) {
         if (err) {
