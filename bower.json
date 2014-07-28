@@ -4,7 +4,7 @@
   "dependencies": {
     "jquery": "2.0.0",
     "jquery-waypoints": "2.0.4",
-    "fingerprint": "0.5.0",
+    "fingerprint": "0.5.3",
     "js-md5": "1.0.1",
     "animated-gif": "sole/Animated_GIF#8414bca77f59328443c85e1918806bbca1cf2bd4",
     "gumhelper": "sole/gumhelper#596ddfb555039a400b8287fc5ac01f0b2aebf6fa",
