@@ -23,7 +23,6 @@
     "meatspace-publico": "~0.0.7",
     "gravatar": "~1.0.6",
     "socket.io": "~0.9.16",
-    "crypto": "~0.0.3",
     "level": "~0.18.0",
     "i18next": "~1.7.1",
     "zmq": "~2.6.0",
