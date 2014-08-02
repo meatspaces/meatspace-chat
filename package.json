@@ -25,7 +25,7 @@
     "socket.io": "~0.9.16",
     "level": "~0.18.0",
     "i18next": "~1.7.1",
-    "zmq": "~2.6.0",
+    "zmq": "^2.7.0",
     "passport": "~0.2.0",
     "passport-twitter": "~1.0.2",
     "connect-redis": "~1.4.0",
