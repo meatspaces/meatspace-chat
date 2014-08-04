@@ -401,11 +401,7 @@ a.medium {
 .input:focus { color: #fff; }
 
 #chat-container {
-    float: left;
-    position: relative;
-    width: 100%;
-    margin-top: 51px;
-    padding-bottom: 99px;
+    padding: 51px 0 119px;
 }
 
 #chat-container.lean {
@@ -414,8 +410,6 @@ a.medium {
 
 #chat-container li {
     background-color: rgba(255, 255, 255, 0.85);
-    clear: both;
-    float: left;
     min-height: 102px;
     width: 100%;
     overflow: hidden;
