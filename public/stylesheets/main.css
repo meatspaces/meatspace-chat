@@ -194,22 +194,6 @@ body.info {
     width: 295px;
 }
 
-.artist-wrapper {
-    font-size: 1.2rem;
-    padding: 20px;
-}
-
-.artist-wrapper a {
-    color: #f65694;
-    display: inline-block;
-    text-decoration: none;
-}
-
-.artist-wrapper a.artist {
-    font-size: 1.8rem;
-    margin-right: 15px;
-}
-
 body > img {
     display: none;
 }
@@ -347,11 +331,6 @@ a.medium {
 
 .info .infobox h1, .info .infobox h2 {
     margin: 0;
-}
-
-#wrapper {
-    margin: 0 auto;
-    position: relative;
 }
 
 .header {
