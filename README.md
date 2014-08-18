@@ -16,7 +16,7 @@ If you want to create a browser add-on or plugin feel free to do so and follow t
     npm install
     npm -g install nodemon
     bower install
-    npm run-script grunt build
+    npm run-script build
     npm start
 
 ## Create a Twitter Application for Meatspace
