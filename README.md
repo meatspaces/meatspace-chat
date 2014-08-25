@@ -61,6 +61,7 @@ If you mute a user then you won't see any new posts from them at that machine an
 
 If you need an apiKey to post from your app, contact me at jen@meatspac.es and I will try to hook you up! You will get access to [staging server](http://chat-staging.meatspac.es) to see if everything works and see if it is appropriate for the production server (which I will give you a new apiKey).
 
+If you plan on using node and the [socket.io-client](https://www.npmjs.org/package/socket.io-client) for a bot or other purposes, ensure you have socket.io-client ~0.9, as ~1.0 isn't compatble with the socket.io ~0.9.
 ### API
 
 If you are doing native or non-web calls to the API, you will first need a valid apiKey and then you can make the following calls:
