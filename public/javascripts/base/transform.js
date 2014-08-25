@@ -16,7 +16,7 @@ define([], function() {
     'construction', 'contractors', 'coop', 'diamonds', 'directory', 'domains',
     'email', 'enterprises', 'equipment', 'estate', 'eus', 'gallery',
     'graphics', 'guru', 'holdings', 'info', 'int', 'jobs', 'kitchen', 'land',
-    'lighting', 'mobi', 'museum', 'name', 'net', 'org', 'photography',
+    'lighting', 'link', 'mobi', 'museum', 'name', 'net', 'org', 'photography',
     'photos', 'plumbing', 'post', 'pro', 'sexy', 'singles', 'technology',
     'tel', 'tips', 'today', 'travel', 'ventures', 'voyage', 'xxx', 'edu',
     'gov', 'mil', 'nyc', 'ac', 'ad', 'ae', 'af', 'ag', 'ai', 'al', 'am', 'an',
