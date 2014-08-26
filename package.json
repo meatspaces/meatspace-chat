@@ -20,7 +20,7 @@
     "express": "~3.5.1",
     "jade": "^1.5.0",
     "nconf": "~0.6.7",
-    "meatspace-publico": "~0.0.7",
+    "meatspace-publico": "~1.0.0",
     "gravatar": "~1.0.6",
     "socket.io": "~0.9.16",
     "level": "~0.18.0",
