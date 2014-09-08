@@ -16,7 +16,7 @@ define([], function() {
     'bid', 'bike', 'biz', 'blackfriday', 'blue', 'boutique', 'build', 'builders',
     'buzz', 'cab', 'camera', 'camp', 'capital', 'cards', 'cash', 'cat', 'catering',
     'care', 'careers', 'center', 'ceo', 'cheap', 'christmas', 'cleaning',
-    'clinic', 'clothing', 'club', 'codes', 'coffee', 'com', 'community', 
+    'clinic', 'clothing', 'club', 'codes', 'coffee', 'com', 'community',
     'company', 'computer', 'condos', 'construction', 'consulting', 'contractors',
     'cool', 'cruises', 'coop', 'dance', 'dating', 'democrat', 'dental',
     'diamonds', 'directory', 'domains', 'education', 'email', 'engineering',
@@ -24,15 +24,15 @@ define([], function() {
     'fail', 'farm', 'financial', 'fish', 'flights', 'florist', 'fund', 'futbol',
     'gallery', 'gift', 'glass', 'graphics', 'gripe', 'guitars', 'guru', 'holdings',
     'holiday', 'house', 'immobilen', 'industries', 'info', 'ink', 'institute',
-    'int', 'international', 'investments', 'jetzt', 'jobs', 'kaufen', 'kim', 
+    'int', 'international', 'investments', 'jetzt', 'jobs', 'kaufen', 'kim',
     'kitchen', 'land', 'lease', 'lighting', 'limited', 'limo', 'link', 'maison',
     'management', 'marketing', 'media', 'menu', 'mobi', 'moda', 'moe', 'museum',
     'name', 'net', 'ninja', 'org', 'partners', 'parts', 'photo', 'photography',
     'photos', 'pics', 'pictures', 'pink', 'plumbing', 'post', 'pro', 'productions',
     'properties', 'pub', 'recipes', 'red', 'reisen', 'rentals', 'repair', 'report',
-    'rest', 'reviews', 'rich', 'rocks', 'services', 'sexy', 'shiksha', 'shoes', 
+    'rest', 'reviews', 'rich', 'rocks', 'services', 'sexy', 'shiksha', 'shoes',
     'singles', 'social', 'solar', 'solutions', 'supplies', 'supply', 'support',
-    'surgery', 'systems', 'tattoo', 'tax', 'technology', 'tel', 'tips', 'today', 
+    'surgery', 'systems', 'tattoo', 'tax', 'technology', 'tel', 'tips', 'today',
     'tools', 'town', 'toys', 'trade', 'travel', 'university', 'uno', 'vacations',
     'ventures', 'viajes', 'villas', 'vision', 'voting', 'voyage', 'wang', 'watch',
     'webcam', 'wiki', 'works', 'wtf', 'xxx', 'xyz', 'zone', 'edu',
@@ -189,6 +189,8 @@ define([], function() {
     var matches = [];
     var index = 0;
     var fragments = [];
+
+    text = text.replace(/&nbsp;/g, '\xa0');
 
     each(linkables, function (type) {
       var pattern = linkables[type].pattern;

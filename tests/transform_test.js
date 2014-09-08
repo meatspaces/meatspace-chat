@@ -48,7 +48,8 @@ valid = {
     //email
     'email+advancedtricky@example.com',
     'http://example.com/#fragment',
-    '#fragment'
+    '#fragment',
+    'http://vimeo.com/91515679&nbsp;https://vine.co/v/ME16mjEaPEY&nbsp;https://vine.co/v/Mlriw1VJeDn'
   ],
 
   expects: [
@@ -92,7 +93,8 @@ valid = {
     '<a href="http://test.com/@test" target="_blank">test.com/@test</a>',
     '<a href="mailto:email+advancedtricky@example.com" target="_blank">email+advancedtricky@example.com</a>',
     '<a href="http://example.com/#fragment" target="_blank">http://example.com/#fragment</a>',
-    '<a href="https://twitter.com/search?q=%23fragment&src=hash" target="_blank">#fragment</a>'
+    '<a href="https://twitter.com/search?q=%23fragment&src=hash" target="_blank">#fragment</a>',
+    '<a href="http://vimeo.com/91515679" target="_blank">http://vimeo.com/91515679</a> <a href="https://vine.co/v/ME16mjEaPEY" target="_blank">https://vine.co/v/ME16mjEaPEY</a> <a href="https://vine.co/v/Mlriw1VJeDn" target="_blank">https://vine.co/v/Mlriw1VJeDn</a>'
   ]
 };
 
