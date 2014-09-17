@@ -463,7 +463,7 @@ define(['jquery', './base/transform', 'gumhelper', './base/videoShooter', 'finge
 
   $(document).on('click', function (ev) { 
     if ( !$(ev.target).closest(menu.button).length ) {
-      if( menu.list.is(":visible")) {
+      if( menu.list.is(':visible')) {
         menu.list.hide();
       }
     }        
