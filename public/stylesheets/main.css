@@ -223,6 +223,12 @@ body > img {
     margin-right: 16px;
     position: relative;
     text-align: right;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 }
 
 #menu-button li a {
