@@ -461,6 +461,14 @@ define(['jquery', './base/transform', 'gumhelper', './base/videoShooter', 'finge
     menu.list.toggle();
   });
 
+  $(document).on('click', function (ev) { 
+    if ( !$(ev.target).closest(menu.button).length ) {
+      if( menu.list.is(':visible')) {
+        menu.list.hide();
+      }
+    }        
+  });
+
   socket.on('message', function (data) {
     render(data.chat);
   });
