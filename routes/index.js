@@ -200,18 +200,16 @@ module.exports = function (app, nconf, io, zio, topic_in, topic_out, passport, i
     });
 
     socket.on('message', function (data) {
-      //if (nativeClients.indexOf(data.apiKey) > -1) {
+      if (nativeClients.indexOf(data.apiKey) > -1) {
         var userId = getUserId(data.fingerprint, ip);
         addChat(data.message, data.picture, userId, ip, function (err) {
           if (err) {
             console.log('error posting ', err.toString());
           }
         });
-      /*
       } else {
         console.log('Invalid apiKey');
       }
-      */
     });
   });
 };
