@@ -19,15 +19,11 @@ module.exports = function(app, configurations, express) {
   };
 
   var clientBypassCSRF = function (req, res, next) {
-    /*
     if (req.isApiUser) {
       next();
     } else {
       csrf(req, res, next);
     }
-    */
-    // Bypass until Kai recompiles for iOS or whatever
-    next();
   };
 
   i18n.init({
@@ -62,14 +58,11 @@ module.exports = function(app, configurations, express) {
     app.use(clientBypassCSRF);
     app.use(function (req, res, next) {
       res.locals.session = req.session;
-      /*
       if (!req.body.apiKey) {
         res.locals.csrf = req.csrfToken();
       } else {
         res.locals.csrf = false;
       }
-      */
-      res.locals.csrf = false;
       if (!process.env.NODE_ENV) {
         res.locals.debug = true;
       } else {
