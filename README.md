@@ -1,6 +1,8 @@
 # Meatspace Chat
 [![Build Status](https://travis-ci.org/meatspaces/meatspace-chat.png)](https://travis-ci.org/meatspaces/meatspace-chat)
 
+**The latest version of the Meatspace Chat source code is now located at https://github.com/tec27/seatcamp**
+
 ## Before you send a pull request
 
 Note that we are not taking any new features or changes - if you feel like something is that important to the chat, please contact [ednapiranha](http://twitter.com/ednapiranha) before sending something that might be rejected.
